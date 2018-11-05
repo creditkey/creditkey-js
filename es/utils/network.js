@@ -1,0 +1,106 @@
+import request from './request';
+import { api } from './platform';
+import { assign } from 'lodash';
+
+/**
+ * @function Network
+ * @description Factory function to create a object that can send
+ * requests to a specific resource on the server.
+ * @param {string} resource The resource used for config
+ */
+var Network = function Network(resource) {
+  var buildURL = function buildURL() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+        params = _ref.params,
+        id = _ref.id,
+        resource = _ref.resource;
+
+    var parameters = [api(), 'api'];
+
+    if (resource) parameters = parameters.concat([resource]);
+    if (id) parameters = parameters.concat([id]);
+
+    if (params) {
+      return parameters.join('/') + params;
+    }
+    return parameters.join('/');
+  };
+
+  // Default options used for every request
+  var defaultOptions = {
+    mode: 'cors',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  };
+
+  return {
+
+    /**
+     * @function post
+     * @description Make a POST request.
+     * @param {string} path
+     * @param {object} body
+     * @param {object} options
+     * @returns {promise}
+     */
+    post: function post(path, body) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+      return request(buildURL(path), assign(options, defaultOptions, {
+        method: 'POST',
+        body: JSON.stringify(body)
+      }));
+    },
+
+    /**
+     * @function post
+     * @description Make a GET request.
+     * @param {string} path
+     * @param {object} options
+     * @returns {promise}
+     */
+    get: function get(path) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      return request(buildURL(path), assign(options, defaultOptions, { method: 'GET' }));
+    },
+
+    /**
+     * @function edit
+     * @description Make a PUT request.
+     * @param {string} path
+     * @param {object} body
+     * @param {object} options
+     * @returns {promise}
+     */
+    edit: function edit(path, body) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+      return request(buildURL(path), assign(options, defaultOptions, {
+        method: 'PUT',
+        body: JSON.stringify(body)
+      }));
+    },
+
+    /**
+     * @function delete
+     * @description Make a DELETE request.
+     * @param {string} path
+     * @param {object} options
+     * @returns {promise}
+     */
+    delete: function _delete(path) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      return request(buildURL(path), assign(options, defaultOptions, { method: 'DELETE' }));
+    },
+
+    ping: function ping() {
+      return request(buildURL(), { method: 'GET' });
+    }
+  };
+};
+
+export default Network;
