@@ -102,10 +102,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modal__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__redirect__ = __webpack_require__(6);
 
+
+
+var height = window.screen.availHeight;
+var width = window.screen.availWidth;
 
 var Checkout = function Checkout(source) {
   var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'modal';
+
+  // always use redirect for small devices
+  if (width <= 479) return Object(__WEBPACK_IMPORTED_MODULE_1__redirect__["a" /* default */])(source);
 
   if (type.toLowerCase() === 'modal') {
     return Object(__WEBPACK_IMPORTED_MODULE_0__modal__["a" /* default */])(source);
@@ -121,71 +129,37 @@ var Checkout = function Checkout(source) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__styles_index_sass__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__styles_index_sass___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__styles_index_sass__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_modal__ = __webpack_require__(5);
 
 
-var modal = "bottom: 0; \
-               left: 0; \
-               position: absolute; \
-               right: 0; \
-               top: 0; \
-               -webkit-box-align: center; \
-                     -ms-flex-align: center; \
-                         align-items: center; \
-               display: none; \
-               -webkit-box-orient: vertical; \
-               -webkit-box-direction: normal; \
-                   -ms-flex-direction: column; \
-                       flex-direction: column; \
-               -webkit-box-pack: center; \
-                   -ms-flex-pack: center; \
-                       justify-content: center; \
-               overflow: hidden; \
-               position: fixed; \
-               z-index: 40; \
-               display: -webkit-box; \
-               display: -ms-flexbox; \
-               display: flex;";
-
-var modal_background = "bottom: 0; \
-                          left: 0; \
-                          position: absolute; \
-                          right: 0; \
-                          top: 0; \
-                          background-color: rgba(10, 10, 10, 0.86); }";
-
-var modal_card = "margin: 0 20px; \
-                    height: calc(100vh - 160px); \
-                    overflow: auto; \
-                    position: relative; \
-                    width: 600px; \
-                    display: -webkit-box; \
-                    display: -ms-flexbox; \
-                    display: flex; \
-                    -webkit-box-orient: vertical; \
-                    -webkit-box-direction: normal; \
-                        -ms-flex-direction: column; \
-                            flex-direction: column; \
-                    background-color: white; \
-                    -ms-overflow-y: visible;";
 
 var Modal = function Modal(source) {
-    var body = document.body;
-    var style = 'margin: auto; width: 100%; border: none; height: calc(100vh - 160px);';
-    var iframe = "<iframe src=\"" + source + "\" style=\"" + style + "\"></iframe>";
+  var body = document.body;
+  var style = 'margin: auto; width: 100%; border: none; height: calc(100vh - 160px);';
+  var iframe = '<iframe src="' + (source + '?modal=true') + '" style="' + style + '"></iframe>';
 
-    body.addEventListener('click', function (e) {
-        return remove();
-    });
-    return body.insertAdjacentHTML('beforeend', "<div id=\"creditkey-modal\" style=\"" + modal + "\"><div style=\"" + modal_background + "\"></div><div style=\"" + modal_card + "\">" + iframe + "</div></div>");
+  body.addEventListener('click', function (e) {
+    return remove();
+  });
+  return body.insertAdjacentHTML('beforeend', '<div id="creditkey-modal" style="' + __WEBPACK_IMPORTED_MODULE_1__styles_modal__["a" /* modal */] + '"><div style="' + __WEBPACK_IMPORTED_MODULE_1__styles_modal__["b" /* modal_background */] + '"></div><div style="' + __WEBPACK_IMPORTED_MODULE_1__styles_modal__["c" /* modal_card */] + '">' + iframe + '</div></div>');
 };
 
 function remove() {
-    var el = document.querySelector('#creditkey-modal');
-    el && document.body.removeEventListener('click', function (e) {
-        return remove;
-    });
-    el && el.remove();
+  var el = document.querySelector('#creditkey-modal');
+  el && document.body.removeEventListener('click', function (e) {
+    return remove;
+  });
+  el && el.remove();
 }
+
+window.addEventListener('message', function (e) {
+  event = JSON.parse(e.data);
+
+  // if we're closing the modal from within the CK iframe, trigger the event bound to parent body
+  if (event.action === 'cancel' && event.type === 'modal') {
+    remove();
+  }
+}, false);
 
 /* harmony default export */ __webpack_exports__["a"] = (Modal);
 
@@ -194,6 +168,34 @@ function remove() {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return modal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return modal_background; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return modal_card; });
+/* unused harmony export modal_head */
+var modal = "bottom: 0;\n                       left: 0;\n                       position: absolute;\n                       right: 0;\n                       top: 0;\n                       -webkit-box-align: center;\n                             -ms-flex-align: center;\n                                 align-items: center;\n                       display: none;\n                       -webkit-box-orient: vertical;\n                       -webkit-box-direction: normal;\n                           -ms-flex-direction: column;:%\n                               flex-direction: column;\n                       -webkit-box-pack: center;\n                           -ms-flex-pack: center;\n                               justify-content: center;\n                       overflow: hidden;\n                       position: fixed;\n                       z-index: 40;\n                       display: -webkit-box;\n                       display: -ms-flexbox;\n                       display: flex;";
+
+var modal_background = "bottom: 0;\n                                  left: 0;\n                                  position: absolute;\n                                  right: 0;\n                                  top: 0;\n                                  background-color: rgba(10, 10, 10, 0.86); }";
+
+var modal_card = "margin: 0 20px;\n                            height: calc(100vh - 160px);\n                            overflow: auto;\n                            position: relative;\n                            width: 600px;\n                            display: -webkit-box;\n                            display: -ms-flexbox;\n                            display: flex;\n                            -webkit-box-orient: vertical;\n                            -webkit-box-direction: normal;\n                                -ms-flex-direction: column;\n                                    flex-direction: column;\n                            background-color: white;\n                            -ms-overflow-y: visible;";
+
+var modal_head = "-webkit-box-align: center;\n                                 -ms-flex-align: center;\n                                     align-items: center;\n                             background-color: white;\n                             display: -webkit-box;\n                             display: -ms-flexbox;\n                             display: flex;\n                             -ms-flex-negative: 0;\n                                 flex-shrink: 0;\n                             -webkit-box-pack: start;\n                                 -ms-flex-pack: start;\n                                     justify-content: center;\n                             padding: 20px;\n                             position: relative;\n                             border-bottom: 1px solid #dbdbdb;\n                             border-top-left-radius: 6px;\n                             border-top-right-radius: 6px;";
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var Redirect = function Redirect(source) {
+  return window.location.href = source;
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (Redirect);
 
 /***/ })
 /******/ ]);
