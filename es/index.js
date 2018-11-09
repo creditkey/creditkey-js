@@ -1,3 +1,4 @@
-import Checkout from './lib/checkout';
+import client from './lib/client';
+import checkout from './lib/checkout';
 
-export { Checkout };
+export { client, checkout };

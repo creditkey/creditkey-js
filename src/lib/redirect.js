@@ -1,5 +1,5 @@
-const Redirect = source => {
+const redirect = source => {
   return window.location.href = source;
 }
 
-export default Redirect;
+export default redirect;

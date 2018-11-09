@@ -8,12 +8,11 @@ import { assign } from 'lodash';
  * requests to a specific resource on the server.
  * @param {string} resource The resource used for config
  */
-const Network = resource => {
+const Network = (platform, resource) => {
+  if (!platform) return false;
+
   let buildURL = ({ params, id, resource } = {}) => {
-    let parameters = [
-      api(),
-      'api'
-    ];
+    let parameters = [api(platform)];
 
     if (resource) parameters = parameters.concat([resource]);
     if (id) parameters = parameters.concat([id]);
