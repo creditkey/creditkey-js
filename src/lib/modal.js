@@ -1,4 +1,3 @@
-import '../styles/index.sass';
 import { modal, modal_background, modal_card, modal_head } from '../styles/modal';
 
 const Modal = source =>  {
