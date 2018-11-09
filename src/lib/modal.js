@@ -22,6 +22,8 @@ window.addEventListener('message', function(e) {
   // if we're closing the modal from within the CK iframe, trigger the event bound to parent body
   if (event.action === 'cancel' && event.type === 'modal') {
     remove();
+  } else if (event.action == 'complete' && event.type == 'modal') {
+    window.location.href = event.options;
   }
 }, false);
 
