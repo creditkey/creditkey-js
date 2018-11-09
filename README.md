@@ -1,16 +1,49 @@
-# creditkey-js
+# Credit Key Javascript SDK
 
-[![Travis][build-badge]][build]
-[![npm package][npm-badge]][npm]
-[![Coveralls][coveralls-badge]][coveralls]
+## Table of Contents
 
-Describe creditkey-js here.
+- [Support](#support)
+- [Requirements](#requirements)
+- [Install](#install)
+- [Overview](#overview)
+- [Configuring Checkout Display](#configuring-checkout-display)
 
-[build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
-[build]: https://travis-ci.org/user/repo
+## Support
+----------
 
-[npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
-[npm]: https://www.npmjs.org/package/npm-package
+You should have been put in contact with an Implementation Support Engineer at Credit Key.  You can directly contact your Support Engineer with any questions or to receive implementation assistance.
 
-[coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
-[coveralls]: https://coveralls.io/github/user/repo
+## Requirements
+---------------
+
+The Credit Key Javascript SDK requires Node 8.x or higher and NPM 5.x or higher.
+
+## Install
+----------
+
+```sh
+npm install creditkey-js
+```
+
+## Overview
+-----------
+
+[Credit Key](https://www.creditkey.com) checkout works similarly as services like [PayPal](https://www.paypal.com) in the sense that the user will be redirected to special checkout pages hosted on [creditkey.com](https://www.creditkey.com) to complete the checkout process.
+
+At this time the [Credit Key Javascript SDK](https://www.creditkey.com) only supports how the Credit Key checkout experience is displayed.  The options are either a full page redirect, or a modal overlay.
+
+## Configuring Checkout Display
+-------------------------------
+
+The `Checkout` method takes two arguments:
+
+* **url** - Required - The url to load Credit Key Checkout.
+* **type** - Optional - The type of Checkout experience, can be 'modal' or 'redirect', default to 'modal'
+
+```sh
+import { Checkout } from 'creditkey-js';
+
+Checkout(url, type)
+```
+
+
