@@ -16,9 +16,15 @@
     "test:coverage": "nwb test --coverage",
     "test:watch": "nwb test --server"
   },
-  "dependencies": {},
+  "dependencies": {
+    "bulma": "^0.7.2"
+  },
   "devDependencies": {
-    "nwb": "0.18.x"
+    "css-loader": "^1.0.1",
+    "node-sass": "^4.10.0",
+    "nwb": "0.18.x",
+    "nwb-sass": "^0.9.0",
+    "sass-loader": "^7.1.0"
   },
   "author": "",
   "homepage": "",
