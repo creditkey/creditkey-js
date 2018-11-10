@@ -1,7 +1,6 @@
-import '../styles/index.sass';
-import { modal, modal_background, modal_card, modal_head } from '../styles/modal';
+import { modal_main, modal_background, modal_card, modal_head } from '../styles/modal';
 
-var Modal = function Modal(source) {
+var modal = function modal(source) {
   var body = document.body;
   var style = 'margin: auto; width: 100%; border: none; height: calc(100vh - 160px);';
   var iframe = '<iframe src="' + (source + '?modal=true') + '" style="' + style + '"></iframe>';
@@ -9,7 +8,7 @@ var Modal = function Modal(source) {
   body.addEventListener('click', function (e) {
     return remove();
   });
-  return body.insertAdjacentHTML('beforeend', '<div id="creditkey-modal" style="' + modal + '"><div style="' + modal_background + '"></div><div style="' + modal_card + '">' + iframe + '</div></div>');
+  return body.insertAdjacentHTML('beforeend', '<div id="creditkey-modal" style="' + modal_main + '"><div style="' + modal_background + '"></div><div style="' + modal_card + '">' + iframe + '</div></div>');
 };
 
 function remove() {
@@ -31,4 +30,4 @@ window.addEventListener('message', function (e) {
   }
 }, false);
 
-export default Modal;
+export default modal;

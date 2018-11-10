@@ -1,16 +1,16 @@
-import Modal from './modal';
-import Redirect from './redirect';
+import modal from './modal';
+import redirect from './redirect';
 
 const height = window.screen.availHeight;
 const width = window.screen.availWidth;
 
-const Checkout = (source, type = 'modal') => {
+const checkout = (source, type = 'modal') => {
   // always use redirect for small devices
-  if (width <= 479) return Redirect(source);
+  if (width <= 479) return redirect(source);
 
   if (type.toLowerCase() === 'modal') {
-    return Modal(source);
+    return modal(source);
   }
 }
 
-export default Checkout;
+export default checkout;

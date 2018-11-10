@@ -1,12 +1,12 @@
-import { modal, modal_background, modal_card, modal_head } from '../styles/modal';
+import { modal_main, modal_background, modal_card, modal_head } from '../styles/modal';
 
-const Modal = source =>  {
+const modal = source =>  {
   const body = document.body;
   const style = 'margin: auto; width: 100%; border: none; height: calc(100vh - 160px);';
   const iframe = `<iframe src="${source + '?modal=true'}" style="${style}"></iframe>`;
 
   body.addEventListener('click', e => remove());
-  return body.insertAdjacentHTML('beforeend', `<div id="creditkey-modal" style="${modal}"><div style="${modal_background}"></div><div style="${modal_card}">${iframe}</div></div>`);
+  return body.insertAdjacentHTML('beforeend', `<div id="creditkey-modal" style="${modal_main}"><div style="${modal_background}"></div><div style="${modal_card}">${iframe}</div></div>`);
 }
 
 function remove() {
@@ -26,4 +26,4 @@ window.addEventListener('message', function(e) {
   }
 }, false);
 
-export default Modal;
+export default modal;

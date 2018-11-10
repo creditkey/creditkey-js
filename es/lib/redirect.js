@@ -1,5 +1,5 @@
-var Redirect = function Redirect(source) {
+var redirect = function redirect(source) {
   return window.location.href = source;
 };
 
-export default Redirect;
+export default redirect;

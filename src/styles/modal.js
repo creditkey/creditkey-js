@@ -1,25 +1,25 @@
-export const modal = `bottom: 0;
-                       left: 0;
-                       position: absolute;
-                       right: 0;
-                       top: 0;
-                       -webkit-box-align: center;
-                             -ms-flex-align: center;
-                                 align-items: center;
-                       display: none;
-                       -webkit-box-orient: vertical;
-                       -webkit-box-direction: normal;
-                           -ms-flex-direction: column;:%
-                               flex-direction: column;
-                       -webkit-box-pack: center;
-                           -ms-flex-pack: center;
-                               justify-content: center;
-                       overflow: hidden;
-                       position: fixed;
-                       z-index: 40;
-                       display: -webkit-box;
-                       display: -ms-flexbox;
-                       display: flex;`;
+export const modal_main = `bottom: 0;
+                           left: 0;
+                           position: absolute;
+                           right: 0;
+                           top: 0;
+                           -webkit-box-align: center;
+                                 -ms-flex-align: center;
+                                     align-items: center;
+                           display: none;
+                           -webkit-box-orient: vertical;
+                           -webkit-box-direction: normal;
+                               -ms-flex-direction: column;:%
+                                   flex-direction: column;
+                           -webkit-box-pack: center;
+                               -ms-flex-pack: center;
+                                   justify-content: center;
+                           overflow: hidden;
+                           position: fixed;
+                           z-index: 40;
+                           display: -webkit-box;
+                           display: -ms-flexbox;
+                           display: flex;`;
 
 export const modal_background = `bottom: 0;
                                   left: 0;
