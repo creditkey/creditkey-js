@@ -74,37 +74,23 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return api; });
+module.exports = __webpack_require__(1);
 
-
-var api = function api(platform) {
-  if (platform === 'development') return 'http://localhost:9100/';
-  if (platform === 'staging') return 'https://staging.creditkey.com/app/';
-  if (platform === 'production') return 'https://www.creditkey.com/app/';
-};
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(2);
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lib_client__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lib_client__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lib_checkout__ = __webpack_require__(9);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "client", function() { return __WEBPACK_IMPORTED_MODULE_0__lib_client__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "checkout", function() { return __WEBPACK_IMPORTED_MODULE_1__lib_checkout__["a"]; });
@@ -114,40 +100,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return client; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_network__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_platform__ = __webpack_require__(0);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_network__ = __webpack_require__(3);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 
 
 var client = function () {
   function client(key) {
-    var platform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'production';
+    var platform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'development';
 
     _classCallCheck(this, client);
 
     this.key = key;
-    this.platform = platform;
-    this.network = Object(__WEBPACK_IMPORTED_MODULE_0__utils_network__["a" /* default */])(Object(__WEBPACK_IMPORTED_MODULE_1__utils_platform__["a" /* api */])(platform));
+    this.network = Object(__WEBPACK_IMPORTED_MODULE_0__utils_network__["a" /* default */])(platform);
   }
 
   client.prototype.is_displayed_in_checkout = function is_displayed_in_checkout() {
     var _this = this;
 
     return new Promise(function (resolve, reject) {
-      _this.network.post('ecomm/is_displayed_in_checkout', {
-        public_key: _this.key
-      }).then(function (res) {
-        return console.log(res);
+      _this.network.post('ecomm/is_displayed_in_checkout' + _this.key_param).then(function (res) {
+        return res['is_displayed_in_checkout'];
       });
     });
   };
+
+  _createClass(client, [{
+    key: 'key_param',
+    get: function get() {
+      return '?public_key=' + this.key;
+    }
+  }]);
 
   return client;
 }();
@@ -155,12 +145,12 @@ var client = function () {
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__request__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__platform__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__request__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__platform__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
 
@@ -176,20 +166,12 @@ var client = function () {
 var Network = function Network(platform, resource) {
   if (!platform) return false;
 
-  var buildURL = function buildURL() {
-    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        params = _ref.params,
-        id = _ref.id,
-        resource = _ref.resource;
-
+  var buildURL = function buildURL(id, resource) {
     var parameters = [Object(__WEBPACK_IMPORTED_MODULE_1__platform__["a" /* api */])(platform)];
 
     if (resource) parameters = parameters.concat([resource]);
     if (id) parameters = parameters.concat([id]);
 
-    if (params) {
-      return parameters.join('/') + params;
-    }
     return parameters.join('/');
   };
 
@@ -273,7 +255,7 @@ var Network = function Network(platform, resource) {
 /* harmony default export */ __webpack_exports__["a"] = (Network);
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -301,6 +283,20 @@ function request(url, options) {
     });
   });
 }
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return api; });
+
+
+var api = function api(platform) {
+  if (platform === 'development') return 'http://localhost:9100';
+  if (platform === 'staging') return 'https://staging.creditkey.com/app';
+  if (platform === 'production') return 'https://www.creditkey.com/app';
+};
 
 /***/ }),
 /* 6 */

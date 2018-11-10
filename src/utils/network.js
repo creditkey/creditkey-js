@@ -11,15 +11,12 @@ import { assign } from 'lodash';
 const Network = (platform, resource) => {
   if (!platform) return false;
 
-  let buildURL = ({ params, id, resource } = {}) => {
+  let buildURL = (id, resource) => {
     let parameters = [api(platform)];
 
     if (resource) parameters = parameters.concat([resource]);
     if (id) parameters = parameters.concat([id]);
 
-    if (params) {
-      return parameters.join('/') + params;
-    }
     return parameters.join('/');
   }
 

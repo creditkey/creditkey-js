@@ -11,20 +11,12 @@ import { assign } from 'lodash';
 var Network = function Network(platform, resource) {
   if (!platform) return false;
 
-  var buildURL = function buildURL() {
-    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        params = _ref.params,
-        id = _ref.id,
-        resource = _ref.resource;
-
+  var buildURL = function buildURL(id, resource) {
     var parameters = [api(platform)];
 
     if (resource) parameters = parameters.concat([resource]);
     if (id) parameters = parameters.concat([id]);
 
-    if (params) {
-      return parameters.join('/') + params;
-    }
     return parameters.join('/');
   };
 
