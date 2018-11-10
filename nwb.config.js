@@ -6,6 +6,9 @@ module.exports = {
       use: ['style-loader', 'css-loader']
     }]
   },
+  karma: {
+    browsers: ["ChromeHeadless"]
+  },
   npm: {
     esModules: true,
     umd: {

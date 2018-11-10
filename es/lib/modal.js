@@ -1,9 +1,14 @@
 import { modal_main, modal_background, modal_card, modal_head } from '../styles/modal';
+import { api } from '../utils/platform';
 
 var modal = function modal(source) {
   var body = document.body;
   var style = 'margin: auto; width: 100%; border: none; height: calc(100vh - 160px);';
   var iframe = '<iframe src="' + (source + '?modal=true') + '" style="' + style + '"></iframe>';
+
+  if (!validate_url(source)) {
+    iframe = 'An invalid resource was requested';
+  }
 
   body.addEventListener('click', function (e) {
     return remove();
@@ -17,6 +22,19 @@ function remove() {
     return remove;
   });
   el && el.remove();
+}
+
+// ensure that we're requesting a valid creditkey domain
+function validate_url(url) {
+  if (!url) return false;
+
+  var root = url.split('/')[1];
+
+  if (api('development').split('/')[1] === root) return true;
+  if (api('staging').split('/')[1] === root) return true;
+  if (api('production').split('/')[1] === root) return true;
+
+  return false;
 }
 
 window.addEventListener('message', function (e) {

@@ -1,7 +1,7 @@
-import client from './lib/client';
+import Client from './lib/client';
 import checkout from './lib/checkout';
 
 export { 
-  client, 
+  Client, 
   checkout 
 }
