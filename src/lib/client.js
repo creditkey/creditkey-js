@@ -13,23 +13,23 @@ export default class Client {
   begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl, mode) {
     return new Promise((resolve, reject) => {
       if (!cartItems || !billingAddress || !charges || !remoteId || !customerId || !returnUrl || !cancelUrl) {
-        reject('missing required data');
+        return reject('missing required data');
       }
 
       if (!Array.isArray(cartItems)) {
-        reject('cart items must be an array of CartItem objects');
+        return reject('cart items must be an array of CartItem objects');
       } else if (cartItems.filter(c => !c.is_valid_item()).length >= 1) {
-        reject('one or more cart items are invalid');
+        return reject('one or more cart items are invalid');
       }
 
       if (typeof billingAddress !== 'object') {
-        reject('billing address should be a billingAddress object');
+        return reject('billing address should be a billingAddress object');
       }
 
       if (typeof charges !== 'object') {
-        reject('charges should be a charges object');
+        return reject('charges should be a charges object');
       } else if (charges.filter(c => !c.validate_charges()).length >= 1) {
-        reject('one or more charges value is invalid');
+        return reject('one or more charges value is invalid');
       }
 
       return this.network.post('ecomm/begin_checkout', {

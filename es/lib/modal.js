@@ -4,7 +4,7 @@ import { api } from '../utils/platform';
 var modal = function modal(source) {
   var body = document.body;
   var style = 'margin: auto; width: 100%; border: none; height: calc(100vh - 160px);';
-  var iframe = '<iframe src="' + (source + '?modal=true') + '" style="' + style + '"></iframe>';
+  var iframe = '<iframe id="creditkey-iframe" src="' + (source + '?modal=true') + '" style="' + style + '"></iframe>';
 
   if (!validate_url(source)) {
     iframe = 'An invalid resource was requested';

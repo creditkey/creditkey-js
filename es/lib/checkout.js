@@ -12,6 +12,8 @@ var checkout = function checkout(source) {
 
   if (type.toLowerCase() === 'modal') {
     return modal(source);
+  } else if (type.toLowerCase() === 'redirect') {
+    return redirect(source);
   }
 };
 
