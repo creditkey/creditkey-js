@@ -10,7 +10,7 @@ const host = api('development');
 const key = '123456789';
 const client = new Client(key);
 const billingAddress = new Address('Test', 'Tester', 'Test Co', 'test@test.com', '1 Test Rd', '', 'Test City', 'XX', '01234');
-const charges = new Charges('100.00', '10.00', 0, 0, '110.00');
+const charges = [new Charges('100.00', '10.00', 0, 0, '110.00')];
 
 describe('Client', () => {
   afterEach(() => {
@@ -29,7 +29,7 @@ describe('Client', () => {
 
     it('rejects when cart items is not an array', () => {
       return client.begin_checkout({}, {}, {}, charges, 1, 1, 'http://', 'http://')
-        .catch(e => expect(e).toBe('cart items must be an array of cart objects'));
+        .catch(e => expect(e).toBe('cart items must be an array of CartItem objects'));
     });
 
     it('sends a request with the expected payload', () => {

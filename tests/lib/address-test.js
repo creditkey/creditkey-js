@@ -4,11 +4,6 @@ import Address from '../../src/lib/address';
 
 describe('Address', () => {
   describe('address validations', () => {
-    it('rejects an invalid address', ()=> {
-      const address = new Address();
-      expect(address.is_valid_address()).toBe(false);
-    });
-
     it('rejects an address missing first name', () => {
       const address2 = new Address('', 'Tester', 'Test Co', 'test@test.com', 'Test Rd', null, 'Test Town', 'MA', '02130');
       expect(address2.is_valid_address()).toBe(false);

@@ -17,7 +17,9 @@ export default class Client {
       }
 
       if (!Array.isArray(cartItems)) {
-        reject('cart items must be an array of cart objects');
+        reject('cart items must be an array of CartItem objects');
+      } else if (cartItems.filter(c => !c.is_valid_item()).length >= 1) {
+        reject('one or more cart items are invalid');
       }
 
       if (typeof billingAddress !== 'object') {
@@ -26,7 +28,7 @@ export default class Client {
 
       if (typeof charges !== 'object') {
         reject('charges should be a charges object');
-      } else if (!charges.validate_charges()) {
+      } else if (charges.filter(c => !c.validate_charges()).length >= 1) {
         reject('one or more charges value is invalid');
       }
 

@@ -1,6 +1,6 @@
 export default class Charges {
   constructor(total, shipping, tax, discountAmount, grandTotal) {
-    this.charges = {
+    this.data = {
       total: total,
       shipping: shipping,
       tax: tax,
@@ -10,12 +10,12 @@ export default class Charges {
   }
 
   validate_charges() {
-    if (this.charges.shipping && !this.is_valid_money_value(this.charges.shipping)) return false;
-    if (this.charges.tax && !this.is_valid_money_value(this.charges.tax)) return false;
-    if (this.charges.discountAmount && !this.is_valid_money_value(this.charges.discountAmount)) return false;
+    if (this.data.shipping && !this.is_valid_money_value(this.data.shipping)) return false;
+    if (this.data.tax && !this.is_valid_money_value(this.data.tax)) return false;
+    if (this.data.discountAmount && !this.is_valid_money_value(this.data.discountAmount)) return false;
 
-    if (!this.is_valid_money_value(this.charges.total) ||
-        !this.is_valid_money_value(this.charges.grandTotal)) {
+    if (!this.is_valid_money_value(this.data.total) ||
+        !this.is_valid_money_value(this.data.grandTotal)) {
       return false;
     }
 
