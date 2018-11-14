@@ -1,3 +1,5 @@
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -23,7 +25,23 @@ var Client = function () {
       }
 
       if (!Array.isArray(cartItems)) {
-        reject('cart items must be an array of cart objects');
+        reject('cart items must be an array of CartItem objects');
+      } else if (cartItems.filter(function (c) {
+        return !c.is_valid_item();
+      }).length >= 1) {
+        reject('one or more cart items are invalid');
+      }
+
+      if ((typeof billingAddress === 'undefined' ? 'undefined' : _typeof(billingAddress)) !== 'object') {
+        reject('billing address should be a billingAddress object');
+      }
+
+      if ((typeof charges === 'undefined' ? 'undefined' : _typeof(charges)) !== 'object') {
+        reject('charges should be a charges object');
+      } else if (charges.filter(function (c) {
+        return !c.validate_charges();
+      }).length >= 1) {
+        reject('one or more charges value is invalid');
       }
 
       return _this.network.post('ecomm/begin_checkout', {

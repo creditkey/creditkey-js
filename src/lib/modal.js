@@ -11,7 +11,7 @@ const modal = source =>  {
   }
 
   body.addEventListener('click', e => remove());
-  return body.insertAdjacentHTML('beforeend', `<div id="creditkey-modal" style="${modal_main}"><div style="${modal_background}"></div><div style="${modal_card}">${iframe}</div></div>`);
+  return body.insertAdjacentHTML('beforeend', `<div id="creditkey-modal" style="${modal_main}"><div style="${modal_background}"></div><div id="modal-card" style="${modal_card}">${iframe}</div></div>`);
 }
 
 function remove() {
@@ -35,12 +35,16 @@ function validate_url(url) {
 
 window.addEventListener('message', function(e) {
   event = JSON.parse(e.data);
+  const modal_element = document.getElementById('modal-card');
 
   // if we're closing the modal from within the CK iframe, trigger the event bound to parent body
   if (event.action === 'cancel' && event.type === 'modal') {
     remove();
   } else if (event.action == 'complete' && event.type == 'modal') {
     window.location.href = event.options;
+  } else if (event.action == 'height' && event.type == 'modal') {
+    const total_height = 180 + event.options;
+    modal_element.style.height = total_height.toString() + 'px';
   }
 }, false);
 

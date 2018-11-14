@@ -29,7 +29,7 @@ export const modal_background = `bottom: 0;
                                   background-color: rgba(10, 10, 10, 0.86); }`;
 
 export const modal_card = `margin: 0 20px;
-                            height: calc(100vh - 160px);
+                            height: 800px;
                             overflow: auto;
                             position: relative;
                             width: 600px;
