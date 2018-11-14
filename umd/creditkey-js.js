@@ -74,29 +74,28 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(1);
-
-
-/***/ }),
-/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lib_client__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lib_checkout__ = __webpack_require__(9);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "client", function() { return __WEBPACK_IMPORTED_MODULE_0__lib_client__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "checkout", function() { return __WEBPACK_IMPORTED_MODULE_1__lib_checkout__["a"]; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return api; });
 
 
+var api = function api(platform) {
+  if (platform === 'development') return 'http://localhost:9100';
+  if (platform === 'staging') return 'https://staging.creditkey.com/app';
+  if (platform === 'production') return 'https://www.creditkey.com/app';
+};
 
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(2);
 
 
 /***/ }),
@@ -104,43 +103,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return client; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_network__ = __webpack_require__(3);
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lib_client__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lib_checkout__ = __webpack_require__(9);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Client", function() { return __WEBPACK_IMPORTED_MODULE_0__lib_client__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "checkout", function() { return __WEBPACK_IMPORTED_MODULE_1__lib_checkout__["a"]; });
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-
-
-var client = function () {
-  function client(key) {
-    var platform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'development';
-
-    _classCallCheck(this, client);
-
-    this.key = key;
-    this.network = Object(__WEBPACK_IMPORTED_MODULE_0__utils_network__["a" /* default */])(platform);
-  }
-
-  client.prototype.is_displayed_in_checkout = function is_displayed_in_checkout() {
-    var _this = this;
-
-    return new Promise(function (resolve, reject) {
-      _this.network.post('ecomm/is_displayed_in_checkout' + _this.key_param).then(function (res) {
-        return res['is_displayed_in_checkout'];
-      });
-    });
-  };
-
-  _createClass(client, [{
-    key: 'key_param',
-    get: function get() {
-      return '?public_key=' + this.key;
-    }
-  }]);
-
-  return client;
-}();
 
 
 
@@ -149,8 +118,85 @@ var client = function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__request__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__platform__ = __webpack_require__(5);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Client; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_network__ = __webpack_require__(4);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var Client = function () {
+  function Client(key) {
+    var platform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'development';
+
+    _classCallCheck(this, Client);
+
+    this.key = key;
+    this.network = Object(__WEBPACK_IMPORTED_MODULE_0__utils_network__["a" /* default */])(platform);
+  }
+
+  Client.prototype.begin_checkout = function begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl, mode) {
+    var _this = this;
+
+    return new Promise(function (resolve, reject) {
+      if (!cartItems || !billingAddress || !charges || !remoteId || !customerId || !returnUrl || !cancelUrl) {
+        reject('missing required data');
+      }
+
+      if (!Array.isArray(cartItems)) {
+        reject('cart items must be an array of cart objects');
+      }
+
+      return _this.network.post('ecomm/begin_checkout', {
+        cart_items: cartItems,
+        shipping_address: shippingAddress,
+        billing_address: billingAddress,
+        charges: charges,
+        remote_id: remoteId,
+        remote_customer_id: customerId,
+        return_url: returnUrl,
+        cancel_url: cancelUrl,
+        mode: mode || 'modal'
+      }).then(function (res) {
+        return resolve(res);
+      }).catch(function (err) {
+        return reject(err);
+      });
+    });
+  };
+
+  Client.prototype.is_displayed_in_checkout = function is_displayed_in_checkout() {
+    var _this2 = this;
+
+    return new Promise(function (resolve, reject) {
+      return _this2.network.post('ecomm/is_displayed_in_checkout' + _this2.key_param).then(function (res) {
+        return res['is_displayed_in_checkout'] ? resolve(true) : reject(false);
+      }).catch(function (err) {
+        return reject(err);
+      });
+    });
+  };
+
+  _createClass(Client, [{
+    key: 'key_param',
+    get: function get() {
+      return '?public_key=' + this.key;
+    }
+  }]);
+
+  return Client;
+}();
+
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__request__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__platform__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
 
@@ -255,7 +301,7 @@ var Network = function Network(platform, resource) {
 /* harmony default export */ __webpack_exports__["a"] = (Network);
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -283,20 +329,6 @@ function request(url, options) {
     });
   });
 }
-
-/***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return api; });
-
-
-var api = function api(platform) {
-  if (platform === 'development') return 'http://localhost:9100';
-  if (platform === 'staging') return 'https://staging.creditkey.com/app';
-  if (platform === 'production') return 'https://www.creditkey.com/app';
-};
 
 /***/ }),
 /* 6 */
@@ -17500,12 +17532,18 @@ var checkout = function checkout(source) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__styles_modal__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_platform__ = __webpack_require__(0);
+
 
 
 var modal = function modal(source) {
   var body = document.body;
   var style = 'margin: auto; width: 100%; border: none; height: calc(100vh - 160px);';
   var iframe = '<iframe src="' + (source + '?modal=true') + '" style="' + style + '"></iframe>';
+
+  if (!validate_url(source)) {
+    iframe = 'An invalid resource was requested';
+  }
 
   body.addEventListener('click', function (e) {
     return remove();
@@ -17519,6 +17557,19 @@ function remove() {
     return remove;
   });
   el && el.remove();
+}
+
+// ensure that we're requesting a valid creditkey domain
+function validate_url(url) {
+  if (!url) return false;
+
+  var root = url.split('/')[1];
+
+  if (Object(__WEBPACK_IMPORTED_MODULE_1__utils_platform__["a" /* api */])('development').split('/')[1] === root) return true;
+  if (Object(__WEBPACK_IMPORTED_MODULE_1__utils_platform__["a" /* api */])('staging').split('/')[1] === root) return true;
+  if (Object(__WEBPACK_IMPORTED_MODULE_1__utils_platform__["a" /* api */])('production').split('/')[1] === root) return true;
+
+  return false;
 }
 
 window.addEventListener('message', function (e) {
