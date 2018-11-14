@@ -120,6 +120,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Client; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_network__ = __webpack_require__(4);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -145,7 +147,23 @@ var Client = function () {
       }
 
       if (!Array.isArray(cartItems)) {
-        reject('cart items must be an array of cart objects');
+        reject('cart items must be an array of CartItem objects');
+      } else if (cartItems.filter(function (c) {
+        return !c.is_valid_item();
+      }).length >= 1) {
+        reject('one or more cart items are invalid');
+      }
+
+      if ((typeof billingAddress === 'undefined' ? 'undefined' : _typeof(billingAddress)) !== 'object') {
+        reject('billing address should be a billingAddress object');
+      }
+
+      if ((typeof charges === 'undefined' ? 'undefined' : _typeof(charges)) !== 'object') {
+        reject('charges should be a charges object');
+      } else if (charges.filter(function (c) {
+        return !c.validate_charges();
+      }).length >= 1) {
+        reject('one or more charges value is invalid');
       }
 
       return _this.network.post('ecomm/begin_checkout', {
@@ -17548,7 +17566,7 @@ var modal = function modal(source) {
   body.addEventListener('click', function (e) {
     return remove();
   });
-  return body.insertAdjacentHTML('beforeend', '<div id="creditkey-modal" style="' + __WEBPACK_IMPORTED_MODULE_0__styles_modal__["c" /* modal_main */] + '"><div style="' + __WEBPACK_IMPORTED_MODULE_0__styles_modal__["a" /* modal_background */] + '"></div><div style="' + __WEBPACK_IMPORTED_MODULE_0__styles_modal__["b" /* modal_card */] + '">' + iframe + '</div></div>');
+  return body.insertAdjacentHTML('beforeend', '<div id="creditkey-modal" style="' + __WEBPACK_IMPORTED_MODULE_0__styles_modal__["c" /* modal_main */] + '"><div style="' + __WEBPACK_IMPORTED_MODULE_0__styles_modal__["a" /* modal_background */] + '"></div><div id="modal-card" style="' + __WEBPACK_IMPORTED_MODULE_0__styles_modal__["b" /* modal_card */] + '">' + iframe + '</div></div>');
 };
 
 function remove() {
@@ -17574,12 +17592,16 @@ function validate_url(url) {
 
 window.addEventListener('message', function (e) {
   event = JSON.parse(e.data);
+  var modal_element = document.getElementById('modal-card');
 
   // if we're closing the modal from within the CK iframe, trigger the event bound to parent body
   if (event.action === 'cancel' && event.type === 'modal') {
     remove();
   } else if (event.action == 'complete' && event.type == 'modal') {
     window.location.href = event.options;
+  } else if (event.action == 'height' && event.type == 'modal') {
+    var total_height = 180 + event.options;
+    modal_element.style.height = total_height.toString() + 'px';
   }
 }, false);
 
@@ -17598,7 +17620,7 @@ var modal_main = "bottom: 0;\n                           left: 0;\n             
 
 var modal_background = "bottom: 0;\n                                  left: 0;\n                                  position: absolute;\n                                  right: 0;\n                                  top: 0;\n                                  background-color: rgba(10, 10, 10, 0.86); }";
 
-var modal_card = "margin: 0 20px;\n                            height: calc(100vh - 160px);\n                            overflow: auto;\n                            position: relative;\n                            width: 600px;\n                            display: -webkit-box;\n                            display: -ms-flexbox;\n                            display: flex;\n                            -webkit-box-orient: vertical;\n                            -webkit-box-direction: normal;\n                                -ms-flex-direction: column;\n                                    flex-direction: column;\n                            background-color: white;\n                            -ms-overflow-y: visible;";
+var modal_card = "margin: 0 20px;\n                            height: 800px;\n                            overflow: auto;\n                            position: relative;\n                            width: 600px;\n                            display: -webkit-box;\n                            display: -ms-flexbox;\n                            display: flex;\n                            -webkit-box-orient: vertical;\n                            -webkit-box-direction: normal;\n                                -ms-flex-direction: column;\n                                    flex-direction: column;\n                            background-color: white;\n                            -ms-overflow-y: visible;";
 
 var modal_head = "-webkit-box-align: center;\n                                 -ms-flex-align: center;\n                                     align-items: center;\n                             background-color: white;\n                             display: -webkit-box;\n                             display: -ms-flexbox;\n                             display: flex;\n                             -ms-flex-negative: 0;\n                                 flex-shrink: 0;\n                             -webkit-box-pack: start;\n                                 -ms-flex-pack: start;\n                                     justify-content: center;\n                             padding: 20px;\n                             position: relative;\n                             border-bottom: 1px solid #dbdbdb;\n                             border-top-left-radius: 6px;\n                             border-top-right-radius: 6px;";
 
