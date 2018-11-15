@@ -1,6 +1,6 @@
 {
   "name": "creditkey-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Credit Key Javascript SDK",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -27,8 +27,8 @@
     "nwb-sass": "^0.9.0",
     "sass-loader": "^7.1.0"
   },
-  "author": "",
-  "homepage": "",
+  "author": "Eben Goodman",
+  "homepage": "https://www.creditkey.com",
   "license": "MIT",
-  "repository": ""
+  "repository": "https://github.com/creditkey/creditkey-js"
 }
