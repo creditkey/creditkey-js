@@ -28,6 +28,12 @@ The Credit Key Javascript SDK requires Node 8.x or higher and NPM 5.x or higher.
 npm install creditkey-js
 ```
 
+The Credit Key Javascript SDK can also be installed via a script tag using the UNPKG CDN.  It is then available as a global variable `ck` or as a UMD module.
+
+```javascript
+<script crossorigin src="https://unpkg.com/creditkey-js@1.0.1/umd/creditkey-js.js"></script>
+```
+
 ## Overview
 -----------
 
