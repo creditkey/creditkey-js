@@ -29,13 +29,14 @@ export const modal_background = `bottom: 0;
                                   background-color: rgba(10, 10, 10, 0.86); }`;
 
 export const modal_card = `margin: 0 20px;
-                            height: 800px;
+                            height: 820px;
                             overflow: auto;
                             position: relative;
                             width: 600px;
                             display: -webkit-box;
                             display: -ms-flexbox;
                             display: flex;
+                            border-radius: 5px;
                             -webkit-box-orient: vertical;
                             -webkit-box-direction: normal;
                                 -ms-flex-direction: column;

@@ -3,7 +3,7 @@ import { api } from '../utils/platform';
 
 const modal = source =>  {
   const body = document.body;
-  const style = 'margin: auto; width: 100%; border: none; height: calc(100vh - 160px);';
+  const style = 'margin: auto; width: 100%; border: none; height: 820px;';
   let iframe = `<iframe id="creditkey-iframe" src="${source + '?modal=true'}" style="${style}"></iframe>`;
 
   if (!validate_url(source)) {

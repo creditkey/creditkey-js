@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.0
+ * creditkey-js v1.0.1 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -143,27 +143,27 @@ var Client = function () {
 
     return new Promise(function (resolve, reject) {
       if (!cartItems || !billingAddress || !charges || !remoteId || !customerId || !returnUrl || !cancelUrl) {
-        reject('missing required data');
+        return reject('missing required data');
       }
 
       if (!Array.isArray(cartItems)) {
-        reject('cart items must be an array of CartItem objects');
+        return reject('cart items must be an array of CartItem objects');
       } else if (cartItems.filter(function (c) {
         return !c.is_valid_item();
       }).length >= 1) {
-        reject('one or more cart items are invalid');
+        return reject('one or more cart items are invalid');
       }
 
       if ((typeof billingAddress === 'undefined' ? 'undefined' : _typeof(billingAddress)) !== 'object') {
-        reject('billing address should be a billingAddress object');
+        return reject('billing address should be a billingAddress object');
       }
 
       if ((typeof charges === 'undefined' ? 'undefined' : _typeof(charges)) !== 'object') {
-        reject('charges should be a charges object');
+        return reject('charges should be a charges object');
       } else if (charges.filter(function (c) {
         return !c.validate_charges();
       }).length >= 1) {
-        reject('one or more charges value is invalid');
+        return reject('one or more charges value is invalid');
       }
 
       return _this.network.post('ecomm/begin_checkout', {
@@ -17539,6 +17539,8 @@ var checkout = function checkout(source) {
 
   if (type.toLowerCase() === 'modal') {
     return Object(__WEBPACK_IMPORTED_MODULE_0__modal__["a" /* default */])(source);
+  } else if (type.toLowerCase() === 'redirect') {
+    return Object(__WEBPACK_IMPORTED_MODULE_1__redirect__["a" /* default */])(source);
   }
 };
 
@@ -17556,8 +17558,8 @@ var checkout = function checkout(source) {
 
 var modal = function modal(source) {
   var body = document.body;
-  var style = 'margin: auto; width: 100%; border: none; height: calc(100vh - 160px);';
-  var iframe = '<iframe src="' + (source + '?modal=true') + '" style="' + style + '"></iframe>';
+  var style = 'margin: auto; width: 100%; border: none; height: 820px;';
+  var iframe = '<iframe id="creditkey-iframe" src="' + (source + '?modal=true') + '" style="' + style + '"></iframe>';
 
   if (!validate_url(source)) {
     iframe = 'An invalid resource was requested';
@@ -17620,7 +17622,7 @@ var modal_main = "bottom: 0;\n                           left: 0;\n             
 
 var modal_background = "bottom: 0;\n                                  left: 0;\n                                  position: absolute;\n                                  right: 0;\n                                  top: 0;\n                                  background-color: rgba(10, 10, 10, 0.86); }";
 
-var modal_card = "margin: 0 20px;\n                            height: 800px;\n                            overflow: auto;\n                            position: relative;\n                            width: 600px;\n                            display: -webkit-box;\n                            display: -ms-flexbox;\n                            display: flex;\n                            -webkit-box-orient: vertical;\n                            -webkit-box-direction: normal;\n                                -ms-flex-direction: column;\n                                    flex-direction: column;\n                            background-color: white;\n                            -ms-overflow-y: visible;";
+var modal_card = "margin: 0 20px;\n                            height: 820px;\n                            overflow: auto;\n                            position: relative;\n                            width: 600px;\n                            display: -webkit-box;\n                            display: -ms-flexbox;\n                            display: flex;\n                            border-radius: 5px;\n                            -webkit-box-orient: vertical;\n                            -webkit-box-direction: normal;\n                                -ms-flex-direction: column;\n                                    flex-direction: column;\n                            background-color: white;\n                            -ms-overflow-y: visible;";
 
 var modal_head = "-webkit-box-align: center;\n                                 -ms-flex-align: center;\n                                     align-items: center;\n                             background-color: white;\n                             display: -webkit-box;\n                             display: -ms-flexbox;\n                             display: flex;\n                             -ms-flex-negative: 0;\n                                 flex-shrink: 0;\n                             -webkit-box-pack: start;\n                                 -ms-flex-pack: start;\n                                     justify-content: center;\n                             padding: 20px;\n                             position: relative;\n                             border-bottom: 1px solid #dbdbdb;\n                             border-top-left-radius: 6px;\n                             border-top-right-radius: 6px;";
 
