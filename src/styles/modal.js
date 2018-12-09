@@ -33,6 +33,7 @@ export const modal_card = `margin: 0 20px;
                             overflow: auto;
                             position: relative;
                             width: 600px;
+                            max-height: 95vh;
                             display: -webkit-box;
                             display: -ms-flexbox;
                             display: flex;

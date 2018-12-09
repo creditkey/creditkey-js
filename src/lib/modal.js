@@ -34,8 +34,8 @@ function validate_url(url) {
 }
 
 window.addEventListener('message', function(e) {
-  event = JSON.parse(e.data);
-  const modal_element = document.getElementById('modal-card');
+  const event = JSON.parse(e.data),
+    modal_element = document.getElementById('modal-card');
 
   // if we're closing the modal from within the CK iframe, trigger the event bound to parent body
   if (event.action === 'cancel' && event.type === 'modal') {
