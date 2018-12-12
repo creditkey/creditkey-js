@@ -10,17 +10,13 @@ var modal = function modal(source) {
     iframe = 'An invalid resource was requested';
   }
 
-  body.addEventListener('click', function (e) {
-    return remove();
-  });
+  //body.addEventListener('click', e => remove());
   return body.insertAdjacentHTML('beforeend', '<div id="creditkey-modal" style="' + modal_main + '"><div style="' + modal_background + '"></div><div id="modal-card" style="' + modal_card + '">' + iframe + '</div></div>');
 };
 
 function remove() {
   var el = document.querySelector('#creditkey-modal');
-  el && document.body.removeEventListener('click', function (e) {
-    return remove;
-  });
+  //el && document.body.removeEventListener('click', e => remove);
   el && el.remove();
 }
 
