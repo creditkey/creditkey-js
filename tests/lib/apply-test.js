@@ -1,10 +1,10 @@
 import expect from 'expect'
 
-import checkout from '../../src/lib/checkout';
+import apply from '../../src/lib/apply';
 
-const source = 'http://localhost:9100';
+const key = 'testkey_123456789';
 
-describe('Checkout', () => {
+describe('Apply Now', () => {
   beforeEach(() => {
     document.body.innerHTML = '';
   });
@@ -13,21 +13,21 @@ describe('Checkout', () => {
     it('adds a modal overlay to the DOM', () => {
       expect(document.getElementById('creditkey-modal')).toNotExist();
 
-      checkout(source);
+      apply(key, 'modal', 'development');
 
       expect(document.getElementById('creditkey-modal')).toExist();
     });
 
     it('has an iframe with the expected source', () => {
-      checkout(source);
+      apply(key, 'modal', 'development');
 
-      expect(document.getElementById('creditkey-iframe').src).toBe(source + '/?modal=true');
+      expect(document.getElementById('creditkey-iframe').src).toBe('http://localhost:9100/apply/modal/start/' + key + '?modal=true');
     });
   });
 
   describe('Redirect', () => {
     xit('redirects to the specified source', () => {
-      checkout(source, 'redirect');
+      apply(key, 'redirect');
 
       expect(global.window.location.href).toBe(source);
     });

@@ -10,6 +10,7 @@
 - [Check for Credit Key Checkout](#check-for-credit-key-checkout)
 - [Obtain Checkout URL](#obtain-checkout-url)
 - [Configuring Checkout Display](#configuring-checkout-display)
+- [Configuring Apply Now Display](#configuring-apply-now-display)
 
 ## Support
 ----------
@@ -104,7 +105,7 @@ client.is_displayed_in_checkout()
 The Credit Key API provides an endpoint to start a checkout experience.  A valid request to this endpoint returns a url to be used when displaying the Credit Key Checkout experience, either as a modal or redirect.
 
 ```javascript
-import Checkout, Client, { Address, Charges, CartItem } from 'creditkey-js';
+import checkout, Client, { Address, Charges, CartItem } from 'creditkey-js';
 
 const client = new Client(your_credit_key_public_key);
 const billingAddress = new Address(...);
@@ -124,13 +125,28 @@ client.begin_checkout(cartItems, billingAddress, shippingAddress, charges, remot
 ## Configuring Checkout Display
 -------------------------------
 
-The `Checkout` method takes two arguments:
+The `checkout` method takes two arguments:
 
 * **url** - Required - The url to load Credit Key Checkout.
 * **type** - Optional - The type of Checkout experience, can be 'modal' or 'redirect', defaults to 'modal'
 
 ```javascript
-import Checkout from 'creditkey-js';
+import checkout from 'creditkey-js';
 
-Checkout(url, type)
+checkout(url, type)
+```
+
+## Configuring Apply Now Display
+-------------------------------
+
+The `apply` method takes three arguments:
+
+* **key** - Required - Your Credit Key public key
+* **type** - Optional - The type of Apply Now experience, can be 'modal' or 'redirect', defaults to 'modal'
+* **platform** - Optional - The platform to load the Apply Now experience from, can be 'development', 'staging' or 'production', defaults to 'production'
+
+```javascript
+import apply from 'creditkey-js';
+
+apply(key)
 ```
