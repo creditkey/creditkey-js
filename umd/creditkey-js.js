@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.6 - https://www.creditkey.com
+ * creditkey-js v1.0.7 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -134,19 +134,13 @@ function validate_url(url) {
 }
 
 window.addEventListener('message', function (e) {
-  var event = void 0;
+  if (!e) return false;
+  if (e && !e.data) return false;
 
-  if (!event.data) return false;
-
-  try {
-    event = JSON.parse(e.data);
-  } catch (e) {
-    event = null;
-  }
-
+  var event = JSON.parse(e.data);
   if (!event || !event.action) return false;
 
-  modal_element = document.getElementById('modal-card');
+  var modal_element = document.getElementById('modal-card');
 
   // if we're closing the modal from within the CK iframe, trigger the event bound to parent body
   if (event.action === 'cancel' && event.type === 'modal') {
