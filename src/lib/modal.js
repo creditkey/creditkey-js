@@ -34,19 +34,13 @@ function validate_url(url) {
 }
 
 window.addEventListener('message', function(e) {
-  let event;
+  if (!e) return false;
+  if (e && !e.data) return false;
 
-  if (!event.data) return false;
-
-  try {
-    event = JSON.parse(e.data);
-  } catch(e) {
-    event = null;
-  }
-
+  const event = JSON.parse(e.data);
   if (!event || !event.action) return false;
 
-  modal_element = document.getElementById('modal-card');
+  let modal_element = document.getElementById('modal-card');
 
   // if we're closing the modal from within the CK iframe, trigger the event bound to parent body
   if (event.action === 'cancel' && event.type === 'modal') {
