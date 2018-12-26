@@ -37,7 +37,14 @@ window.addEventListener('message', function(e) {
   if (!e) return false;
   if (e && !e.data) return false;
 
-  const event = JSON.parse(e.data);
+  let event;
+
+  try {
+    event = JSON.parse(e.data);
+  } catch (e) {
+    event = false;
+  }
+
   if (!event || !event.action) return false;
 
   let modal_element = document.getElementById('modal-card');
