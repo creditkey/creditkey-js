@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.7 - https://www.creditkey.com
+ * creditkey-js v1.0.8 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -17640,7 +17640,7 @@ var checkout = function checkout(source) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return modal_background; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return modal_card; });
 /* unused harmony export modal_head */
-var modal_main = "bottom: 0;\n                           left: 0;\n                           position: absolute;\n                           right: 0;\n                           top: 0;\n                           -webkit-box-align: center;\n                                 -ms-flex-align: center;\n                                     align-items: center;\n                           display: none;\n                           -webkit-box-orient: vertical;\n                           -webkit-box-direction: normal;\n                               -ms-flex-direction: column;:%\n                                   flex-direction: column;\n                           -webkit-box-pack: center;\n                               -ms-flex-pack: center;\n                                   justify-content: center;\n                           overflow: hidden;\n                           position: fixed;\n                           z-index: 40;\n                           display: -webkit-box;\n                           display: -ms-flexbox;\n                           display: flex;";
+var modal_main = "bottom: 0;\n                           left: 0;\n                           position: absolute;\n                           right: 0;\n                           top: 0;\n                           -webkit-box-align: center;\n                                 -ms-flex-align: center;\n                                     align-items: center;\n                           display: none;\n                           -webkit-box-orient: vertical;\n                           -webkit-box-direction: normal;\n                               -ms-flex-direction: column;:%\n                                   flex-direction: column;\n                           -webkit-box-pack: center;\n                               -ms-flex-pack: center;\n                                   justify-content: center;\n                           overflow: hidden;\n                           position: fixed;\n                           z-index: 2000;\n                           display: -webkit-box;\n                           display: -ms-flexbox;\n                           display: flex;";
 
 var modal_background = "bottom: 0;\n                                  left: 0;\n                                  position: absolute;\n                                  right: 0;\n                                  top: 0;\n                                  background-color: rgba(10, 10, 10, 0.86); }";
 

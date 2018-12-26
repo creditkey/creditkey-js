@@ -16,7 +16,7 @@ export const modal_main = `bottom: 0;
                                    justify-content: center;
                            overflow: hidden;
                            position: fixed;
-                           z-index: 40;
+                           z-index: 2000;
                            display: -webkit-box;
                            display: -ms-flexbox;
                            display: flex;`;
