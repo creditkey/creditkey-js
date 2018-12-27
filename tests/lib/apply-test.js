@@ -10,6 +10,10 @@ describe('Apply Now', () => {
   });
 
   describe('Modal', () => {
+    it('should throw an exception', () => {
+      expect(() => apply()).toThrow(/required/);
+    });
+
     it('adds a modal overlay to the DOM', () => {
       expect(document.getElementById('creditkey-modal')).toNotExist();
 
