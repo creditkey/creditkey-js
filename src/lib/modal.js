@@ -1,23 +1,36 @@
 import { modal_main, modal_background, modal_card, modal_head } from '../styles/modal';
 import { api } from '../utils/platform';
 
-const modal = source =>  {
-  const body = document.body;
-  const style = 'margin: auto; width: 100%; border: none; height: 820px;';
-  let iframe = `<iframe id="creditkey-iframe" src="${source + '?modal=true'}" style="${style}"></iframe>`;
+const modal = source => {
+  // Check to see if we've already created the modal - but hidden it when the user clicked off.
+  // If so, simply redisplay the modal.
+  const existingModal = document.getElementById('creditkey-modal');
 
-  if (!validate_url(source)) {
-    iframe = `An invalid resource was requested`;
+  if (existingModal !== null) {
+    existingModal.style.display = 'flex';
+  } else {
+    // Otherwise, create the modal.
+
+    const body = document.body;
+    const style = 'margin: auto; width: 100%; border: none; height: 820px;';
+    let iframe = `<iframe id="creditkey-iframe" src="${source + '?modal=true'}" style="${style}"></iframe>`;
+
+    if (!validate_url(source)) {
+      iframe = `An invalid resource was requested`;
+    }
+
+    //body.addEventListener('click', e => remove());
+    return body.insertAdjacentHTML('beforeend', `<div id="creditkey-modal" style="${modal_main}"><div style="${modal_background}"></div><div id="modal-card" style="${modal_card}">${iframe}</div></div>`);
   }
-
-  //body.addEventListener('click', e => remove());
-  return body.insertAdjacentHTML('beforeend', `<div id="creditkey-modal" style="${modal_main}"><div style="${modal_background}"></div><div id="modal-card" style="${modal_card}">${iframe}</div></div>`);
 }
 
 function remove() {
-  const el = document.querySelector('#creditkey-modal');
-  //el && document.body.removeEventListener('click', e => remove);
-  el && el.remove();
+  // Hide the modal so we can potentially redisplay it, leaving the user at the same place in the
+  // checkout flow, if they accidentially click off.
+  const el = document.getElementById('creditkey-modal');
+  if (el !== null) {
+    el.style.display = 'none';
+  }
 }
 
 // ensure that we're requesting a valid creditkey domain
