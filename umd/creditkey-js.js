@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.11 - https://www.creditkey.com
+ * creditkey-js v1.0.12 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -102,22 +102,35 @@ var api = function api(platform) {
 
 
 var modal = function modal(source) {
-  var body = document.body;
-  var style = 'margin: auto; width: 100%; border: none; height: 820px;';
-  var iframe = '<iframe id="creditkey-iframe" src="' + (source + '?modal=true') + '" style="' + style + '"></iframe>';
+  // Check to see if we've already created the modal - but hidden it when the user clicked off.
+  // If so, simply redisplay the modal.
+  var existingModal = document.getElementById('creditkey-modal');
 
-  if (!validate_url(source)) {
-    iframe = 'An invalid resource was requested';
+  if (existingModal !== null) {
+    existingModal.style.display = 'flex';
+  } else {
+    // Otherwise, create the modal.
+
+    var body = document.body;
+    var style = 'margin: auto; width: 100%; border: none; height: 820px;';
+    var iframe = '<iframe id="creditkey-iframe" src="' + (source + '?modal=true') + '" style="' + style + '"></iframe>';
+
+    if (!validate_url(source)) {
+      iframe = 'An invalid resource was requested';
+    }
+
+    //body.addEventListener('click', e => remove());
+    return body.insertAdjacentHTML('beforeend', '<div id="creditkey-modal" style="' + __WEBPACK_IMPORTED_MODULE_0__styles_modal__["c" /* modal_main */] + '"><div style="' + __WEBPACK_IMPORTED_MODULE_0__styles_modal__["a" /* modal_background */] + '"></div><div id="modal-card" style="' + __WEBPACK_IMPORTED_MODULE_0__styles_modal__["b" /* modal_card */] + '">' + iframe + '</div></div>');
   }
-
-  //body.addEventListener('click', e => remove());
-  return body.insertAdjacentHTML('beforeend', '<div id="creditkey-modal" style="' + __WEBPACK_IMPORTED_MODULE_0__styles_modal__["c" /* modal_main */] + '"><div style="' + __WEBPACK_IMPORTED_MODULE_0__styles_modal__["a" /* modal_background */] + '"></div><div id="modal-card" style="' + __WEBPACK_IMPORTED_MODULE_0__styles_modal__["b" /* modal_card */] + '">' + iframe + '</div></div>');
 };
 
 function remove() {
-  var el = document.querySelector('#creditkey-modal');
-  //el && document.body.removeEventListener('click', e => remove);
-  el && el.remove();
+  // Hide the modal so we can potentially redisplay it, leaving the user at the same place in the
+  // checkout flow, if they accidentially click off.
+  var el = document.getElementById('creditkey-modal');
+  if (el !== null) {
+    el.style.display = 'none';
+  }
 }
 
 // ensure that we're requesting a valid creditkey domain
