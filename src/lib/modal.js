@@ -46,6 +46,13 @@ function validate_url(url) {
   return false;
 }
 
+function redirect(uri) {
+  if(navigator.userAgent.match(/Android/i)) 
+    document.location = uri;      
+  else
+    window.location.replace(uri);
+}
+
 window.addEventListener('message', function(e) {
   if (!e) return false;
   if (e && !e.data) return false;
@@ -66,7 +73,7 @@ window.addEventListener('message', function(e) {
   if (event.action === 'cancel' && event.type === 'modal') {
     remove();
   } else if (event.action == 'complete' && event.type == 'modal') {
-    window.location.href = event.options;
+    redirect(event.options);
   } else if (event.action == 'height' && event.type == 'modal') {
     const total_height = 180 + event.options;
     modal_element.style.height = total_height.toString() + 'px';
