@@ -93,9 +93,10 @@ import Client from 'creditkey-js';
 
 const client = new Client(your_credit_key_public_key);
 
-let isCreditKeyDisplayed = false;
+let isCreditKeyDisplayed = false,
+    cartItems = [new CartItem(...), new CartItem(...)];
 
-client.is_displayed_in_checkout()
+client.is_displayed_in_checkout(cartItems)
   .then(response => isCreditKeyDisplayed = response);
 ```
 
@@ -117,7 +118,12 @@ const customerId = your_customer_id;
 const returnUrl = 'your url to send the customer back to after completing credit key checkout';
 const cancelUrl = 'your url to return the customer to if they cancel out of the credit key checkout';
 
-client.begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl);
+// Optional
+const merchantData = {
+  myDataKey: 'my value'
+};
+
+client.begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl, merchantData);
   .then(response => Checkout(response.checkout_url));
 ```
 
