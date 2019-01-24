@@ -1,5 +1,7 @@
-import { modal_main, modal_background, modal_card, modal_head } from '../styles/modal';
+import { modal_main, modal_background, modal_card, modal_card_mobile, modal_head } from '../styles/modal';
 import { api } from '../utils/platform';
+
+var width = window.screen.availWidth;
 
 var modal = function modal(source) {
   // Check to see if we've already created the modal - but hidden it when the user clicked off.
@@ -20,7 +22,7 @@ var modal = function modal(source) {
     }
 
     //body.addEventListener('click', e => remove());
-    return body.insertAdjacentHTML('beforeend', '<div id="creditkey-modal" style="' + modal_main + '"><div style="' + modal_background + '"></div><div id="modal-card" style="' + modal_card + '">' + iframe + '</div></div>');
+    return body.insertAdjacentHTML('beforeend', '<div id="creditkey-modal" style="' + modal_main + '"><div style="' + modal_background + '"></div><div id="modal-card" style="' + (width <= 479 ? modal_card_mobile : modal_card) + '">' + iframe + '</div></div>');
   }
 };
 
