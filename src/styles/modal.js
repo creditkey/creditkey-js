@@ -45,6 +45,22 @@ export const modal_card = `margin: 0 20px;
                             background-color: white;
                             -ms-overflow-y: visible;`;
 
+export const modal_card_mobile = `margin: 0;
+                                  height: 100vh;
+                                  max-height: 100vh;
+                                  overflow: auto;
+                                  position: relative;
+                                  width: 100vw;
+                                  display: -webkit-box;
+                                  display: -ms-flexbox;
+                                  display: flex;
+                                  -webkit-box-orient: vertical;
+                                  -webkit-box-direction: normal;
+                                      -ms-flex-direction: column;
+                                          flex-direction: column;
+                                  background-color: white;
+                                  -ms-overflow-y: visible;`;
+
 export const modal_head = `-webkit-box-align: center;
                                  -ms-flex-align: center;
                                      align-items: center;
