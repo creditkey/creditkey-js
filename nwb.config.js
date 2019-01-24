@@ -2,8 +2,10 @@ module.exports = {
   type: 'web-module',
   module: {
     rules: [{
-      test: /\.css$/,
-      use: ['style-loader', 'css-loader']
+      'sass-css': {
+        modules: true,
+        localIdentName: '[hash:base64:5]'
+      }
     }]
   },
   karma: {

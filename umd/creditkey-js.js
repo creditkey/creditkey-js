@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.19 - https://www.creditkey.com
+ * creditkey-js v1.0.20 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -186,16 +186,11 @@ window.addEventListener('message', function (e) {
 
 "use strict";
 var redirect = function redirect(source) {
-
   var uri = void 0;
   var isModal = source.indexOf('modal');
-  isModal <= 0 ? uri = source.replace('modal', 'redirect') : uri = source;
-  console.log(source, isModal);
+  isModal >= 0 ? uri = source.replace('modal', 'redirect') : uri = source;
 
-  /*if(navigator.userAgent.match(/Android/i)) */
-  //document.location = uri;      
-  //else
-  /*window.location.replace(uri);*/
+  if (navigator.userAgent.match(/Android/i)) document.location = uri;else window.location.href = uri;
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (redirect);
