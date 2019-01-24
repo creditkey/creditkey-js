@@ -1,6 +1,6 @@
 export const modal_main = `bottom: 0;
                            left: 0;
-                           position: absolute;
+                           position: fixed;
                            right: 0;
                            top: 0;
                            -webkit-box-align: center;
@@ -42,6 +42,8 @@ export const modal_card = `margin: 0 20px;
                             -webkit-box-direction: normal;
                                 -ms-flex-direction: column;
                                     flex-direction: column;
+                            -webkit-overflow-scrolling: touch;
+                            overflow-y: scroll
                             background-color: white;
                             -ms-overflow-y: visible;`;
 
@@ -58,6 +60,8 @@ export const modal_card_mobile = `margin: 0;
                                   -webkit-box-direction: normal;
                                       -ms-flex-direction: column;
                                           flex-direction: column;
+                                  -webkit-overflow-scrolling: touch;
+                                  overflow-y: scroll
                                   background-color: white;
                                   -ms-overflow-y: visible;`;
 
