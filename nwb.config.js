@@ -1,12 +1,19 @@
+const path = require('path');
+
+const nodeModulesPath = path.resolve('./node_modules');
+
 module.exports = {
   type: 'web-module',
-  module: {
-    rules: [{
-      'sass-css': {
-        modules: true,
-        localIdentName: '[hash:base64:5]'
+  webpack: {
+    extractCSS: false,
+    rules: {
+      'sass': {
+        loader: 'sass-loader',
+        options: {
+          includePaths: [nodeModulesPath]
+        }
       }
-    }]
+    }
   },
   karma: {
     browsers: ["ChromeHeadless"]

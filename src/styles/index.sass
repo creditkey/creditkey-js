@@ -1,2 +1,18 @@
-@import "~bulma/sass/utilities/_all.sass"
-@import "~bulma/sass/components/modal.sass"
+#creditkey-modal
+  $modal-z: 2000;
+  $modal-content-width: 600px;
+
+  //@import "~bulma/bulma";
+  @import "~bulma/sass/utilities/_all";
+  @import "~bulma/sass/components/modal";
+
+  .modal-content
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 5px;
+
+  +touch
+    .modal-content
+      height: 100%;
+      max-height: 100vh;
+      border-radius: 0 !important;

@@ -5,4 +5,11 @@ import Charges from './lib/charges';
 import checkout from './lib/checkout';
 import apply from './lib/apply';
 
-export { Client, CartItem, Address, Charges, apply, checkout };
+export default {
+  Client: Client,
+  CartItem: CartItem,
+  Address: Address,
+  Charges: Charges,
+  apply: apply,
+  checkout: checkout
+};

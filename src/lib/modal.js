@@ -1,5 +1,5 @@
-import { modal_main, modal_background, modal_card, modal_head } from '../styles/modal';
 import { api } from '../utils/platform';
+import styles from '../styles/index.sass';
 
 const modal = source => {
   // Check to see if we've already created the modal - but hidden it when the user clicked off.
@@ -19,8 +19,7 @@ const modal = source => {
       iframe = `An invalid resource was requested`;
     }
 
-    //body.addEventListener('click', e => remove());
-    return body.insertAdjacentHTML('beforeend', `<div id="creditkey-modal" style="${modal_main}"><div style="${modal_background}"></div><div id="modal-card" style="${modal_card}">${iframe}</div></div>`);
+    return body.insertAdjacentHTML('beforeend', `<div id="creditkey-modal"><div class="modal is-active"><div class="modal-background"></div><div class="modal-content" id="modal-card">${iframe}</div></div></div>`);
   }
 }
 

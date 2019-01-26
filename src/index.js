@@ -5,7 +5,7 @@ import Charges from './lib/charges';
 import checkout from './lib/checkout';
 import apply from './lib/apply';
 
-export { 
+export default { 
   Client,
   CartItem,
   Address,
