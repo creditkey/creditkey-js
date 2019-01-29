@@ -64,6 +64,7 @@ window.addEventListener('message', function (e) {
   if (!event || !event.action) return false;
 
   var modal_element = document.getElementById('modal-card');
+  var iframe_element = document.getElementById('creditkey-iframe');
 
   // if we're closing the modal from within the CK iframe, trigger the event bound to parent body
   if (event.action === 'cancel' && event.type === 'modal') {
@@ -73,6 +74,7 @@ window.addEventListener('message', function (e) {
   } else if (event.action == 'height' && event.type == 'modal') {
     var total_height = 180 + event.options;
     modal_element.style.height = total_height.toString() + 'px';
+    iframe_element.style.height = total_height.toString() + 'px';
   }
 }, false);
 
