@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.21 - https://www.creditkey.com
+ * creditkey-js v1.0.22 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -1392,6 +1392,7 @@ var api = function api(platform) {
 };
 // EXTERNAL MODULE: ./node_modules/lodash.assign/index.js
 var lodash_assign = __webpack_require__(0);
+var lodash_assign_default = /*#__PURE__*/__webpack_require__.n(lodash_assign);
 
 // CONCATENATED MODULE: ./src/utils/network.js
 
@@ -1438,7 +1439,7 @@ var network_Network = function Network(platform, resource) {
     post: function post(path, body) {
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-      return request(buildURL(path), Object(lodash_assign["assign"])(options, defaultOptions, {
+      return request(buildURL(path), lodash_assign_default()(options, defaultOptions, {
         method: 'POST',
         body: JSON.stringify(body)
       }));
@@ -1454,7 +1455,7 @@ var network_Network = function Network(platform, resource) {
     get: function get(path) {
       var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-      return request(buildURL(path), Object(lodash_assign["assign"])(options, defaultOptions, { method: 'GET' }));
+      return request(buildURL(path), lodash_assign_default()(options, defaultOptions, { method: 'GET' }));
     },
 
     /**
@@ -1468,7 +1469,7 @@ var network_Network = function Network(platform, resource) {
     edit: function edit(path, body) {
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
-      return request(buildURL(path), Object(lodash_assign["assign"])(options, defaultOptions, {
+      return request(buildURL(path), lodash_assign_default()(options, defaultOptions, {
         method: 'PUT',
         body: JSON.stringify(body)
       }));
@@ -1484,7 +1485,7 @@ var network_Network = function Network(platform, resource) {
     delete: function _delete(path) {
       var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-      return request(buildURL(path), Object(lodash_assign["assign"])(options, defaultOptions, { method: 'DELETE' }));
+      return request(buildURL(path), lodash_assign_default()(options, defaultOptions, { method: 'DELETE' }));
     },
 
     ping: function ping() {
@@ -1543,7 +1544,7 @@ var client_Client = function () {
         cart_items: cartItems.map(function (item) {
           return item.data;
         }),
-        shipping_address: shippingAddress.data,
+        shipping_address: shippingAddress && shippingAddress.data,
         billing_address: billingAddress.data,
         charges: charges.data,
         remote_id: remoteId,
@@ -1798,9 +1799,6 @@ var width = window.screen.availWidth;
 
 var checkout_checkout = function checkout(source) {
   var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'modal';
-
-  // always use redirect for small devices
-  //if (width <= 479) return redirect(source);
 
   if (type.toLowerCase() === 'modal') {
     return lib_modal(source);

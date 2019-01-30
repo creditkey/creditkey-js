@@ -1,6 +1,6 @@
 import request from './request';
 import { api } from './platform';
-import { assign } from 'lodash.assign';
+import assign from 'lodash.assign';
 
 /**
  * @function Network

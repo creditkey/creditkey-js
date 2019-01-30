@@ -34,7 +34,7 @@ export default class Client {
 
       return this.network.post('ecomm/begin_checkout' + this.key_param, {
         cart_items: cartItems.map(item => item.data),
-        shipping_address: shippingAddress.data,
+        shipping_address: shippingAddress && shippingAddress.data,
         billing_address: billingAddress.data,
         charges: charges.data,
         remote_id: remoteId,

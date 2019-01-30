@@ -5,12 +5,14 @@ import { api } from '../../src/utils/platform';
 import Client from '../../src/lib/client';
 import Address from '../../src/lib/address';
 import Charges from '../../src/lib/charges';
+import CartItem from '../../src/lib/cart-item';
 
 const host = api('development');
 const key = '123456789';
 const client = new Client(key);
+const items = [new CartItem(1, 'Test Item', 100)];
 const billingAddress = new Address('Test', 'Tester', 'Test Co', 'test@test.com', '1 Test Rd', '', 'Test City', 'XX', '01234');
-const charges = [new Charges('100.00', '10.00', 0, 0, '110.00')];
+const charges = new Charges('100.00', '10.00', 0, 0, '110.00');
 
 describe('Client', () => {
   afterEach(() => {
@@ -34,7 +36,7 @@ describe('Client', () => {
 
     it('sends a request with the expected payload', () => {
       const response = { checkout_url: 'http://localhost:9100' };
-      fetchMock.post(host + '/ecomm/begin_checkout', response);
+      fetchMock.post(host + '/ecomm/begin_checkout?public_key=' + key, response);
 
       return client.begin_checkout([], billingAddress, null, charges, 1, 1, 'http://', 'http://')
         .then(res => expect(res).toEqual(response));
@@ -46,7 +48,7 @@ describe('Client', () => {
       const response = { is_displayed_in_checkout: true };
       fetchMock.post(host + '/ecomm/is_displayed_in_checkout?public_key=' + key, response);
 
-      return client.is_displayed_in_checkout()
+      return client.is_displayed_in_checkout(items)
         .then(res => expect(res).toEqual(true));
     });
 
@@ -54,7 +56,7 @@ describe('Client', () => {
       const response = { is_displayed_in_checkout: false };
       fetchMock.post(host + '/ecomm/is_displayed_in_checkout?public_key=' + key, response);
 
-      return client.is_displayed_in_checkout()
+      return client.is_displayed_in_checkout(items)
         .catch(err => expect(err).toBe(false));
     });
   });
