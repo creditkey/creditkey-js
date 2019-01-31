@@ -1,10 +1,18 @@
 #creditkey-modal
-  $modal-z: 2000;
+  $modal-z: 50001;
   $modal-content-width: 600px;
+  z-index: 50000;
 
   //@import "~bulma/bulma";
   @import "~bulma/sass/utilities/_all";
   @import "~bulma/sass/components/modal";
+
+  .modal
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    visibility: visible !important;
+    background: transparent !important;
 
   .modal-content
     overflow: scroll;
