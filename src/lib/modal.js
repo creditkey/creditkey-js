@@ -10,7 +10,7 @@ const modal = source => {
     existingModal.style.display = 'flex';
   } else {
     // Otherwise, create the modal.
-
+    
     const body = document.body;
     const style = 'margin: auto; width: 100%; border: none; height: 820px;';
     let iframe = `<iframe id="creditkey-iframe" src="${source + '?modal=true'}" style="${style}"></iframe>`;
