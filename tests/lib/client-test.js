@@ -60,4 +60,14 @@ describe('Client', () => {
         .catch(err => expect(err).toBe(false));
     });
   });
+
+  describe('get_marketing_display', () => {
+    it('sends a request for the active promotion marketing language', () => {
+      const response= { text: '0% for 30 days' };
+      fetchMock.post(host + '/ecomm/marketing?public_key=' + key, response);
+
+      return client.get_marketing_display()
+        .then(res => expect(res).toEqual(response));
+    });
+  });
 });

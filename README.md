@@ -156,3 +156,21 @@ import apply from 'creditkey-js';
 
 apply(key)
 ```
+
+## Display Active Promotion
+-------------------------------
+
+The `get_marketing_display` method takes one argument:
+
+* **type** - Optional - Type of marketing copy to retrieve, defaults to 'checkout'
+
+At this time, only checkout marketing language is supported.
+
+```javascript
+import Client from 'creditkey-js';
+
+let marketingText;
+
+Client.get_marketing_display()
+  .then(res => marketingText = res.text)
+```
