@@ -64,4 +64,12 @@ export default class Client {
         .catch(err => reject(err));
     });
   }
+
+  get_marketing_display(type = "checkout") {
+    return new Promise((resolve, reject) => {
+      return this.network.post('ecomm/marketing' + this.key_param, { type: type })
+        .then(res => resolve(res))
+        .catch(err => reject(error))
+    });
+  }
 }
