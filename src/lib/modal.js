@@ -7,6 +7,12 @@ const modal = source => {
   const existingModal = document.getElementById('creditkey-modal');
 
   if (existingModal !== null) {
+    let iframe = document.getElementById('creditkey-iframe');
+    let url = iframe.src;
+    if (url !== source + '?modal=true') {
+      existingModal.remove();
+      return modal(source);
+    }
     existingModal.style.display = 'flex';
   } else {
     // Otherwise, create the modal.
