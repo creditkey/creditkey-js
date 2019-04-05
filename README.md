@@ -162,9 +162,12 @@ apply(key)
 
 The `get_marketing_display` method takes one argument:
 
+* **charges** - Optional - A Charges object
 * **type** - Optional - Type of marketing copy to retrieve, defaults to 'checkout'
 
 At this time, only checkout marketing language is supported.
+
+When a charges object is supplied, with subtotal, shipping, tax, discount and grand total amounts, then the returned text calculates and displays the monthly payment amount.
 
 ```javascript
 import Client from 'creditkey-js';
