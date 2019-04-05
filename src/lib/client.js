@@ -65,9 +65,13 @@ export default class Client {
     });
   }
 
-  get_marketing_display(type = "checkout") {
+  get_marketing_display(charges, type = "checkout") {
+    if (charges && typeof charges !== 'object') {
+      return reject('charges should be a charges object');
+    }
+
     return new Promise((resolve, reject) => {
-      return this.network.post('ecomm/marketing' + this.key_param, { type: type })
+      return this.network.post('ecomm/marketing' + this.key_param, { type: type, charges: charges })
         .then(res => resolve(res))
         .catch(err => reject(error))
     });
