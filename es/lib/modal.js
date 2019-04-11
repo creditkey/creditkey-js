@@ -18,8 +18,8 @@ var modal = function modal(source) {
     // Otherwise, create the modal.
 
     var body = document.body;
-    var style = 'margin: auto; width: 100%; border: none; height: 820px;';
-    var _iframe = '<iframe id="creditkey-iframe" src="' + (source + '?modal=true') + '" style="' + style + '"></iframe>';
+    var style = 'margin: auto; width: 100%; border: none; height: 820px; overflow: hidden;';
+    var _iframe = '<iframe id="creditkey-iframe" src="' + (source + '?modal=true') + '" style="' + style + '" scrolling="no"></iframe>';
 
     if (!validate_url(source)) {
       _iframe = 'An invalid resource was requested';
@@ -78,8 +78,7 @@ window.addEventListener('message', function (e) {
   } else if (event.action == 'complete' && event.type == 'modal') {
     redirect(event.options);
   } else if (event.action == 'height' && event.type == 'modal') {
-    var total_height = 180 + event.options;
-    modal_element.style.height = total_height.toString() + 'px';
+    var total_height = event.options;
     iframe_element.style.height = total_height.toString() + 'px';
   }
 }, false);
