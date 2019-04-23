@@ -32,7 +32,7 @@ npm install creditkey-js
 The Credit Key Javascript SDK can also be installed via a script tag using the UNPKG CDN.  It is then available as a global variable `ck` or as a UMD module.
 
 ```javascript
-<script crossorigin src="https://unpkg.com/creditkey-js@1.0.32/umd/creditkey-js.js"></script>
+<script crossorigin src="https://unpkg.com/creditkey-js@1.0.36/umd/creditkey-js.js"></script>
 ```
 
 ## Overview
