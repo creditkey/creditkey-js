@@ -5,6 +5,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 import Network from '../utils/network';
+import Button from './components/button';
+import Text from './components/text';
 
 var Client = function () {
   function Client(key) {
@@ -87,20 +89,36 @@ var Client = function () {
     });
   };
 
+  // display options are button, text, button_text
+  // size options are small, medium, large
+
+
   Client.prototype.get_marketing_display = function get_marketing_display(charges) {
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "checkout";
+
     var _this3 = this;
 
-    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "checkout";
+    var display = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "button";
+    var size = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "medium";
 
     if (charges && (typeof charges === 'undefined' ? 'undefined' : _typeof(charges)) !== 'object') {
       return reject('charges should be a charges object');
     }
 
+    var component = Button;
+
+    console.log(display);
+    switch (display) {
+      case "text":
+        component = Text;
+        break;
+    }
+
     return new Promise(function (resolve, reject) {
       return _this3.network.post('ecomm/marketing' + _this3.key_param, { type: type, charges: charges }).then(function (res) {
-        return resolve(res);
+        return resolve(component(res.text, type, size));
       }).catch(function (err) {
-        return reject(error);
+        return reject(err);
       });
     });
   };
