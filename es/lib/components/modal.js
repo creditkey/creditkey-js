@@ -1,5 +1,4 @@
-import { api } from '../utils/platform';
-import styles from '../styles/index.sass';
+import { api } from '../../utils/platform';
 
 var modal = function modal(source) {
   // Check to see if we've already created the modal - but hidden it when the user clicked off.
@@ -25,7 +24,7 @@ var modal = function modal(source) {
       _iframe = 'An invalid resource was requested';
     }
 
-    return body.insertAdjacentHTML('beforeend', '<div id="creditkey-modal"><div class="modal is-active"><div class="modal-background"></div><div class="modal-content" id="modal-card">' + _iframe + '</div></div></div>');
+    return body.insertAdjacentHTML('beforeend', '<div id="creditkey"><div class="modal is-active"><div class="modal-background"></div><div class="modal-content" id="modal-card">' + _iframe + '</div></div></div>');
   }
 };
 

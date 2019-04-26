@@ -1,3 +1,5 @@
+import styles from './styles/index.sass';
+
 import Client from './lib/client';
 import CartItem from './lib/cart-item';
 import Address from './lib/address';

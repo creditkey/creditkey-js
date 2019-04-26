@@ -1,11 +1,31 @@
-#creditkey-modal
+#creditkey
   $modal-z: 50001;
   $modal-content-width: 600px;
   z-index: 50000;
 
   //@import "~bulma/bulma";
   @import "~bulma/sass/utilities/_all";
+  @import "~bulma/sass/base/helpers";
   @import "~bulma/sass/components/modal";
+  @import "~bulma/sass/elements/button";
+
+  .payment-icon
+    display: inline-block !important;
+    margin-right: 5px !important;
+    vertical-align: middle !important;
+
+  .terms
+    text-decoration: underline;
+    padding: 0 0 0 5px;
+
+  .terms:hover
+    text-decoration: none;
+
+  .button
+    min-height: 40px !important;
+    border-width: 0 !important;
+    vertical-align: middle !important;
+    text-decoration: none !important;
 
   .modal
     margin: 0 !important;

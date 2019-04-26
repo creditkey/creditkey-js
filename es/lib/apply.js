@@ -1,4 +1,4 @@
-import modal from './modal';
+import modal from './components/modal';
 import redirect from './redirect';
 import { api } from '../utils/platform';
 

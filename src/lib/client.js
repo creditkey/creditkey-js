@@ -1,4 +1,6 @@
 import Network from '../utils/network';
+import Button from './components/button';
+import Text from './components/text';
 
 export default class Client {
   constructor(key, platform = 'development') {
@@ -65,15 +67,26 @@ export default class Client {
     });
   }
 
-  get_marketing_display(charges, type = "checkout") {
+  // display options are button, text, button_text
+  // size options are small, medium, large
+  get_marketing_display(charges, type = "checkout", display = "button", size = "medium") {
     if (charges && typeof charges !== 'object') {
       return reject('charges should be a charges object');
     }
 
+    let component = Button;
+
+    console.log(display);
+    switch(display) {
+      case "text":
+        component = Text;
+        break;
+    }
+
     return new Promise((resolve, reject) => {
       return this.network.post('ecomm/marketing' + this.key_param, { type: type, charges: charges })
-        .then(res => resolve(res))
-        .catch(err => reject(error))
+        .then(res => resolve(component(res.text, type, size)))
+        .catch(err => reject(err))
     });
   }
 }
