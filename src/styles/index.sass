@@ -1,4 +1,4 @@
-#creditkey
+.creditkey
   $modal-z: 50001;
   $modal-content-width: 600px;
   z-index: 50000;
@@ -9,18 +9,7 @@
   @import "~bulma/sass/components/modal";
   @import "~bulma/sass/elements/button";
 
-  .payment-icon
-    display: inline-block !important;
-    margin-right: 5px !important;
-    vertical-align: middle !important;
-
-  .terms
-    text-decoration: underline;
-    padding: 0 0 0 5px;
-
-  .terms:hover
-    text-decoration: none;
-
+  // default overrides
   .button
     min-height: 40px !important;
     border-width: 0 !important;
@@ -49,3 +38,20 @@
       height: 100%;
       max-height: 100vh;
       border-radius: 0 !important;
+
+  // custom classes
+  .payment-icon
+    display: inline-block !important;
+    margin-right: 5px !important;
+    vertical-align: middle !important;
+
+  .terms
+    text-decoration: underline;
+    padding: 0 0 0 5px;
+
+  .terms:hover
+    text-decoration: none;
+
+  .pdp
+    padding: 0 5px 0 0;
+    font-weight: bold;

@@ -7,6 +7,8 @@ import Address from '../../src/lib/address';
 import Charges from '../../src/lib/charges';
 import CartItem from '../../src/lib/cart-item';
 
+import Button from '../../src/lib/components/button';
+
 const host = api('development');
 const key = '123456789';
 const client = new Client(key);
@@ -63,11 +65,11 @@ describe('Client', () => {
 
   describe('get_marketing_display', () => {
     it('sends a request for the active promotion marketing language', () => {
-      const response= { text: '0% for 30 days' };
+      const response = { text: '0% for 30 days' };
       fetchMock.post(host + '/ecomm/marketing?public_key=' + key, response);
 
       return client.get_marketing_display()
-        .then(res => expect(res).toEqual(response));
+        .then(res => expect(res).toEqual(Button(key, response.text, 'checkout', 'medium')));
     });
   });
 });
