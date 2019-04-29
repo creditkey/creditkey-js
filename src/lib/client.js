@@ -76,7 +76,6 @@ export default class Client {
 
     let component = Button;
 
-    console.log(display);
     switch(display) {
       case "text":
         component = Text;
@@ -85,7 +84,7 @@ export default class Client {
 
     return new Promise((resolve, reject) => {
       return this.network.post('ecomm/marketing' + this.key_param, { type: type, charges: charges })
-        .then(res => resolve(component(res.text, type, size)))
+        .then(res => resolve(component(this.key, res.text, type, size)))
         .catch(err => reject(err))
     });
   }

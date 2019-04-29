@@ -24,7 +24,7 @@ const modal = source => {
       iframe = `An invalid resource was requested`;
     }
 
-    return body.insertAdjacentHTML('beforeend', `<div id="creditkey"><div class="modal is-active"><div class="modal-background"></div><div class="modal-content" id="modal-card">${iframe}</div></div></div>`);
+    return body.insertAdjacentHTML('beforeend', `<div class="creditkey" id="creditkey-modal"><div class="modal is-active"><div class="modal-background"></div><div class="modal-content" id="modal-card">${iframe}</div></div></div>`);
   }
 }
 
