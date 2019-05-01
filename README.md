@@ -11,6 +11,7 @@
 - [Obtain Checkout URL](#obtain-checkout-url)
 - [Configuring Checkout Display](#configuring-checkout-display)
 - [Configuring Apply Now Display](#configuring-apply-now-display)
+- [Configuring Checkout and Product Page Display](#configuring-marketing-display)
 
 ## Support
 ----------
@@ -157,15 +158,17 @@ import apply from 'creditkey-js';
 apply(key)
 ```
 
-## Display Active Promotion
--------------------------------
+## Configuring Marketing Display
+--------------------------------
 
 The `get_marketing_display` method takes one argument:
 
 * **charges** - Optional - A Charges object
-* **type** - Optional - Type of marketing copy to retrieve, defaults to 'checkout'
+* **type** - Optional - Type of marketing copy to retrieve, defaults to 'checkout', options are 'checkout' and 'pdp'
+* **display** - Optional - Type of marketing display to retrieve, defaults to 'button', options are 'button' and 'text'
+* **size** - Optional - Type of marketing dispay size to retrieve, defaults to 'medium', options are 'small', 'medium' and 'large'
 
-At this time, only checkout marketing language is supported.
+At this time, only checkout and product page displays are supported.
 
 When a charges object is supplied, with subtotal, shipping, tax, discount and grand total amounts, then the returned text calculates and displays the monthly payment amount.
 
