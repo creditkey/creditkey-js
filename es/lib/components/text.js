@@ -13,7 +13,7 @@ var Text = function Text(key, label) {
       break;
 
     case "pdp":
-      return "<span class=\"creditkey\"><a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" class=\"button is-link is-" + size + " is-fullwidth\" style=\"" + styles + "\">\n          <span class=\"pdp is-size-4\">" + label + "</span> <span class=\"is-size-4\" style=\"padding: 0 5px 0 0;\">with</span>\n          <img src=\"https://s3-us-west-2.amazonaws.com/creditkey-assets/ck-mark-white.svg\" /><span class=\"is-size-3 is-uppercase\" style=\"padding: 0 0 0 5px;\">Credit Key</span>\n        </a>\n      </span>";
+      return "<span class=\"creditkey\"><a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" class=\"is-" + size + " is-fullwidth\" style=\"" + styles + "\">\n          <span class=\"pdp-text is-size-4\">" + label + "</span> <span class=\"is-size-4\" style=\"padding: 0 5px 0 0;\">with</span>\n          <img src=\"https://s3-us-west-2.amazonaws.com/creditkey-assets/ck-btn.svg\" class=\"payment-icon\">\n        </a>\n      </span>";
       break;
 
     default:

@@ -74,12 +74,13 @@ export default class Client {
       return reject('charges should be a charges object');
     }
 
-    let component = Button;
-
+    let component;
     switch(display) {
       case "text":
         component = Text;
         break;
+      default:
+        component = Button;
     }
 
     return new Promise((resolve, reject) => {

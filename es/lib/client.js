@@ -105,12 +105,13 @@ var Client = function () {
       return reject('charges should be a charges object');
     }
 
-    var component = Button;
-
+    var component = void 0;
     switch (display) {
       case "text":
         component = Text;
         break;
+      default:
+        component = Button;
     }
 
     return new Promise(function (resolve, reject) {
