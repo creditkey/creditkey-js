@@ -17,8 +17,7 @@ const modal = source => {
     // Otherwise, create the modal.
     
     const body = document.body;
-    const style = 'margin: auto; width: 100%; border: none; height: 820px; overflow: hidden;';
-    let iframe = `<iframe id="creditkey-iframe" src="${source + '?modal=true'}" style="${style}" scrolling="no"></iframe>`;
+    let iframe = `<iframe id="creditkey-iframe" src="${source + '?modal=true'}"></iframe>`;
 
     if (!validate_url(source)) {
       iframe = `An invalid resource was requested`;
