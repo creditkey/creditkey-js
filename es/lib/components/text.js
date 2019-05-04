@@ -22,15 +22,15 @@ var Text = function Text(key, label) {
 
   switch (type) {
     case "checkout":
-      return "<span class=\"creditkey\"><img src=\"https://s3-us-west-2.amazonaws.com/creditkey-assets/ck-btn.svg\" class=\"payment-icon\">\n          <span class=\"is-size-" + font_size + "\">" + label + "</span>\n          <a href=\"https://www.creditkey.com/credit-key-lending\" class=\"action action-help is-size-" + font_size + "\" target=\"_new\">See Terms</a>\n        </span>";
+      return "<span class=\"creditkey\"><img src=\"https://s3-us-west-2.amazonaws.com/creditkey-assets/ck-btn.svg\" class=\"payment-icon\">\n          " + label + "\n          <a href=\"https://www.creditkey.com/credit-key-lending\" class=\"action action-help\" target=\"_new\">See Terms</a>\n        </span>";
       break;
 
     case "pdp":
-      return "<span class=\"creditkey\"><a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" class=\"is-" + size + " is-fullwidth\" style=\"" + styles + "\">\n          <span class=\"pdp-text is-size-" + font_size + "\">" + label + "</span> <span class=\"is-size-" + font_size + "\" style=\"padding: 0 5px 0 0;\">with</span>\n          <img src=\"https://s3-us-west-2.amazonaws.com/creditkey-assets/ck-btn.svg\" class=\"payment-icon\">\n        </a>\n      </span>";
+      return "<span class=\"creditkey\"><a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" class=\"is-fullwidth\" style=\"" + styles + "\">\n          <span class=\"pdp-text\">" + label + "</span> <span style=\"padding: 0 5px 0 0;\">with</span>\n          <img src=\"https://s3-us-west-2.amazonaws.com/creditkey-assets/ck-btn.svg\" class=\"payment-icon\">\n        </a>\n      </span>";
       break;
 
     default:
-      return "<span class=\"creditkey\"><img src=\"https://s3-us-west-2.amazonaws.com/creditkey-assets/ck-btn.svg\">\n          <span class=\"is-size-" + font_size + "\">" + label + "</span>\n          <a href=\"https://www.creditkey.com/credit-key-lending\" class=\"action action-help is-size-" + font_size + "\" target=\"_new\">See Terms</a>\n        </span>";
+      return "<span class=\"creditkey\"><img src=\"https://s3-us-west-2.amazonaws.com/creditkey-assets/ck-btn.svg\">\n          " + label + "\n          <a href=\"https://www.creditkey.com/credit-key-lending\" class=\"action action-help\" target=\"_new\">See Terms</a>\n        </span>";
   }
 };
 

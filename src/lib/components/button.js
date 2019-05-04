@@ -21,28 +21,28 @@ const Button = (key, label, type, size = "medium", styles) => {
 
   switch(type) {
     case "checkout":
-      return `<span class="creditkey"><a class="button is-link is-${size}" style="${styles}">
+      return `<span class="creditkey"><a class="button is-link" style="${styles}">
           <img src="${logo_url}" class="ck-logo-${size}" />
-          <span class="is-size-${font_size}">${label}</span>
+          ${label}
         </a>
-        <a href="${terms_url}" class="is-size-5 terms" target="_new">See Terms</a>
+        <a href="${terms_url}" class="terms" target="_new">See Terms</a>
       </span>`;
       break;
 
     case "pdp":
-      return `<span class="creditkey"><a href="${host}/apply/start/${key}" target="_new" class="button is-link is-${size} is-fullwidth" style="${styles}">
-          <span class="pdp is-size-${font_size}">${label}</span> <span class="is-size-${font_size}" style="padding: 0 5px 0 0;">with</span>
+      return `<span class="creditkey"><a href="${host}/apply/start/${key}" target="_new" class="button is-link is-fullwidth" style="${styles}">
+          <span class="pdp">${label}</span> <span style="padding: 0 5px 0 0;">with</span>
           <img src="${logo_url}" class="ck-logo-${size}" />
         </a>
       </span>`;
       break;
 
     default:
-      return `<span class="creditkey"><a class="button is-link is-${size}" style="${styles}">
+      return `<span class="creditkey"><a class="button is-link" style="${styles}">
           <img src="${logo_url}" class="ck-logo-${size}" />
-          <span class="is-size-${font_size}">${label}</span>
+          ${label}
         </a>
-        <a href="${terms_url}" class="is-size-5 terms" target="_new">See Terms</a>
+        <a href="${terms_url}" class="terms" target="_new">See Terms</a>
       </span>`;
   }
 }
