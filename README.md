@@ -178,5 +178,5 @@ import Client from 'creditkey-js';
 let marketingText;
 
 Client.get_marketing_display()
-  .then(res => marketingText = res.text)
+  .then(res => marketingText = res)
 ```
