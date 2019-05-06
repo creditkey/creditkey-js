@@ -2,40 +2,30 @@ import { api, pdpHost } from '../../utils/platform';
 
 const Text = (key, label, type = "checkout", size = "medium", styles) => {
   const host = pdpHost(api);
-
-  let font_size;
-
-  switch(size) {
-    case 'small':
-      font_size = 5;
-      break;
-    case 'large':
-      font_size = 2;
-      break;
-    default:
-      font_size = 4;
-  }
+  const terms_url = "https://www.creditkey.com/credit-key-lending";
+  const btn_url = s => 'https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-btn-' + s + '.svg';
 
   switch(type) {
     case "checkout":
-      return `<span class="creditkey"><img src="https://s3-us-west-2.amazonaws.com/creditkey-assets/ck-btn.svg" class="payment-icon">
-          ${label}
-          <a href="https://www.creditkey.com/credit-key-lending" class="action action-help" target="_new">See Terms</a>
+      return `<span class="creditkey">
+          <img src="${btn_url(size)}" class="payment-icon" />
+          ${size == 'small' ? label.replace('Approval in seconds.', '') : label}
+          <a href="${terms_url}" class="action action-help" target="_new">See Terms</a>
         </span>`;
       break;
 
     case "pdp":
       return `<span class="creditkey"><a href="${host}/apply/start/${key}" target="_new" class="is-fullwidth" style="${styles}">
           <span class="pdp-text">${label}</span> <span style="padding: 0 5px 0 0;">with</span>
-          <img src="https://s3-us-west-2.amazonaws.com/creditkey-assets/ck-btn.svg" class="payment-icon">
+          <img src="${btn_url(size)}" class="payment-icon">
         </a>
       </span>`;
       break;
 
     default:
-      return `<span class="creditkey"><img src="https://s3-us-west-2.amazonaws.com/creditkey-assets/ck-btn.svg">
+      return `<span class="creditkey"><img src="${btn_url(size)}">
           ${label}
-          <a href="https://www.creditkey.com/credit-key-lending" class="action action-help" target="_new">See Terms</a>
+          <a href="${terms_url}" class="action action-help" target="_new">See Terms</a>
         </span>`;
   }
 }
