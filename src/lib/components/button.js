@@ -3,26 +3,26 @@ import { api, pdpHost } from '../../utils/platform';
 const Button = (key, label, type, size = "medium", styles) => {
   const host = pdpHost(api);
   const terms_url = "https://www.creditkey.com/credit-key-lending";
-  const logo_url = "https://s3-us-west-2.amazonaws.com/creditkey-assets/ck-logo-white.svg";
-  const logo_height = 35;
+  const logo_url = s => 'https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-logo-white-' + s + '.svg';
 
-  let font_size;
+  let buttonClass;
 
-  switch(size) {
+  switch (size) {
     case 'small':
-      font_size = 5;
+      buttonClass = "is-small";
+      break;
+    case 'medium':
+      buttonClass = "is-normal";
       break;
     case 'large':
-      font_size = 2;
+      buttonClass = "is-fullwidth";
       break;
-    default:
-      font_size = 4;
   }
 
   switch(type) {
     case "checkout":
-      return `<span class="creditkey"><a class="button is-link" style="${styles}">
-          <img src="${logo_url}" class="ck-logo-${size}" />
+      return `<span class="creditkey"><a class="button is-link ${buttonClass}" style="${styles}">
+          <img src="${logo_url(size)}" class="ck-logo-${size}" />
           ${label}
         </a>
         <a href="${terms_url}" class="terms" target="_new">See Terms</a>
@@ -30,16 +30,16 @@ const Button = (key, label, type, size = "medium", styles) => {
       break;
 
     case "pdp":
-      return `<span class="creditkey"><a href="${host}/apply/start/${key}" target="_new" class="button is-link is-fullwidth" style="${styles}">
+      return `<span class="creditkey"><a href="${host}/apply/start/${key}" target="_new" class="button is-link ${buttonClass}" style="${styles}">
           <span class="pdp">${label}</span> <span style="padding: 0 5px 0 0;">with</span>
-          <img src="${logo_url}" class="ck-logo-${size}" />
+          <img src="${logo_url(size)}" class="ck-logo-${size} "/>
         </a>
       </span>`;
       break;
 
     default:
-      return `<span class="creditkey"><a class="button is-link" style="${styles}">
-          <img src="${logo_url}" class="ck-logo-${size}" />
+      return `<span class="creditkey"><a class="button is-link ${buttonClass}" style="${styles}">
+          <img src="${logo_url(size)}" class="ck-logo-${size}" />
           ${label}
         </a>
         <a href="${terms_url}" class="terms" target="_new">See Terms</a>
