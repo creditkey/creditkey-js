@@ -18,7 +18,7 @@ export const pdpHost = api => {
     return api(DEV);
   }
 
-  if(window.location.hostname.indexOf('staging') >= 0) {
+  if(window.location.hostname.indexOf('staging') >= 0 || window.location.hostname.indexOf('dev') >= 0) {
     return api(STAGE);
   }
 
@@ -27,6 +27,7 @@ export const pdpHost = api => {
       return api(DEV);
       break;
     
+    case 'katom.app':
     case 'magento.creditkey.com':
       return api(STAGE);
       break;
