@@ -17,7 +17,7 @@ var Text = function Text(key, label) {
       break;
 
     case "pdp":
-      return "<span class=\"creditkey\"><a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" class=\"is-fullwidth\" style=\"" + styles + "\">\n          <span class=\"pdp-text\">" + label + "</span> <span style=\"padding: 0 5px 0 0;\">with</span>\n          <img src=\"" + btn_url(size) + "\" class=\"payment-icon\">\n        </a>\n      </span>";
+      return "<span class=\"creditkey\"><a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" class=\"is-fullwidth\" style=\"" + styles + "\">\n          <span class=\"pdp-text\">" + label + "</span> <span style=\"padding: 0 5px 0 0; font-size: 16px !important;\">with</span>\n          <img src=\"" + btn_url(size) + "\" class=\"payment-icon\">\n        </a>\n      </span>";
       break;
 
     default:
