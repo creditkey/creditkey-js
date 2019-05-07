@@ -80,7 +80,10 @@ window.addEventListener('message', function(e) {
     redirect(event.options);
   } else if (event.action == 'height' && event.type == 'modal') {
     const total_height = event.options;
-    iframe_element.style.height = total_height.toString() + 'px';
+
+    let height;
+    total_height <= window.innerHeight ? height = total_height : height = window.innerHeight;
+    iframe_element.style.height = height.toString() + 'px';
   }
 }, false);
 
