@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.44 - https://www.creditkey.com
+ * creditkey-js v1.0.45 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -1921,7 +1921,7 @@ window.addEventListener('message', function (e) {
     var total_height = event.options;
 
     var height = void 0;
-    total_height <= window.innerHeight ? height = total_height : height = window.innerHeight;
+    total_height <= window.innerHeight ? height = total_height : height = window.innerHeight - 40;
     iframe_element.style.height = height.toString() + 'px';
   }
 }, false);
