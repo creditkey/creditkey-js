@@ -12,6 +12,7 @@
 - [Configuring Checkout Display](#configuring-checkout-display)
 - [Configuring Apply Now Display](#configuring-apply-now-display)
 - [Configuring Checkout and Product Page Display](#configuring-marketing-display)
+- [Configuring User Total Line of Credit Display](#configuring-user-total-line-of-credit-display)
 
 ## Support
 ----------
@@ -155,13 +156,13 @@ The `apply` method takes three arguments:
 ```javascript
 import apply from 'creditkey-js';
 
-apply(key)
+apply(key);
 ```
 
 ## Configuring Marketing Display
 --------------------------------
 
-The `get_marketing_display` method takes one argument:
+The `get_marketing_display` method takes four arguments:
 
 * **charges** - Optional - A Charges object
 * **type** - Optional - Type of marketing copy to retrieve, defaults to 'checkout', options are 'checkout' and 'pdp'
@@ -178,5 +179,25 @@ import Client from 'creditkey-js';
 let marketingText;
 
 Client.get_marketing_display()
-  .then(res => marketingText = res)
+  .then(res => marketingText = res);
+```
+
+## Configuring User Total Line of Credit Display
+--------------------------------
+
+The `get_customer` method takes two arguments:
+
+* **email** - required - The email of your customer (should be the same email used to establish their Credit Key account)
+* **customer_id** - required - Your internal, unqiue id for the customer (should be the same as the remote_customer_id sent during begin_checkout)
+
+returns a json payload with `amount` and `amount_available`
+
+```javascript
+import Client from 'creditkey-js';
+
+let userTcl;
+
+Client.get_customer()
+  .then(res => userTcl = res)
+  .then(() => console.log(userTcl.amount, userTcl.amount_available));
 ```
