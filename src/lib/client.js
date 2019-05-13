@@ -83,10 +83,22 @@ export default class Client {
         component = Button;
     }
 
-    return new Promise((resolve, reject) => {
-      return this.network.post('ecomm/marketing' + this.key_param, { type: type, charges: charges })
+    return new Promise((resolve, reject) => this.network.post('ecomm/marketing' + this.key_param, { type: type, charges: charges })
         .then(res => resolve(component(this.key, res.text, type, size)))
-        .catch(err => reject(err))
-    });
+        .catch(err => reject(err)));
+  }
+
+  get_customer(email, customer_id) {
+    if (!email || !customer_id) {
+      return Promise.reject('Missing required paramters');
+    }
+
+    if (!/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b/.test(email)) {
+      return Promise.reject('Invalid email address');
+    }
+
+    return new Promise((resolve, reject) => this.network.post('ecomm/customer' + this.key_param, { email: email, customer_id: customer_id })
+      .then(res => resolve(res))
+      .catch(err => reject(err)));
   }
 }

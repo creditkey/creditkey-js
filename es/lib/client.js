@@ -123,6 +123,26 @@ var Client = function () {
     });
   };
 
+  Client.prototype.get_customer = function get_customer(email, customer_id) {
+    var _this4 = this;
+
+    if (!email || !customer_id) {
+      return Promise.reject('Missing required paramters');
+    }
+
+    if (!/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b/.test(email)) {
+      return Promise.reject('Invalid email address');
+    }
+
+    return new Promise(function (resolve, reject) {
+      return _this4.network.post('ecomm/customer' + _this4.key_param, { email: email, customer_id: customer_id }).then(function (res) {
+        return resolve(res);
+      }).catch(function (err) {
+        return reject(err);
+      });
+    });
+  };
+
   _createClass(Client, [{
     key: 'key_param',
     get: function get() {
