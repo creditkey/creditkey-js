@@ -28,6 +28,7 @@ export var pdpHost = function pdpHost(api) {
       break;
 
     case 'katom.app':
+    case 'packnwood-demo.wjserver960.com':
     case 'magento.creditkey.com':
       return api(STAGE);
       break;

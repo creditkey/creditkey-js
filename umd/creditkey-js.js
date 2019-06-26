@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.46 - https://www.creditkey.com
+ * creditkey-js v1.0.47 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -1415,6 +1415,7 @@ var pdpHost = function pdpHost(api) {
       break;
 
     case 'katom.app':
+    case 'packnwood-demo.wjserver960.com':
     case 'magento.creditkey.com':
       return api(STAGE);
       break;
