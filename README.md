@@ -90,6 +90,8 @@ item.data.name;
 
 Credit key Checkout must be enabled on a per merchant basis. It is advisable to check that Credit Key Checkout is available prior to displaying it.
 
+NOTE: The Client method take an optional platform argument.  This can be 'staging' or 'production' and determines the appropriate Credit Key API to use when sending requests. Default is 'development' and expects a local Credit Key API at 'localhost:9100'.
+
 ```javascript
 import Client from 'creditkey-js';
 
