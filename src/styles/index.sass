@@ -25,6 +25,26 @@
     width: 100% !important;
     visibility: visible !important;
     background: transparent !important;
+    position: absolute
+    justify-content: normal
+
+  .modal-background
+    position: fixed
+
+  .modal-content,
+  .modal-card
+    min-height: calc(100vh - #{$modal-content-spacing-mobile}) !important;
+    max-height: none;
+    height: 100% !important;
+    +tablet
+      min-height: calc(100vh - #{$modal-content-spacing-tablet}) !important;
+      max-height: none;
+      height: 100% !important;
+
+  .modal-card
+    min-height: calc(100vh - #{$modal-card-spacing}) !important;
+    max-height: calc(100vh - 1000px) !important;
+    height: inherit
 
   .modal-content
     overflow: hidden;
@@ -35,11 +55,12 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
+    min-height: calc(100vh - #{$modal-content-spacing-mobile}) !important;
+    max-height: none;
 
   +touch
     .modal-content
       height: 100%;
-      max-height: 100vh;
       border-radius: 0 !important;
 
   // custom classes
@@ -47,7 +68,7 @@
     margin: auto; 
     width: 100%; 
     border: none; 
-    height: 820px;
+    height: inherit;
 
   .payment-icon
     display: inline-block !important;

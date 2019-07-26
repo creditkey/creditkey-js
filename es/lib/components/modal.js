@@ -76,11 +76,11 @@ window.addEventListener('message', function (e) {
   } else if (event.action == 'complete' && event.type == 'modal') {
     redirect(event.options);
   } else if (event.action == 'height' && event.type == 'modal') {
-    var total_height = event.options;
+    var total_height = event.options + 50;
 
-    var height = void 0;
-    total_height <= window.innerHeight ? height = total_height : height = window.innerHeight - 40;
-    iframe_element.style.height = height.toString() + 'px';
+    // set the iframe, the parent div, and that div's parent height to something that adjusts to content height
+    iframe_element.style.height = total_height.toString() + 'px';
+    modal_element.parentNode.style.height = total_height.toString() + 'px';
   }
 }, false);
 
