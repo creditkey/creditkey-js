@@ -79,7 +79,7 @@ window.addEventListener('message', function(e) {
   } else if (event.action == 'complete' && event.type == 'modal') {
     redirect(event.options);
   } else if (event.action == 'height' && event.type == 'modal') {
-    const total_height = event.options;
+    const total_height = event.options + 14; // 14 allows padding underneath content (usually legal footer)
 
     // set the iframe, the parent div, and that div's parent height to something that adjusts to content height
     iframe_element.style.height = total_height.toString() + 'px';
