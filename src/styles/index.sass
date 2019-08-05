@@ -1,6 +1,6 @@
 .creditkey
   $modal-z: 50001;
-  $modal-content-width: 600px;
+  $modal-content-width: 650px;
   z-index: 50000;
 
   //@import "~bulma/bulma";
@@ -21,6 +21,7 @@
 
   .modal
     margin: 0 !important;
+    padding-top: 50px;
     max-width: 100% !important;
     width: 100% !important;
     visibility: visible !important;
@@ -28,23 +29,26 @@
     position: absolute
     justify-content: normal
 
+  @media screen and (max-device-width: 480px)
+    .modal
+      padding-top: 0px !important;
+
   .modal-background
     position: fixed
 
   .modal-content,
   .modal-card
-    min-height: calc(100vh - #{$modal-content-spacing-mobile}) !important;
+    min-height: min-content !important;
     max-height: none;
-    height: 100% !important;
+    height: auto !important;
     +tablet
-      min-height: calc(100vh - #{$modal-content-spacing-tablet}) !important;
+      min-height: min-content !important;
       max-height: none;
-      height: 100% !important;
+      height: auto !important;
 
   .modal-card
-    min-height: calc(100vh - #{$modal-card-spacing}) !important;
-    max-height: calc(100vh - 1000px) !important;
-    height: inherit
+    min-height: min-content !important;
+    max-height: none !important;
 
   .modal-content
     overflow: hidden;
@@ -55,7 +59,8 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    min-height: calc(100vh - #{$modal-content-spacing-mobile}) !important;
+    height: auto;
+    min-height: min-content;
     max-height: none;
 
   +touch
