@@ -1,3 +1,4 @@
+import styles from '../../styles/index.sass';
 import { api, pdpHost } from '../../utils/platform';
 
 const Text = (key, label, type = "checkout", size = "medium", styles) => {

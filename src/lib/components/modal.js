@@ -1,3 +1,4 @@
+import styles from '../../styles/index.sass';
 import { api } from '../../utils/platform';
 
 const modal = source => {
