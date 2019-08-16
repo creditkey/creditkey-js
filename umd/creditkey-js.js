@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.49 - https://www.creditkey.com
+ * creditkey-js v1.0.51 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -1880,7 +1880,8 @@ var modal = function modal(source) {
     // Otherwise, create the modal.
 
     var body = document.body;
-    var _iframe = '<iframe id="creditkey-iframe" src="' + (source + '?modal=true') + '"></iframe>';
+    // default height set for UX during load, will be changed via updateParent() from inside iframe content later
+    var _iframe = '<iframe id="creditkey-iframe" src="' + (source + '?modal=true') + '" style="height: 100vh;"></iframe>';
 
     if (!validate_url(source)) {
       _iframe = 'An invalid resource was requested';
