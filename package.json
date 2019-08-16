@@ -1,6 +1,6 @@
 {
   "name": "creditkey-js",
-  "version": "1.0.53",
+  "version": "1.0.54",
   "description": "Credit Key Javascript SDK",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -17,7 +17,8 @@
     "test:watch": "nwb test --server"
   },
   "dependencies": {
-    "bulma": "^0.7.2"
+    "bulma": "^0.7.2",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "css-loader": "^1.0.1",
