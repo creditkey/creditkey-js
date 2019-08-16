@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.52 - https://www.creditkey.com
+ * creditkey-js v1.0.53 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -95,7 +95,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -745,13 +745,6 @@ module.exports = assign;
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(7);
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
 
 var content = __webpack_require__(3);
 
@@ -771,6 +764,13 @@ var update = __webpack_require__(5)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(7);
 
 
 /***/ }),
@@ -1357,9 +1357,6 @@ module.exports = function (css) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 
-// EXTERNAL MODULE: ./src/styles/index.sass
-var src_styles = __webpack_require__(2);
-
 // CONCATENATED MODULE: ./src/utils/request.js
 /**
  * @private
@@ -1533,7 +1530,11 @@ var network_Network = function Network(platform, resource) {
 };
 
 /* harmony default export */ var network = (network_Network);
+// EXTERNAL MODULE: ./src/styles/index.sass
+var src_styles = __webpack_require__(1);
+
 // CONCATENATED MODULE: ./src/lib/components/button.js
+
 
 
 var button_Button = function Button(key, label, type) {
@@ -1562,20 +1563,21 @@ var button_Button = function Button(key, label, type) {
 
   switch (type) {
     case "checkout":
-      return "<span class=\"creditkey\"><a class=\"button is-link " + buttonClass + "\" style=\"" + styles + "\">\n          <img src=\"" + logo_url(size) + "\" class=\"ck-logo-" + size + "\" />\n          " + label + "\n        </a>\n        <a href=\"" + terms_url + "\" class=\"terms\" target=\"_new\">See Terms</a>\n      </span>";
+      return '<span class="creditkey"><a class="button is-link ' + buttonClass + '" style="' + styles + '">\n          <img src="' + logo_url(size) + '" class="ck-logo-' + size + '" />\n          ' + label + '\n        </a>\n        <a href="' + terms_url + '" class="terms" target="_new">See Terms</a>\n      </span>';
       break;
 
     case "pdp":
-      return "<span class=\"creditkey\"><a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" class=\"button is-link " + buttonClass + "\" style=\"" + styles + "\">\n          <span class=\"pdp\">" + label + "</span> <span style=\"padding: 0 5px 0 0; font-size: 16px !important;\">with</span>\n          <img src=\"" + logo_url(size) + "\" class=\"ck-logo-" + size + " \"/>\n        </a>\n      </span>";
+      return '<span class="creditkey"><a href="' + host + '/apply/start/' + key + '" target="_new" class="button is-link ' + buttonClass + '" style="' + styles + '">\n          <span class="pdp">' + label + '</span> <span style="padding: 0 5px 0 0; font-size: 16px !important;">with</span>\n          <img src="' + logo_url(size) + '" class="ck-logo-' + size + ' "/>\n        </a>\n      </span>';
       break;
 
     default:
-      return "<span class=\"creditkey\"><a class=\"button is-link " + buttonClass + "\" style=\"" + styles + "\">\n          <img src=\"" + logo_url(size) + "\" class=\"ck-logo-" + size + "\" />\n          " + label + "\n        </a>\n        <a href=\"" + terms_url + "\" class=\"terms\" target=\"_new\">See Terms</a>\n      </span>";
+      return '<span class="creditkey"><a class="button is-link ' + buttonClass + '" style="' + styles + '">\n          <img src="' + logo_url(size) + '" class="ck-logo-' + size + '" />\n          ' + label + '\n        </a>\n        <a href="' + terms_url + '" class="terms" target="_new">See Terms</a>\n      </span>';
   }
 };
 
 /* harmony default export */ var components_button = (button_Button);
 // CONCATENATED MODULE: ./src/lib/components/text.js
+
 
 
 var text_Text = function Text(key, label) {
@@ -1591,15 +1593,15 @@ var text_Text = function Text(key, label) {
 
   switch (type) {
     case "checkout":
-      return "<span class=\"creditkey\">\n          <img src=\"" + btn_url(size) + "\" class=\"payment-icon\" />\n          " + (size == 'small' ? label.replace('Approval in seconds.', '') : label) + "\n          <a href=\"" + terms_url + "\" class=\"action action-help\" target=\"_new\">See Terms</a>\n        </span>";
+      return '<span class="creditkey">\n          <img src="' + btn_url(size) + '" class="payment-icon" />\n          ' + (size == 'small' ? label.replace('Approval in seconds.', '') : label) + '\n          <a href="' + terms_url + '" class="action action-help" target="_new">See Terms</a>\n        </span>';
       break;
 
     case "pdp":
-      return "<span class=\"creditkey\"><a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" class=\"is-fullwidth\" style=\"" + styles + "\">\n          <span class=\"pdp-text\">" + label + "</span> <span style=\"padding: 0 5px 0 0; font-size: 16px !important;\">with</span>\n          <img src=\"" + btn_url(size) + "\" class=\"payment-icon\">\n        </a>\n      </span>";
+      return '<span class="creditkey"><a href="' + host + '/apply/start/' + key + '" target="_new" class="is-fullwidth" style="' + styles + '">\n          <span class="pdp-text">' + label + '</span> <span style="padding: 0 5px 0 0; font-size: 16px !important;">with</span>\n          <img src="' + btn_url(size) + '" class="payment-icon">\n        </a>\n      </span>';
       break;
 
     default:
-      return "<span class=\"creditkey\"><img src=\"" + btn_url(size) + "\">\n          " + label + "\n          <a href=\"" + terms_url + "\" class=\"action action-help\" target=\"_new\">See Terms</a>\n        </span>";
+      return '<span class="creditkey"><img src="' + btn_url(size) + '">\n          ' + label + '\n          <a href="' + terms_url + '" class="action action-help" target="_new">See Terms</a>\n        </span>';
   }
 };
 
@@ -1863,6 +1865,7 @@ var Charges = function () {
 // CONCATENATED MODULE: ./src/lib/components/modal.js
 
 
+
 var modal = function modal(source) {
   // Check to see if we've already created the modal - but hidden it when the user clicked off.
   // If so, simply redisplay the modal.
@@ -2010,8 +2013,6 @@ var apply_apply = function apply(key) {
 
 /* harmony default export */ var lib_apply = (apply_apply);
 // CONCATENATED MODULE: ./src/index.js
-
-
 
 
 

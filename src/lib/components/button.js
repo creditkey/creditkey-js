@@ -1,3 +1,4 @@
+import styles from '../../styles/index.sass';
 import { api, pdpHost } from '../../utils/platform';
 
 const Button = (key, label, type, size = "medium", styles) => {

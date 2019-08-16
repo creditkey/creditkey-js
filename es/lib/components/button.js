@@ -1,3 +1,4 @@
+import styles from '../../styles/index.sass';
 import { api, pdpHost } from '../../utils/platform';
 
 var Button = function Button(key, label, type) {
@@ -26,15 +27,15 @@ var Button = function Button(key, label, type) {
 
   switch (type) {
     case "checkout":
-      return "<span class=\"creditkey\"><a class=\"button is-link " + buttonClass + "\" style=\"" + styles + "\">\n          <img src=\"" + logo_url(size) + "\" class=\"ck-logo-" + size + "\" />\n          " + label + "\n        </a>\n        <a href=\"" + terms_url + "\" class=\"terms\" target=\"_new\">See Terms</a>\n      </span>";
+      return '<span class="creditkey"><a class="button is-link ' + buttonClass + '" style="' + styles + '">\n          <img src="' + logo_url(size) + '" class="ck-logo-' + size + '" />\n          ' + label + '\n        </a>\n        <a href="' + terms_url + '" class="terms" target="_new">See Terms</a>\n      </span>';
       break;
 
     case "pdp":
-      return "<span class=\"creditkey\"><a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" class=\"button is-link " + buttonClass + "\" style=\"" + styles + "\">\n          <span class=\"pdp\">" + label + "</span> <span style=\"padding: 0 5px 0 0; font-size: 16px !important;\">with</span>\n          <img src=\"" + logo_url(size) + "\" class=\"ck-logo-" + size + " \"/>\n        </a>\n      </span>";
+      return '<span class="creditkey"><a href="' + host + '/apply/start/' + key + '" target="_new" class="button is-link ' + buttonClass + '" style="' + styles + '">\n          <span class="pdp">' + label + '</span> <span style="padding: 0 5px 0 0; font-size: 16px !important;">with</span>\n          <img src="' + logo_url(size) + '" class="ck-logo-' + size + ' "/>\n        </a>\n      </span>';
       break;
 
     default:
-      return "<span class=\"creditkey\"><a class=\"button is-link " + buttonClass + "\" style=\"" + styles + "\">\n          <img src=\"" + logo_url(size) + "\" class=\"ck-logo-" + size + "\" />\n          " + label + "\n        </a>\n        <a href=\"" + terms_url + "\" class=\"terms\" target=\"_new\">See Terms</a>\n      </span>";
+      return '<span class="creditkey"><a class="button is-link ' + buttonClass + '" style="' + styles + '">\n          <img src="' + logo_url(size) + '" class="ck-logo-' + size + '" />\n          ' + label + '\n        </a>\n        <a href="' + terms_url + '" class="terms" target="_new">See Terms</a>\n      </span>';
   }
 };
 
