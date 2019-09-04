@@ -123,11 +123,13 @@ const returnUrl = 'your url to send the customer back to after completing credit
 const cancelUrl = 'your url to return the customer to if they cancel out of the credit key checkout';
 
 // Optional
+const mode = 'modal';
+
 const merchantData = {
   myDataKey: 'my value'
 };
 
-client.begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl, merchantData);
+client.begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl, mode, merchantData);
   .then(response => Checkout(response.checkout_url));
 ```
 
