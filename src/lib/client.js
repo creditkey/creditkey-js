@@ -25,11 +25,11 @@ export default class Client {
       }
 
       if (typeof billingAddress !== 'object') {
-        return reject('billing address should be a billingAddress object');
+        return reject('billing address should be an Address object');
       }
 
       if (typeof charges !== 'object') {
-        return reject('charges should be a charges object');
+        return reject('charges should be a Charges object');
       } else if (!charges.validate_charges()) {
         return reject('charges value is invalid');
       }

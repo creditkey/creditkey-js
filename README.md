@@ -22,7 +22,7 @@ You should have been put in contact with an Implementation Support Engineer at C
 ## Requirements
 ---------------
 
-The Credit Key Javascript SDK requires Node 8.x or higher and NPM 5.x or higher.
+The Credit Key Javascript SDK requires Node 8.x or higher and NPM 5.x or higher. Depending on your setup the following dependencies may also need to be present: babel-loader @babel/core @babel/preset-env node-sass 
 
 ## Install
 ----------
@@ -42,7 +42,7 @@ The Credit Key Javascript SDK can also be installed via a script tag using the U
 
 [Credit Key](https://www.creditkey.com) checkout works similarly as services like [PayPal](https://www.paypal.com) in the sense that the user will be redirected to special checkout pages hosted on [creditkey.com](https://www.creditkey.com) to complete the checkout process.
 
-At this time the [Credit Key Javascript SDK](https://www.creditkey.com) only supports how the Credit Key checkout experience is displayed.  The options are either a full page redirect, or a modal overlay.
+A real world example of Credit Key implemented in a React app is available [here](https://github.com/creditkey/ck-react).
 
 ## Models
 ---------
@@ -52,7 +52,9 @@ At this time the [Credit Key Javascript SDK](https://www.creditkey.com) only sup
 This object is used to represent either a billing or shipping address.  All arguments are required except `address2`
 
 ```javascript
-const billingAddress = new Address(first_name, last_name, company_name, email, address1, address2, city, state, zip);
+import ck from 'creditkey-js';
+
+const billingAddress = new ck.Address(first_name, last_name, company_name, email, address1, address2, city, state, zip);
 
 billingAddress.data.first_name;
 billingAddress.data.last_name;
@@ -66,7 +68,8 @@ This object represents total order charges, discounts applied, tax and shipping 
 ```shipping```, ```tax```, and ```discountAmount``` can be ```null``` or ```0``` if the value is not applicable to this purchase.
 
 ```javascript
-const charges = new Charges(total, shipping, tax, discountAmount, grandTotal)
+import ck from 'creditkey-js';
+const charges = new ck.Charges(total, shipping, tax, discountAmount, grandTotal)
 
 charges.data.total;
 charges.data.shipping;
@@ -78,7 +81,9 @@ charges.data.shipping;
 This object represents a product in the user's shopping cart. ```sku```, ```size```, and ```color``` are all optional and can be ```null```.  The ```merchantProductId``` is the key referring to the product on the merchant system.
 
 ```javascript
-const item = new CartItem(merchantProductId, name, price, sku, quantity, size, color);
+import ck from 'creditkey-js';
+
+const item = new ck.CartItem(merchantProductId, name, price, sku, quantity, size, color);
 
 item.data.merchant_id;
 item.data.name;
@@ -93,12 +98,12 @@ Credit key Checkout must be enabled on a per merchant basis. It is advisable to 
 NOTE: The Client method take an optional platform argument.  This can be 'staging' or 'production' and determines the appropriate Credit Key API to use when sending requests. Default is 'development' and expects a local Credit Key API at 'localhost:9100'.
 
 ```javascript
-import Client from 'creditkey-js';
+import ck from 'creditkey-js';
 
-const client = new Client(your_credit_key_public_key, 'production');
+const client = new ck.Client(your_credit_key_public_key, 'production');
 
 let isCreditKeyDisplayed = false,
-    cartItems = [new CartItem(...), new CartItem(...)];
+    cartItems = [new ck.CartItem(...), new ck.CartItem(...)];
 
 client.is_displayed_in_checkout(cartItems)
   .then(response => isCreditKeyDisplayed = response);
@@ -110,13 +115,13 @@ client.is_displayed_in_checkout(cartItems)
 The Credit Key API provides an endpoint to start a checkout experience.  A valid request to this endpoint returns a url to be used when displaying the Credit Key Checkout experience, either as a modal or redirect.
 
 ```javascript
-import checkout, Client, { Address, Charges, CartItem } from 'creditkey-js';
+import ck from 'creditkey-js';
 
-const client = new Client(your_credit_key_public_key, 'production');
-const billingAddress = new Address(...);
-const shippingAddress = new Address(...);
-const charges = new Charges(...);
-const cartItems = [new CartItem(...), new CartItem(...), ...];
+const client = new ck.Client(your_credit_key_public_key, 'production');
+const billingAddress = new ck.Address(...);
+const shippingAddress = new ck.Address(...);
+const charges = new ck.Charges(...);
+const cartItems = [new ck.CartItem(...), new ck.CartItem(...), ...];
 const remoteId = your_order_id;
 const customerId = your_customer_id;
 const returnUrl = 'your url to send the customer back to after completing credit key checkout';
@@ -130,7 +135,7 @@ const merchantData = {
 };
 
 client.begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl, mode, merchantData);
-  .then(response => Checkout(response.checkout_url));
+  .then(response => ck.checkout(response.checkout_url));
 ```
 
 
@@ -143,9 +148,9 @@ The `checkout` method takes two arguments:
 * **type** - Optional - The type of Checkout experience, can be 'modal' or 'redirect', defaults to 'modal'
 
 ```javascript
-import checkout from 'creditkey-js';
+import ck from 'creditkey-js';
 
-checkout(url, type)
+ck.checkout(url, type)
 ```
 
 ## Configuring Apply Now Display
@@ -158,9 +163,9 @@ The `apply` method takes three arguments:
 * **platform** - Optional - The platform to load the Apply Now experience from, can be 'development', 'staging' or 'production', defaults to 'production'
 
 ```javascript
-import apply from 'creditkey-js';
+import ck from 'creditkey-js';
 
-apply(key);
+ck.apply(key);
 ```
 
 ## Configuring Marketing Display
@@ -178,9 +183,9 @@ At this time, only checkout and product page displays are supported.
 When a charges object is supplied, with subtotal, shipping, tax, discount and grand total amounts, then the returned text calculates and displays the monthly payment amount.
 
 ```javascript
-import Client from 'creditkey-js';
+import ck from 'creditkey-js';
 
-const client = new Client(your_credit_key_public_key, 'production');
+const client = new ck.Client(your_credit_key_public_key, 'production');
 
 let marketingText;
 
@@ -199,9 +204,9 @@ The `get_customer` method takes two arguments:
 returns a json payload with `amount` and `amount_available`
 
 ```javascript
-import Client from 'creditkey-js';
+import ck from 'creditkey-js';
 
-const client = new Client(your_credit_key_public_key, 'production');
+const client = new ck.Client(your_credit_key_public_key, 'production');
 
 let userTcl;
 
