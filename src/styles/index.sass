@@ -19,7 +19,8 @@
     vertical-align: middle !important;
     text-decoration: none !important;
 
-  .modal
+  .ck-modal
+    @extend .modal
     margin: 0 !important;
     padding-top: 50px;
     max-width: 100% !important;
@@ -30,14 +31,16 @@
     justify-content: normal
 
   @media screen and (max-device-width: 480px)
-    .modal
+    .ck-modal
       padding-top: 0px !important;
 
-  .modal-background
+  .ck-modal-background
+    @extend .modal-background
     position: fixed
 
-  .modal-content,
-  .modal-card
+  .ck-modal-content,
+  .ck-modal-card
+    @extend .modal-card
     min-height: min-content !important;
     max-height: none;
     height: auto !important;
@@ -46,11 +49,12 @@
       max-height: none;
       height: auto !important;
 
-  .modal-card
+  .ck-modal-card
     min-height: min-content !important;
     max-height: none !important;
 
-  .modal-content
+  .ck-modal-content
+    @extend .modal-content
     overflow: hidden;
     -webkit-overflow-scrolling: touch;
     border-radius: 5px;
