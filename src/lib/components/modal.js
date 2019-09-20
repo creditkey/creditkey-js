@@ -72,7 +72,7 @@ window.addEventListener('message', function(e) {
 
   if (!event || !event.action) return false;
 
-  let modal_element = document.getElementById('modal-card');
+  let modal_element = document.getElementById('ck-modal-card');
   let iframe_element = document.getElementById('creditkey-iframe');
 
   // if we're closing the modal from within the CK iframe, trigger the event bound to parent body
