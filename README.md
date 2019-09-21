@@ -34,7 +34,7 @@ npm install creditkey-js
 The Credit Key Javascript SDK can also be installed via a script tag using the UNPKG CDN.  It is then available as a global variable `ck` or as a UMD module.
 
 ```javascript
-<script crossorigin src="https://unpkg.com/creditkey-js@1.0.60/umd/creditkey-js.js"></script>
+<script crossorigin src="https://unpkg.com/creditkey-js@1.0.62/umd/creditkey-js.js"></script>
 ```
 
 ## Overview
@@ -54,7 +54,7 @@ This object is used to represent either a billing or shipping address.  All argu
 ```javascript
 import ck from 'creditkey-js';
 
-const billingAddress = new ck.Address(first_name, last_name, company_name, email, address1, address2, city, state, zip);
+const billingAddress = new ck.Address(first_name, last_name, company_name, email, address1, address2, city, state, zip, phone_number);
 
 billingAddress.data.first_name;
 billingAddress.data.last_name;

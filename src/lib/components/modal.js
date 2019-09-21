@@ -52,11 +52,11 @@ function validate_url(url) {
 }
 
 function redirect(uri) {
-  console.log(uri);
-  if(navigator.userAgent.match(/Android/i)) 
+  if(navigator.userAgent.match(/Android/i)) {
     document.location = uri;      
-  else
+  } else {
     window.location.replace(uri);
+  }
 }
 
 window.addEventListener('message', function(e) {

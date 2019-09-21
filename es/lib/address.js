@@ -1,7 +1,7 @@
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Address = function () {
-  function Address(first_name, last_name, company_name, email, address1, address2, city, state, zip) {
+  function Address(first_name, last_name, company_name, email, address1, address2, city, state, zip, phone_number) {
     _classCallCheck(this, Address);
 
     this.data = {
@@ -13,7 +13,8 @@ var Address = function () {
       address2: address2 || '',
       city: city,
       state: state,
-      zip: zip
+      zip: zip,
+      phone_number: phone_number || ''
     };
   }
 

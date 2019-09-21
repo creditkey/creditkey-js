@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.60 - https://www.creditkey.com
+ * creditkey-js v1.0.62 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -18314,7 +18314,7 @@ var CartItem = function () {
 function address_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Address = function () {
-  function Address(first_name, last_name, company_name, email, address1, address2, city, state, zip) {
+  function Address(first_name, last_name, company_name, email, address1, address2, city, state, zip, phone_number) {
     address_classCallCheck(this, Address);
 
     this.data = {
@@ -18326,7 +18326,8 @@ var Address = function () {
       address2: address2 || '',
       city: city,
       state: state,
-      zip: zip
+      zip: zip,
+      phone_number: phone_number || ''
     };
   }
 
@@ -18438,8 +18439,11 @@ function validate_url(url) {
 }
 
 function redirect(uri) {
-  console.log(uri);
-  if (navigator.userAgent.match(/Android/i)) document.location = uri;else window.location.replace(uri);
+  if (navigator.userAgent.match(/Android/i)) {
+    document.location = uri;
+  } else {
+    window.location.replace(uri);
+  }
 }
 
 window.addEventListener('message', function (e) {
