@@ -52,6 +52,7 @@ function validate_url(url) {
 }
 
 function redirect(uri) {
+  console.log(uri);
   if(navigator.userAgent.match(/Android/i)) 
     document.location = uri;      
   else
