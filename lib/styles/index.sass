@@ -40,6 +40,7 @@
 
   .ck-modal-content,
   .ck-modal-card
+    @extend .modal-content
     @extend .modal-card
     min-height: min-content !important;
     max-height: none;
@@ -50,6 +51,7 @@
       height: auto !important;
 
   .ck-modal-card
+    @extend .modal-card
     min-height: min-content !important;
     max-height: none !important;
 
@@ -66,7 +68,7 @@
     min-height: min-content;
     max-height: none;
     +touch
-      .modal-content
+      .ck-modal-content
         height: 100%;
         border-radius: 0 !important;
 
