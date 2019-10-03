@@ -89,7 +89,9 @@ window.addEventListener('message', function(e) {
 
     // Pad parent div height because issues where Chrome's calc'd <body> height is different than other browsers
     //  which cuts of the bottom rounded corners
-    modal_element.parentNode.style.height = (total_height + 60).toString() + 'px';
+    if ((total_height + 60) > window.innerHeight) {
+      modal_element.parentNode.style.height = (total_height + 60).toString() + 'px';
+    }
 
     // force scroll to top because modal starts at top of page.
     document.body.scrollTop = document.documentElement.scrollTop = 0;
