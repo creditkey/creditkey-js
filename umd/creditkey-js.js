@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.65 - https://www.creditkey.com
+ * creditkey-js v1.0.66 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -18473,10 +18473,6 @@ window.addEventListener('message', function (e) {
 
     // set the iframe, the parent div, and that div's parent height to something that adjusts to content height
     iframe_element.style.height = total_height.toString() + 'px';
-
-    // Pad parent div height because issues where Chrome's calc'd <body> height is different than other browsers
-    //  which cuts of the bottom rounded corners
-    modal_element.parentNode.style.height = (total_height + 60).toString() + 'px';
 
     // force scroll to top because modal starts at top of page.
     document.body.scrollTop = document.documentElement.scrollTop = 0;
