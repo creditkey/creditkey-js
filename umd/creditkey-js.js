@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.63 - https://www.creditkey.com
+ * creditkey-js v1.0.65 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -17888,18 +17888,26 @@ __webpack_require__.r(__webpack_exports__);
  * @param {object} options
  * @returns {promise}
  */
+function handleErrors(response) {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
+}
+
 function request(url, options) {
   return new Promise(function (resolve, reject) {
     if (!url) reject(new Error('URL parameter required'));
     if (!options) reject(new Error('Options parameter required'));
 
     fetch(url, options).then(function (response) {
-      if (!response.ok) throw response;
-      return response;
+      return handleErrors(response);
     }).then(function (response) {
       return response.json();
     }).then(function (response) {
       if (response.errors) reject(response.errors);else resolve(response);
+    }).catch(function (err) {
+      return reject(err);
     });
   });
 }
@@ -18254,8 +18262,6 @@ var client_Client = function () {
   };
 
   Client.prototype.get_customer = function get_customer(email, customer_id) {
-    var _this4 = this;
-
     if (!email || !customer_id) {
       return Promise.reject('Missing required paramters');
     }
@@ -18264,13 +18270,7 @@ var client_Client = function () {
       return Promise.reject('Invalid email address');
     }
 
-    return new Promise(function (resolve, reject) {
-      return _this4.network.post('ecomm/customer' + _this4.key_param, { email: email, customer_id: customer_id }).then(function (res) {
-        return resolve(res);
-      }).catch(function (err) {
-        return reject(err);
-      });
-    });
+    return this.network.post('ecomm/customer' + this.key_param, { email: email, customer_id: customer_id });
   };
 
   _createClass(Client, [{

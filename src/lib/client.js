@@ -84,8 +84,8 @@ export default class Client {
     }
 
     return new Promise((resolve, reject) => this.network.post('ecomm/marketing' + this.key_param, { type: type, charges: charges })
-        .then(res => resolve(component(this.key, res.text, type, size)))
-        .catch(err => reject(err)));
+      .then(res => resolve(component(this.key, res.text, type, size)))
+      .catch(err => reject(err)));
   }
 
   get_customer(email, customer_id) {
@@ -97,8 +97,6 @@ export default class Client {
       return Promise.reject('Invalid email address');
     }
 
-    return new Promise((resolve, reject) => this.network.post('ecomm/customer' + this.key_param, { email: email, customer_id: customer_id })
-      .then(res => resolve(res))
-      .catch(err => reject(err)));
+    return this.network.post('ecomm/customer' + this.key_param, { email: email, customer_id: customer_id });
   }
 }

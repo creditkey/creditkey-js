@@ -6,20 +6,25 @@
  * @param {object} options
  * @returns {promise}
  */
+function handleErrors(response) {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
+}
+
 export default function request(url, options) {
   return new Promise((resolve, reject) => {
     if (!url) reject(new Error('URL parameter required'));
     if (!options) reject(new Error('Options parameter required'));
 
     fetch(url, options)
-      .then(response => {
-        if (!response.ok) throw response;
-        return response;
-      })
+      .then(response => handleErrors(response))
       .then(response => response.json())
       .then(response => {
         if (response.errors) reject(response.errors);
         else resolve(response);
-      });
+      })
+      .catch(err => reject(err));
   });
 }
