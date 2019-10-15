@@ -201,7 +201,11 @@ The `get_customer` method takes two arguments:
 * **email** - required - The email of your customer (should be the same email used to establish their Credit Key account)
 * **customer_id** - required - Your internal, unqiue id for the customer (should be the same as the remote_customer_id sent during begin_checkout)
 
-returns a json payload with `amount` and `amount_available`
+returns a json payload with `status`, `amount` and `amount_available`
+
+`status` is the customer's underwriting status and will be "declined", "pending" or "approved"
+
+**NOTE:** if a customer was declined, then they will not have a line of credit.  In that case this method will *only* return the customer's underwriting status
 
 ```javascript
 import ck from 'creditkey-js';
@@ -212,5 +216,5 @@ let userTcl;
 
 client.get_customer()
   .then(res => userTcl = res)
-  .then(() => console.log(userTcl.amount, userTcl.amount_available));
+  .then(() => console.log(userTcl.status, userTcl.amount, userTcl.amount_available));
 ```
