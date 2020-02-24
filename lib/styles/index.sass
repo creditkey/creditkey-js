@@ -2,6 +2,7 @@
   $modal-z: 50001;
   $modal-content-width: 650px;
   z-index: 50000;
+  text-decoration: none !important;
 
   //@import "~bulma/bulma";
   @import "~bulma/sass/utilities/_all";
@@ -9,6 +10,9 @@
   @import "~bulma/sass/components/modal";
   @import "~bulma/sass/components/level";
   @import "~bulma/sass/elements/button";
+
+  &a
+    text-decoration: none !important;
 
   // default overrides
   .button
@@ -98,7 +102,7 @@
 
   .pdp-text
     font-size: 16px !important;
-    font-weight: bold;
+    font-weight: 500;
 
   .ck-offer
     float: right;

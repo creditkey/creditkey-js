@@ -17,7 +17,7 @@ const Text = (key, label, type = "checkout", size = "medium", styles) => {
 
     case "pdp":
       return `<span class="creditkey"><a href="${host}/apply/start/${key}" target="_new" class="is-fullwidth" style="${styles}">
-          <span class="pdp-text">${label}</span> <span style="margin: 0 5px 0 0; font-size: 16px !important;">with</span><img src="${btn_url(size)}" class="payment-icon">
+          <span class="pdp-text">${label} with </span><img src="${btn_url(size)}" class="payment-icon">
         </a>
       </span>`;
       break;
