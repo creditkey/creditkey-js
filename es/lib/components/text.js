@@ -4,10 +4,11 @@ import { api, pdpHost } from '../../utils/platform';
 var Text = function Text(key, label) {
   var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "checkout";
   var size = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "medium";
-  var styles = arguments[4];
+  var slug = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "credit-key-lending";
+  var styles = arguments[5];
 
   var host = pdpHost(api);
-  var terms_url = "https://www.creditkey.com/credit-key-lending";
+  var terms_url = "https://www.creditkey.com/" + slug;
   var btn_url = function btn_url(s) {
     return 'https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-btn-' + s + '.svg';
   };

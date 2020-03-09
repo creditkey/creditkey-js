@@ -1,6 +1,6 @@
 {
   "name": "creditkey-js",
-  "version": "1.0.67",
+  "version": "1.0.68",
   "description": "Credit Key Javascript SDK",
   "main": "lib/index.js",
   "module": "es/index.js",

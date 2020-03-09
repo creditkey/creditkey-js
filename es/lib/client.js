@@ -116,7 +116,7 @@ var Client = function () {
 
     return new Promise(function (resolve, reject) {
       return _this3.network.post('ecomm/marketing' + _this3.key_param, { type: type, charges: charges }).then(function (res) {
-        return resolve(component(_this3.key, res.text, type, size));
+        return resolve(component(_this3.key, res.text, type, size, res.slug));
       }).catch(function (err) {
         return reject(err);
       });

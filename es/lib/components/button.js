@@ -3,10 +3,11 @@ import { api, pdpHost } from '../../utils/platform';
 
 var Button = function Button(key, label, type) {
   var size = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "medium";
-  var styles = arguments[4];
+  var slug = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "credit-key-lending";
+  var styles = arguments[5];
 
   var host = pdpHost(api);
-  var terms_url = "https://www.creditkey.com/credit-key-lending";
+  var terms_url = "https://www.creditkey.com/" + slug;
   var logo_url = function logo_url(s) {
     return 'https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-logo-white-' + s + '.svg';
   };
