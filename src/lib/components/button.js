@@ -1,9 +1,8 @@
 import styles from '../../styles/index.sass';
 import { api, pdpHost } from '../../utils/platform';
 
-const Button = (key, label, type, size = "medium", styles) => {
+const Button = (key, label, type, size = "medium", slug = "", styles) => {
   const host = pdpHost(api);
-  const terms_url = "https://www.creditkey.com/credit-key-lending";
   const logo_url = s => 'https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-logo-white-' + s + '.svg';
 
   let buttonClass;
@@ -26,7 +25,7 @@ const Button = (key, label, type, size = "medium", styles) => {
           <img src="${logo_url(size)}" class="ck-logo-${size}" />
           ${label}
         </a>
-        <a href="${terms_url}" class="terms" target="_new">See Terms</a>
+        <a href="${slug}" class="terms" target="_new">See Terms</a>
       </span>`;
       break;
 
@@ -43,7 +42,7 @@ const Button = (key, label, type, size = "medium", styles) => {
           <img src="${logo_url(size)}" class="ck-logo-${size}" />
           ${label}
         </a>
-        <a href="${terms_url}" class="terms" target="_new">See Terms</a>
+        <a href="${slug}" class="terms" target="_new">See Terms</a>
       </span>`;
   }
 }
