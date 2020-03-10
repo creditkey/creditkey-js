@@ -18068,11 +18068,10 @@ var src_styles = __webpack_require__(1);
 
 var button_Button = function Button(key, label, type) {
   var size = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "medium";
-  var slug = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "credit-key-lending";
+  var slug = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
   var styles = arguments[5];
 
   var host = pdpHost(api);
-  var terms_url = "https://www.creditkey.com/" + slug;
   var logo_url = function logo_url(s) {
     return 'https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-logo-white-' + s + '.svg';
   };
@@ -18093,7 +18092,7 @@ var button_Button = function Button(key, label, type) {
 
   switch (type) {
     case "checkout":
-      return '<span class="creditkey"><a class="button is-link ' + buttonClass + '" style="' + styles + '">\n          <img src="' + logo_url(size) + '" class="ck-logo-' + size + '" />\n          ' + label + '\n        </a>\n        <a href="' + terms_url + '" class="terms" target="_new">See Terms</a>\n      </span>';
+      return '<span class="creditkey"><a class="button is-link ' + buttonClass + '" style="' + styles + '">\n          <img src="' + logo_url(size) + '" class="ck-logo-' + size + '" />\n          ' + label + '\n        </a>\n        <a href="' + slug + '" class="terms" target="_new">See Terms</a>\n      </span>';
       break;
 
     case "pdp":
@@ -18101,7 +18100,7 @@ var button_Button = function Button(key, label, type) {
       break;
 
     default:
-      return '<span class="creditkey"><a class="button is-link ' + buttonClass + '" style="' + styles + '">\n          <img src="' + logo_url(size) + '" class="ck-logo-' + size + '" />\n          ' + label + '\n        </a>\n        <a href="' + terms_url + '" class="terms" target="_new">See Terms</a>\n      </span>';
+      return '<span class="creditkey"><a class="button is-link ' + buttonClass + '" style="' + styles + '">\n          <img src="' + logo_url(size) + '" class="ck-logo-' + size + '" />\n          ' + label + '\n        </a>\n        <a href="' + slug + '" class="terms" target="_new">See Terms</a>\n      </span>';
   }
 };
 
@@ -18113,18 +18112,17 @@ var button_Button = function Button(key, label, type) {
 var text_Text = function Text(key, label) {
   var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "checkout";
   var size = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "medium";
-  var slug = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "credit-key-lending";
+  var slug = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "";
   var styles = arguments[5];
 
   var host = pdpHost(api);
-  var terms_url = "https://www.creditkey.com/" + slug;
   var btn_url = function btn_url(s) {
     return 'https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-btn-' + s + '.svg';
   };
 
   switch (type) {
     case "checkout":
-      return '<span class="creditkey">\n          <img src="' + btn_url(size) + '" class="payment-icon" />\n          ' + (size == 'small' ? label.replace('Approval in seconds.', '') : label) + '\n          <a href="' + terms_url + '" class="action action-help" target="_new">See Terms</a>\n        </span>';
+      return '<span class="creditkey">\n          <img src="' + btn_url(size) + '" class="payment-icon" />\n          ' + (size == 'small' ? label.replace('Approval in seconds.', '') : label) + '\n          <a href="' + slug + '" class="action action-help" target="_new">See Terms</a>\n        </span>';
       break;
 
     case "pdp":
