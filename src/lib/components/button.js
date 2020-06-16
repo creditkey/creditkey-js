@@ -31,7 +31,7 @@ const Button = (key, label, type, size = "medium", slug = "", styles) => {
 
     case "pdp":
       return `<span class="creditkey"><a href="${host}/apply/start/${key}" target="_new" class="button is-link ${buttonClass}" style="${styles}">
-          <span class="pdp">${label}</span> <span style="padding: 0 5px 0 0; font-size: 16px !important;">with</span>
+          <span class="pdp">${label}</span> <span style="padding: 0 5px 0 0;">with</span>
           <img src="${logo_url(size)}" class="ck-logo-${size} "/>
         </a>
       </span>`;
