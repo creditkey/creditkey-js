@@ -10,7 +10,7 @@ const Text = (key, label, type = "checkout", size = "medium", slug = "", styles)
       return `<span class="creditkey">
           <img src="${btn_url(size)}" class="payment-icon" />
           ${size == 'small' ? label.replace('Approval in seconds.', '') : label}
-          <a href="${slug}" class="action action-help" target="_new">See Terms</a>
+          <a href="${slug}" class="action action-help terms" target="_new">See Terms</a>
         </span>`;
       break;
 
@@ -24,7 +24,7 @@ const Text = (key, label, type = "checkout", size = "medium", slug = "", styles)
     default:
       return `<span class="creditkey"><img src="${btn_url(size)}">
           ${label}
-          <a href="${terms_url}" class="action action-help" target="_new">See Terms</a>
+          <a href="${terms_url}" class="action action-help terms" target="_new">See Terms</a>
         </span>`;
   }
 }

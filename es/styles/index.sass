@@ -1,8 +1,14 @@
 .creditkey
+  all: initial;
+  *
+    all: unset;
+
+.creditkey
   $modal-z: 50001;
   $modal-content-width: 650px;
   z-index: 50000;
   text-decoration: none !important;
+  font-family: Arial, Helvetica, sans-serif;
 
   //@import "~bulma/bulma";
   @import "~bulma/sass/utilities/_all";
@@ -90,7 +96,8 @@
 
   .terms
     text-decoration: underline;
-    padding: 0 0 0 5px;
+    color: #3D9CE5;
+    cursor: pointer;
 
   .terms:hover
     text-decoration: none;
