@@ -12,6 +12,6 @@ export default class CartItem {
   }
 
   is_valid_item() {
-    return !!(this.data.merchant_id && this.data.name && this.data.price);
+    return !!(this.data.merchant_id && this.data.name);
   }
 }

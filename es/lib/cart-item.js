@@ -16,7 +16,7 @@ var CartItem = function () {
   }
 
   CartItem.prototype.is_valid_item = function is_valid_item() {
-    return !!(this.data.merchant_id && this.data.name && this.data.price);
+    return !!(this.data.merchant_id && this.data.name);
   };
 
   return CartItem;
