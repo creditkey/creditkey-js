@@ -44,6 +44,9 @@ The Credit Key Javascript SDK can also be installed via a script tag using the U
 
 A real world example of Credit Key implemented in a React app is available [here](https://github.com/creditkey/ck-react).
 
+The Credit Key [Merchant Implementation Guide](https://github.com/creditkey/docs/blob/master/implementation-guide.md) guide should be reviewed before performing a merchant integration with Credit Key via SDK. It should familiarize you with the general requirements of a merchant implementation.
+
+
 ## Models
 ---------
 
