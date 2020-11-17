@@ -10,6 +10,7 @@ function handleErrors(response) {
   if (!response.ok) {
     throw Error(response.statusText);
   }
+
   return response;
 }
 
@@ -17,14 +18,13 @@ export default function request(url, options) {
   return new Promise(function (resolve, reject) {
     if (!url) reject(new Error('URL parameter required'));
     if (!options) reject(new Error('Options parameter required'));
-
     fetch(url, options).then(function (response) {
       return handleErrors(response);
     }).then(function (response) {
       return response.json();
     }).then(function (response) {
       if (response.errors) reject(response.errors);else resolve(response);
-    }).catch(function (err) {
+    })["catch"](function (err) {
       return reject(err);
     });
   });

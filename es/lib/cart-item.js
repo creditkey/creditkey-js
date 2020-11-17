@@ -1,9 +1,5 @@
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var CartItem = function () {
+var CartItem = /*#__PURE__*/function () {
   function CartItem(merchantProductId, name, price, sku, quantity, size, color) {
-    _classCallCheck(this, CartItem);
-
     this.data = {
       merchant_id: merchantProductId,
       name: name,
@@ -15,7 +11,9 @@ var CartItem = function () {
     };
   }
 
-  CartItem.prototype.is_valid_item = function is_valid_item() {
+  var _proto = CartItem.prototype;
+
+  _proto.is_valid_item = function is_valid_item() {
     return !!(this.data.merchant_id && this.data.name);
   };
 

@@ -1,24 +1,24 @@
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 import Network from '../utils/network';
 import Button from './components/button';
 import Text from './components/text';
 
-var Client = function () {
-  function Client(key) {
-    var platform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'development';
-
-    _classCallCheck(this, Client);
+var Client = /*#__PURE__*/function () {
+  function Client(key, platform) {
+    if (platform === void 0) {
+      platform = 'development';
+    }
 
     this.key = key;
     this.network = Network(platform);
   }
 
-  Client.prototype.begin_checkout = function begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl, mode, merchant_data) {
+  var _proto = Client.prototype;
+
+  _proto.begin_checkout = function begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl, mode, merchant_data) {
     var _this = this;
 
     return new Promise(function (resolve, reject) {
@@ -34,11 +34,11 @@ var Client = function () {
         return reject('one or more cart items are invalid');
       }
 
-      if ((typeof billingAddress === 'undefined' ? 'undefined' : _typeof(billingAddress)) !== 'object') {
+      if (typeof billingAddress !== 'object') {
         return reject('billing address should be an Address object');
       }
 
-      if ((typeof charges === 'undefined' ? 'undefined' : _typeof(charges)) !== 'object') {
+      if (typeof charges !== 'object') {
         return reject('charges should be a Charges object');
       } else if (!charges.validate_charges()) {
         return reject('charges value is invalid');
@@ -59,13 +59,13 @@ var Client = function () {
         merchant_data: merchant_data
       }).then(function (res) {
         return resolve(res);
-      }).catch(function (err) {
+      })["catch"](function (err) {
         return reject(err);
       });
     });
   };
 
-  Client.prototype.is_displayed_in_checkout = function is_displayed_in_checkout(cartItems) {
+  _proto.is_displayed_in_checkout = function is_displayed_in_checkout(cartItems) {
     var _this2 = this;
 
     return new Promise(function (resolve, reject) {
@@ -83,47 +83,57 @@ var Client = function () {
         })
       }).then(function (res) {
         return res['is_displayed_in_checkout'] ? resolve(true) : reject(false);
-      }).catch(function (err) {
+      })["catch"](function (err) {
         return reject(err);
       });
     });
-  };
-
-  // display options are button, text, button_text
+  } // display options are button, text, button_text
   // size options are small, medium, large
+  ;
 
-
-  Client.prototype.get_marketing_display = function get_marketing_display(charges) {
-    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "checkout";
-
+  _proto.get_marketing_display = function get_marketing_display(charges, type, display, size) {
     var _this3 = this;
 
-    var display = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "button";
-    var size = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "medium";
+    if (type === void 0) {
+      type = "checkout";
+    }
 
-    if (charges && (typeof charges === 'undefined' ? 'undefined' : _typeof(charges)) !== 'object') {
+    if (display === void 0) {
+      display = "button";
+    }
+
+    if (size === void 0) {
+      size = "medium";
+    }
+
+    if (charges && typeof charges !== 'object') {
       return reject('charges should be a charges object');
     }
 
-    var component = void 0;
+    var component;
+
     switch (display) {
       case "text":
         component = Text;
         break;
+
       default:
         component = Button;
     }
 
     return new Promise(function (resolve, reject) {
-      return _this3.network.post('ecomm/marketing' + _this3.key_param, { type: type, charges: charges }).then(function (res) {
+      return _this3.network.post('ecomm/marketing' + _this3.key_param, {
+        type: type,
+        charges: charges
+      }).then(function (res) {
         return resolve(component(_this3.key, res.text, type, size, res.slug));
-      }).catch(function (err) {
+      })["catch"](function (err) {
         return reject(err);
       });
     });
   };
 
-  Client.prototype.get_customer = function get_customer(email, customer_id) {
+  _proto.get_customer = function get_customer(email, customer_id) {
     if (!email || !customer_id) {
       return Promise.reject('Missing required paramters');
     }
@@ -132,11 +142,14 @@ var Client = function () {
       return Promise.reject('Invalid email address');
     }
 
-    return this.network.post('ecomm/customer' + this.key_param, { email: email, customer_id: customer_id });
+    return this.network.post('ecomm/customer' + this.key_param, {
+      email: email,
+      customer_id: customer_id
+    });
   };
 
   _createClass(Client, [{
-    key: 'key_param',
+    key: "key_param",
     get: function get() {
       return '?public_key=' + this.key;
     }

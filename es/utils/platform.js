@@ -3,14 +3,12 @@
 var DEV = 'development';
 var STAGE = 'staging';
 var PROD = 'production';
-
 export var api = function api(platform) {
   if (platform === DEV) return 'http://localhost:9100';
   if (platform === STAGE) return 'https://staging.creditkey.com/app';
   if (platform === PROD) return 'https://www.creditkey.com/app';
   return platform; // custom URL - for testing
 };
-
 export var pdpHost = function pdpHost(api) {
   var host = window.location.hostname;
 

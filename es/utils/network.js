@@ -1,26 +1,24 @@
 import request from './request';
 import { api } from './platform';
 import { assign } from 'lodash';
-
 /**
  * @function Network
  * @description Factory function to create a object that can send
  * requests to a specific resource on the server.
  * @param {string} resource The resource used for config
  */
+
 var Network = function Network(platform, resource) {
   if (!platform) return false;
 
   var buildURL = function buildURL(id, resource) {
     var parameters = [api(platform)];
-
     if (resource) parameters = parameters.concat([resource]);
     if (id) parameters = parameters.concat([id]);
-
     return parameters.join('/');
-  };
+  }; // Default options used for every request
 
-  // Default options used for every request
+
   var defaultOptions = {
     mode: 'cors',
     headers: {
@@ -28,9 +26,7 @@ var Network = function Network(platform, resource) {
       'Content-Type': 'application/json'
     }
   };
-
   return {
-
     /**
      * @function post
      * @description Make a POST request.
@@ -39,8 +35,10 @@ var Network = function Network(platform, resource) {
      * @param {object} options
      * @returns {promise}
      */
-    post: function post(path, body) {
-      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    post: function post(path, body, options) {
+      if (options === void 0) {
+        options = {};
+      }
 
       return request(buildURL(path), assign(options, defaultOptions, {
         method: 'POST',
@@ -55,10 +53,14 @@ var Network = function Network(platform, resource) {
      * @param {object} options
      * @returns {promise}
      */
-    get: function get(path) {
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    get: function get(path, options) {
+      if (options === void 0) {
+        options = {};
+      }
 
-      return request(buildURL(path), assign(options, defaultOptions, { method: 'GET' }));
+      return request(buildURL(path), assign(options, defaultOptions, {
+        method: 'GET'
+      }));
     },
 
     /**
@@ -69,8 +71,10 @@ var Network = function Network(platform, resource) {
      * @param {object} options
      * @returns {promise}
      */
-    edit: function edit(path, body) {
-      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    edit: function edit(path, body, options) {
+      if (options === void 0) {
+        options = {};
+      }
 
       return request(buildURL(path), assign(options, defaultOptions, {
         method: 'PUT',
@@ -85,14 +89,19 @@ var Network = function Network(platform, resource) {
      * @param {object} options
      * @returns {promise}
      */
-    delete: function _delete(path) {
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    "delete": function _delete(path, options) {
+      if (options === void 0) {
+        options = {};
+      }
 
-      return request(buildURL(path), assign(options, defaultOptions, { method: 'DELETE' }));
+      return request(buildURL(path), assign(options, defaultOptions, {
+        method: 'DELETE'
+      }));
     },
-
     ping: function ping() {
-      return request(buildURL(), { method: 'GET' });
+      return request(buildURL(), {
+        method: 'GET'
+      });
     }
   };
 };
