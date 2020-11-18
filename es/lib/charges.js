@@ -1,9 +1,5 @@
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Charges = function () {
+var Charges = /*#__PURE__*/function () {
   function Charges(total, shipping, tax, discount_amount, grand_total) {
-    _classCallCheck(this, Charges);
-
     this.data = {
       total: total,
       shipping: shipping,
@@ -13,7 +9,9 @@ var Charges = function () {
     };
   }
 
-  Charges.prototype.validate_charges = function validate_charges() {
+  var _proto = Charges.prototype;
+
+  _proto.validate_charges = function validate_charges() {
     if (this.data.shipping && !this.is_valid_money_value(this.data.shipping)) return false;
     if (this.data.tax && !this.is_valid_money_value(this.data.tax)) return false;
     if (this.data.discount_amount && !this.is_valid_money_value(this.data.discount_amount)) return false;
@@ -25,10 +23,9 @@ var Charges = function () {
     return true;
   };
 
-  Charges.prototype.is_valid_money_value = function is_valid_money_value(value) {
+  _proto.is_valid_money_value = function is_valid_money_value(value) {
     var num = +value;
     if (isNaN(num)) return false;
-
     return true;
   };
 

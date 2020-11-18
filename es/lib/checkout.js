@@ -1,11 +1,12 @@
 import modal from './components/modal';
 import redirect from './redirect';
-
 var height = window.screen.availHeight;
 var width = window.screen.availWidth;
 
-var checkout = function checkout(source) {
-  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'modal';
+var checkout = function checkout(source, type) {
+  if (type === void 0) {
+    type = 'modal';
+  }
 
   if (type.toLowerCase() === 'modal') {
     return modal(source);
