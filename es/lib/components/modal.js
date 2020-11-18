@@ -9,23 +9,24 @@ var modal = function modal(source) {
   if (existingModal !== null) {
     var iframe = document.getElementById('creditkey-iframe');
     var url = iframe.src;
+
     if (url !== source + '?modal=true') {
       existingModal.remove();
       return modal(source);
     }
+
     existingModal.style.display = 'flex';
   } else {
     // Otherwise, create the modal.
+    var body = document.body; // default height set for UX during load, will be changed via updateParent() from inside iframe content later
 
-    var body = document.body;
-    // default height set for UX during load, will be changed via updateParent() from inside iframe content later
-    var _iframe = '<iframe id="creditkey-iframe" src="' + (source + '?modal=true') + '" style="height: 100vh;"></iframe>';
+    var _iframe = "<iframe id=\"creditkey-iframe\" src=\"" + (source + '?modal=true') + "\" style=\"height: 100vh;\"></iframe>";
 
     if (!validate_url(source)) {
-      _iframe = 'An invalid resource was requested';
+      _iframe = "An invalid resource was requested";
     }
 
-    return body.insertAdjacentHTML('beforeend', '<div class="creditkey" id="creditkey-modal"><div class="ck-modal is-active"><div class="ck-modal-background"></div><div class="ck-modal-content" id="ck-modal-card">' + _iframe + '</div></div></div>');
+    return body.insertAdjacentHTML('beforeend', "<div class=\"creditkey\" id=\"creditkey-modal\"><div class=\"ck-modal is-active\"><div class=\"ck-modal-background\"></div><div class=\"ck-modal-content\" id=\"ck-modal-card\">" + _iframe + "</div></div></div>");
   }
 };
 
@@ -33,21 +34,19 @@ function remove() {
   // Hide the modal so we can potentially redisplay it, leaving the user at the same place in the
   // checkout flow, if they accidentially click off.
   var el = document.getElementById('creditkey-modal');
+
   if (el !== null) {
     el.style.display = 'none';
   }
-}
+} // ensure that we're requesting a valid creditkey domain
 
-// ensure that we're requesting a valid creditkey domain
+
 function validate_url(url) {
   if (!url) return false;
-
   var root = url.split('/')[1];
-
   if (api('development').split('/')[1] === root) return true;
   if (api('staging').split('/')[1] === root) return true;
   if (api('production').split('/')[1] === root) return true;
-
   return false;
 }
 
@@ -62,8 +61,7 @@ function redirect(uri) {
 window.addEventListener('message', function (e) {
   if (!e) return false;
   if (e && !e.data) return false;
-
-  var event = void 0;
+  var event;
 
   try {
     event = JSON.parse(e.data);
@@ -72,32 +70,27 @@ window.addEventListener('message', function (e) {
   }
 
   if (!event || !event.action) return false;
-
   var modal_element = document.getElementById('ck-modal-card');
   var iframe_element = document.getElementById('creditkey-iframe');
+  if (!iframe_element || !modal_element) return false; // if we're closing the modal from within the CK iframe, trigger the event bound to parent body
 
-  if (!iframe_element || !modal_element) return false;
-
-  // if we're closing the modal from within the CK iframe, trigger the event bound to parent body
   if (event.action === 'cancel' && event.type === 'modal') {
     remove();
   } else if (event.action == 'complete' && event.type == 'modal') {
     redirect(event.options);
   } else if (event.action == 'height' && event.type == 'modal') {
     var total_height = event.options + 14; // 14 allows padding underneath content (usually legal footer)
-
     // set the iframe, the parent div, and that div's parent height to something that adjusts to content height
-    iframe_element.style.height = total_height.toString() + 'px';
 
-    // Pad parent div height because issues where Chrome's calc'd <body> height is different than other browsers
+    iframe_element.style.height = total_height.toString() + 'px'; // Pad parent div height because issues where Chrome's calc'd <body> height is different than other browsers
     //  which cuts of the bottom rounded corners
+
     if (total_height + 60 > window.innerHeight) {
       modal_element.parentNode.style.height = (total_height + 60).toString() + 'px';
-    }
+    } // force scroll to top because modal starts at top of page.
 
-    // force scroll to top because modal starts at top of page.
+
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
 }, false);
-
 export default modal;

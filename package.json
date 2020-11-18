@@ -1,6 +1,6 @@
 {
   "name": "creditkey-js",
-  "version": "1.0.73",
+  "version": "1.0.74",
   "description": "Credit Key Javascript SDK",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -10,23 +10,23 @@
     "umd"
   ],
   "scripts": {
-    "build": "nwb build-web-module",
+    "build": "nwb build-web-module --copy-files",
     "clean": "nwb clean-module",
     "test": "nwb test",
     "test:coverage": "nwb test --coverage",
     "test:watch": "nwb test --server"
   },
   "dependencies": {
-    "bulma": "^0.7.2",
-    "lodash": "^4.17.15"
+    "bulma": "^0.9.1",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
-    "css-loader": "^1.0.1",
-    "fetch-mock": "^7.2.5",
-    "node-sass": "^4.10.0",
-    "nwb": "^0.23.0",
-    "nwb-sass": "^0.9.0",
-    "sass-loader": "^7.1.0"
+    "css-loader": "^5.0.1",
+    "fetch-mock": "^9.10.7",
+    "node-sass": "^5.0.0",
+    "nwb": "^0.25.2",
+    "nwb-sass": "^0.10.2",
+    "sass-loader": "^10.1.0"
   },
   "author": "Eben Goodman",
   "homepage": "https://www.creditkey.com",

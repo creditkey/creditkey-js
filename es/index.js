@@ -4,7 +4,6 @@ import Address from './lib/address';
 import Charges from './lib/charges';
 import checkout from './lib/checkout';
 import apply from './lib/apply';
-
 export default {
   Client: Client,
   CartItem: CartItem,

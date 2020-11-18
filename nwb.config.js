@@ -8,10 +8,7 @@ module.exports = {
     extractCSS: false,
     rules: {
       'sass': {
-        loader: 'sass-loader',
-        options: {
-          includePaths: [nodeModulesPath]
-        }
+        loader: 'sass-loader'
       }
     }
   },
