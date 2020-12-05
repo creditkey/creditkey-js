@@ -7,11 +7,15 @@ const Text = (key, label, type = "checkout", size = "medium", slug = "", styles)
 
   switch(type) {
     case "checkout":
-      return `<span class="creditkey">
-          <img src="${btn_url(size)}" class="payment-icon" />
-          ${size == 'small' ? label.replace('Approval in seconds.', '') : label}
-          <a href="${slug}" class="action action-help terms" target="_new">See Terms</a>
-        </span>`;
+      return `<div id="ck-payment-wrapper" class="loader-wrapper" style="position: relative;">
+          <div id="ck-loader" style="position: absolute; left: 50%; z-index: 2; font-size: 3em;"></div>
+          <span class="creditkey" style="cursor: pointer">
+            <img src="${btn_url(size)}" class="payment-icon" />
+            ${size == 'small' ? label.replace('Approval in seconds.', '') : label}
+            <a href="${slug}" class="action action-help terms" target="_new">See Terms</a>
+          </span>
+          <div id="ck-payment-overlay"></div>
+        </div>`;
       break;
 
     case "pdp":

@@ -17966,7 +17966,7 @@ var button_Button = function Button(key, label, type, size, slug, styles) {
 
   switch (type) {
     case "checkout":
-      return "<span class=\"creditkey\"><a class=\"button is-link " + buttonClass + "\" style=\"" + styles + "\">\n          <img src=\"" + logo_url(size) + "\" class=\"ck-logo-" + size + "\" />\n          " + label + "\n        </a>\n        <a href=\"" + slug + "\" class=\"terms\" target=\"_new\">See Terms</a>\n      </span>";
+      return "<span id=\"ck-payment-overlay\"><span class=\"creditkey\"><a class=\"button is-link " + buttonClass + "\" style=\"" + styles + "\">\n          <img src=\"" + logo_url(size) + "\" class=\"ck-logo-" + size + "\" />\n          " + label + "\n        </a>\n        <a href=\"" + slug + "\" class=\"terms\" target=\"_new\">See Terms</a>\n      </span></span>";
       break;
 
     case "pdp":
@@ -18004,7 +18004,7 @@ var text_Text = function Text(key, label, type, size, slug, styles) {
 
   switch (type) {
     case "checkout":
-      return "<span class=\"creditkey\">\n          <img src=\"" + btn_url(size) + "\" class=\"payment-icon\" />\n          " + (size == 'small' ? label.replace('Approval in seconds.', '') : label) + "\n          <a href=\"" + slug + "\" class=\"action action-help terms\" target=\"_new\">See Terms</a>\n        </span>";
+      return "<div id=\"ck-payment-wrapper\" class=\"loader-wrapper\" style=\"position: relative;\">\n          <div id=\"ck-loader\" style=\"position: absolute; left: 50%; z-index: 2; font-size: 3em;\"></div>\n          <span class=\"creditkey\" style=\"cursor: pointer\">\n            <img src=\"" + btn_url(size) + "\" class=\"payment-icon\" />\n            " + (size == 'small' ? label.replace('Approval in seconds.', '') : label) + "\n            <a href=\"" + slug + "\" class=\"action action-help terms\" target=\"_new\">See Terms</a>\n          </span>\n          <div id=\"ck-payment-overlay\"></div>\n        </div>";
       break;
 
     case "pdp":
@@ -18064,6 +18064,16 @@ var client_Client = /*#__PURE__*/function () {
         return reject('charges value is invalid');
       }
 
+      var paymentMethod = document.getElementById('ck-payment-overlay');
+      var ckLoader = document.getElementById('ck-loader');
+
+      if (paymentMethod) {
+        paymentMethod.style.cssText = 'position: absolute; top: 0; bottom: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, .8);';
+        paymentMethod.classList.add('is-active');
+        ckLoader.classList.add('loader');
+        ckLoader.classList.add('is-loading');
+      }
+
       return _this.network.post('ecomm/begin_checkout' + _this.key_param, {
         cart_items: cartItems.map(function (item) {
           return item.data;
@@ -18078,7 +18088,14 @@ var client_Client = /*#__PURE__*/function () {
         mode: mode || 'modal',
         merchant_data: merchant_data
       }).then(function (res) {
-        return resolve(res);
+        if (paymentMethod) {
+          paymentMethod.style.cssText = '';
+          paymentMethod.classList.remove('is-active');
+          ckLoader.classList.remove('loader');
+          ckLoader.classList.remove('is-loading');
+        }
+
+        resolve(res);
       })["catch"](function (err) {
         return reject(err);
       });

@@ -34,6 +34,15 @@ export default class Client {
         return reject('charges value is invalid');
       }
 
+      const paymentMethod = document.getElementById('ck-payment-overlay');
+      const ckLoader = document.getElementById('ck-loader');
+      if (paymentMethod) {
+        paymentMethod.style.cssText = 'position: absolute; top: 0; bottom: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, .8);';
+        paymentMethod.classList.add('is-active');
+        ckLoader.classList.add('loader');
+        ckLoader.classList.add('is-loading');
+      }
+
       return this.network.post('ecomm/begin_checkout' + this.key_param, {
         cart_items: cartItems.map(item => item.data),
         shipping_address: shippingAddress && shippingAddress.data,
@@ -46,7 +55,15 @@ export default class Client {
         mode: mode || 'modal',
         merchant_data
       })
-      .then(res => resolve(res))
+      .then(res => {
+        if (paymentMethod) {
+          paymentMethod.style.cssText = '';
+          paymentMethod.classList.remove('is-active');
+          ckLoader.classList.remove('loader');
+          ckLoader.classList.remove('is-loading');
+        }
+        resolve(res);
+      })
       .catch(err => reject(err));
     });
   }

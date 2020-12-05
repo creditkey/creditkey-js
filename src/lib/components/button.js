@@ -21,12 +21,12 @@ const Button = (key, label, type, size = "medium", slug = "", styles) => {
 
   switch(type) {
     case "checkout":
-      return `<span class="creditkey"><a class="button is-link ${buttonClass}" style="${styles}">
+      return `<span id="ck-payment-overlay"><span class="creditkey"><a class="button is-link ${buttonClass}" style="${styles}">
           <img src="${logo_url(size)}" class="ck-logo-${size}" />
           ${label}
         </a>
         <a href="${slug}" class="terms" target="_new">See Terms</a>
-      </span>`;
+      </span></span>`;
       break;
 
     case "pdp":
