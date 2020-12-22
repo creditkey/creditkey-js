@@ -8,9 +8,9 @@ var checkout = function checkout(source, type) {
     type = 'modal';
   }
 
-  if (type.toLowerCase() === 'modal') {
+  if (type.toLowerCase() === 'modal' && width > 480) {
     return modal(source);
-  } else if (type.toLowerCase() === 'redirect') {
+  } else {
     return redirect(source);
   }
 };
