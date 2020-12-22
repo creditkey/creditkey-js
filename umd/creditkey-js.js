@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.73 - https://www.creditkey.com
+ * creditkey-js v1.0.74 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -18389,9 +18389,9 @@ var checkout_checkout = function checkout(source, type) {
     type = 'modal';
   }
 
-  if (type.toLowerCase() === 'modal') {
+  if (type.toLowerCase() === 'modal' && width > 480) {
     return components_modal(source);
-  } else if (type.toLowerCase() === 'redirect') {
+  } else {
     return lib_redirect(source);
   }
 };

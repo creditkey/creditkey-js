@@ -5,9 +5,9 @@ const height = window.screen.availHeight;
 const width = window.screen.availWidth;
 
 const checkout = (source, type = 'modal') => {
-  if (type.toLowerCase() === 'modal') {
+  if (type.toLowerCase() === 'modal' && width > 480) {
     return modal(source);
-  } else if (type.toLowerCase() === 'redirect') {
+  } else {
     return redirect(source);
   }
 }
