@@ -1,13 +1,21 @@
 import styles from '../../styles/index.sass';
 import { api, pdpHost } from '../../utils/platform';
 
-var Button = function Button(key, label, type, size, slug, styles) {
+var Button = function Button(key, label, type, size, slug, styles, extra) {
   if (size === void 0) {
     size = "medium";
   }
 
   if (slug === void 0) {
     slug = "";
+  }
+
+  if (styles === void 0) {
+    styles = "";
+  }
+
+  if (extra === void 0) {
+    extra = "none";
   }
 
   var host = pdpHost(api);
@@ -38,7 +46,12 @@ var Button = function Button(key, label, type, size, slug, styles) {
       break;
 
     case "pdp":
-      return "<span class=\"creditkey\"><a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" class=\"button is-link " + buttonClass + "\" style=\"" + styles + "\">\n          <span class=\"pdp\">" + label + "</span> <span style=\"padding: 0 5px 0 0;\">with</span>\n          <img src=\"" + logo_url(size) + "\" class=\"ck-logo-" + size + " \"/>\n        </a>\n      </span>";
+      if (extra === 'static') {
+        return "<span class=\"creditkey\"><a class=\"button is-link " + buttonClass + "\" style=\"" + styles + "\">\n            <span class=\"pdp\">" + label + "</span> <span style=\"padding: 0 5px 0 0;\">with</span>\n            <img src=\"" + logo_url(size) + "\" class=\"ck-logo-" + size + " \"/>\n          </a>\n        </span>";
+      } else {
+        return "<span class=\"creditkey\"><a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" class=\"button is-link " + buttonClass + "\" style=\"" + styles + "\">\n            <span class=\"pdp\">" + label + "</span> <span style=\"padding: 0 5px 0 0;\">with</span>\n            <img src=\"" + logo_url(size) + "\" class=\"ck-logo-" + size + " \"/>\n          </a>\n        </span>";
+      }
+
       break;
 
     default:

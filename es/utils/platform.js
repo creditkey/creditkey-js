@@ -9,33 +9,41 @@ export var api = function api(platform) {
   if (platform === PROD) return 'https://www.creditkey.com/app';
   return platform; // custom URL - for testing
 };
-export var pdpHost = function pdpHost(api) {
+export var ui = function ui(platform) {
+  if (platform === DEV) return 'http://localhost:3001';
+  if (platform === STAGE) return 'https://staging-apply.creditkey.com';
+  if (platform === PROD) return 'https://apply.creditkey.com';
+  return platform; // custom URL - for testing
+};
+export var pdpHost = function pdpHost(resource) {
   var host = window.location.hostname;
 
   if (window.location.hostname.indexOf('localhost') >= 0) {
-    return api(DEV);
+    return resource(DEV);
   }
 
   if (window.location.hostname.indexOf('staging') >= 0 || window.location.hostname.indexOf('dev') >= 0) {
-    return api(STAGE);
+    return resource(STAGE);
   }
 
   switch (host) {
     case 'creditkey.magento2':
-      return api(DEV);
+      return resource(DEV);
       break;
 
     case 'katom.app':
     case 'packnwood-demo.wjserver960.com':
     case 'magento.creditkey.com':
-      return api(STAGE);
+    case 'demo.creditkey.com':
+    case 'demo.creditkey.tech':
+      return resource(STAGE);
       break;
 
     case 'magento2.creditkey.com':
-      return api(PROD);
+      return resource(PROD);
       break;
 
     default:
-      return api(PROD);
+      return resource(PROD);
   }
 };

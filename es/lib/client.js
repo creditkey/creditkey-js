@@ -5,6 +5,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 import Network from '../utils/network';
 import Button from './components/button';
 import Text from './components/text';
+import modal from './components/modal';
+import { pdpHost, ui } from '../utils/platform';
 
 var Client = /*#__PURE__*/function () {
   function Client(key, platform) {
@@ -88,10 +90,14 @@ var Client = /*#__PURE__*/function () {
       });
     });
   } // display options are button, text, button_text
-  // size options are small, medium, large
+  // size options are small, medium, large, special (special loads a special version of the plain logo, instead of a sized badge version)
+  // extra options can be: 
+  // 'special' = renders a special text only version of the pdp
+  // 'static' = renders an unlinked version pf the pdp, basically a dumb banner
+  // extra is ignored when 'none' or called with type checkout
   ;
 
-  _proto.get_marketing_display = function get_marketing_display(charges, type, display, size) {
+  _proto.get_marketing_display = function get_marketing_display(charges, type, display, size, extra) {
     var _this3 = this;
 
     if (type === void 0) {
@@ -104,6 +110,10 @@ var Client = /*#__PURE__*/function () {
 
     if (size === void 0) {
       size = "medium";
+    }
+
+    if (extra === void 0) {
+      extra = "none";
     }
 
     if (charges && typeof charges !== 'object') {
@@ -126,11 +136,20 @@ var Client = /*#__PURE__*/function () {
         type: type,
         charges: charges
       }).then(function (res) {
-        return resolve(component(_this3.key, res.text, type, size, res.slug));
+        return resolve(component(_this3.key, res.text, type, size, res.slug, "", extra));
       })["catch"](function (err) {
         return reject(err);
       });
     });
+  };
+
+  _proto.enhanced_pdp_modal = function enhanced_pdp_modal(charges) {
+    if (charges && typeof charges !== 'object') {
+      return reject('charges should be a charges object');
+    }
+
+    var url = pdpHost(ui) + '/pdp/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total].join(',');
+    return modal(url);
   };
 
   _proto.get_customer = function get_customer(email, customer_id) {

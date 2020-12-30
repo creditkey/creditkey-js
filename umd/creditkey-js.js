@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.74 - https://www.creditkey.com
+ * creditkey-js v1.0.75 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -17783,34 +17783,42 @@ var api = function api(platform) {
   if (platform === PROD) return 'https://www.creditkey.com/app';
   return platform; // custom URL - for testing
 };
-var pdpHost = function pdpHost(api) {
+var ui = function ui(platform) {
+  if (platform === DEV) return 'http://localhost:3001';
+  if (platform === STAGE) return 'https://staging-apply.creditkey.com';
+  if (platform === PROD) return 'https://apply.creditkey.com';
+  return platform; // custom URL - for testing
+};
+var pdpHost = function pdpHost(resource) {
   var host = window.location.hostname;
 
   if (window.location.hostname.indexOf('localhost') >= 0) {
-    return api(DEV);
+    return resource(DEV);
   }
 
   if (window.location.hostname.indexOf('staging') >= 0 || window.location.hostname.indexOf('dev') >= 0) {
-    return api(STAGE);
+    return resource(STAGE);
   }
 
   switch (host) {
     case 'creditkey.magento2':
-      return api(DEV);
+      return resource(DEV);
       break;
 
     case 'katom.app':
     case 'packnwood-demo.wjserver960.com':
     case 'magento.creditkey.com':
-      return api(STAGE);
+    case 'demo.creditkey.com':
+    case 'demo.creditkey.tech':
+      return resource(STAGE);
       break;
 
     case 'magento2.creditkey.com':
-      return api(PROD);
+      return resource(PROD);
       break;
 
     default:
-      return api(PROD);
+      return resource(PROD);
   }
 };
 // EXTERNAL MODULE: ./node_modules/lodash/lodash.js
@@ -17933,13 +17941,21 @@ var src_styles = __webpack_require__(1);
 
 
 
-var button_Button = function Button(key, label, type, size, slug, styles) {
+var button_Button = function Button(key, label, type, size, slug, styles, extra) {
   if (size === void 0) {
     size = "medium";
   }
 
   if (slug === void 0) {
     slug = "";
+  }
+
+  if (styles === void 0) {
+    styles = "";
+  }
+
+  if (extra === void 0) {
+    extra = "none";
   }
 
   var host = pdpHost(api);
@@ -17970,7 +17986,12 @@ var button_Button = function Button(key, label, type, size, slug, styles) {
       break;
 
     case "pdp":
-      return "<span class=\"creditkey\"><a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" class=\"button is-link " + buttonClass + "\" style=\"" + styles + "\">\n          <span class=\"pdp\">" + label + "</span> <span style=\"padding: 0 5px 0 0;\">with</span>\n          <img src=\"" + logo_url(size) + "\" class=\"ck-logo-" + size + " \"/>\n        </a>\n      </span>";
+      if (extra === 'static') {
+        return "<span class=\"creditkey\"><a class=\"button is-link " + buttonClass + "\" style=\"" + styles + "\">\n            <span class=\"pdp\">" + label + "</span> <span style=\"padding: 0 5px 0 0;\">with</span>\n            <img src=\"" + logo_url(size) + "\" class=\"ck-logo-" + size + " \"/>\n          </a>\n        </span>";
+      } else {
+        return "<span class=\"creditkey\"><a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" class=\"button is-link " + buttonClass + "\" style=\"" + styles + "\">\n            <span class=\"pdp\">" + label + "</span> <span style=\"padding: 0 5px 0 0;\">with</span>\n            <img src=\"" + logo_url(size) + "\" class=\"ck-logo-" + size + " \"/>\n          </a>\n        </span>";
+      }
+
       break;
 
     default:
@@ -18017,10 +18038,109 @@ var text_Text = function Text(key, label, type, size, slug, styles) {
 };
 
 /* harmony default export */ var components_text = (text_Text);
+// CONCATENATED MODULE: ./src/lib/components/modal.js
+
+
+
+var modal = function modal(source) {
+  // Check to see if we've already created the modal - but hidden it when the user clicked off.
+  // If so, simply redisplay the modal.
+  var existingModal = document.getElementById('creditkey-modal');
+
+  if (existingModal !== null) {
+    var iframe = document.getElementById('creditkey-iframe');
+    var url = iframe.src;
+
+    if (url !== source + '?modal=true') {
+      existingModal.remove();
+      return modal(source);
+    }
+
+    existingModal.style.display = 'flex';
+  } else {
+    // Otherwise, create the modal.
+    var body = document.body; // default height set for UX during load, will be changed via updateParent() from inside iframe content later
+
+    var _iframe = "<iframe id=\"creditkey-iframe\" src=\"" + (source + '?modal=true') + "\" style=\"height: 100vh;\"></iframe>";
+
+    if (!validate_url(source)) {
+      _iframe = "An invalid resource was requested";
+    }
+
+    return body.insertAdjacentHTML('beforeend', "<div class=\"creditkey\" id=\"creditkey-modal\"><div class=\"ck-modal is-active\"><div class=\"ck-modal-background\"></div><div class=\"ck-modal-content\" id=\"ck-modal-card\">" + _iframe + "</div></div></div>");
+  }
+};
+
+function remove() {
+  // Hide the modal so we can potentially redisplay it, leaving the user at the same place in the
+  // checkout flow, if they accidentially click off.
+  var el = document.getElementById('creditkey-modal');
+
+  if (el !== null) {
+    el.style.display = 'none';
+  }
+} // ensure that we're requesting a valid creditkey domain
+
+
+function validate_url(url) {
+  if (!url) return false;
+  var root = url.split('/')[1];
+  if (api('development').split('/')[1] === root) return true;
+  if (api('staging').split('/')[1] === root) return true;
+  if (api('production').split('/')[1] === root) return true;
+  return false;
+}
+
+function redirect(uri) {
+  if (navigator.userAgent.match(/Android/i)) {
+    document.location = uri;
+  } else {
+    window.location.replace(uri);
+  }
+}
+
+window.addEventListener('message', function (e) {
+  if (!e) return false;
+  if (e && !e.data) return false;
+  var event;
+
+  try {
+    event = JSON.parse(e.data);
+  } catch (e) {
+    event = false;
+  }
+
+  if (!event || !event.action) return false;
+  var modal_element = document.getElementById('ck-modal-card');
+  var iframe_element = document.getElementById('creditkey-iframe');
+  if (!iframe_element || !modal_element) return false; // if we're closing the modal from within the CK iframe, trigger the event bound to parent body
+
+  if (event.action === 'cancel' && event.type === 'modal') {
+    remove();
+  } else if (event.action == 'complete' && event.type == 'modal') {
+    redirect(event.options);
+  } else if (event.action == 'height' && event.type == 'modal') {
+    var total_height = event.options + 14; // 14 allows padding underneath content (usually legal footer)
+    // set the iframe, the parent div, and that div's parent height to something that adjusts to content height
+
+    iframe_element.style.height = total_height.toString() + 'px'; // Pad parent div height because issues where Chrome's calc'd <body> height is different than other browsers
+    //  which cuts of the bottom rounded corners
+
+    if (total_height + 60 > window.innerHeight) {
+      modal_element.parentNode.style.height = (total_height + 60).toString() + 'px';
+    } // force scroll to top because modal starts at top of page.
+
+
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }
+}, false);
+/* harmony default export */ var components_modal = (modal);
 // CONCATENATED MODULE: ./src/lib/client.js
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
 
 
 
@@ -18108,10 +18228,14 @@ var client_Client = /*#__PURE__*/function () {
       });
     });
   } // display options are button, text, button_text
-  // size options are small, medium, large
+  // size options are small, medium, large, special (special loads a special version of the plain logo, instead of a sized badge version)
+  // extra options can be: 
+  // 'special' = renders a special text only version of the pdp
+  // 'static' = renders an unlinked version pf the pdp, basically a dumb banner
+  // extra is ignored when 'none' or called with type checkout
   ;
 
-  _proto.get_marketing_display = function get_marketing_display(charges, type, display, size) {
+  _proto.get_marketing_display = function get_marketing_display(charges, type, display, size, extra) {
     var _this3 = this;
 
     if (type === void 0) {
@@ -18124,6 +18248,10 @@ var client_Client = /*#__PURE__*/function () {
 
     if (size === void 0) {
       size = "medium";
+    }
+
+    if (extra === void 0) {
+      extra = "none";
     }
 
     if (charges && typeof charges !== 'object') {
@@ -18146,11 +18274,20 @@ var client_Client = /*#__PURE__*/function () {
         type: type,
         charges: charges
       }).then(function (res) {
-        return resolve(component(_this3.key, res.text, type, size, res.slug));
+        return resolve(component(_this3.key, res.text, type, size, res.slug, "", extra));
       })["catch"](function (err) {
         return reject(err);
       });
     });
+  };
+
+  _proto.enhanced_pdp_modal = function enhanced_pdp_modal(charges) {
+    if (charges && typeof charges !== 'object') {
+      return reject('charges should be a charges object');
+    }
+
+    var url = pdpHost(ui) + '/pdp/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total].join(',');
+    return components_modal(url);
   };
 
   _proto.get_customer = function get_customer(email, customer_id) {
@@ -18272,103 +18409,6 @@ var Charges = /*#__PURE__*/function () {
 }();
 
 
-// CONCATENATED MODULE: ./src/lib/components/modal.js
-
-
-
-var modal = function modal(source) {
-  // Check to see if we've already created the modal - but hidden it when the user clicked off.
-  // If so, simply redisplay the modal.
-  var existingModal = document.getElementById('creditkey-modal');
-
-  if (existingModal !== null) {
-    var iframe = document.getElementById('creditkey-iframe');
-    var url = iframe.src;
-
-    if (url !== source + '?modal=true') {
-      existingModal.remove();
-      return modal(source);
-    }
-
-    existingModal.style.display = 'flex';
-  } else {
-    // Otherwise, create the modal.
-    var body = document.body; // default height set for UX during load, will be changed via updateParent() from inside iframe content later
-
-    var _iframe = "<iframe id=\"creditkey-iframe\" src=\"" + (source + '?modal=true') + "\" style=\"height: 100vh;\"></iframe>";
-
-    if (!validate_url(source)) {
-      _iframe = "An invalid resource was requested";
-    }
-
-    return body.insertAdjacentHTML('beforeend', "<div class=\"creditkey\" id=\"creditkey-modal\"><div class=\"ck-modal is-active\"><div class=\"ck-modal-background\"></div><div class=\"ck-modal-content\" id=\"ck-modal-card\">" + _iframe + "</div></div></div>");
-  }
-};
-
-function remove() {
-  // Hide the modal so we can potentially redisplay it, leaving the user at the same place in the
-  // checkout flow, if they accidentially click off.
-  var el = document.getElementById('creditkey-modal');
-
-  if (el !== null) {
-    el.style.display = 'none';
-  }
-} // ensure that we're requesting a valid creditkey domain
-
-
-function validate_url(url) {
-  if (!url) return false;
-  var root = url.split('/')[1];
-  if (api('development').split('/')[1] === root) return true;
-  if (api('staging').split('/')[1] === root) return true;
-  if (api('production').split('/')[1] === root) return true;
-  return false;
-}
-
-function redirect(uri) {
-  if (navigator.userAgent.match(/Android/i)) {
-    document.location = uri;
-  } else {
-    window.location.replace(uri);
-  }
-}
-
-window.addEventListener('message', function (e) {
-  if (!e) return false;
-  if (e && !e.data) return false;
-  var event;
-
-  try {
-    event = JSON.parse(e.data);
-  } catch (e) {
-    event = false;
-  }
-
-  if (!event || !event.action) return false;
-  var modal_element = document.getElementById('ck-modal-card');
-  var iframe_element = document.getElementById('creditkey-iframe');
-  if (!iframe_element || !modal_element) return false; // if we're closing the modal from within the CK iframe, trigger the event bound to parent body
-
-  if (event.action === 'cancel' && event.type === 'modal') {
-    remove();
-  } else if (event.action == 'complete' && event.type == 'modal') {
-    redirect(event.options);
-  } else if (event.action == 'height' && event.type == 'modal') {
-    var total_height = event.options + 14; // 14 allows padding underneath content (usually legal footer)
-    // set the iframe, the parent div, and that div's parent height to something that adjusts to content height
-
-    iframe_element.style.height = total_height.toString() + 'px'; // Pad parent div height because issues where Chrome's calc'd <body> height is different than other browsers
-    //  which cuts of the bottom rounded corners
-
-    if (total_height + 60 > window.innerHeight) {
-      modal_element.parentNode.style.height = (total_height + 60).toString() + 'px';
-    } // force scroll to top because modal starts at top of page.
-
-
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
-  }
-}, false);
-/* harmony default export */ var components_modal = (modal);
 // CONCATENATED MODULE: ./src/lib/redirect.js
 var redirect_redirect = function redirect(source) {
   var uri;

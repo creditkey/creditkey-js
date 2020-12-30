@@ -1,6 +1,8 @@
 import Network from '../utils/network';
 import Button from './components/button';
 import Text from './components/text';
+import modal from './components/modal';
+import { pdpHost, ui } from '../utils/platform';
 
 export default class Client {
   constructor(key, platform = 'development') {
@@ -68,8 +70,12 @@ export default class Client {
   }
 
   // display options are button, text, button_text
-  // size options are small, medium, large
-  get_marketing_display(charges, type = "checkout", display = "button", size = "medium") {
+  // size options are small, medium, large, special (special loads a special version of the plain logo, instead of a sized badge version)
+  // extra options can be: 
+  // 'special' = renders a special text only version of the pdp
+  // 'static' = renders an unlinked version pf the pdp, basically a dumb banner
+  // extra is ignored when 'none' or called with type checkout
+  get_marketing_display(charges, type = "checkout", display = "button", size = "medium", extra = "none") {
     if (charges && typeof charges !== 'object') {
       return reject('charges should be a charges object');
     }
@@ -84,8 +90,18 @@ export default class Client {
     }
 
     return new Promise((resolve, reject) => this.network.post('ecomm/marketing' + this.key_param, { type: type, charges: charges })
-      .then(res => resolve(component(this.key, res.text, type, size, res.slug)))
+      .then(res => resolve(component(this.key, res.text, type, size, res.slug, "", extra)))
       .catch(err => reject(err)));
+  }
+
+  enhanced_pdp_modal(charges) {
+    if (charges && typeof charges !== 'object') {
+      return reject('charges should be a charges object');
+    }
+
+    const url = pdpHost(ui) + '/pdp/' + this.key + '/' + [ charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total ].join(',');
+
+    return modal(url);
   }
 
   get_customer(email, customer_id) {
