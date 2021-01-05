@@ -18,7 +18,7 @@ export const ui = platform => {
   return platform; // custom URL - for testing
 }
 
-export const pdpHost = resource => {
+export const pdpHost = (resource, platform) => {
   const host = window.location.hostname;
 
   if(window.location.hostname.indexOf('localhost') >= 0) {
@@ -27,6 +27,10 @@ export const pdpHost = resource => {
 
   if(window.location.hostname.indexOf('staging') >= 0 || window.location.hostname.indexOf('dev') >= 0) {
     return resource(STAGE);
+  }
+
+  if (platform) {
+    return resource(platform);
   }
 
   switch(host) {

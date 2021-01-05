@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.75 - https://www.creditkey.com
+ * creditkey-js v1.0.77 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -17789,7 +17789,7 @@ var ui = function ui(platform) {
   if (platform === PROD) return 'https://apply.creditkey.com';
   return platform; // custom URL - for testing
 };
-var pdpHost = function pdpHost(resource) {
+var pdpHost = function pdpHost(resource, platform) {
   var host = window.location.hostname;
 
   if (window.location.hostname.indexOf('localhost') >= 0) {
@@ -17798,6 +17798,10 @@ var pdpHost = function pdpHost(resource) {
 
   if (window.location.hostname.indexOf('staging') >= 0 || window.location.hostname.indexOf('dev') >= 0) {
     return resource(STAGE);
+  }
+
+  if (platform) {
+    return resource(platform);
   }
 
   switch (host) {
@@ -18153,6 +18157,7 @@ var client_Client = /*#__PURE__*/function () {
     }
 
     this.key = key;
+    this.platform = platform;
     this.network = network(platform);
   }
 
@@ -18286,7 +18291,7 @@ var client_Client = /*#__PURE__*/function () {
       return reject('charges should be a charges object');
     }
 
-    var url = pdpHost(ui) + '/pdp/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total].join(',');
+    var url = pdpHost(ui, this.platform) + '/pdp/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total].join(',');
     return components_modal(url);
   };
 

@@ -7,6 +7,7 @@ import { pdpHost, ui } from '../utils/platform';
 export default class Client {
   constructor(key, platform = 'development') {
     this.key = key;
+    this.platform = platform;
     this.network = Network(platform);
   }
 
@@ -99,7 +100,7 @@ export default class Client {
       return reject('charges should be a charges object');
     }
 
-    const url = pdpHost(ui) + '/pdp/' + this.key + '/' + [ charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total ].join(',');
+    const url = pdpHost(ui, this.platform) + '/pdp/' + this.key + '/' + [ charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total ].join(',');
 
     return modal(url);
   }

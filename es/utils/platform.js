@@ -15,7 +15,7 @@ export var ui = function ui(platform) {
   if (platform === PROD) return 'https://apply.creditkey.com';
   return platform; // custom URL - for testing
 };
-export var pdpHost = function pdpHost(resource) {
+export var pdpHost = function pdpHost(resource, platform) {
   var host = window.location.hostname;
 
   if (window.location.hostname.indexOf('localhost') >= 0) {
@@ -24,6 +24,10 @@ export var pdpHost = function pdpHost(resource) {
 
   if (window.location.hostname.indexOf('staging') >= 0 || window.location.hostname.indexOf('dev') >= 0) {
     return resource(STAGE);
+  }
+
+  if (platform) {
+    return resource(platform);
   }
 
   switch (host) {
