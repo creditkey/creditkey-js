@@ -1,7 +1,7 @@
 import styles from '../../styles/index.sass';
 import { api, pdpHost } from '../../utils/platform';
 
-const Button = (key, label, type, size = "medium", slug = "", styles) => {
+const Button = (key, label, type, size = "medium", slug = "", styles = "", extra = "none") => {
   const host = pdpHost(api);
   const logo_url = s => 'https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-logo-white-' + s + '.svg';
 
@@ -30,11 +30,20 @@ const Button = (key, label, type, size = "medium", slug = "", styles) => {
       break;
 
     case "pdp":
-      return `<span class="creditkey"><a href="${host}/apply/start/${key}" target="_new" class="button is-link ${buttonClass}" style="${styles}">
-          <span class="pdp">${label}</span> <span style="padding: 0 5px 0 0;">with</span>
-          <img src="${logo_url(size)}" class="ck-logo-${size} "/>
-        </a>
-      </span>`;
+      if (extra === 'static') {
+        return `<span class="creditkey"><a class="button is-link ${buttonClass}" style="${styles}">
+            <span class="pdp">${label}</span> <span style="padding: 0 5px 0 0;">with</span>
+            <img src="${logo_url(size)}" class="ck-logo-${size} "/>
+          </a>
+        </span>`;
+      } else {
+        return `<span class="creditkey"><a href="${host}/apply/start/${key}" target="_new" class="button is-link ${buttonClass}" style="${styles}">
+            <span class="pdp">${label}</span> <span style="padding: 0 5px 0 0;">with</span>
+            <img src="${logo_url(size)}" class="ck-logo-${size} "/>
+          </a>
+        </span>`;
+      }
+      
       break;
 
     default:
