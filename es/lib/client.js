@@ -15,6 +15,7 @@ var Client = /*#__PURE__*/function () {
     }
 
     this.key = key;
+    this.platform = platform;
     this.network = Network(platform);
   }
 
@@ -148,7 +149,7 @@ var Client = /*#__PURE__*/function () {
       return reject('charges should be a charges object');
     }
 
-    var url = pdpHost(ui) + '/pdp/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total].join(',');
+    var url = pdpHost(ui, this.platform) + '/pdp/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total].join(',');
     return modal(url);
   };
 
