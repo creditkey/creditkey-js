@@ -100,7 +100,7 @@ export default class Client {
       return reject('charges should be a charges object');
     }
 
-    allowedTypes = ['pdp', 'cart'];
+    const allowedTypes = ['pdp', 'cart'];
     if (!allowedTypes.includes(type)) return reject('invalid type, allowed types are "pdp", "cart"');
 
     const url = pdpHost(ui, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [ charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total ].join(',');
