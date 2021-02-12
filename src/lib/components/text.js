@@ -1,9 +1,11 @@
 import styles from '../../styles/index.sass';
 import { api, pdpHost } from '../../utils/platform';
 
-const Text = (key, label, type = "checkout", size = "medium", slug = "", styles) => {
+const Text = (key, label, type = "checkout", size = "medium", slug = "", styles = "", extra = "none") => {
   const host = pdpHost(api);
   const btn_url = s => 'https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-btn-' + s + '.svg';
+
+  const learnMoreLink = slug !== '' ? slug : host + '/learn-more';
 
   switch(type) {
     case "checkout":
@@ -15,10 +17,20 @@ const Text = (key, label, type = "checkout", size = "medium", slug = "", styles)
       break;
 
     case "pdp":
-      return `<span class="creditkey"><a href="${host}/apply/start/${key}" target="_new" class="is-fullwidth" style="${styles}">
-          <span class="pdp-text">${label} with </span><img src="${btn_url(size)}" class="payment-icon">
-        </a>
-      </span>`;
+      if (extra === 'static') {
+        return `<div class="creditkey" style="display: flex; align-items: center; cursor: pointer;">
+            <div class="pdp-text" style="margin: 0 5px;">${label} with</div>
+            <img src="${btn_url(size)}" class="payment-icon" />
+            <a href="${learnMoreLink}" target="_new" style="display: ${size === 'special' ? 'inline-block' : 'none'};"><img src="https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-info.png" style="height: 19px !important;" /></a>
+          </div>`;
+      } else {
+        return `<div class="creditkey" style="display: flex; align-items: center; cursor: pointer;">
+            <a href="${host}/apply/start/${key}" target="_new" style="margin: 0 5px;" ${styles}"><div class="pdp-text">${label} with</div></a>
+            <a href="${host}/apply/start/${key}" target="_new" style="${styles}"><img src="${btn_url(size)}" class="payment-icon" /></a>
+            <a href="${learnMoreLink}" target="_new" style="display: ${size === 'special' ? 'inline-block' : 'none'};"><img src="https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-info.png" style="height: 19px !important;" /></a>
+          </div>`;
+      }
+      
       break;
 
     default:
