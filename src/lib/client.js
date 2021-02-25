@@ -91,7 +91,7 @@ export default class Client {
     }
 
     return new Promise((resolve, reject) => this.network.post('ecomm/marketing' + this.key_param, { type: type, charges: charges })
-      .then(res => resolve(component(this.key, res.text, type, size, res.slug, "", extra)))
+      .then(res => resolve(component(this.key, res.text, type, size, res.slug, "", extra, this.platform)))
       .catch(err => reject(err)));
   }
 

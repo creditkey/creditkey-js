@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.80 - https://www.creditkey.com
+ * creditkey-js v1.0.81 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -17945,7 +17945,7 @@ var src_styles = __webpack_require__(1);
 
 
 
-var button_Button = function Button(key, label, type, size, slug, styles, extra) {
+var button_Button = function Button(key, label, type, size, slug, styles, extra, platform) {
   if (size === void 0) {
     size = "medium";
   }
@@ -17962,7 +17962,11 @@ var button_Button = function Button(key, label, type, size, slug, styles, extra)
     extra = "none";
   }
 
-  var host = pdpHost(api);
+  if (platform === void 0) {
+    platform = "development";
+  }
+
+  var host = pdpHost(api, platform);
 
   var logo_url = function logo_url(s) {
     return 'https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-logo-white-' + s + '.svg';
@@ -18008,7 +18012,7 @@ var button_Button = function Button(key, label, type, size, slug, styles, extra)
 
 
 
-var text_Text = function Text(key, label, type, size, slug, styles, extra) {
+var text_Text = function Text(key, label, type, size, slug, styles, extra, platform) {
   if (type === void 0) {
     type = "checkout";
   }
@@ -18029,7 +18033,11 @@ var text_Text = function Text(key, label, type, size, slug, styles, extra) {
     extra = "none";
   }
 
-  var host = pdpHost(api);
+  if (platform === void 0) {
+    platform = "development";
+  }
+
+  var host = pdpHost(api, platform);
 
   var btn_url = function btn_url(s) {
     return 'https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-btn-' + s + '.svg';
@@ -18294,7 +18302,7 @@ var client_Client = /*#__PURE__*/function () {
         type: type,
         charges: charges
       }).then(function (res) {
-        return resolve(component(_this3.key, res.text, type, size, res.slug, "", extra));
+        return resolve(component(_this3.key, res.text, type, size, res.slug, "", extra, _this3.platform));
       })["catch"](function (err) {
         return reject(err);
       });

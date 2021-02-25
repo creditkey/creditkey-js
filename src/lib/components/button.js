@@ -1,8 +1,8 @@
 import styles from '../../styles/index.sass';
 import { api, pdpHost } from '../../utils/platform';
 
-const Button = (key, label, type, size = "medium", slug = "", styles = "", extra = "none") => {
-  const host = pdpHost(api);
+const Button = (key, label, type, size = "medium", slug = "", styles = "", extra = "none", platform = "development") => {
+  const host = pdpHost(api, platform);
   const logo_url = s => 'https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-logo-white-' + s + '.svg';
 
   let buttonClass;

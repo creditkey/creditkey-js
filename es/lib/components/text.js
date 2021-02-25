@@ -1,7 +1,7 @@
 import styles from '../../styles/index.sass';
 import { api, pdpHost } from '../../utils/platform';
 
-var Text = function Text(key, label, type, size, slug, styles, extra) {
+var Text = function Text(key, label, type, size, slug, styles, extra, platform) {
   if (type === void 0) {
     type = "checkout";
   }
@@ -22,7 +22,11 @@ var Text = function Text(key, label, type, size, slug, styles, extra) {
     extra = "none";
   }
 
-  var host = pdpHost(api);
+  if (platform === void 0) {
+    platform = "development";
+  }
+
+  var host = pdpHost(api, platform);
 
   var btn_url = function btn_url(s) {
     return 'https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-btn-' + s + '.svg';
