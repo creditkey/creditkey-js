@@ -1,8 +1,8 @@
 import styles from '../../styles/index.sass';
 import { api, pdpHost } from '../../utils/platform';
 
-const Text = (key, label, type = "checkout", size = "medium", slug = "", styles = "", extra = "none") => {
-  const host = pdpHost(api);
+const Text = (key, label, type = "checkout", size = "medium", slug = "", styles = "", extra = "none", platform = "development") => {
+  const host = pdpHost(api, platform);
   const btn_url = s => 'https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-btn-' + s + '.svg';
 
   const learnMoreLink = slug !== '' ? slug : host + '/learn-more';

@@ -1,7 +1,7 @@
 import styles from '../../styles/index.sass';
 import { api, pdpHost } from '../../utils/platform';
 
-var Button = function Button(key, label, type, size, slug, styles, extra) {
+var Button = function Button(key, label, type, size, slug, styles, extra, platform) {
   if (size === void 0) {
     size = "medium";
   }
@@ -18,7 +18,11 @@ var Button = function Button(key, label, type, size, slug, styles, extra) {
     extra = "none";
   }
 
-  var host = pdpHost(api);
+  if (platform === void 0) {
+    platform = "development";
+  }
+
+  var host = pdpHost(api, platform);
 
   var logo_url = function logo_url(s) {
     return 'https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-logo-white-' + s + '.svg';

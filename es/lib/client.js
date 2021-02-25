@@ -137,7 +137,7 @@ var Client = /*#__PURE__*/function () {
         type: type,
         charges: charges
       }).then(function (res) {
-        return resolve(component(_this3.key, res.text, type, size, res.slug, "", extra));
+        return resolve(component(_this3.key, res.text, type, size, res.slug, "", extra, _this3.platform));
       })["catch"](function (err) {
         return reject(err);
       });
