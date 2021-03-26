@@ -17783,10 +17783,16 @@ var api = function api(platform) {
   if (platform === PROD) return 'https://www.creditkey.com/app';
   return platform; // custom URL - for testing
 };
-var ui = function ui(platform) {
+var applyUI = function applyUI(platform) {
   if (platform === DEV) return 'http://localhost:3001';
   if (platform === STAGE) return 'https://staging-apply.creditkey.com';
   if (platform === PROD) return 'https://apply.creditkey.com';
+  return platform; // custom URL - for testing
+};
+var marketingUI = function marketingUI(platform) {
+  if (platform === DEV) return 'http://localhost:3002';
+  if (platform === STAGE) return 'https://staging-marketing.creditkey.com';
+  if (platform === PROD) return 'https://marketing.creditkey.com';
   return platform; // custom URL - for testing
 };
 var pdpHost = function pdpHost(resource, platform) {
@@ -18320,7 +18326,7 @@ var client_Client = /*#__PURE__*/function () {
 
     var allowedTypes = ['pdp', 'cart'];
     if (!allowedTypes.includes(type)) return reject('invalid type, allowed types are "pdp", "cart"');
-    var url = pdpHost(ui, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total].join(',');
+    var url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total].join(',');
     return components_modal(url);
   };
 

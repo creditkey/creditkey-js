@@ -11,10 +11,17 @@ export const api = platform => {
   return platform; // custom URL - for testing
 }
 
-export const ui = platform => {
+export const applyUI = platform => {
   if (platform === DEV) return 'http://localhost:3001';
   if (platform === STAGE) return 'https://staging-apply.creditkey.com';
   if (platform === PROD) return 'https://apply.creditkey.com';
+  return platform; // custom URL - for testing
+}
+
+export const marketingUI = platform => {
+  if (platform === DEV) return 'http://localhost:3002';
+  if (platform === STAGE) return 'https://staging-marketing.creditkey.com';
+  if (platform === PROD) return 'https://marketing.creditkey.com';
   return platform; // custom URL - for testing
 }
 
