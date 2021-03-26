@@ -21,13 +21,11 @@ const Text = (key, label, type = "checkout", size = "medium", slug = "", styles 
         return `<div class="creditkey" style="display: flex; align-items: center; cursor: pointer;">
             <div class="pdp-text" style="margin: 0 5px;">${label} with</div>
             <img src="${btn_url(size)}" class="payment-icon" />
-            <a href="${learnMoreLink}" target="_new" style="display: ${size === 'special' ? 'inline-block' : 'none'};"><img src="https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-info.png" style="height: 19px !important;" /></a>
           </div>`;
       } else {
         return `<div class="creditkey" style="display: flex; align-items: center; cursor: pointer;">
             <a href="${host}/apply/start/${key}" target="_new" style="margin: 0 5px;" ${styles}"><div class="pdp-text">${label} with</div></a>
             <a href="${host}/apply/start/${key}" target="_new" style="${styles}"><img src="${btn_url(size)}" class="payment-icon" /></a>
-            <a href="${learnMoreLink}" target="_new" style="display: ${size === 'special' ? 'inline-block' : 'none'};"><img src="https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-info.png" style="height: 19px !important;" /></a>
           </div>`;
       }
       

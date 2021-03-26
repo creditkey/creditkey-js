@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.81 - https://www.creditkey.com
+ * creditkey-js v1.0.82 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -17783,10 +17783,16 @@ var api = function api(platform) {
   if (platform === PROD) return 'https://www.creditkey.com/app';
   return platform; // custom URL - for testing
 };
-var ui = function ui(platform) {
+var applyUI = function applyUI(platform) {
   if (platform === DEV) return 'http://localhost:3001';
   if (platform === STAGE) return 'https://staging-apply.creditkey.com';
   if (platform === PROD) return 'https://apply.creditkey.com';
+  return platform; // custom URL - for testing
+};
+var marketingUI = function marketingUI(platform) {
+  if (platform === DEV) return 'http://localhost:3002';
+  if (platform === STAGE) return 'https://staging-marketing.creditkey.com';
+  if (platform === PROD) return 'https://marketing.creditkey.com';
   return platform; // custom URL - for testing
 };
 var pdpHost = function pdpHost(resource, platform) {
@@ -18052,9 +18058,9 @@ var text_Text = function Text(key, label, type, size, slug, styles, extra, platf
 
     case "pdp":
       if (extra === 'static') {
-        return "<div class=\"creditkey\" style=\"display: flex; align-items: center; cursor: pointer;\">\n            <div class=\"pdp-text\" style=\"margin: 0 5px;\">" + label + " with</div>\n            <img src=\"" + btn_url(size) + "\" class=\"payment-icon\" />\n            <a href=\"" + learnMoreLink + "\" target=\"_new\" style=\"display: " + (size === 'special' ? 'inline-block' : 'none') + ";\"><img src=\"https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-info.png\" style=\"height: 19px !important;\" /></a>\n          </div>";
+        return "<div class=\"creditkey\" style=\"display: flex; align-items: center; cursor: pointer;\">\n            <div class=\"pdp-text\" style=\"margin: 0 5px;\">" + label + " with</div>\n            <img src=\"" + btn_url(size) + "\" class=\"payment-icon\" />\n          </div>";
       } else {
-        return "<div class=\"creditkey\" style=\"display: flex; align-items: center; cursor: pointer;\">\n            <a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" style=\"margin: 0 5px;\" " + styles + "\"><div class=\"pdp-text\">" + label + " with</div></a>\n            <a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" style=\"" + styles + "\"><img src=\"" + btn_url(size) + "\" class=\"payment-icon\" /></a>\n            <a href=\"" + learnMoreLink + "\" target=\"_new\" style=\"display: " + (size === 'special' ? 'inline-block' : 'none') + ";\"><img src=\"https://s3-us-west-2.amazonaws.com/creditkey-assets/sdk/ck-info.png\" style=\"height: 19px !important;\" /></a>\n          </div>";
+        return "<div class=\"creditkey\" style=\"display: flex; align-items: center; cursor: pointer;\">\n            <a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" style=\"margin: 0 5px;\" " + styles + "\"><div class=\"pdp-text\">" + label + " with</div></a>\n            <a href=\"" + host + "/apply/start/" + key + "\" target=\"_new\" style=\"" + styles + "\"><img src=\"" + btn_url(size) + "\" class=\"payment-icon\" /></a>\n          </div>";
       }
 
       break;
@@ -18320,7 +18326,7 @@ var client_Client = /*#__PURE__*/function () {
 
     var allowedTypes = ['pdp', 'cart'];
     if (!allowedTypes.includes(type)) return reject('invalid type, allowed types are "pdp", "cart"');
-    var url = pdpHost(ui, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total].join(',');
+    var url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total].join(',');
     return components_modal(url);
   };
 
