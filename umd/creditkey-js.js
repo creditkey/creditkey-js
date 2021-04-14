@@ -18168,10 +18168,67 @@ window.addEventListener('message', function (e) {
   }
 }, false);
 /* harmony default export */ var components_modal = (modal);
+// CONCATENATED MODULE: ./src/lib/charges.js
+var Charges = /*#__PURE__*/function () {
+  function Charges(total, shipping, tax, discount_amount, grand_total) {
+    this.data = {
+      total: total,
+      shipping: shipping,
+      tax: tax,
+      discount_amount: discount_amount,
+      grand_total: grand_total
+    };
+  }
+
+  var _proto = Charges.prototype;
+
+  _proto.validate_charges = function validate_charges() {
+    if (this.data.shipping && !this.is_valid_money_value(this.data.shipping)) return false;
+    if (this.data.tax && !this.is_valid_money_value(this.data.tax)) return false;
+    if (this.data.discount_amount && !this.is_valid_money_value(this.data.discount_amount)) return false;
+
+    if (!this.is_valid_money_value(this.data.total) || !this.is_valid_money_value(this.data.grand_total)) {
+      return false;
+    }
+
+    return true;
+  };
+
+  _proto.is_valid_money_value = function is_valid_money_value(value) {
+    var num = +value;
+    if (isNaN(num)) return false;
+    return true;
+  };
+
+  return Charges;
+}();
+
+
+// CONCATENATED MODULE: ./src/lib/components/modal-pdp-banner.js
+
+
+
+var modalPdpBanner = function modalPdpBanner(url) {
+  var iframe = "<iframe id=\"creditkey-pdp-iframe\" src=\"" + url + "\"></iframe>";
+  return iframe;
+};
+
+window.addEventListener('message', function (e) {
+  if (!e) return false;
+  var data = JSON.parse(e.data);
+
+  if (data.action === 'pdp' && data.options.public_key) {
+    var charges = new Charges(data.options.charges ? data.options.charges.split(',') : '0, 0, 0, 0, 0'.split(','));
+    var c = new client_Client(data.options.public_key);
+    c.enhanced_pdp_modal(charges);
+  }
+});
+/* harmony default export */ var modal_pdp_banner = (modalPdpBanner);
 // CONCATENATED MODULE: ./src/lib/client.js
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -18330,6 +18387,11 @@ var client_Client = /*#__PURE__*/function () {
     return components_modal(url);
   };
 
+  _proto.get_pdp_display = function get_pdp_display(charges) {
+    var url = pdpHost(marketingUI, this.platform) + '/pdp';
+    return modal_pdp_banner(url);
+  };
+
   _proto.get_customer = function get_customer(email, customer_id) {
     if (!email || !customer_id) {
       return Promise.reject('Missing required paramters');
@@ -18410,42 +18472,6 @@ var Address = /*#__PURE__*/function () {
   };
 
   return Address;
-}();
-
-
-// CONCATENATED MODULE: ./src/lib/charges.js
-var Charges = /*#__PURE__*/function () {
-  function Charges(total, shipping, tax, discount_amount, grand_total) {
-    this.data = {
-      total: total,
-      shipping: shipping,
-      tax: tax,
-      discount_amount: discount_amount,
-      grand_total: grand_total
-    };
-  }
-
-  var _proto = Charges.prototype;
-
-  _proto.validate_charges = function validate_charges() {
-    if (this.data.shipping && !this.is_valid_money_value(this.data.shipping)) return false;
-    if (this.data.tax && !this.is_valid_money_value(this.data.tax)) return false;
-    if (this.data.discount_amount && !this.is_valid_money_value(this.data.discount_amount)) return false;
-
-    if (!this.is_valid_money_value(this.data.total) || !this.is_valid_money_value(this.data.grand_total)) {
-      return false;
-    }
-
-    return true;
-  };
-
-  _proto.is_valid_money_value = function is_valid_money_value(value) {
-    var num = +value;
-    if (isNaN(num)) return false;
-    return true;
-  };
-
-  return Charges;
 }();
 
 

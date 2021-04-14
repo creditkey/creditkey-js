@@ -6,6 +6,7 @@ import Network from '../utils/network';
 import Button from './components/button';
 import Text from './components/text';
 import modal from './components/modal';
+import modalPdpBanner from './components/modal-pdp-banner';
 import { pdpHost, marketingUI } from '../utils/platform';
 
 var Client = /*#__PURE__*/function () {
@@ -157,6 +158,11 @@ var Client = /*#__PURE__*/function () {
     if (!allowedTypes.includes(type)) return reject('invalid type, allowed types are "pdp", "cart"');
     var url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total].join(',');
     return modal(url);
+  };
+
+  _proto.get_pdp_display = function get_pdp_display(charges) {
+    var url = pdpHost(marketingUI, this.platform) + '/pdp';
+    return modalPdpBanner(url);
   };
 
   _proto.get_customer = function get_customer(email, customer_id) {

@@ -2,6 +2,7 @@ import Network from '../utils/network';
 import Button from './components/button';
 import Text from './components/text';
 import modal from './components/modal';
+import modalPdpBanner from './components/modal-pdp-banner';
 import { pdpHost, marketingUI } from '../utils/platform';
 
 export default class Client {
@@ -106,6 +107,12 @@ export default class Client {
     const url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [ charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total ].join(',');
 
     return modal(url);
+  }
+
+  get_pdp_display(charges) {
+    const url = pdpHost(marketingUI, this.platform) + '/pdp';
+
+    return modalPdpBanner(url);
   }
 
   get_customer(email, customer_id) {
