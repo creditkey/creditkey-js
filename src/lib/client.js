@@ -50,8 +50,8 @@ export default class Client {
         mode: mode || 'modal',
         merchant_data
       })
-      .then(res => resolve(res))
-      .catch(err => reject(err));
+        .then(res => resolve(res))
+        .catch(err => reject(err));
     });
   }
 
@@ -64,8 +64,8 @@ export default class Client {
       }
 
       return this.network.post('ecomm/is_displayed_in_checkout' + this.key_param, {
-          cart_items: cartItems.map(item => item.data)
-        })
+        cart_items: cartItems.map(item => item.data)
+      })
         .then(res => res['is_displayed_in_checkout'] ? resolve(true) : reject(false))
         .catch(err => reject(err));
     });
@@ -83,7 +83,7 @@ export default class Client {
     }
 
     let component;
-    switch(display) {
+    switch (display) {
       case "text":
         component = Text;
         break;
@@ -104,13 +104,14 @@ export default class Client {
     const allowedTypes = ['pdp', 'cart'];
     if (!allowedTypes.includes(type)) return reject('invalid type, allowed types are "pdp", "cart"');
 
-    const url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [ charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total ].join(',');
+    const url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total].join(',');
 
     return modal(url);
   }
 
+  //charges is a charges object
   get_pdp_display(charges) {
-    const url = pdpHost(marketingUI, this.platform) + '/pdp';
+    const url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
 
     return modalPdpBanner(url);
   }
