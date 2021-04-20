@@ -3,9 +3,6 @@
   *
     all: unset;
 
-.creditkey-pdp-iframe
-  width: 400px;
-
 .creditkey
   $modal-z: 50001;
   $modal-content-width: 650px;
@@ -128,6 +125,8 @@
   .ck-logo-large
     height: 22px !important;
 
-.creditkey-pdp-iframe{
+#creditkey-pdp-iframe
   width: 400px;
-}  
+  @media screen and (max-device-width: 400px)
+    .prequal-link
+      display:none;
