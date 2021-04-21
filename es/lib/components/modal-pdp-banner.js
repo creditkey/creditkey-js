@@ -2,7 +2,7 @@ import Client from '../client';
 import Charges from '../charges';
 
 var modalPdpBanner = function modalPdpBanner(url) {
-  var iframe = "<iframe id=\"creditkey-pdp-iframe\" src=\"" + url + "\"></iframe>";
+  var iframe = "<div className=\"iframe-container\"><iframe id=\"creditkey-pdp-iframe\" src=\"" + url + "\"></iframe></div>";
   return iframe;
 };
 
