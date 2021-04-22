@@ -166,8 +166,18 @@ var Client = /*#__PURE__*/function () {
     return modalPdpBanner(url);
   };
 
-  _proto.get_cart_display = function get_cart_display(charges) {
-    var url = pdpHost(marketingUI, this.platform) + '/cart-promo/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+  _proto.get_cart_display_left = function get_cart_display_left(charges) {
+    var url = pdpHost(marketingUI, this.platform) + '/cart-promo/left/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    return modalPdpBanner(url);
+  };
+
+  _proto.get_cart_display_right = function get_cart_display_right(charges) {
+    var url = pdpHost(marketingUI, this.platform) + '/cart-promo/right/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    return modalPdpBanner(url);
+  };
+
+  _proto.get_cart_display_centered = function get_cart_display_centered(charges) {
+    var url = pdpHost(marketingUI, this.platform) + '/cart-promo/centered/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return modalPdpBanner(url);
   };
 

@@ -115,8 +115,18 @@ export default class Client {
     return modalPdpBanner(url);
   }
 
-  get_cart_display(charges) {
-    const url = pdpHost(marketingUI, this.platform) + '/cart-promo/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+  get_cart_display_left(charges) {
+    const url = pdpHost(marketingUI, this.platform) + '/cart-promo/left/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    return modalPdpBanner(url);
+  }
+
+  get_cart_display_right(charges) {
+    const url = pdpHost(marketingUI, this.platform) + '/cart-promo/right/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    return modalPdpBanner(url);
+  }
+
+  get_cart_display_centered(charges) {
+    const url = pdpHost(marketingUI, this.platform) + '/cart-promo/centered/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return modalPdpBanner(url);
   }
 
