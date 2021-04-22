@@ -166,6 +166,11 @@ var Client = /*#__PURE__*/function () {
     return modalPdpBanner(url);
   };
 
+  _proto.get_cart_display = function get_cart_display(charges) {
+    var url = pdpHost(marketingUI, this.platform) + '/cart-promo/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    return modalPdpBanner(url);
+  };
+
   _proto.get_customer = function get_customer(email, customer_id) {
     if (!email || !customer_id) {
       return Promise.reject('Missing required paramters');

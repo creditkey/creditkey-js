@@ -115,6 +115,11 @@ export default class Client {
     return modalPdpBanner(url);
   }
 
+  get_cart_display(charges) {
+    const url = pdpHost(marketingUI, this.platform) + '/cart-promo/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    return modalPdpBanner(url);
+  }
+
   get_customer(email, customer_id) {
     if (!email || !customer_id) {
       return Promise.reject('Missing required paramters');
