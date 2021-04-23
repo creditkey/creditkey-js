@@ -115,7 +115,7 @@ export default class Client {
     return modalPdpBanner(url);
   }
 
-  get_cart_display(charges, desktop = 1, mobile = 1) {
+  get_cart_display(charges, desktop = "right", mobile = "left") {
     const url = pdpHost(marketingUI, this.platform) + '/cart-promo/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',') + '/' + desktop + '/' + mobile;
     return modalPdpBanner(url);
   }
