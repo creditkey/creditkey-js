@@ -1,6 +1,6 @@
 {
   "name": "creditkey-js",
-  "version": "1.0.82",
+  "version": "1.0.83",
   "description": "Credit Key Javascript SDK",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -18,15 +18,15 @@
   },
   "dependencies": {
     "bulma": "^0.9.1",
-    "lodash": "^4.17.20"
+    "lodash": "^4.17.20",
+    "node-sass": "4.14.1"
   },
   "devDependencies": {
     "css-loader": "^5.0.1",
     "fetch-mock": "^9.10.7",
-    "node-sass": "^5.0.0",
     "nwb": "^0.25.2",
     "nwb-sass": "^0.10.2",
-    "sass-loader": "^10.1.0"
+    "sass-loader": "^7.1.0"
   },
   "author": "Eben Goodman",
   "homepage": "https://www.creditkey.com",
