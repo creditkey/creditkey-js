@@ -21,8 +21,47 @@ You should have been put in contact with an Implementation Support Engineer at C
 
 ## Requirements
 ---------------
+The `get_pdp_display` method takes one argument:
 
-The Credit Key Javascript SDK requires Node 8.x or higher and NPM 5.x or higher. Depending on your setup the following dependencies may also need to be present: babel-loader @babel/core @babel/preset-env node-sass 
+charges - Required - A Charges object
+
+At this time, only checkout and product page displays are supported.
+When a charges object is supplied, with subtotal, shipping, tax, discount and grand total amounts, then the returned text calculates and displays the monthly payment amount.
+
+```javascript
+import ck from 'creditkey-js';
+
+const client = new ck.Client(your_credit_key_public_key, 'production');
+
+let pdpBanner;
+
+client.get_pdp_display()
+  .then(res => pdpBanner = res);
+```
+
+The `get_cart_display` method takes three argument:
+
+charges - Required - A Charges object <br />
+desktop - Optional - “left”, “right”, “centered” <br />
+mobile - Optional - “left”, “right”, “centered”
+
+At this time, only checkout and product page displays are supported.
+When a charges object is supplied, with subtotal, shipping, tax, discount and grand total amounts, then the returned text calculates and displays the monthly payment amount.
+ 
+ ```javascript
+import ck from 'creditkey-js';
+
+const client = new ck.Client(your_credit_key_public_key, 'production');
+
+let cartBanner;
+
+client.get_cart_display()
+  .then(res => cartBanner = res);
+```
+
+The Credit Key Javascript SDK requires Node 8.x or higher and NPM 5.x or higher. Depending on your setup the following dependencies may also need to be present: 
+
+`babel-loader` <br /> `@babel/core` <br /> `@babel/preset-env` <br /> `node-sass`
 
 ## Install
 ----------
