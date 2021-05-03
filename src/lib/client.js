@@ -109,14 +109,14 @@ export default class Client {
     return modal(url);
   }
 
-  //charges is a charges object
+  // charges is a charges object
   get_pdp_display(charges) {
     const url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return modalPdpBanner(url);
   }
 
   get_cart_display(charges, desktop = "right", mobile = "left") {
-    const url = pdpHost(marketingUI, this.platform) + '/cart-promo/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',') + '/' + desktop + '/' + mobile;
+    const url = pdpHost(marketingUI, this.platform) + '/cart-promo/' + this.key + '/' + desktop + '/' + mobile + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return modalPdpBanner(url);
   }
 
