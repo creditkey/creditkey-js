@@ -7,7 +7,7 @@ const modalPdpBanner = url => {
 }
 
 window.addEventListener('message', function (e) {
-  if (!e || !e.data) return false;
+  if (!e || !e.data || !e.data.action) return false;
 
   const data = JSON.parse(e.data);
 
