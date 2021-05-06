@@ -19,7 +19,7 @@ window.addEventListener('message', function (e) {
 
   if (data.action === 'pdp' && data.options.public_key) {
     const charges = new Charges(data.options.charges ? data.options.charges : '0, 0, 0, 0, 0'.split(','));
-    const c = new Client(data.options.public_key);
+    const c = new Client(data.options.public_key, data.options.platform);
     c.enhanced_pdp_modal(charges);
   }
 });
