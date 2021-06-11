@@ -2,7 +2,7 @@ import Client from '../client';
 import Charges from '../charges';
 
 const modalPdpBanner = url => {
-  let iframe = `<div className="iframe-container"><iframe id="creditkey-pdp-iframe" src="${url}"></iframe></div>`;
+  let iframe = `<div className="iframe-container"><iframe scrolling=\"no\" id="creditkey-pdp-iframe" src="${url}"></iframe></div>`;
   return iframe;
 }
 
