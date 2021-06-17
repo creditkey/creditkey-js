@@ -16,7 +16,7 @@ export default class Client {
     return '?public_key=' + this.key;
   }
 
-  begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl, mode, merchant_data) {
+  begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl, orderCompleteUrl, mode, merchant_data) {
     return new Promise((resolve, reject) => {
       if (!cartItems || !billingAddress || !charges || !remoteId || !customerId || !returnUrl || !cancelUrl) {
         return reject('missing required data');
@@ -47,6 +47,7 @@ export default class Client {
         remote_customer_id: customerId,
         return_url: returnUrl,
         cancel_url: cancelUrl,
+        order_complete_url: orderCompleteUrl,
         mode: mode || 'modal',
         merchant_data
       })
