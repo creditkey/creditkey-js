@@ -21,9 +21,8 @@ You should have been put in contact with an Implementation Support Engineer at C
 
 ## Requirements
 ---------------
-The Credit Key Javascript SDK requires Node 8.x or higher and NPM 5.x or higher. Depending on your setup the following dependencies may also need to be present: 
 
-`babel-loader` <br /> `@babel/core` <br /> `@babel/preset-env` <br /> `node-sass`
+The Credit Key Javascript SDK requires Node 8.x or higher and NPM 5.x or higher. Depending on your setup the following dependencies may also need to be present: babel-loader @babel/core @babel/preset-env node-sass 
 
 ## Install
 ----------
@@ -44,9 +43,6 @@ The Credit Key Javascript SDK can also be installed via a script tag using the U
 [Credit Key](https://www.creditkey.com) checkout works similarly as services like [PayPal](https://www.paypal.com) in the sense that the user will be redirected to special checkout pages hosted on [creditkey.com](https://www.creditkey.com) to complete the checkout process.
 
 A real world example of Credit Key implemented in a React app is available [here](https://github.com/creditkey/ck-react).
-
-The Credit Key [Merchant Implementation Guide](https://github.com/creditkey/docs/blob/master/implementation-guide.md) guide should be reviewed before performing a merchant integration with Credit Key via SDK. It should familiarize you with the general requirements of a merchant implementation.
-
 
 ## Models
 ---------
@@ -132,13 +128,16 @@ const returnUrl = 'your url to send the customer back to after completing credit
 const cancelUrl = 'your url to return the customer to if they cancel out of the credit key checkout';
 
 // Optional
+const orderCompleteUrl = 'your url to allow Credit Key admin ot approve orders for pended applications';
+
+// Optional
 const mode = 'modal';
 
 const merchantData = {
   myDataKey: 'my value'
 };
 
-client.begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl, mode, merchantData);
+client.begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl, orderCompleteUrl, mode, merchantData);
   .then(response => ck.checkout(response.checkout_url));
 ```
 
@@ -196,46 +195,6 @@ let marketingText;
 client.get_marketing_display()
   .then(res => marketingText = res);
 ```
-
-The `get_pdp_display` method takes one argument:
-
-* **charges** - Required - A Charges object
-
-At this time, only checkout and product page displays are supported.
-When a charges object is supplied, with subtotal, shipping, tax, discount and grand total amounts, then the returned text calculates and displays the monthly payment amount.
-
-```javascript
-import ck from 'creditkey-js';
-
-const client = new ck.Client(your_credit_key_public_key, 'production');
-
-let pdpBanner;
-
-client.get_pdp_display()
-  .then(res => pdpBanner = res);
-```
-
-The `get_cart_display` method takes three arguments:
-
-* **charges**- Required - A Charges object <br />
-* **desktop** - Optional - “left”, “right”, “centered” <br />
-* **mobile** - Optional - “left”, “right”, “centered”
-
-At this time, only checkout, cart page and product page displays are supported.
-When a charges object is supplied, with subtotal, shipping, tax, discount and grand total amounts, then the returned text calculates and displays the monthly payment amount.
-When desktop or mobile arguments are supplied, the alignment of the returned text is adjusted for responsive display.
- 
- ```javascript
-import ck from 'creditkey-js';
-
-const client = new ck.Client(your_credit_key_public_key, 'production');
-
-let cartBanner;
-
-client.get_cart_display()
-  .then(res => cartBanner = res);
-```
-
 
 ## Configuring User Total Line of Credit Display
 --------------------------------
