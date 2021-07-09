@@ -208,10 +208,7 @@ import ck from 'creditkey-js';
 
 const client = new ck.Client(your_credit_key_public_key, 'production');
 
-let pdpBanner;
-
-client.get_pdp_display()
-  .then(res => pdpBanner = res);
+pdp.innerHTML = client.get_pdp_display(charges);
 ```
 
 The `get_cart_display` method takes three arguments:
@@ -229,10 +226,10 @@ import ck from 'creditkey-js';
 
 const client = new ck.Client(your_credit_key_public_key, 'production');
 
-let cartBanner;
-
-client.get_cart_display()
-  .then(res => cartBanner = res);
+let desktop = "right";
+let mobile = "center";
+          
+ck_cart.innerHTML = client.get_cart_display(charges, desktop, mobile);
 ```
 
 ## Configuring User Total Line of Credit Display
