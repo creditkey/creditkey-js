@@ -1,5 +1,5 @@
 /*!
- * creditkey-js v1.0.86 - https://www.creditkey.com
+ * @credit-key/creditkey-js v1.0.89 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -18209,7 +18209,7 @@ var Charges = /*#__PURE__*/function () {
 
 
 var modalPdpBanner = function modalPdpBanner(url) {
-  var iframe = "<div className=\"iframe-container\"><iframe scrolling=\"no\" id=\"creditkey-pdp-iframe\" src=\"" + url + "\"></iframe></div>";
+  var iframe = "<div className=\"iframe-container\"><iframe scrolling=\"no\" frameBorder=\"0\" id=\"creditkey-pdp-iframe\" src=\"" + url + "\"></iframe></div>";
   return iframe;
 };
 
@@ -18390,7 +18390,7 @@ var client_Client = /*#__PURE__*/function () {
 
     var allowedTypes = ['pdp', 'cart'];
     if (!allowedTypes.includes(type)) return reject('invalid type, allowed types are "pdp", "cart"');
-    var url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.grand_total].join(',');
+    var url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return components_modal(url);
   } // charges is a charges object
   ;
