@@ -162,8 +162,16 @@ var Client = /*#__PURE__*/function () {
   } // charges is a charges object
   ;
 
-  _proto.get_pdp_display = function get_pdp_display(charges) {
-    var url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+  _proto.get_pdp_display = function get_pdp_display(charges, desktop, mobile) {
+    if (desktop === void 0) {
+      desktop = "center";
+    }
+
+    if (mobile === void 0) {
+      mobile = "center";
+    }
+
+    var url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + desktop + '/' + mobile + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return modalPdpBanner(url);
   };
 
