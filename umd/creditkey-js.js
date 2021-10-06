@@ -18257,7 +18257,7 @@ var Charges = /*#__PURE__*/function () {
 
 
 var modalPdpBanner = function modalPdpBanner(url) {
-  var iframe = "<div allowtransparency=\"true\" className=\"iframe-container\"><iframe scrolling=\"no\" frameBorder=\"0\" id=\"creditkey-pdp-iframe\" src=\"" + url + "\"></iframe></div>";
+  var iframe = "<div className=\"iframe-container\"><iframe allowtransparency=\"true\" scrolling=\"no\" frameBorder=\"0\" id=\"creditkey-pdp-iframe\" src=\"" + url + "\"></iframe></div>";
   return iframe;
 };
 
