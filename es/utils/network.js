@@ -1,6 +1,6 @@
 import request from './request';
 import { api } from './platform';
-import { assign } from 'lodash';
+import assign from 'lodash.assign';
 /**
  * @function Network
  * @description Factory function to create a object that can send
