@@ -173,28 +173,7 @@ ck.apply(key);
 
 ## Configuring Marketing Display
 --------------------------------
-
-The `get_marketing_display` method takes four arguments:
-
-* **charges** - Optional - A Charges object
-* **type** - Optional - Type of marketing copy to retrieve, defaults to 'checkout', options are 'checkout' and 'pdp'
-* **display** - Optional - Type of marketing display to retrieve, defaults to 'button', options are 'button' and 'text'
-* **size** - Optional - Type of marketing dispay size to retrieve, defaults to 'medium', options are 'small', 'medium' and 'large'
-
-At this time, only checkout and product page displays are supported.
-
-When a charges object is supplied, with subtotal, shipping, tax, discount and grand total amounts, then the returned text calculates and displays the monthly payment amount.
-
-```javascript
-import ck from 'creditkey-js';
-
-const client = new ck.Client(your_credit_key_public_key, 'production');
-
-let marketingText;
-
-client.get_marketing_display()
-  .then(res => marketingText = res);
-```
+### Product Detail Page Marketing Display
 
 The `get_pdp_display` method takes one argument:
 
@@ -210,6 +189,7 @@ const client = new ck.Client(your_credit_key_public_key, 'production');
 
 pdp.innerHTML = client.get_pdp_display(charges);
 ```
+### Cart Page Marketing Display
 
 The `get_cart_display` method takes three arguments:
 
