@@ -3,10 +3,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 import Network from '../utils/network';
-import Button from './components/button';
-import Text from './components/text';
 import modal from './components/modal';
-import modalPdpBanner from './components/modal-pdp-banner';
+import { frame } from './components/iframes';
 import { pdpHost, marketingUI } from '../utils/platform';
 
 var Client = /*#__PURE__*/function () {
@@ -94,7 +92,7 @@ var Client = /*#__PURE__*/function () {
     });
   } // display options are button, text, button_text
   // size options are small, medium, large, special (special loads a special version of the plain logo, instead of a sized badge version)
-  // extra options can be: 
+  // extra options can be:
   // 'special' = renders a special text only version of the pdp
   // 'static' = renders an unlinked version pf the pdp, basically a dumb banner
   // extra is ignored when 'none' or called with type checkout
@@ -119,30 +117,8 @@ var Client = /*#__PURE__*/function () {
       extra = "none";
     }
 
-    if (charges && typeof charges !== 'object') {
-      return reject('charges should be a charges object');
-    }
-
-    var component;
-
-    switch (display) {
-      case "text":
-        component = Text;
-        break;
-
-      default:
-        component = Button;
-    }
-
     return new Promise(function (resolve, reject) {
-      return _this3.network.post('ecomm/marketing' + _this3.key_param, {
-        type: type,
-        charges: charges
-      }).then(function (res) {
-        return resolve(component(_this3.key, res.text, type, size, res.slug, "", extra, _this3.platform));
-      })["catch"](function (err) {
-        return reject(err);
-      });
+      return resolve(_this3.get_checkout_display(charges));
     });
   };
 
@@ -159,12 +135,21 @@ var Client = /*#__PURE__*/function () {
     if (!allowedTypes.includes(type)) return reject('invalid type, allowed types are "pdp", "cart"');
     var url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return modal(url);
+  };
+
+  _proto.get_checkout_display = function get_checkout_display(charges) {
+    if (charges && typeof charges !== 'object') {
+      return reject('charges should be a charges object');
+    }
+
+    var url = pdpHost(marketingUI, this.platform) + '/checkout/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    return frame(url, false);
   } // charges is a charges object
   ;
 
   _proto.get_pdp_display = function get_pdp_display(charges) {
     var url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
-    return modalPdpBanner(url);
+    return frame(url);
   };
 
   _proto.get_cart_display = function get_cart_display(charges, desktop, mobile) {
@@ -177,7 +162,7 @@ var Client = /*#__PURE__*/function () {
     }
 
     var url = pdpHost(marketingUI, this.platform) + '/cart-promo/' + this.key + '/' + desktop + '/' + mobile + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
-    return modalPdpBanner(url);
+    return frame(url);
   };
 
   _proto.get_customer = function get_customer(email, customer_id) {

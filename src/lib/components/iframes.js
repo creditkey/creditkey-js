@@ -1,8 +1,10 @@
 import Client from '../client';
 import Charges from '../charges';
 
-const modalPdpBanner = url => {
-  let iframe = `<div className="iframe-container"><iframe allowtransparency=\"true\" scrolling=\"no\" frameBorder=\"0\" id="creditkey-pdp-iframe" src="${url}"></iframe></div>`;
+export const frame = (url, pointer = true) => {
+  let style = '';
+  if (!pointer) style = 'pointer-events: none;';
+  let iframe = `<div className="iframe-container"><iframe allowtransparency=\"true\" scrolling=\"no\" frameBorder=\"0\" id="creditkey-pdp-iframe" style=\"${style}\" src="${url}"></iframe></div>`;
   return iframe;
 }
 
@@ -23,5 +25,3 @@ window.addEventListener('message', function (e) {
     c.enhanced_pdp_modal(charges);
   }
 });
-
-export default modalPdpBanner;

@@ -1,11 +1,15 @@
 import Client from '../client';
 import Charges from '../charges';
+export var frame = function frame(url, pointer) {
+  if (pointer === void 0) {
+    pointer = true;
+  }
 
-var modalPdpBanner = function modalPdpBanner(url) {
-  var iframe = "<div className=\"iframe-container\"><iframe allowtransparency=\"true\" scrolling=\"no\" frameBorder=\"0\" id=\"creditkey-pdp-iframe\" src=\"" + url + "\"></iframe></div>";
+  var style = '';
+  if (!pointer) style = 'pointer-events: none;';
+  var iframe = "<div className=\"iframe-container\"><iframe allowtransparency=\"true\" scrolling=\"no\" frameBorder=\"0\" id=\"creditkey-pdp-iframe\" style=\"" + style + "\" src=\"" + url + "\"></iframe></div>";
   return iframe;
 };
-
 window.addEventListener('message', function (e) {
   var data;
   if (!e || !e.data) return false;
@@ -22,4 +26,3 @@ window.addEventListener('message', function (e) {
     c.enhanced_pdp_modal(charges);
   }
 });
-export default modalPdpBanner;
