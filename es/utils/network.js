@@ -1,6 +1,7 @@
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
 import request from './request';
 import { api } from './platform';
-import assign from 'lodash.assign';
 /**
  * @function Network
  * @description Factory function to create a object that can send
@@ -40,7 +41,7 @@ var Network = function Network(platform, resource) {
         options = {};
       }
 
-      return request(buildURL(path), assign(options, defaultOptions, {
+      return request(buildURL(path), _extends({}, options, defaultOptions, {
         method: 'POST',
         body: JSON.stringify(body)
       }));
@@ -58,7 +59,7 @@ var Network = function Network(platform, resource) {
         options = {};
       }
 
-      return request(buildURL(path), assign(options, defaultOptions, {
+      return request(buildURL(path), _extends({}, options, defaultOptions, {
         method: 'GET'
       }));
     },
@@ -76,7 +77,7 @@ var Network = function Network(platform, resource) {
         options = {};
       }
 
-      return request(buildURL(path), assign(options, defaultOptions, {
+      return request(buildURL(path), _extends({}, options, defaultOptions, {
         method: 'PUT',
         body: JSON.stringify(body)
       }));
@@ -94,7 +95,7 @@ var Network = function Network(platform, resource) {
         options = {};
       }
 
-      return request(buildURL(path), assign(options, defaultOptions, {
+      return request(buildURL(path), _extends({}, options, defaultOptions, {
         method: 'DELETE'
       }));
     },

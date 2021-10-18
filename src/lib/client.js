@@ -3,6 +3,11 @@ import modal from './components/modal';
 import { frame }  from './components/iframes';
 import { pdpHost, marketingUI } from '../utils/platform';
 
+const custom = [
+  'culinarydepotinc',
+  'creditkeydev'
+];
+
 export default class Client {
   constructor(key, platform = 'development') {
     this.key = key;
@@ -98,13 +103,15 @@ export default class Client {
       return reject('charges should be a charges object');
     }
 
-    const url = pdpHost(marketingUI, this.platform) + '/checkout/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    const url = pdpHost(marketingUI, this.platform) + '/checkout.html?' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return frame(url, false);
   }
 
   // charges is a charges object
   get_pdp_display(charges) {
-    const url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    let view = 'pdp';
+    if (custom.includes(this.key.split('_')[0])) view = this.key.split('_')[0];
+    const url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return frame(url);
   }
 

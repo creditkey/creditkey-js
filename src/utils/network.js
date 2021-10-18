@@ -1,6 +1,5 @@
 import request from './request';
 import { api } from './platform';
-import assign from 'lodash.assign';
 
 /**
  * @function Network
@@ -40,14 +39,12 @@ const Network = (platform, resource) => {
      * @returns {promise}
      */
     post: (path, body, options = {}) => {
-      return request(buildURL(path), assign(
-        options,
-        defaultOptions,
-        {
-          method: 'POST',
-          body: JSON.stringify(body)
-        }
-      ));
+      return request(buildURL(path), {
+        ...options,
+        ...defaultOptions,
+        method: 'POST',
+        body: JSON.stringify(body)
+      });
     },
 
     /**
@@ -58,11 +55,11 @@ const Network = (platform, resource) => {
      * @returns {promise}
      */
     get: (path, options = {}) => {
-      return request(buildURL(path), assign(
-        options,
-        defaultOptions,
-        { method: 'GET' }
-      ));
+      return request(buildURL(path), {
+        ...options,
+        ...defaultOptions,
+        method: 'GET'
+      });
     },
 
     /**
@@ -74,14 +71,12 @@ const Network = (platform, resource) => {
      * @returns {promise}
      */
     edit: (path, body, options = {}) => {
-      return request(buildURL(path), assign(
-        options,
-        defaultOptions,
-        { 
-          method: 'PUT',
-          body: JSON.stringify(body)
-        }
-      ));
+      return request(buildURL(path), {
+        ...options,
+        ...defaultOptions,
+        method: 'PUT',
+        body: JSON.stringify(body)
+      });
     },
 
     /**
@@ -92,11 +87,11 @@ const Network = (platform, resource) => {
      * @returns {promise}
      */
     delete: (path, options = {}) => {
-      return request(buildURL(path), assign(
-        options,
-        defaultOptions,
-        { method: 'DELETE' }
-      ));
+      return request(buildURL(path), {
+        ...options,
+        ...defaultOptions,
+        method: 'DELETE'
+      });
     },
 
     ping: () => request(buildURL(), { method: 'GET' })
