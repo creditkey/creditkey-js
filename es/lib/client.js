@@ -143,7 +143,7 @@ var Client = /*#__PURE__*/function () {
       return reject('charges should be a charges object');
     }
 
-    var url = pdpHost(marketingUI, this.platform) + '/checkout/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    var url = pdpHost(marketingUI, this.platform) + '/checkout.html?' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return frame(url, false);
   } // charges is a charges object
   ;
