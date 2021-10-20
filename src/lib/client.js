@@ -1,9 +1,12 @@
 import Network from '../utils/network';
-import Button from './components/button';
-import Text from './components/text';
 import modal from './components/modal';
-import modalPdpBanner from './components/modal-pdp-banner';
+import { frame }  from './components/iframes';
 import { pdpHost, marketingUI } from '../utils/platform';
+
+const custom = [
+  'culinarydepotinc',
+  'creditkeydev'
+];
 
 export default class Client {
   constructor(key, platform = 'development') {
@@ -74,27 +77,12 @@ export default class Client {
 
   // display options are button, text, button_text
   // size options are small, medium, large, special (special loads a special version of the plain logo, instead of a sized badge version)
-  // extra options can be: 
+  // extra options can be:
   // 'special' = renders a special text only version of the pdp
   // 'static' = renders an unlinked version pf the pdp, basically a dumb banner
   // extra is ignored when 'none' or called with type checkout
   get_marketing_display(charges, type = "checkout", display = "button", size = "medium", extra = "none") {
-    if (charges && typeof charges !== 'object') {
-      return reject('charges should be a charges object');
-    }
-
-    let component;
-    switch (display) {
-      case "text":
-        component = Text;
-        break;
-      default:
-        component = Button;
-    }
-
-    return new Promise((resolve, reject) => this.network.post('ecomm/marketing' + this.key_param, { type: type, charges: charges })
-      .then(res => resolve(component(this.key, res.text, type, size, res.slug, "", extra, this.platform)))
-      .catch(err => reject(err)));
+    return new Promise((resolve, reject) => resolve(this.get_checkout_display(charges)));
   }
 
   enhanced_pdp_modal(charges, type = 'pdp') {
@@ -110,15 +98,26 @@ export default class Client {
     return modal(url);
   }
 
+  get_checkout_display(charges) {
+    if (charges && typeof charges !== 'object') {
+      return reject('charges should be a charges object');
+    }
+
+    const url = pdpHost(marketingUI, this.platform) + '/checkout/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    return frame(url, false);
+  }
+
   // charges is a charges object
   get_pdp_display(charges) {
-    const url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
-    return modalPdpBanner(url);
+    let view = 'pdp';
+    if (custom.includes(this.key.split('_')[0])) view = this.key.split('_')[0];
+    const url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    return frame(url);
   }
 
   get_cart_display(charges, desktop = "right", mobile = "left") {
     const url = pdpHost(marketingUI, this.platform) + '/cart-promo/' + this.key + '/' + desktop + '/' + mobile + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
-    return modalPdpBanner(url);
+    return frame(url);
   }
 
   get_customer(email, customer_id) {
