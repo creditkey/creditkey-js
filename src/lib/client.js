@@ -98,6 +98,11 @@ export default class Client {
     return modal(url);
   }
 
+  get_apply_now(type = 'redirect') {
+    const url = pdpHost(marketingUI, this.platform) + '/apply.html?' + this.key + '&type=' + type;
+    return frame(url);
+  }
+
   get_checkout_display(charges) {
     if (charges && typeof charges !== 'object') {
       return reject('charges should be a charges object');

@@ -1,5 +1,5 @@
 /*!
- * @credit-key/creditkey-js v1.0.95 - https://www.creditkey.com
+ * @credit-key/creditkey-js v1.0.96 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -867,6 +867,7 @@ var Charges = /*#__PURE__*/function () {
 // CONCATENATED MODULE: ./src/lib/components/iframes.js
 
 
+
 var iframes_frame = function frame(url, pointer) {
   if (pointer === void 0) {
     pointer = true;
@@ -874,7 +875,7 @@ var iframes_frame = function frame(url, pointer) {
 
   var style = '';
   if (!pointer) style = 'pointer-events: none;';
-  var iframe = "<div className=\"iframe-container\"><iframe allowtransparency=\"true\" scrolling=\"no\" frameBorder=\"0\" id=\"creditkey-pdp-iframe\" style=\"" + style + "\" src=\"" + url + "\"></iframe></div>";
+  var iframe = "<div className=\"iframe-container\"><iframe allowtransparency=\"true\" scrolling=\"no\" id=\"creditkey-pdp-iframe\" frameBorder=\"0\" style=\"" + style + "\" src=\"" + url + "\"></iframe></div>";
   return iframe;
 };
 window.addEventListener('message', function (e) {
@@ -891,6 +892,8 @@ window.addEventListener('message', function (e) {
     var charges = new Charges(data.options.charges ? data.options.charges : '0, 0, 0, 0, 0'.split(','));
     var c = new client_Client(data.options.public_key, data.options.platform);
     c.enhanced_pdp_modal(charges);
+  } else if (data.action === 'apply' && data.options.public_key) {
+    components_modal(data.options.url);
   }
 });
 // CONCATENATED MODULE: ./src/lib/client.js
@@ -1032,6 +1035,15 @@ var client_Client = /*#__PURE__*/function () {
     if (!allowedTypes.includes(type)) return reject('invalid type, allowed types are "pdp", "cart"');
     var url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return components_modal(url);
+  };
+
+  _proto.get_apply_now = function get_apply_now(type) {
+    if (type === void 0) {
+      type = 'redirect';
+    }
+
+    var url = pdpHost(marketingUI, this.platform) + '/apply.html?' + this.key + '&type=' + type;
+    return iframes_frame(url);
   };
 
   _proto.get_checkout_display = function get_checkout_display(charges) {

@@ -138,6 +138,15 @@ var Client = /*#__PURE__*/function () {
     return modal(url);
   };
 
+  _proto.get_apply_now = function get_apply_now(type) {
+    if (type === void 0) {
+      type = 'redirect';
+    }
+
+    var url = pdpHost(marketingUI, this.platform) + '/apply.html?' + this.key + '&type=' + type;
+    return frame(url);
+  };
+
   _proto.get_checkout_display = function get_checkout_display(charges) {
     if (charges && typeof charges !== 'object') {
       return reject('charges should be a charges object');
