@@ -5,7 +5,8 @@ import { pdpHost, marketingUI } from '../utils/platform';
 
 const custom = [
   'culinarydepotinc',
-  'creditkeydev'
+  'creditkeydev',
+  'webstaurantstore'
 ];
 
 export default class Client {
