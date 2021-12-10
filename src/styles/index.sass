@@ -1,44 +1,44 @@
 .creditkey
-  all: initial;
+  all: initial
   *
-    all: unset;
+    all: unset
 
 .creditkey
-  $modal-z: 50001;
-  $modal-content-width: 650px;
-  z-index: 50000;
-  text-decoration: none !important;
-  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  $modal-z: 50001
+  $modal-content-width: 650px
+  z-index: 50000
+  text-decoration: none !important
+  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif
 
-  @import "~bulma/sass/utilities/_all";
-  @import "~bulma/sass/components/modal";
+  @import "~bulma/sass/utilities/_all"
+  @import "~bulma/sass/components/modal"
 
   &a
-    text-decoration: none !important;
+    text-decoration: none !important
 
   // default overrides
 
   .button
-    background-color: #3D9CE5 !important;
-    min-height: 40px !important;
-    border-width: 0 !important;
-    vertical-align: middle !important;
-    text-decoration: none !important;
+    background-color: #3D9CE5 !important
+    min-height: 40px !important
+    border-width: 0 !important
+    vertical-align: middle !important
+    text-decoration: none !important
 
   .ck-modal
     @extend .modal
-    margin: 0 !important;
-    padding-top: 50px;
-    max-width: 100% !important;
-    width: 100% !important;
-    visibility: visible !important;
-    background: transparent !important;
+    margin: 0 !important
+    padding-top: 50px
+    max-width: 100% !important
+    width: 100% !important
+    visibility: visible !important
+    background: transparent !important
     position: absolute
     justify-content: normal
 
   @media screen and (max-device-width: 480px)
     .ck-modal
-      padding-top: 0px !important;
+      padding-top: 0px !important
 
   .ck-modal-background
     @extend .modal-background
@@ -48,79 +48,79 @@
   .ck-modal-card
     @extend .modal-content
     @extend .modal-card
-    min-height: min-content !important;
-    max-height: none;
-    height: auto !important;
+    min-height: min-content !important
+    max-height: none
+    height: auto !important
     +tablet
-      min-height: min-content !important;
-      max-height: none;
-      height: auto !important;
+      min-height: min-content !important
+      max-height: none
+      height: auto !important
 
   .ck-modal-card
     @extend .modal-card
-    min-height: min-content !important;
-    max-height: none !important;
+    min-height: min-content !important
+    max-height: none !important
 
   .ck-modal-content
     @extend .modal-content
-    overflow: hidden;
-    -webkit-overflow-scrolling: touch;
-    border-radius: 5px;
-    background-color: #fff;
-    background-image: url("https://www.creditkey.com/app/assets/header/ck-nav-logo-d79f74bc03213d02a5ab4cd1c484cfcfb533c2abf5f05ee35cd67c5239693a28.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    height: auto;
-    min-height: min-content;
-    max-height: none;
+    overflow: hidden
+    -webkit-overflow-scrolling: touch
+    border-radius: 5px
+    background-color: #fff
+    background-image: url("https://www.creditkey.com/app/assets/header/ck-nav-logo-d79f74bc03213d02a5ab4cd1c484cfcfb533c2abf5f05ee35cd67c5239693a28.svg")
+    background-repeat: no-repeat
+    background-position: center
+    height: auto
+    min-height: min-content
+    max-height: none
     +touch
       .ck-modal-content
-        height: 100%;
-        border-radius: 0 !important;
+        height: 100%
+        border-radius: 0 !important
 
   // custom classes
   #creditkey-iframe
-    margin: auto; 
-    width: 100%; 
-    border: none; 
-    height: inherit;
+    margin: auto
+    width: 100%
+    border: none
+    height: inherit
 
   .payment-icon
-    display: inline-block !important;
-    margin-right: 5px !important;
-    vertical-align: middle !important;
+    display: inline-block !important
+    margin-right: 5px !important
+    vertical-align: middle !important
 
   .terms
-    text-decoration: underline;
-    color: #3D9CE5;
-    cursor: pointer;
+    text-decoration: underline
+    color: #3D9CE5
+    cursor: pointer
 
   .terms:hover
-    text-decoration: none;
+    text-decoration: none
 
   .pdp
-    padding: 0 5px 0 0;
-    font-size: 16px !important;
-    font-weight: bold;
+    padding: 0 5px 0 0
+    font-size: 16px !important
+    font-weight: bold
 
   .pdp-text
-    font-size: 16px !important;
-    font-weight: 400;
+    font-size: 16px !important
+    font-weight: 400
 
   .ck-offer
-    float: right;
-    text-align: left;
+    float: right
+    text-align: left
 
   .ck-logo-small
-    height: 22px !important;
+    height: 22px !important
 
   .ck-logo-medium
-    height: 22px !important;
+    height: 22px !important
 
   .ck-logo-large
-    height: 22px !important;
+    height: 22px !important
 
 #creditkey-pdp-iframe 
-  width: 100% !important;
-  max-height: 70px !important;
+  width: 100% !important
+  max-height: 70px !important
   
