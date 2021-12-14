@@ -6,7 +6,7 @@ import Network from '../utils/network';
 import modal from './components/modal';
 import { frame } from './components/iframes';
 import { pdpHost, marketingUI } from '../utils/platform';
-var custom = ['culinarydepotinc', 'creditkeydev'];
+var custom = ['culinarydepotinc'];
 
 var Client = /*#__PURE__*/function () {
   function Client(key, platform) {
@@ -165,6 +165,8 @@ var Client = /*#__PURE__*/function () {
   };
 
   _proto.get_cart_display = function get_cart_display(charges, desktop, mobile) {
+    var view = 'cart';
+
     if (desktop === void 0) {
       desktop = "right";
     }
@@ -173,7 +175,8 @@ var Client = /*#__PURE__*/function () {
       mobile = "left";
     }
 
-    var url = pdpHost(marketingUI, this.platform) + '/cart-promo/' + this.key + '/' + desktop + '/' + mobile + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    if (custom.includes(this.key.split('_')[0])) view = 'custom/' + this.key.split('_')[0];
+    var url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key + '/' + '&desktop=' + desktop + '&mobile=' + mobile + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return frame(url);
   };
 
