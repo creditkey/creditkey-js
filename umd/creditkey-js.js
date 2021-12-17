@@ -905,7 +905,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-var custom = ['culinarydepotinc'];
+var custom = ['culinarydepotinc', 'webstaurantstore'];
 
 var client_Client = /*#__PURE__*/function () {
   function Client(key, platform) {
@@ -1074,7 +1074,7 @@ var client_Client = /*#__PURE__*/function () {
       mobile = "left";
     }
 
-    if (custom.includes(this.key.split('_')[0])) view = 'custom/' + this.key.split('_')[0];
+    if (custom.includes(this.key.split('_')[0])) view = this.key.split('_')[0] + "_cart";
     var url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key + '/' + '&desktop=' + desktop + '&mobile=' + mobile + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return iframes_frame(url);
   };
