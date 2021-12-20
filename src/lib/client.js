@@ -5,7 +5,7 @@ import { pdpHost, marketingUI } from '../utils/platform';
 
 const custom = [
   'culinarydepotinc',
-  'webstaurantstore'
+  'thewebstaurantstoreinc'
 ];
 
 export default class Client {

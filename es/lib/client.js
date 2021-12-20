@@ -6,7 +6,7 @@ import Network from '../utils/network';
 import modal from './components/modal';
 import { frame } from './components/iframes';
 import { pdpHost, marketingUI } from '../utils/platform';
-var custom = ['culinarydepotinc', 'webstaurantstore'];
+var custom = ['culinarydepotinc', 'thewebstaurantstoreinc'];
 
 var Client = /*#__PURE__*/function () {
   function Client(key, platform) {

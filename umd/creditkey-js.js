@@ -905,7 +905,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-var custom = ['culinarydepotinc', 'webstaurantstore'];
+var custom = ['culinarydepotinc', 'thewebstaurantstoreinc'];
 
 var client_Client = /*#__PURE__*/function () {
   function Client(key, platform) {
