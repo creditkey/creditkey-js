@@ -5,7 +5,7 @@ import { pdpHost, marketingUI } from '../utils/platform';
 
 const custom = [
   'culinarydepotinc',
-  'creditkeydev'
+  'thewebstaurantstoreinc'
 ];
 
 export default class Client {
@@ -115,14 +115,27 @@ export default class Client {
   // charges is a charges object
   get_pdp_display(charges) {
     let view = 'pdp';
+
     if (custom.includes(this.key.split('_')[0])) view = this.key.split('_')[0];
     const url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return frame(url);
   }
 
-  get_cart_display(charges, desktop = "right", mobile = "left") {
-    const url = pdpHost(marketingUI, this.platform) + '/cart-promo/' + this.key + '/' + desktop + '/' + mobile + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+  get_cart_display(charges, desktop, mobile) {
+    let view = 'cart';
+
+    if (desktop === void 0) {
+      desktop = "right";
+    }
+
+    if (mobile === void 0) {
+      mobile = "left";
+    }
+
+    if (custom.includes(this.key.split('_')[0])) view = this.key.split('_')[0] + "_cart";
+    const url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key + '/' + '&desktop=' + desktop + '&mobile=' + mobile + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return frame(url);
+    
   }
 
   get_customer(email, customer_id) {
