@@ -133,7 +133,7 @@ export default class Client {
     }
 
     if (custom.includes(this.key.split('_')[0])) view = this.key.split('_')[0] + "_cart";
-    const url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key + '/' + '&desktop=' + desktop + '&mobile=' + mobile + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    const url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key + '&desktop=' + desktop + '&mobile=' + mobile + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return frame(url);
     
   }
