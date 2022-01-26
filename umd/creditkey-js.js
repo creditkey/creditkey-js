@@ -1,5 +1,5 @@
 /*!
- * @credit-key/creditkey-js v1.0.98 - https://www.creditkey.com
+ * @credit-key/creditkey-js v1.1.0 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -905,7 +905,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-var custom = ['culinarydepotinc', 'thewebstaurantstoreinc'];
+var custom = ['culinarydepotinc', 'thewebstaurantstoreinc', 'acmefurniture'];
 
 var client_Client = /*#__PURE__*/function () {
   function Client(key, platform) {
