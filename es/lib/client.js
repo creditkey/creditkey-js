@@ -6,7 +6,6 @@ import Network from '../utils/network';
 import modal from './components/modal';
 import { frame } from './components/iframes';
 import { pdpHost, marketingUI } from '../utils/platform';
-var custom = ['culinarydepotinc', 'thewebstaurantstoreinc', 'acmefurniture'];
 
 var Client = /*#__PURE__*/function () {
   function Client(key, platform) {
@@ -159,7 +158,6 @@ var Client = /*#__PURE__*/function () {
 
   _proto.get_pdp_display = function get_pdp_display(charges) {
     var view = 'pdp';
-    if (custom.includes(this.key.split('_')[0])) view = this.key.split('_')[0];
     var url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return frame(url);
   };
@@ -175,7 +173,6 @@ var Client = /*#__PURE__*/function () {
       mobile = "left";
     }
 
-    if (custom.includes(this.key.split('_')[0])) view = this.key.split('_')[0] + "_cart";
     var url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key + '&desktop=' + desktop + '&mobile=' + mobile + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return frame(url);
   };
