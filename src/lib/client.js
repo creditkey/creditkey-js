@@ -3,12 +3,6 @@ import modal from './components/modal';
 import { frame }  from './components/iframes';
 import { pdpHost, marketingUI } from '../utils/platform';
 
-const custom = [
-  'culinarydepotinc',
-  'thewebstaurantstoreinc',
-  'acmefurniture'
-];
-
 export default class Client {
   constructor(key, platform = 'development') {
     this.key = key;
@@ -117,7 +111,6 @@ export default class Client {
   get_pdp_display(charges) {
     let view = 'pdp';
 
-    if (custom.includes(this.key.split('_')[0])) view = this.key.split('_')[0];
     const url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return frame(url);
   }
@@ -133,7 +126,6 @@ export default class Client {
       mobile = "left";
     }
 
-    if (custom.includes(this.key.split('_')[0])) view = this.key.split('_')[0] + "_cart";
     const url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key + '&desktop=' + desktop + '&mobile=' + mobile + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return frame(url);
     
