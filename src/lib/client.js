@@ -98,6 +98,14 @@ export default class Client {
     return frame(url);
   }
 
+  get_apply_button() {
+    let view = 'pdp';
+
+    const url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key;
+    return frame(url);
+  }
+
+
   get_checkout_display(charges) {
     if (charges && typeof charges !== 'object') {
       return reject('charges should be a charges object');

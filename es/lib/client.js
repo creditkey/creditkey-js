@@ -146,6 +146,12 @@ var Client = /*#__PURE__*/function () {
     return frame(url);
   };
 
+  _proto.get_apply_button = function get_apply_button() {
+    var view = 'pdp';
+    var url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key;
+    return frame(url);
+  };
+
   _proto.get_checkout_display = function get_checkout_display(charges) {
     if (charges && typeof charges !== 'object') {
       return reject('charges should be a charges object');

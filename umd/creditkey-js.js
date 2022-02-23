@@ -1,5 +1,5 @@
 /*!
- * @credit-key/creditkey-js v1.1.0 - https://www.creditkey.com
+ * @credit-key/creditkey-js v1.1.1 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -1042,6 +1042,12 @@ var client_Client = /*#__PURE__*/function () {
     }
 
     var url = pdpHost(marketingUI, this.platform) + '/apply.html?' + this.key + '&type=' + type;
+    return iframes_frame(url);
+  };
+
+  _proto.get_apply_button = function get_apply_button() {
+    var view = 'pdp';
+    var url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key;
     return iframes_frame(url);
   };
 
