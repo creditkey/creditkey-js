@@ -17,7 +17,7 @@ var apply = function apply(key, type, platform) {
   } // always use redirect for small devices
 
 
-  if (width <= 479) return redirect(source);
+  if (width <= 479) return redirect(api(platform) + '/apply/start/' + key);
 
   if (type.toLowerCase() === 'modal') {
     return modal(api(platform) + '/apply/modal/start/' + key);
