@@ -96,7 +96,11 @@ window.addEventListener('message', function(e) {
     }
 
     // force scroll to top because modal starts at top of page.
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 }, false);
 

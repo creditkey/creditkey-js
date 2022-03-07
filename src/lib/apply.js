@@ -9,6 +9,12 @@ const apply = (key, type = 'modal', platform = 'production') => {
     throw new Error('API public key required.');
   }
 
+  window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+
   // always use redirect for small devices
   if (width <= 479) return redirect(api(platform) + '/apply/start/' + key);
 
