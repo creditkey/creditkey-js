@@ -14,8 +14,13 @@ var apply = function apply(key, type, platform) {
 
   if (!key) {
     throw new Error('API public key required.');
-  } // always use redirect for small devices
+  }
 
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth'
+  }); // always use redirect for small devices
 
   if (width <= 479) return redirect(api(platform) + '/apply/start/' + key);
 

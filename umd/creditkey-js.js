@@ -1,5 +1,5 @@
 /*!
- * @credit-key/creditkey-js v1.1.2 - https://www.creditkey.com
+ * @credit-key/creditkey-js v1.1.4 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -824,7 +824,11 @@ window.addEventListener('message', function (e) {
     } // force scroll to top because modal starts at top of page.
 
 
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 }, false);
 /* harmony default export */ var components_modal = (modal);
@@ -1204,8 +1208,13 @@ var apply_apply = function apply(key, type, platform) {
 
   if (!key) {
     throw new Error('API public key required.');
-  } // always use redirect for small devices
+  }
 
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth'
+  }); // always use redirect for small devices
 
   if (apply_width <= 479) return lib_redirect(api(platform) + '/apply/start/' + key);
 
