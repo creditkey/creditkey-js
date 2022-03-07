@@ -33,7 +33,7 @@
     width: 100% !important
     visibility: visible !important
     background: transparent !important
-    position: absolute
+    position: fixed
     justify-content: normal
 
   @media screen and (max-device-width: 480px)
@@ -49,11 +49,11 @@
     @extend .modal-content
     @extend .modal-card
     min-height: min-content !important
-    max-height: none
+    max-height: 90vh
     height: auto !important
     +tablet
       min-height: min-content !important
-      max-height: none
+      max-height: 90vh
       height: auto !important
 
   .ck-modal-card
@@ -72,7 +72,7 @@
     background-position: center
     height: auto
     min-height: min-content
-    max-height: none
+    max-height: 90vh
     +touch
       .ck-modal-content
         height: 100%
