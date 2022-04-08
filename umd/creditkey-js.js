@@ -1,5 +1,5 @@
 /*!
- * @credit-key/creditkey-js v1.1.4 - https://www.creditkey.com
+ * @credit-key/creditkey-js v1.1.5 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -1215,8 +1215,7 @@ var apply_apply = function apply(key, type, platform) {
     left: 0,
     behavior: 'smooth'
   }); // always use redirect for small devices
-
-  if (apply_width <= 479) return lib_redirect(api(platform) + '/apply/start/' + key);
+  // if (width <= 479) return redirect(api(platform) + '/apply/start/' + key);
 
   if (type.toLowerCase() === 'modal') {
     return components_modal(api(platform) + '/apply/modal/start/' + key);
