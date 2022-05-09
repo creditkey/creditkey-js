@@ -764,6 +764,16 @@ var modal = function modal(source) {
   }
 };
 
+function resizeIFrameToFitContent(iFrame) {
+  iFrame.width = iFrame.contentWindow.document.body.scrollWidth;
+  iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
+}
+
+window.addEventListener('DOMContentLoaded', function (e) {
+  var iFrame = document.getElementById('creditkey-iframe');
+  resizeIFrameToFitContent(iFrame);
+});
+
 function remove() {
   // Hide the modal so we can potentially redisplay it, leaving the user at the same place in the
   // checkout flow, if they accidentially click off.
