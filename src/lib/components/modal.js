@@ -19,7 +19,7 @@ const modal = source => {
     
     const body = document.body;
     // default height set for UX during load, will be changed via updateParent() from inside iframe content later
-    let iframe = `<iframe scrolling=\"no\" id="creditkey-iframe" src="${source + '?modal=true'}" style="height: 100vh;"></iframe>`;
+    let iframe = `<iframe scrolling="no" id="creditkey-iframe" src="${source + '?modal=true'}" style="height: 100vh;"></iframe>`;
 
     if (!validate_url(source)) {
       iframe = `An invalid resource was requested`;
@@ -28,18 +28,6 @@ const modal = source => {
     return body.insertAdjacentHTML('beforeend', `<div class="creditkey" id="creditkey-modal"><div class="ck-modal is-active"><div class="ck-modal-background"></div><div class="ck-modal-content" id="ck-modal-card">${iframe}</div></div></div>`);
   }
 }
-
-function resizeIFrameToFitContent( iFrame ) {
-
-  iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
-}
-
-window.addEventListener('DOMContentLoaded', function(e) {
-
-  var iFrame = document.getElementById('creditkey-iframe');
-  resizeIFrameToFitContent( iFrame );
-  
-} );
 
 function remove() {
   // Hide the modal so we can potentially redisplay it, leaving the user at the same place in the
