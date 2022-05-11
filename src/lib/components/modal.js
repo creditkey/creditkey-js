@@ -19,7 +19,7 @@ const modal = source => {
     
     const body = document.body;
     // default height set for UX during load, will be changed via updateParent() from inside iframe content later
-    let iframe = `<iframe id="creditkey-iframe" src="${source + '?modal=true'}" style="height: 100vh;"></iframe>`;
+    let iframe = `<iframe scrolling="no" id="creditkey-iframe" src="${source + '?modal=true'}" style="height: 100vh;"></iframe>`;
 
     if (!validate_url(source)) {
       iframe = `An invalid resource was requested`;
