@@ -1,7 +1,6 @@
 import modal from './components/modal';
 import redirect from './redirect';
 import { api } from '../utils/platform';
-var width = window.screen.availWidth;
 
 var apply = function apply(key, type, platform) {
   if (type === void 0) {
@@ -11,6 +10,8 @@ var apply = function apply(key, type, platform) {
   if (platform === void 0) {
     platform = 'production';
   }
+
+  var width = window.screen.availWidth;
 
   if (!key) {
     throw new Error('API public key required.');
