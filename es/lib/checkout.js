@@ -6,7 +6,6 @@ var checkout = function checkout(source, type) {
     type = 'modal';
   }
 
-  var height = window.screen.availHeight;
   var width = window.screen.availWidth;
 
   if (type.toLowerCase() === 'modal' && width > 480) {

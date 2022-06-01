@@ -1,5 +1,5 @@
 /*!
- * @credit-key/creditkey-js v1.1.9 - https://www.creditkey.com
+ * @credit-key/creditkey-js v1.2.0 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -1189,7 +1189,6 @@ var checkout_checkout = function checkout(source, type) {
     type = 'modal';
   }
 
-  var height = window.screen.availHeight;
   var width = window.screen.availWidth;
 
   if (type.toLowerCase() === 'modal' && width > 480) {
@@ -1214,8 +1213,6 @@ var apply_apply = function apply(key, type, platform) {
     platform = 'production';
   }
 
-  var width = window.screen.availWidth;
-
   if (!key) {
     throw new Error('API public key required.');
   }
@@ -1224,8 +1221,7 @@ var apply_apply = function apply(key, type, platform) {
     top: 0,
     left: 0,
     behavior: 'smooth'
-  }); // always use redirect for small devices
-  // if (width <= 479) return redirect(api(platform) + '/apply/start/' + key);
+  });
 
   if (type.toLowerCase() === 'modal') {
     return components_modal(api(platform) + '/apply/modal/start/' + key);
