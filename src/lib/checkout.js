@@ -1,10 +1,10 @@
 import modal from './components/modal';
 import redirect from './redirect';
 
-const height = window.screen.availHeight;
-const width = window.screen.availWidth;
-
 const checkout = (source, type = 'modal') => {
+
+  let width = window.screen.availWidth;
+
   if (type.toLowerCase() === 'modal' && width > 480) {
     return modal(source);
   } else {
