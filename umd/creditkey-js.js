@@ -95,22 +95,282 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = __webpack_require__(5);
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return api; });
+/* unused harmony export applyUI */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return marketingUI; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return pdpHost; });
 
+
+var DEV = 'development';
+var STAGE = 'staging';
+var PROD = 'production';
+var api = function api(platform) {
+  if (platform === DEV) return process.env.REACT_APP_API ? process.env.REACT_APP_API : 'http://localhost:9100';
+  if (platform === STAGE) return 'https://staging.creditkey.com/app';
+  if (platform === PROD) return 'https://www.creditkey.com/app';
+  return platform; // custom URL - for testing
+};
+var applyUI = function applyUI(platform) {
+  if (platform === DEV) return process.env.REACT_APP_APPLY_UI ? process.env.REACT_APP_APPLY_UI : 'http://apply.localhost:3001';
+  if (platform === STAGE) return 'https://staging-apply.creditkey.com';
+  if (platform === PROD) return 'https://apply.creditkey.com';
+  return platform; // custom URL - for testing
+};
+var marketingUI = function marketingUI(platform) {
+  if (platform === DEV) return process.env.REACT_APP_MARKETING_UI ? process.env.REACT_APP_MARKETING_UI : 'http://localhost:3002';
+  if (platform === STAGE) return 'https://staging-marketing.creditkey.com';
+  if (platform === PROD) return 'https://marketing.creditkey.com';
+  return platform; // custom URL - for testing
+};
+var pdpHost = function pdpHost(resource, platform) {
+  var host = window.location.hostname;
+
+  if (window.location.hostname.indexOf('localhost') >= 0) {
+    return resource(DEV);
+  }
+
+  if (window.location.hostname.indexOf('staging') >= 0 || window.location.hostname.indexOf('dev') >= 0) {
+    return resource(STAGE);
+  }
+
+  if (platform) {
+    return resource(platform);
+  }
+
+  switch (host) {
+    case 'creditkey.magento2':
+      return resource(DEV);
+      break;
+
+    case 'katom.app':
+    case 'packnwood-demo.wjserver960.com':
+    case 'magento.creditkey.com':
+    case 'demo.creditkey.com':
+    case 'demo.creditkey.tech':
+      return resource(STAGE);
+      break;
+
+    case 'magento2.creditkey.com':
+      return resource(PROD);
+      break;
+
+    default:
+      return resource(PROD);
+  }
+};
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(2)))
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var api = __webpack_require__(2);
-            var content = __webpack_require__(3);
+module.exports = __webpack_require__(7);
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(4);
+            var content = __webpack_require__(5);
 
             content = content.__esModule ? content.default : content;
 
@@ -130,7 +390,7 @@ var update = api(content, options);
 module.exports = content.locals || {};
 
 /***/ }),
-/* 2 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -405,20 +665,20 @@ module.exports = function (list, options) {
 };
 
 /***/ }),
-/* 3 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(4);
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".creditkey{all:initial}.creditkey *{all:unset}.creditkey{z-index:50000;text-decoration:none !important;font-family:\"Proxima Nova\", \"Helvetica Neue\", Helvetica, Arial, sans-serif}.creditkey .modal-close{-webkit-touch-callout:none;-webkit-user-select:none;-ms-user-select:none;user-select:none;-moz-appearance:none;-webkit-appearance:none;background-color:rgba(10,10,10,0.2);border:none;border-radius:9999px;cursor:pointer;pointer-events:auto;display:inline-block;flex-grow:0;flex-shrink:0;font-size:0;height:20px;max-height:20px;max-width:20px;min-height:20px;min-width:20px;outline:none;position:relative;vertical-align:top;width:20px}.creditkey .modal-close::before,.creditkey .modal-close::after{background-color:#fff;content:\"\";display:block;left:50%;position:absolute;top:50%;-webkit-transform:translateX(-50%) translateY(-50%) rotate(45deg);transform:translateX(-50%) translateY(-50%) rotate(45deg);-webkit-transform-origin:center center;transform-origin:center center}.creditkey .modal-close::before{height:2px;width:50%}.creditkey .modal-close::after{height:50%;width:2px}.creditkey .modal-close:hover,.creditkey .modal-close:focus{background-color:rgba(10,10,10,0.3)}.creditkey .modal-close:active{background-color:rgba(10,10,10,0.4)}.creditkey .is-small.modal-close{height:16px;max-height:16px;max-width:16px;min-height:16px;min-width:16px;width:16px}.creditkey .is-medium.modal-close{height:24px;max-height:24px;max-width:24px;min-height:24px;min-width:24px;width:24px}.creditkey .is-large.modal-close{height:32px;max-height:32px;max-width:32px;min-height:32px;min-width:32px;width:32px}.creditkey .modal,.creditkey .ck-modal,.creditkey .modal-background,.creditkey .ck-modal-background{bottom:0;left:0;position:absolute;right:0;top:0}.creditkey .modal,.creditkey .ck-modal{align-items:center;display:none;flex-direction:column;justify-content:center;overflow:hidden;position:fixed;z-index:50001}.creditkey .modal.is-active,.creditkey .is-active.ck-modal{display:flex}.creditkey .modal-background,.creditkey .ck-modal-background{background-color:rgba(10,10,10,0.86)}.creditkey .modal-content,.creditkey .ck-modal-content,.creditkey .ck-modal-card,.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{margin:0 20px;max-height:calc(100vh - 160px);overflow:auto;position:relative;width:100%}@media screen and (min-width: 769px){.creditkey .modal-content,.creditkey .ck-modal-content,.creditkey .ck-modal-card,.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{margin:0 auto;max-height:calc(100vh - 40px);width:650px}}.creditkey .modal-close{background:none;height:40px;position:fixed;right:20px;top:20px;width:40px}.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{display:flex;flex-direction:column;max-height:calc(100vh - 40px);overflow:hidden;-ms-overflow-y:visible}.creditkey .modal-card-head,.creditkey .modal-card-foot{align-items:center;background-color:#f5f5f5;display:flex;flex-shrink:0;justify-content:flex-start;padding:20px;position:relative}.creditkey .modal-card-head{border-bottom:1px solid #dbdbdb;border-top-left-radius:6px;border-top-right-radius:6px}.creditkey .modal-card-title{color:#363636;flex-grow:1;flex-shrink:0;font-size:1.5rem;line-height:1}.creditkey .modal-card-foot{border-bottom-left-radius:6px;border-bottom-right-radius:6px;border-top:1px solid #dbdbdb}.creditkey .modal-card-foot .button:not(:last-child){margin-right:.5em}.creditkey .modal-card-body{-webkit-overflow-scrolling:touch;background-color:#fff;flex-grow:1;flex-shrink:1;overflow:auto;padding:20px}.creditkeya{text-decoration:none !important}.creditkey .button{background-color:#3D9CE5 !important;min-height:40px !important;border-width:0 !important;vertical-align:middle !important;text-decoration:none !important}.creditkey .ck-modal{margin:0 !important;padding-top:50px;max-width:100% !important;width:100% !important;visibility:visible !important;background:transparent !important;position:absolute;justify-content:normal}@media screen and (max-device-width: 480px){.creditkey .ck-modal{padding-top:0px !important}}.creditkey .ck-modal-background{position:fixed}.creditkey .ck-modal-content,.creditkey .ck-modal-card{min-height:-webkit-min-content !important;min-height:min-content !important;max-height:none;height:auto !important}@media screen and (min-width: 769px), print{.creditkey .ck-modal-content,.creditkey .ck-modal-card{min-height:-webkit-min-content !important;min-height:min-content !important;max-height:none;height:auto !important}}.creditkey .ck-modal-card{min-height:-webkit-min-content !important;min-height:min-content !important;max-height:none !important}.creditkey .ck-modal-content{overflow:hidden;-webkit-overflow-scrolling:touch;border-radius:5px;background-color:#fff;background-image:url(\"https://www.creditkey.com/app/assets/header/ck-nav-logo-d79f74bc03213d02a5ab4cd1c484cfcfb533c2abf5f05ee35cd67c5239693a28.svg\");background-repeat:no-repeat;background-position:center;height:auto;min-height:-webkit-min-content;min-height:min-content;max-height:none}@media screen and (max-width: 1023px){.creditkey .ck-modal-content .ck-modal-content{height:100%;border-radius:0 !important}}.creditkey #creditkey-iframe{margin:auto;width:100%;border:none;height:inherit}.creditkey .payment-icon{display:inline-block !important;margin-right:5px !important;vertical-align:middle !important}.creditkey .terms{text-decoration:underline;color:#3D9CE5;cursor:pointer}.creditkey .terms:hover{text-decoration:none}.creditkey .pdp{padding:0 5px 0 0;font-size:16px !important;font-weight:bold}.creditkey .pdp-text{font-size:16px !important;font-weight:400}.creditkey .ck-offer{float:right;text-align:left}.creditkey .ck-logo-small{height:22px !important}.creditkey .ck-logo-medium{height:22px !important}.creditkey .ck-logo-large{height:22px !important}#creditkey-pdp-iframe{width:100% !important;max-height:70px !important}\n", ""]);
+exports.push([module.i, ".creditkey{all:initial}.creditkey *{all:unset}.creditkey{z-index:50000;text-decoration:none !important;font-family:\"Proxima Nova\", \"Helvetica Neue\", Helvetica, Arial, sans-serif}.creditkey .modal-close{-webkit-touch-callout:none;-webkit-user-select:none;-ms-user-select:none;user-select:none;-moz-appearance:none;-webkit-appearance:none;background-color:rgba(10,10,10,0.2);border:none;border-radius:290486px;cursor:pointer;pointer-events:auto;display:inline-block;-webkit-flex-grow:0;flex-grow:0;-webkit-flex-shrink:0;flex-shrink:0;font-size:0;height:20px;max-height:20px;max-width:20px;min-height:20px;min-width:20px;outline:none;position:relative;vertical-align:top;width:20px}.creditkey .modal-close::before,.creditkey .modal-close::after{background-color:#fff;content:\"\";display:block;left:50%;position:absolute;top:50%;-webkit-transform:translateX(-50%) translateY(-50%) rotate(45deg);transform:translateX(-50%) translateY(-50%) rotate(45deg);-webkit-transform-origin:center center;transform-origin:center center}.creditkey .modal-close::before{height:2px;width:50%}.creditkey .modal-close::after{height:50%;width:2px}.creditkey .modal-close:hover,.creditkey .modal-close:focus{background-color:rgba(10,10,10,0.3)}.creditkey .modal-close:active{background-color:rgba(10,10,10,0.4)}.creditkey .is-small.modal-close{height:16px;max-height:16px;max-width:16px;min-height:16px;min-width:16px;width:16px}.creditkey .is-medium.modal-close{height:24px;max-height:24px;max-width:24px;min-height:24px;min-width:24px;width:24px}.creditkey .is-large.modal-close{height:32px;max-height:32px;max-width:32px;min-height:32px;min-width:32px;width:32px}.creditkey .modal,.creditkey .ck-modal,.creditkey .modal-background,.creditkey .ck-modal-background{bottom:0;left:0;position:absolute;right:0;top:0}.creditkey .modal,.creditkey .ck-modal{-webkit-align-items:center;align-items:center;display:none;-webkit-flex-direction:column;flex-direction:column;-webkit-justify-content:center;justify-content:center;overflow:hidden;position:fixed;z-index:50001}.creditkey .modal.is-active,.creditkey .is-active.ck-modal{display:-webkit-flex;display:flex}.creditkey .modal-background,.creditkey .ck-modal-background{background-color:rgba(10,10,10,0.86)}.creditkey .modal-content,.creditkey .ck-modal-content,.creditkey .ck-modal-card,.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{margin:0 20px;max-height:calc(100vh - 160px);overflow:auto;position:relative;width:100%}@media screen and (min-width: 769px){.creditkey .modal-content,.creditkey .ck-modal-content,.creditkey .ck-modal-card,.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{margin:0 auto;max-height:calc(100vh - 40px);width:650px}}.creditkey .modal-close{background:none;height:40px;position:fixed;right:20px;top:20px;width:40px}.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{display:-webkit-flex;display:flex;-webkit-flex-direction:column;flex-direction:column;max-height:calc(100vh - 40px);overflow:hidden;-ms-overflow-y:visible}.creditkey .modal-card-head,.creditkey .modal-card-foot{-webkit-align-items:center;align-items:center;background-color:#f5f5f5;display:-webkit-flex;display:flex;-webkit-flex-shrink:0;flex-shrink:0;-webkit-justify-content:flex-start;justify-content:flex-start;padding:20px;position:relative}.creditkey .modal-card-head{border-bottom:1px solid #dbdbdb;border-top-left-radius:6px;border-top-right-radius:6px}.creditkey .modal-card-title{color:#363636;-webkit-flex-grow:1;flex-grow:1;-webkit-flex-shrink:0;flex-shrink:0;font-size:1.5rem;line-height:1}.creditkey .modal-card-foot{border-bottom-left-radius:6px;border-bottom-right-radius:6px;border-top:1px solid #dbdbdb}.creditkey .modal-card-foot .button:not(:last-child){margin-right:.5em}.creditkey .modal-card-body{-webkit-overflow-scrolling:touch;background-color:#fff;-webkit-flex-grow:1;flex-grow:1;-webkit-flex-shrink:1;flex-shrink:1;overflow:auto;padding:20px}.creditkeya{text-decoration:none !important}.creditkey .button{background-color:#3D9CE5 !important;min-height:40px !important;border-width:0 !important;vertical-align:middle !important;text-decoration:none !important}.creditkey .ck-modal{margin:0 !important;padding-top:50px;max-width:100% !important;width:100% !important;visibility:visible !important;background:transparent !important;position:absolute;-webkit-justify-content:normal;justify-content:normal}@media screen and (max-device-width: 480px){.creditkey .ck-modal{padding-top:0px !important}}.creditkey .ck-modal-background{position:fixed}.creditkey .ck-modal-content,.creditkey .ck-modal-card{min-height:-webkit-min-content !important;min-height:min-content !important;max-height:none;height:auto !important}@media screen and (min-width: 769px), print{.creditkey .ck-modal-content,.creditkey .ck-modal-card{min-height:-webkit-min-content !important;min-height:min-content !important;max-height:none;height:auto !important}}.creditkey .ck-modal-card{min-height:-webkit-min-content !important;min-height:min-content !important;max-height:none !important}.creditkey .ck-modal-content{overflow:hidden;-webkit-overflow-scrolling:touch;border-radius:5px;background-color:#fff;background-image:url(\"https://www.creditkey.com/app/assets/header/ck-nav-logo-d79f74bc03213d02a5ab4cd1c484cfcfb533c2abf5f05ee35cd67c5239693a28.svg\");background-repeat:no-repeat;background-position:center;height:auto;min-height:-webkit-min-content;min-height:min-content;max-height:none}@media screen and (max-width: 1023px){.creditkey .ck-modal-content .ck-modal-content{height:100%;border-radius:0 !important}}.creditkey #creditkey-iframe{margin:auto;width:100%;border:none;height:inherit}.creditkey .payment-icon{display:inline-block !important;margin-right:5px !important;vertical-align:middle !important}.creditkey .terms{text-decoration:underline;color:#3D9CE5;cursor:pointer}.creditkey .terms:hover{text-decoration:none}.creditkey .pdp{padding:0 5px 0 0;font-size:16px !important;font-weight:bold}.creditkey .pdp-text{font-size:16px !important;font-weight:400}.creditkey .ck-offer{float:right;text-align:left}.creditkey .ck-logo-small{height:22px !important}.creditkey .ck-logo-medium{height:22px !important}.creditkey .ck-logo-large{height:22px !important}#creditkey-pdp-iframe{width:100% !important;max-height:70px !important}\n", ""]);
 // Exports
 module.exports = exports;
 
 
 /***/ }),
-/* 4 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -518,7 +778,7 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -557,66 +817,9 @@ function request(url, options) {
     });
   });
 }
-// CONCATENATED MODULE: ./src/utils/platform.js
+// EXTERNAL MODULE: ./src/utils/platform.js
+var utils_platform = __webpack_require__(0);
 
-
-var DEV = 'development';
-var STAGE = 'staging';
-var PROD = 'production';
-var api = function api(platform) {
-  if (platform === DEV) return 'http://localhost:9100';
-  if (platform === STAGE) return 'https://staging.creditkey.com/app';
-  if (platform === PROD) return 'https://www.creditkey.com/app';
-  return platform; // custom URL - for testing
-};
-var applyUI = function applyUI(platform) {
-  if (platform === DEV) return 'http://localhost:3001';
-  if (platform === STAGE) return 'https://staging-apply.creditkey.com';
-  if (platform === PROD) return 'https://apply.creditkey.com';
-  return platform; // custom URL - for testing
-};
-var marketingUI = function marketingUI(platform) {
-  if (platform === DEV) return 'http://localhost:3002';
-  if (platform === STAGE) return 'https://staging-marketing.creditkey.com';
-  if (platform === PROD) return 'https://marketing.creditkey.com';
-  return platform; // custom URL - for testing
-};
-var pdpHost = function pdpHost(resource, platform) {
-  var host = window.location.hostname;
-
-  if (window.location.hostname.indexOf('localhost') >= 0) {
-    return resource(DEV);
-  }
-
-  if (window.location.hostname.indexOf('staging') >= 0 || window.location.hostname.indexOf('dev') >= 0) {
-    return resource(STAGE);
-  }
-
-  if (platform) {
-    return resource(platform);
-  }
-
-  switch (host) {
-    case 'creditkey.magento2':
-      return resource(DEV);
-      break;
-
-    case 'katom.app':
-    case 'packnwood-demo.wjserver960.com':
-    case 'magento.creditkey.com':
-    case 'demo.creditkey.com':
-    case 'demo.creditkey.tech':
-      return resource(STAGE);
-      break;
-
-    case 'magento2.creditkey.com':
-      return resource(PROD);
-      break;
-
-    default:
-      return resource(PROD);
-  }
-};
 // CONCATENATED MODULE: ./src/utils/network.js
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -633,7 +836,7 @@ var network_Network = function Network(platform, resource) {
   if (!platform) return false;
 
   var buildURL = function buildURL(id, resource) {
-    var parameters = [api(platform)];
+    var parameters = [Object(utils_platform["a" /* api */])(platform)];
     if (resource) parameters = parameters.concat([resource]);
     if (id) parameters = parameters.concat([id]);
     return parameters.join('/');
@@ -729,7 +932,7 @@ var network_Network = function Network(platform, resource) {
 
 /* harmony default export */ var network = (network_Network);
 // EXTERNAL MODULE: ./src/styles/index.sass
-var styles = __webpack_require__(1);
+var styles = __webpack_require__(3);
 
 // CONCATENATED MODULE: ./src/lib/components/modal.js
 
@@ -779,9 +982,9 @@ function remove() {
 function validate_url(url) {
   if (!url) return false;
   var root = url.split('/')[1];
-  if (api('development').split('/')[1] === root) return true;
-  if (api('staging').split('/')[1] === root) return true;
-  if (api('production').split('/')[1] === root) return true;
+  if (Object(utils_platform["a" /* api */])('development').split('/')[1] === root) return true;
+  if (Object(utils_platform["a" /* api */])('staging').split('/')[1] === root) return true;
+  if (Object(utils_platform["a" /* api */])('production').split('/')[1] === root) return true;
   return false;
 }
 
@@ -911,7 +1114,7 @@ function iframes_registerPostMessageCallback() {
 // CONCATENATED MODULE: ./src/lib/client.js
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
@@ -1044,7 +1247,7 @@ var client_Client = /*#__PURE__*/function () {
 
     var allowedTypes = ['pdp', 'cart'];
     if (!allowedTypes.includes(type)) return reject('invalid type, allowed types are "pdp", "cart"');
-    var url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return components_modal(url);
   };
 
@@ -1053,7 +1256,7 @@ var client_Client = /*#__PURE__*/function () {
       type = 'redirect';
     }
 
-    var url = pdpHost(marketingUI, this.platform) + '/apply.html?' + this.key + '&type=' + type;
+    var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/apply.html?' + this.key + '&type=' + type;
     return iframes_frame(url);
   };
 
@@ -1062,14 +1265,14 @@ var client_Client = /*#__PURE__*/function () {
       return reject('charges should be a charges object');
     }
 
-    var url = pdpHost(marketingUI, this.platform) + '/checkout.html?' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/checkout.html?' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return iframes_frame(url, false);
   } // charges is a charges object
   ;
 
   _proto.get_pdp_display = function get_pdp_display(charges) {
     var view = 'pdp';
-    var url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/' + view + '.html?public_key=' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return iframes_frame(url);
   };
 
@@ -1084,7 +1287,7 @@ var client_Client = /*#__PURE__*/function () {
       mobile = "left";
     }
 
-    var url = pdpHost(marketingUI, this.platform) + '/' + view + '.html?public_key=' + this.key + '&desktop=' + desktop + '&mobile=' + mobile + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/' + view + '.html?public_key=' + this.key + '&desktop=' + desktop + '&mobile=' + mobile + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return iframes_frame(url);
   };
 
@@ -1224,9 +1427,9 @@ var apply_apply = function apply(key, type, platform) {
   });
 
   if (type.toLowerCase() === 'modal') {
-    return components_modal(api(platform) + '/apply/modal/start/' + key);
+    return components_modal(Object(utils_platform["a" /* api */])(platform) + '/apply/modal/start/' + key);
   } else if (type.toLowerCase() === 'redirect') {
-    return lib_redirect(api(platform) + '/apply/start/' + key);
+    return lib_redirect(Object(utils_platform["a" /* api */])(platform) + '/apply/start/' + key);
   }
 };
 

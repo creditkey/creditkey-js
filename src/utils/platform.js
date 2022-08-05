@@ -5,21 +5,21 @@ const STAGE = 'staging';
 const PROD = 'production';
 
 export const api = platform => {
-  if (platform === DEV) return 'http://localhost:9100';
+  if (platform === DEV) return process.env.REACT_APP_API ? process.env.REACT_APP_API : 'http://localhost:9100';
   if (platform === STAGE) return 'https://staging.creditkey.com/app';
   if (platform === PROD) return 'https://www.creditkey.com/app';
   return platform; // custom URL - for testing
 }
 
 export const applyUI = platform => {
-  if (platform === DEV) return 'http://localhost:3001';
+  if (platform === DEV) return process.env.REACT_APP_APPLY_UI ? process.env.REACT_APP_APPLY_UI : 'http://apply.localhost:3001';
   if (platform === STAGE) return 'https://staging-apply.creditkey.com';
   if (platform === PROD) return 'https://apply.creditkey.com';
   return platform; // custom URL - for testing
 }
 
 export const marketingUI = platform => {
-  if (platform === DEV) return 'http://localhost:3002';
+  if (platform === DEV) return process.env.REACT_APP_MARKETING_UI ? process.env.REACT_APP_MARKETING_UI : 'http://localhost:3002';
   if (platform === STAGE) return 'https://staging-marketing.creditkey.com';
   if (platform === PROD) return 'https://marketing.creditkey.com';
   return platform; // custom URL - for testing
