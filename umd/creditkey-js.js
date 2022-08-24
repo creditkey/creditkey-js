@@ -1,5 +1,5 @@
 /*!
- * @credit-key/creditkey-js v1.2.0 - https://www.creditkey.com
+ * @credit-key/creditkey-js v1.2.1 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -133,16 +133,16 @@ var marketingUI = function marketingUI(platform) {
 var pdpHost = function pdpHost(resource, platform) {
   var host = window.location.hostname;
 
-  if (window.location.hostname.indexOf('localhost') >= 0) {
-    return resource(DEV);
+  if (platform) {
+    return resource(platform);
   }
 
   if (window.location.hostname.indexOf('staging') >= 0 || window.location.hostname.indexOf('dev') >= 0) {
     return resource(STAGE);
   }
 
-  if (platform) {
-    return resource(platform);
+  if (window.location.hostname.indexOf('localhost') >= 0) {
+    return resource(DEV);
   }
 
   switch (host) {

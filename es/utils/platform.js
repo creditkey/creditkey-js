@@ -24,16 +24,16 @@ export var marketingUI = function marketingUI(platform) {
 export var pdpHost = function pdpHost(resource, platform) {
   var host = window.location.hostname;
 
-  if (window.location.hostname.indexOf('localhost') >= 0) {
-    return resource(DEV);
+  if (platform) {
+    return resource(platform);
   }
 
   if (window.location.hostname.indexOf('staging') >= 0 || window.location.hostname.indexOf('dev') >= 0) {
     return resource(STAGE);
   }
 
-  if (platform) {
-    return resource(platform);
+  if (window.location.hostname.indexOf('localhost') >= 0) {
+    return resource(DEV);
   }
 
   switch (host) {
