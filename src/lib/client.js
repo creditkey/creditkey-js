@@ -93,7 +93,7 @@ export default class Client {
     return modal(url);
   }
 
-  get_apply_now(type = 'redirect') {
+  get_apply_now(type) {
     const url = pdpHost(marketingUI, this.platform) + '/apply.html?' + this.key + '&type=' + type;
     return frame(url);
   }

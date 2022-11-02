@@ -138,10 +138,6 @@ var Client = /*#__PURE__*/function () {
   };
 
   _proto.get_apply_now = function get_apply_now(type) {
-    if (type === void 0) {
-      type = 'redirect';
-    }
-
     var url = pdpHost(marketingUI, this.platform) + '/apply.html?' + this.key + '&type=' + type;
     return frame(url);
   };
