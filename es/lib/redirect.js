@@ -4,5 +4,4 @@ var redirect = function redirect(source) {
   isModal >= 0 ? uri = source.replace('modal', 'redirect') : uri = source;
   if (navigator.userAgent.match(/Android/i)) document.location = uri;else window.location.href = uri;
 };
-
 export default redirect;
