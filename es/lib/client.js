@@ -115,7 +115,6 @@ var Client = /*#__PURE__*/function () {
     var allowedTypes = ['pdp', 'cart'];
     if (!allowedTypes.includes(type)) return reject('invalid type, allowed types are "pdp", "cart"');
     var url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
-    console.log(url);
     return modal(url);
   };
   _proto.get_apply_now = function get_apply_now(type) {

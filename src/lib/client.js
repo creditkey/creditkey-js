@@ -89,7 +89,6 @@ export default class Client {
     if (!allowedTypes.includes(type)) return reject('invalid type, allowed types are "pdp", "cart"');
 
     const url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
-    console.log(url);
 
     return modal(url);
   }
