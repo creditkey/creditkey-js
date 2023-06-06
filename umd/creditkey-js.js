@@ -139,10 +139,7 @@ var marketingUI = function marketingUI(platform) {
 
 var pdpHost = function pdpHost(resource, platform) {
   var host = window.location.hostname;
-  console.log('preview test: ' + host);
-  if (platform) {
-    return resource(platform);
-  }
+  console.log('preview testing: ' + host.indexOf('preview'), host.indexOf('dev'));
   if (host.indexOf('staging') >= 0 || host.indexOf('dev') >= 0) {
     return resource(STAGE);
   }
@@ -151,6 +148,9 @@ var pdpHost = function pdpHost(resource, platform) {
   }
   if (host.indexOf('localhost') >= 0) {
     return resource(DEV);
+  }
+  if (platform) {
+    return resource(platform);
   }
   switch (host) {
     case 'creditkey.magento2':

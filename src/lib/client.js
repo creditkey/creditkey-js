@@ -94,7 +94,7 @@ export default class Client {
   }
 
   get_apply_now(type) {
-    const url = pdpHost(marketingUI, this.platform) + '/apply.html?' + this.key + '&type=' + type;
+    const url = pdpHost(marketingUI, this.platform) + '/apply.html?public_key=' + this.key + '&type=' + type;
     return frame(url);
   }
 
@@ -103,7 +103,7 @@ export default class Client {
       return reject('charges should be a charges object');
     }
 
-    const url = pdpHost(marketingUI, this.platform) + '/checkout.html?' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    const url = pdpHost(marketingUI, this.platform) + '/checkout.html?public_key=' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return frame(url, false);
   }
 
