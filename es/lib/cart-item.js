@@ -10,14 +10,10 @@ var CartItem = /*#__PURE__*/function () {
       color: color
     };
   }
-
   var _proto = CartItem.prototype;
-
   _proto.is_valid_item = function is_valid_item() {
     return !!(this.data.merchant_id && this.data.name);
   };
-
   return CartItem;
 }();
-
 export { CartItem as default };

@@ -1,5 +1,5 @@
 /*!
- * @credit-key/creditkey-js v1.2.3 - https://www.creditkey.com
+ * @credit-key/creditkey-js v1.2.4 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -111,45 +111,51 @@ return /******/ (function(modules) { // webpackBootstrap
 
 var DEV = 'development';
 var STAGE = 'staging';
+var PREVIEW = 'preview';
 var PROD = 'production';
 var api = function api(platform) {
   if (platform === DEV) return process.env.REACT_APP_API ? process.env.REACT_APP_API : 'http://localhost:9100';
+  if (platform === PREVIEW) return 'https://preview.creditkey.com';
   if (platform === STAGE) return 'https://staging.creditkey.com/app';
   if (platform === PROD) return 'https://www.creditkey.com/app';
   return platform; // custom URL - for testing
 };
+
 var applyUI = function applyUI(platform) {
   if (platform === DEV) return process.env.REACT_APP_APPLY_UI ? process.env.REACT_APP_APPLY_UI : 'http://apply.localhost:3001';
+  if (platform === PREVIEW) return 'https://apply.preview.creditkey.com';
   if (platform === STAGE) return 'https://staging-apply.creditkey.com';
   if (platform === PROD) return 'https://apply.creditkey.com';
   return platform; // custom URL - for testing
 };
+
 var marketingUI = function marketingUI(platform) {
   if (platform === DEV) return process.env.REACT_APP_MARKETING_UI ? process.env.REACT_APP_MARKETING_UI : 'http://localhost:3002';
   if (platform === STAGE) return 'https://staging-marketing.creditkey.com';
-  if (platform === PROD) return 'https://marketing.creditkey.com';
+  if (platform === PREVIEW) return 'https://marketing.preview.creditkey.com';
+  if (platform === PROD) return 'https://beta-marketing.creditkey.com';
   return platform; // custom URL - for testing
 };
+
 var pdpHost = function pdpHost(resource, platform) {
   var host = window.location.hostname;
-
+  console.log('preview testing: ' + host.indexOf('preview'), host.indexOf('dev'));
+  if (host.indexOf('staging') >= 0 || host.indexOf('dev') >= 0) {
+    return resource(STAGE);
+  }
+  if (host.indexOf('preview') >= 0 || host.indexOf('dev') >= 0) {
+    return resource(PREVIEW);
+  }
+  if (host.indexOf('localhost') >= 0) {
+    return resource(DEV);
+  }
   if (platform) {
     return resource(platform);
   }
-
-  if (window.location.hostname.indexOf('staging') >= 0 || window.location.hostname.indexOf('dev') >= 0) {
-    return resource(STAGE);
-  }
-
-  if (window.location.hostname.indexOf('localhost') >= 0) {
-    return resource(DEV);
-  }
-
   switch (host) {
     case 'creditkey.magento2':
       return resource(DEV);
       break;
-
     case 'katom.app':
     case 'packnwood-demo.wjserver960.com':
     case 'magento.creditkey.com':
@@ -157,11 +163,9 @@ var pdpHost = function pdpHost(resource, platform) {
     case 'demo.creditkey.tech':
       return resource(STAGE);
       break;
-
     case 'magento2.creditkey.com':
       return resource(PROD);
       break;
-
     default:
       return resource(PROD);
   }
@@ -672,7 +676,7 @@ module.exports = function (list, options) {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".creditkey{all:initial}.creditkey *{all:unset}.creditkey{z-index:50000;text-decoration:none !important;font-family:\"Proxima Nova\", \"Helvetica Neue\", Helvetica, Arial, sans-serif}.creditkey .modal-close{-webkit-touch-callout:none;-webkit-user-select:none;-ms-user-select:none;user-select:none;-moz-appearance:none;-webkit-appearance:none;background-color:rgba(10,10,10,0.2);border:none;border-radius:9999px;cursor:pointer;pointer-events:auto;display:inline-block;flex-grow:0;flex-shrink:0;font-size:0;height:20px;max-height:20px;max-width:20px;min-height:20px;min-width:20px;outline:none;position:relative;vertical-align:top;width:20px}.creditkey .modal-close::before,.creditkey .modal-close::after{background-color:#fff;content:\"\";display:block;left:50%;position:absolute;top:50%;-webkit-transform:translateX(-50%) translateY(-50%) rotate(45deg);transform:translateX(-50%) translateY(-50%) rotate(45deg);-webkit-transform-origin:center center;transform-origin:center center}.creditkey .modal-close::before{height:2px;width:50%}.creditkey .modal-close::after{height:50%;width:2px}.creditkey .modal-close:hover,.creditkey .modal-close:focus{background-color:rgba(10,10,10,0.3)}.creditkey .modal-close:active{background-color:rgba(10,10,10,0.4)}.creditkey .is-small.modal-close{height:16px;max-height:16px;max-width:16px;min-height:16px;min-width:16px;width:16px}.creditkey .is-medium.modal-close{height:24px;max-height:24px;max-width:24px;min-height:24px;min-width:24px;width:24px}.creditkey .is-large.modal-close{height:32px;max-height:32px;max-width:32px;min-height:32px;min-width:32px;width:32px}.creditkey .modal,.creditkey .ck-modal,.creditkey .modal-background,.creditkey .ck-modal-background{bottom:0;left:0;position:absolute;right:0;top:0}.creditkey .modal,.creditkey .ck-modal{align-items:center;display:none;flex-direction:column;justify-content:center;overflow:hidden;position:fixed;z-index:50001}.creditkey .modal.is-active,.creditkey .is-active.ck-modal{display:flex}.creditkey .modal-background,.creditkey .ck-modal-background{background-color:rgba(10,10,10,0.86)}.creditkey .modal-content,.creditkey .ck-modal-content,.creditkey .ck-modal-card,.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{margin:0 20px;max-height:calc(100vh - 160px);overflow:auto;position:relative;width:100%}@media screen and (min-width: 769px){.creditkey .modal-content,.creditkey .ck-modal-content,.creditkey .ck-modal-card,.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{margin:0 auto;max-height:calc(100vh - 40px);width:650px}}.creditkey .modal-close{background:none;height:40px;position:fixed;right:20px;top:20px;width:40px}.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{display:flex;flex-direction:column;max-height:calc(100vh - 40px);overflow:hidden;-ms-overflow-y:visible}.creditkey .modal-card-head,.creditkey .modal-card-foot{align-items:center;background-color:#f5f5f5;display:flex;flex-shrink:0;justify-content:flex-start;padding:20px;position:relative}.creditkey .modal-card-head{border-bottom:1px solid #dbdbdb;border-top-left-radius:6px;border-top-right-radius:6px}.creditkey .modal-card-title{color:#363636;flex-grow:1;flex-shrink:0;font-size:1.5rem;line-height:1}.creditkey .modal-card-foot{border-bottom-left-radius:6px;border-bottom-right-radius:6px;border-top:1px solid #dbdbdb}.creditkey .modal-card-foot .button:not(:last-child){margin-right:.5em}.creditkey .modal-card-body{-webkit-overflow-scrolling:touch;background-color:#fff;flex-grow:1;flex-shrink:1;overflow:auto;padding:20px}.creditkeya{text-decoration:none !important}.creditkey .button{background-color:#3D9CE5 !important;min-height:40px !important;border-width:0 !important;vertical-align:middle !important;text-decoration:none !important}.creditkey .ck-modal{margin:0 !important;padding-top:50px;max-width:100% !important;width:100% !important;visibility:visible !important;background:transparent !important;position:absolute;justify-content:normal}@media screen and (max-device-width: 480px){.creditkey .ck-modal{padding-top:0px !important}}.creditkey .ck-modal-background{position:fixed}.creditkey .ck-modal-content,.creditkey .ck-modal-card{min-height:-webkit-min-content !important;min-height:min-content !important;max-height:none;height:auto !important}@media screen and (min-width: 769px), print{.creditkey .ck-modal-content,.creditkey .ck-modal-card{min-height:-webkit-min-content !important;min-height:min-content !important;max-height:none;height:auto !important}}.creditkey .ck-modal-card{min-height:-webkit-min-content !important;min-height:min-content !important;max-height:none !important}.creditkey .ck-modal-content{overflow:hidden;-webkit-overflow-scrolling:touch;border-radius:5px;background-color:#fff;background-image:url(\"https://www.creditkey.com/app/assets/header/ck-nav-logo-d79f74bc03213d02a5ab4cd1c484cfcfb533c2abf5f05ee35cd67c5239693a28.svg\");background-repeat:no-repeat;background-position:center;height:auto;min-height:-webkit-min-content;min-height:min-content;max-height:none}@media screen and (max-width: 1023px){.creditkey .ck-modal-content .ck-modal-content{height:100%;border-radius:0 !important}}.creditkey #creditkey-iframe{margin:auto;width:100%;border:none;height:inherit}.creditkey .payment-icon{display:inline-block !important;margin-right:5px !important;vertical-align:middle !important}.creditkey .terms{text-decoration:underline;color:#3D9CE5;cursor:pointer}.creditkey .terms:hover{text-decoration:none}.creditkey .pdp{padding:0 5px 0 0;font-size:16px !important;font-weight:bold}.creditkey .pdp-text{font-size:16px !important;font-weight:400}.creditkey .ck-offer{float:right;text-align:left}.creditkey .ck-logo-small{height:22px !important}.creditkey .ck-logo-medium{height:22px !important}.creditkey .ck-logo-large{height:22px !important}#creditkey-pdp-iframe{width:100% !important;max-height:70px !important}\n", ""]);
+exports.push([module.i, ".creditkey{all:initial}.creditkey *{all:unset}.creditkey{z-index:50000;text-decoration:none !important;font-family:\"Proxima Nova\", \"Helvetica Neue\", Helvetica, Arial, sans-serif}.creditkey .modal-close{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-moz-appearance:none;-webkit-appearance:none;background-color:rgba(10,10,10,0.2);border:none;border-radius:9999px;cursor:pointer;pointer-events:auto;display:inline-block;flex-grow:0;flex-shrink:0;font-size:0;height:20px;max-height:20px;max-width:20px;min-height:20px;min-width:20px;outline:none;position:relative;vertical-align:top;width:20px}.creditkey .modal-close::before,.creditkey .modal-close::after{background-color:#fff;content:\"\";display:block;left:50%;position:absolute;top:50%;-webkit-transform:translateX(-50%) translateY(-50%) rotate(45deg);transform:translateX(-50%) translateY(-50%) rotate(45deg);-webkit-transform-origin:center center;transform-origin:center center}.creditkey .modal-close::before{height:2px;width:50%}.creditkey .modal-close::after{height:50%;width:2px}.creditkey .modal-close:hover,.creditkey .modal-close:focus{background-color:rgba(10,10,10,0.3)}.creditkey .modal-close:active{background-color:rgba(10,10,10,0.4)}.creditkey .is-small.modal-close{height:16px;max-height:16px;max-width:16px;min-height:16px;min-width:16px;width:16px}.creditkey .is-medium.modal-close{height:24px;max-height:24px;max-width:24px;min-height:24px;min-width:24px;width:24px}.creditkey .is-large.modal-close{height:32px;max-height:32px;max-width:32px;min-height:32px;min-width:32px;width:32px}.creditkey .modal,.creditkey .ck-modal,.creditkey .modal-background,.creditkey .ck-modal-background{bottom:0;left:0;position:absolute;right:0;top:0}.creditkey .modal,.creditkey .ck-modal{align-items:center;display:none;flex-direction:column;justify-content:center;overflow:hidden;position:fixed;z-index:50001}.creditkey .modal.is-active,.creditkey .is-active.ck-modal{display:flex}.creditkey .modal-background,.creditkey .ck-modal-background{background-color:rgba(10,10,10,0.86)}.creditkey .modal-content,.creditkey .ck-modal-content,.creditkey .ck-modal-card,.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{margin:0 20px;max-height:calc(100vh - 160px);overflow:auto;position:relative;width:100%}@media screen and (min-width: 769px){.creditkey .modal-content,.creditkey .ck-modal-content,.creditkey .ck-modal-card,.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{margin:0 auto;max-height:calc(100vh - 40px);width:650px}}.creditkey .modal-close{background:none;height:40px;position:fixed;right:20px;top:20px;width:40px}.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{display:flex;flex-direction:column;max-height:calc(100vh - 40px);overflow:hidden;-ms-overflow-y:visible}.creditkey .modal-card-head,.creditkey .modal-card-foot{align-items:center;background-color:#f5f5f5;display:flex;flex-shrink:0;justify-content:flex-start;padding:20px;position:relative}.creditkey .modal-card-head{border-bottom:1px solid #dbdbdb;border-top-left-radius:6px;border-top-right-radius:6px}.creditkey .modal-card-title{color:#363636;flex-grow:1;flex-shrink:0;font-size:1.5rem;line-height:1}.creditkey .modal-card-foot{border-bottom-left-radius:6px;border-bottom-right-radius:6px;border-top:1px solid #dbdbdb}.creditkey .modal-card-foot .button:not(:last-child){margin-right:.5em}.creditkey .modal-card-body{-webkit-overflow-scrolling:touch;background-color:#fff;flex-grow:1;flex-shrink:1;overflow:auto;padding:20px}.creditkeya{text-decoration:none !important}.creditkey .button{background-color:#3D9CE5 !important;min-height:40px !important;border-width:0 !important;vertical-align:middle !important;text-decoration:none !important}.creditkey .ck-modal{margin:0 !important;padding-top:50px;max-width:100% !important;width:100% !important;visibility:visible !important;background:transparent !important;position:absolute;justify-content:normal}@media screen and (max-device-width: 480px){.creditkey .ck-modal{padding-top:0px !important}}.creditkey .ck-modal-background{position:fixed}.creditkey .ck-modal-content,.creditkey .ck-modal-card{min-height:-webkit-min-content !important;min-height:min-content !important;max-height:none;height:auto !important}@media screen and (min-width: 769px), print{.creditkey .ck-modal-content,.creditkey .ck-modal-card{min-height:-webkit-min-content !important;min-height:min-content !important;max-height:none;height:auto !important}}.creditkey .ck-modal-card{min-height:-webkit-min-content !important;min-height:min-content !important;max-height:none !important}.creditkey .ck-modal-content{overflow:hidden;-webkit-overflow-scrolling:touch;border-radius:5px;background-color:#fff;background-image:url(\"https://www.creditkey.com/app/assets/header/ck-nav-logo-d79f74bc03213d02a5ab4cd1c484cfcfb533c2abf5f05ee35cd67c5239693a28.svg\");background-repeat:no-repeat;background-position:center;height:auto;min-height:-webkit-min-content;min-height:min-content;max-height:none}@media screen and (max-width: 1023px){.creditkey .ck-modal-content .ck-modal-content{height:100%;border-radius:0 !important}}.creditkey #creditkey-iframe{margin:auto;width:100%;border:none;height:inherit}.creditkey .payment-icon{display:inline-block !important;margin-right:5px !important;vertical-align:middle !important}.creditkey .terms{text-decoration:underline;color:#3D9CE5;cursor:pointer}.creditkey .terms:hover{text-decoration:none}.creditkey .pdp{padding:0 5px 0 0;font-size:16px !important;font-weight:bold}.creditkey .pdp-text{font-size:16px !important;font-weight:400}.creditkey .ck-offer{float:right;text-align:left}.creditkey .ck-logo-small{height:22px !important}.creditkey .ck-logo-medium{height:22px !important}.creditkey .ck-logo-large{height:22px !important}#creditkey-pdp-iframe{width:100% !important;max-height:70px !important}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -798,10 +802,8 @@ function handleErrors(response) {
   if (!response.ok) {
     throw Error(response.statusText);
   }
-
   return response;
 }
-
 function request(url, options) {
   return new Promise(function (resolve, reject) {
     if (!url) reject(new Error('URL parameter required'));
@@ -821,7 +823,7 @@ function request(url, options) {
 var utils_platform = __webpack_require__(0);
 
 // CONCATENATED MODULE: ./src/utils/network.js
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
 
@@ -831,18 +833,16 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
  * requests to a specific resource on the server.
  * @param {string} resource The resource used for config
  */
-
 var network_Network = function Network(platform, resource) {
   if (!platform) return false;
-
   var buildURL = function buildURL(id, resource) {
     var parameters = [Object(utils_platform["a" /* api */])(platform)];
     if (resource) parameters = parameters.concat([resource]);
     if (id) parameters = parameters.concat([id]);
     return parameters.join('/');
-  }; // Default options used for every request
+  };
 
-
+  // Default options used for every request
   var defaultOptions = {
     mode: 'cors',
     headers: {
@@ -863,13 +863,11 @@ var network_Network = function Network(platform, resource) {
       if (options === void 0) {
         options = {};
       }
-
       return request(buildURL(path), _extends({}, options, defaultOptions, {
         method: 'POST',
         body: JSON.stringify(body)
       }));
     },
-
     /**
      * @function post
      * @description Make a GET request.
@@ -881,12 +879,10 @@ var network_Network = function Network(platform, resource) {
       if (options === void 0) {
         options = {};
       }
-
       return request(buildURL(path), _extends({}, options, defaultOptions, {
         method: 'GET'
       }));
     },
-
     /**
      * @function edit
      * @description Make a PUT request.
@@ -899,13 +895,11 @@ var network_Network = function Network(platform, resource) {
       if (options === void 0) {
         options = {};
       }
-
       return request(buildURL(path), _extends({}, options, defaultOptions, {
         method: 'PUT',
         body: JSON.stringify(body)
       }));
     },
-
     /**
      * @function delete
      * @description Make a DELETE request.
@@ -917,7 +911,6 @@ var network_Network = function Network(platform, resource) {
       if (options === void 0) {
         options = {};
       }
-
       return request(buildURL(path), _extends({}, options, defaultOptions, {
         method: 'DELETE'
       }));
@@ -929,7 +922,6 @@ var network_Network = function Network(platform, resource) {
     }
   };
 };
-
 /* harmony default export */ var network = (network_Network);
 // EXTERNAL MODULE: ./src/styles/index.sass
 var styles = __webpack_require__(3);
@@ -937,48 +929,44 @@ var styles = __webpack_require__(3);
 // CONCATENATED MODULE: ./src/lib/components/modal.js
 
 
-
 var modal = function modal(source) {
-  registerPostMessageCallback(); // Check to see if we've already created the modal - but hidden it when the user clicked off.
+  registerPostMessageCallback();
+
+  // Check to see if we've already created the modal - but hidden it when the user clicked off.
   // If so, simply redisplay the modal.
-
   var existingModal = document.getElementById('creditkey-modal');
-
+  var sourceUrl = new URL(source);
+  sourceUrl.searchParams.append('modal', true);
   if (existingModal !== null) {
     var iframe = document.getElementById('creditkey-iframe');
     var url = iframe.src;
-
-    if (url !== source + '?modal=true') {
+    if (url !== "" + sourceUrl.href) {
       existingModal.remove();
       return modal(source);
     }
-
     existingModal.style.display = 'flex';
   } else {
     // Otherwise, create the modal.
-    var body = document.body; // default height set for UX during load, will be changed via updateParent() from inside iframe content later
 
-    var _iframe = "<iframe scrolling=\"no\" id=\"creditkey-iframe\" src=\"" + (source + '?modal=true') + "\" style=\"height: 100vh;\"></iframe>";
-
+    var body = document.body;
+    // default height set for UX during load, will be changed via updateParent() from inside iframe content later
+    var _iframe = "<iframe scrolling=\"no\" id=\"creditkey-iframe\" src=\"" + sourceUrl.href + "\" style=\"height: 100vh;\"></iframe>";
     if (!validate_url(source)) {
       _iframe = "An invalid resource was requested";
     }
-
     return body.insertAdjacentHTML('beforeend', "<div class=\"creditkey\" id=\"creditkey-modal\"><div class=\"ck-modal is-active\"><div class=\"ck-modal-background\"></div><div class=\"ck-modal-content\" id=\"ck-modal-card\">" + _iframe + "</div></div></div>");
   }
 };
-
 function remove() {
   // Hide the modal so we can potentially redisplay it, leaving the user at the same place in the
   // checkout flow, if they accidentially click off.
   var el = document.getElementById('creditkey-modal');
-
   if (el !== null) {
     el.style.display = 'none';
   }
-} // ensure that we're requesting a valid creditkey domain
+}
 
-
+// ensure that we're requesting a valid creditkey domain
 function validate_url(url) {
   if (!url) return false;
   var root = url.split('/')[1];
@@ -987,7 +975,6 @@ function validate_url(url) {
   if (Object(utils_platform["a" /* api */])('production').split('/')[1] === root) return true;
   return false;
 }
-
 function redirect(uri) {
   if (navigator.userAgent.match(/Android/i)) {
     document.location = uri;
@@ -995,40 +982,39 @@ function redirect(uri) {
     window.location.replace(uri);
   }
 }
-
 function registerPostMessageCallback() {
   window.addEventListener('message', function (e) {
     if (!e) return false;
     if (e && !e.data) return false;
     var event;
-
     try {
       event = JSON.parse(e.data);
     } catch (e) {
       event = false;
     }
-
     if (!event || !event.action) return false;
     var modal_element = document.getElementById('ck-modal-card');
     var iframe_element = document.getElementById('creditkey-iframe');
-    if (!iframe_element || !modal_element) return false; // if we're closing the modal from within the CK iframe, trigger the event bound to parent body
+    if (!iframe_element || !modal_element) return false;
 
+    // if we're closing the modal from within the CK iframe, trigger the event bound to parent body
     if (event.action === 'cancel' && event.type === 'modal') {
       remove();
     } else if (event.action == 'complete' && event.type == 'modal') {
       redirect(event.options);
     } else if (event.action == 'height' && event.type == 'modal') {
       var total_height = event.options + 14; // 14 allows padding underneath content (usually legal footer)
+
       // set the iframe, the parent div, and that div's parent height to something that adjusts to content height
+      iframe_element.style.height = total_height.toString() + 'px';
 
-      iframe_element.style.height = total_height.toString() + 'px'; // Pad parent div height because issues where Chrome's calc'd <body> height is different than other browsers
+      // Pad parent div height because issues where Chrome's calc'd <body> height is different than other browsers
       //  which cuts of the bottom rounded corners
-
       if (total_height + 60 > window.innerHeight) {
         modal_element.parentNode.style.height = (total_height + 60).toString() + 'px';
-      } // force scroll to top because modal starts at top of page.
+      }
 
-
+      // force scroll to top because modal starts at top of page.
       window.scrollTo({
         top: 0,
         left: 0,
@@ -1037,7 +1023,6 @@ function registerPostMessageCallback() {
     }
   }, false);
 }
-
 /* harmony default export */ var components_modal = (modal);
 // CONCATENATED MODULE: ./src/lib/charges.js
 var Charges = /*#__PURE__*/function () {
@@ -1050,30 +1035,23 @@ var Charges = /*#__PURE__*/function () {
       grand_total: grand_total
     };
   }
-
   var _proto = Charges.prototype;
-
   _proto.validate_charges = function validate_charges() {
     if (this.data.shipping && !this.is_valid_money_value(this.data.shipping)) return false;
     if (this.data.tax && !this.is_valid_money_value(this.data.tax)) return false;
     if (this.data.discount_amount && !this.is_valid_money_value(this.data.discount_amount)) return false;
-
     if (!this.is_valid_money_value(this.data.total) || !this.is_valid_money_value(this.data.grand_total)) {
       return false;
     }
-
     return true;
   };
-
   _proto.is_valid_money_value = function is_valid_money_value(value) {
     var num = +value;
     if (isNaN(num)) return false;
     return true;
   };
-
   return Charges;
 }();
-
 
 // CONCATENATED MODULE: ./src/lib/components/iframes.js
 
@@ -1083,25 +1061,21 @@ var iframes_frame = function frame(url, pointer) {
   if (pointer === void 0) {
     pointer = true;
   }
-
   iframes_registerPostMessageCallback();
   var style = '';
   if (!pointer) style = 'pointer-events: none;';
   var iframe = "<div className=\"iframe-container\"><iframe allowtransparency=\"true\" scrolling=\"no\" id=\"creditkey-pdp-iframe\" frameBorder=\"0\" style=\"" + style + "\" src=\"" + url + "\"></iframe></div>";
   return iframe;
 };
-
 function iframes_registerPostMessageCallback() {
   window.addEventListener('message', function (e) {
     var data;
     if (!e || !e.data) return false;
-
     try {
       data = JSON.parse(e.data);
     } catch (e) {
       return false;
     }
-
     if (data.action === 'pdp' && data.options.public_key) {
       var charges = new Charges(data.options.charges ? data.options.charges : '0, 0, 0, 0, 0'.split(','));
       var c = new client_Client(data.options.public_key, data.options.platform);
@@ -1112,11 +1086,10 @@ function iframes_registerPostMessageCallback() {
   });
 }
 // CONCATENATED MODULE: ./src/lib/client.js
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-
-
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
@@ -1126,22 +1099,17 @@ var client_Client = /*#__PURE__*/function () {
     if (platform === void 0) {
       platform = 'development';
     }
-
     this.key = key;
     this.platform = platform;
     this.network = network(platform);
   }
-
   var _proto = Client.prototype;
-
   _proto.begin_checkout = function begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl, orderCompleteUrl, mode, merchant_data) {
     var _this = this;
-
     return new Promise(function (resolve, reject) {
       if (!cartItems || !billingAddress || !charges || !remoteId || !customerId || !returnUrl || !cancelUrl) {
         return reject('missing required data');
       }
-
       if (!Array.isArray(cartItems)) {
         return reject('cart items must be an array of CartItem objects');
       } else if (cartItems.filter(function (c) {
@@ -1149,17 +1117,14 @@ var client_Client = /*#__PURE__*/function () {
       }).length >= 1) {
         return reject('one or more cart items are invalid');
       }
-
       if (typeof billingAddress !== 'object') {
         return reject('billing address should be an Address object');
       }
-
       if (typeof charges !== 'object') {
         return reject('charges should be a Charges object');
       } else if (!charges.validate_charges()) {
         return reject('charges value is invalid');
       }
-
       return _this.network.post('ecomm/begin_checkout' + _this.key_param, {
         cart_items: cartItems.map(function (item) {
           return item.data;
@@ -1181,10 +1146,8 @@ var client_Client = /*#__PURE__*/function () {
       });
     });
   };
-
   _proto.is_displayed_in_checkout = function is_displayed_in_checkout(cartItems) {
     var _this2 = this;
-
     return new Promise(function (resolve, reject) {
       if (!Array.isArray(cartItems)) {
         return reject('cart items must be an array of CartItem objects');
@@ -1193,7 +1156,6 @@ var client_Client = /*#__PURE__*/function () {
       }).length >= 1) {
         return reject('one or more cart items are invalid');
       }
-
       return _this2.network.post('ecomm/is_displayed_in_checkout' + _this2.key_param, {
         cart_items: cartItems.map(function (item) {
           return item.data;
@@ -1204,114 +1166,95 @@ var client_Client = /*#__PURE__*/function () {
         return reject(err);
       });
     });
-  } // display options are button, text, button_text
+  }
+
+  // display options are button, text, button_text
   // size options are small, medium, large, special (special loads a special version of the plain logo, instead of a sized badge version)
   // extra options can be:
   // 'special' = renders a special text only version of the pdp
   // 'static' = renders an unlinked version pf the pdp, basically a dumb banner
   // extra is ignored when 'none' or called with type checkout
   ;
-
   _proto.get_marketing_display = function get_marketing_display(charges, type, display, size, extra) {
     var _this3 = this;
-
     if (type === void 0) {
       type = "checkout";
     }
-
     if (display === void 0) {
       display = "button";
     }
-
     if (size === void 0) {
       size = "medium";
     }
-
     if (extra === void 0) {
       extra = "none";
     }
-
     return new Promise(function (resolve, reject) {
       return resolve(_this3.get_checkout_display(charges));
     });
   };
-
   _proto.enhanced_pdp_modal = function enhanced_pdp_modal(charges, type) {
     if (type === void 0) {
       type = 'pdp';
     }
-
     if (charges && typeof charges !== 'object') {
       return reject('charges should be a charges object');
     }
-
     var allowedTypes = ['pdp', 'cart'];
     if (!allowedTypes.includes(type)) return reject('invalid type, allowed types are "pdp", "cart"');
     var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return components_modal(url);
   };
-
   _proto.get_apply_now = function get_apply_now(type) {
     var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/apply.html?' + this.key + '&type=' + type;
     return iframes_frame(url);
   };
-
   _proto.get_checkout_display = function get_checkout_display(charges) {
     if (charges && typeof charges !== 'object') {
       return reject('charges should be a charges object');
     }
-
     var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/checkout.html?' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return iframes_frame(url, false);
-  } // charges is a charges object
-  ;
+  }
 
+  // charges is a charges object
+  ;
   _proto.get_pdp_display = function get_pdp_display(charges) {
     var view = 'pdp';
     var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/' + view + '.html?public_key=' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return iframes_frame(url);
   };
-
   _proto.get_cart_display = function get_cart_display(charges, desktop, mobile) {
     var view = 'cart';
-
     if (desktop === void 0) {
       desktop = "right";
     }
-
     if (mobile === void 0) {
       mobile = "left";
     }
-
     var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/' + view + '.html?public_key=' + this.key + '&desktop=' + desktop + '&mobile=' + mobile + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return iframes_frame(url);
   };
-
   _proto.get_customer = function get_customer(email, customer_id) {
     if (!email || !customer_id) {
       return Promise.reject('Missing required paramters');
     }
-
     if (!/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b/.test(email)) {
       return Promise.reject('Invalid email address');
     }
-
     return this.network.post('ecomm/customer' + this.key_param, {
       email: email,
       customer_id: customer_id
     });
   };
-
   _createClass(Client, [{
     key: "key_param",
     get: function get() {
       return '?public_key=' + this.key;
     }
   }]);
-
   return Client;
 }();
-
 
 // CONCATENATED MODULE: ./src/lib/cart-item.js
 var CartItem = /*#__PURE__*/function () {
@@ -1326,16 +1269,12 @@ var CartItem = /*#__PURE__*/function () {
       color: color
     };
   }
-
   var _proto = CartItem.prototype;
-
   _proto.is_valid_item = function is_valid_item() {
     return !!(this.data.merchant_id && this.data.name);
   };
-
   return CartItem;
 }();
-
 
 // CONCATENATED MODULE: ./src/lib/address.js
 var Address = /*#__PURE__*/function () {
@@ -1353,22 +1292,17 @@ var Address = /*#__PURE__*/function () {
       phone_number: phone_number || ''
     };
   }
-
   var _proto = Address.prototype;
-
   _proto.is_valid_address = function is_valid_address() {
     for (var p in this.data) {
       if ((!this.data[p] || this.data[p] === '') && p !== 'address2') {
         return false;
       }
     }
-
     return true;
   };
-
   return Address;
 }();
-
 
 // CONCATENATED MODULE: ./src/lib/redirect.js
 var redirect_redirect = function redirect(source) {
@@ -1377,29 +1311,23 @@ var redirect_redirect = function redirect(source) {
   isModal >= 0 ? uri = source.replace('modal', 'redirect') : uri = source;
   if (navigator.userAgent.match(/Android/i)) document.location = uri;else window.location.href = uri;
 };
-
 /* harmony default export */ var lib_redirect = (redirect_redirect);
 // CONCATENATED MODULE: ./src/lib/checkout.js
-
 
 
 var checkout_checkout = function checkout(source, type) {
   if (type === void 0) {
     type = 'modal';
   }
-
   var width = window.screen.availWidth;
-
   if (type.toLowerCase() === 'modal' && width > 480) {
     return components_modal(source);
   } else {
     return lib_redirect(source);
   }
 };
-
 /* harmony default export */ var lib_checkout = (checkout_checkout);
 // CONCATENATED MODULE: ./src/lib/apply.js
-
 
 
 
@@ -1407,28 +1335,23 @@ var apply_apply = function apply(key, type, platform) {
   if (type === void 0) {
     type = 'modal';
   }
-
   if (platform === void 0) {
     platform = 'production';
   }
-
   if (!key) {
     throw new Error('API public key required.');
   }
-
   window.scrollTo({
     top: 0,
     left: 0,
     behavior: 'smooth'
   });
-
   if (type.toLowerCase() === 'modal') {
     return components_modal(Object(utils_platform["a" /* api */])(platform) + '/apply/modal/start/' + key);
   } else if (type.toLowerCase() === 'redirect') {
     return lib_redirect(Object(utils_platform["a" /* api */])(platform) + '/apply/start/' + key);
   }
 };
-
 /* harmony default export */ var lib_apply = (apply_apply);
 // CONCATENATED MODULE: ./src/index.js
 

@@ -2,8 +2,6 @@ import modal from './components/modal';
 import redirect from './redirect';
 import { api } from '../utils/platform';
 
-
-
 const apply = (key, type = 'modal', platform = 'production') => {
 
   if (!key) {

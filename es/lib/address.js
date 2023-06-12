@@ -13,20 +13,15 @@ var Address = /*#__PURE__*/function () {
       phone_number: phone_number || ''
     };
   }
-
   var _proto = Address.prototype;
-
   _proto.is_valid_address = function is_valid_address() {
     for (var p in this.data) {
       if ((!this.data[p] || this.data[p] === '') && p !== 'address2') {
         return false;
       }
     }
-
     return true;
   };
-
   return Address;
 }();
-
 export { Address as default };

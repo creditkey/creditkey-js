@@ -8,10 +8,13 @@ const modal = source => {
   // If so, simply redisplay the modal.
   const existingModal = document.getElementById('creditkey-modal');
 
+  const sourceUrl = new URL(source);
+  sourceUrl.searchParams.append('modal', true);
+
   if (existingModal !== null) {
     let iframe = document.getElementById('creditkey-iframe');
     let url = iframe.src;
-    if (url !== source + '?modal=true') {
+    if (url !== `${sourceUrl.href}`) {
       existingModal.remove();
       return modal(source);
     }
@@ -21,7 +24,7 @@ const modal = source => {
     
     const body = document.body;
     // default height set for UX during load, will be changed via updateParent() from inside iframe content later
-    let iframe = `<iframe scrolling="no" id="creditkey-iframe" src="${source + '?modal=true'}" style="height: 100vh;"></iframe>`;
+    let iframe = `<iframe scrolling="no" id="creditkey-iframe" src="${sourceUrl.href}" style="height: 100vh;"></iframe>`;
 
     if (!validate_url(source)) {
       iframe = `An invalid resource was requested`;
