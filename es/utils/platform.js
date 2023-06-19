@@ -5,7 +5,7 @@ var STAGE = 'staging';
 var PREVIEW = 'preview';
 var PROD = 'production';
 export var api = function api(platform) {
-  if (platform === DEV) return process.env.REACT_APP_API ? process.env.REACT_APP_API : 'http://localhost:9100';
+  if (platform === DEV) return process.env.REACT_APP_API ? process.env.REACT_APP_API : 'http://ck-web.creditkey.localhost';
   if (platform === PREVIEW) return 'https://preview.creditkey.com';
   if (platform === STAGE) return 'https://staging.creditkey.com/app';
   if (platform === PROD) return 'https://www.creditkey.com/app';
@@ -13,7 +13,7 @@ export var api = function api(platform) {
 };
 
 export var applyUI = function applyUI(platform) {
-  if (platform === DEV) return process.env.REACT_APP_APPLY_UI ? process.env.REACT_APP_APPLY_UI : 'http://apply.localhost:3001';
+  if (platform === DEV) return process.env.REACT_APP_APPLY_UI ? process.env.REACT_APP_APPLY_UI : 'http://apply.creditkey.localhost';
   if (platform === PREVIEW) return 'https://apply.preview.creditkey.com';
   if (platform === STAGE) return 'https://staging-apply.creditkey.com';
   if (platform === PROD) return 'https://apply.creditkey.com';
@@ -21,10 +21,10 @@ export var applyUI = function applyUI(platform) {
 };
 
 export var marketingUI = function marketingUI(platform) {
-  if (platform === DEV) return process.env.REACT_APP_MARKETING_UI ? process.env.REACT_APP_MARKETING_UI : 'http://localhost:3002';
+  if (platform === DEV) return process.env.REACT_APP_MARKETING_UI ? process.env.REACT_APP_MARKETING_UI : 'http://marketing.creditkey.localhost';
   if (platform === STAGE) return 'https://staging-marketing.creditkey.com';
   if (platform === PREVIEW) return 'https://marketing.preview.creditkey.com';
-  if (platform === PROD) return 'https://beta-marketing.creditkey.com';
+  if (platform === PROD) return 'https://marketing.creditkey.com';
   return platform; // custom URL - for testing
 };
 

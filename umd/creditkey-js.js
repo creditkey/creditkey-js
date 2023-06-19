@@ -1,5 +1,5 @@
 /*!
- * @credit-key/creditkey-js v1.2.4 - https://www.creditkey.com
+ * @credit-key/creditkey-js v1.2.6 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -114,7 +114,7 @@ var STAGE = 'staging';
 var PREVIEW = 'preview';
 var PROD = 'production';
 var api = function api(platform) {
-  if (platform === DEV) return process.env.REACT_APP_API ? process.env.REACT_APP_API : 'http://localhost:9100';
+  if (platform === DEV) return process.env.REACT_APP_API ? process.env.REACT_APP_API : 'http://ck-web.creditkey.localhost';
   if (platform === PREVIEW) return 'https://preview.creditkey.com';
   if (platform === STAGE) return 'https://staging.creditkey.com/app';
   if (platform === PROD) return 'https://www.creditkey.com/app';
@@ -122,7 +122,7 @@ var api = function api(platform) {
 };
 
 var applyUI = function applyUI(platform) {
-  if (platform === DEV) return process.env.REACT_APP_APPLY_UI ? process.env.REACT_APP_APPLY_UI : 'http://apply.localhost:3001';
+  if (platform === DEV) return process.env.REACT_APP_APPLY_UI ? process.env.REACT_APP_APPLY_UI : 'http://apply.creditkey.localhost';
   if (platform === PREVIEW) return 'https://apply.preview.creditkey.com';
   if (platform === STAGE) return 'https://staging-apply.creditkey.com';
   if (platform === PROD) return 'https://apply.creditkey.com';
@@ -130,10 +130,10 @@ var applyUI = function applyUI(platform) {
 };
 
 var marketingUI = function marketingUI(platform) {
-  if (platform === DEV) return process.env.REACT_APP_MARKETING_UI ? process.env.REACT_APP_MARKETING_UI : 'http://localhost:3002';
+  if (platform === DEV) return process.env.REACT_APP_MARKETING_UI ? process.env.REACT_APP_MARKETING_UI : 'http://marketing.creditkey.localhost';
   if (platform === STAGE) return 'https://staging-marketing.creditkey.com';
   if (platform === PREVIEW) return 'https://marketing.preview.creditkey.com';
-  if (platform === PROD) return 'https://beta-marketing.creditkey.com';
+  if (platform === PROD) return 'https://marketing.creditkey.com';
   return platform; // custom URL - for testing
 };
 
@@ -1205,15 +1205,15 @@ var client_Client = /*#__PURE__*/function () {
     var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return components_modal(url);
   };
-  _proto.get_apply_now = function get_apply_now(type) {
-    var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/apply.html?' + this.key + '&type=' + type;
+  _proto.get_apply_now = function get_apply_now(type, charges) {
+    var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/apply.html?public_key=' + this.key + '&type=' + type + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return iframes_frame(url);
   };
   _proto.get_checkout_display = function get_checkout_display(charges) {
     if (charges && typeof charges !== 'object') {
       return reject('charges should be a charges object');
     }
-    var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/checkout.html?' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/checkout.html?public_key=' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return iframes_frame(url, false);
   }
 

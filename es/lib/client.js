@@ -117,15 +117,15 @@ var Client = /*#__PURE__*/function () {
     var url = pdpHost(marketingUI, this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return modal(url);
   };
-  _proto.get_apply_now = function get_apply_now(type) {
-    var url = pdpHost(marketingUI, this.platform) + '/apply.html?' + this.key + '&type=' + type;
+  _proto.get_apply_now = function get_apply_now(type, charges) {
+    var url = pdpHost(marketingUI, this.platform) + '/apply.html?public_key=' + this.key + '&type=' + type + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return frame(url);
   };
   _proto.get_checkout_display = function get_checkout_display(charges) {
     if (charges && typeof charges !== 'object') {
       return reject('charges should be a charges object');
     }
-    var url = pdpHost(marketingUI, this.platform) + '/checkout.html?' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
+    var url = pdpHost(marketingUI, this.platform) + '/checkout.html?public_key=' + this.key + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return frame(url, false);
   }
 
