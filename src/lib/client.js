@@ -93,8 +93,8 @@ export default class Client {
     return modal(url);
   }
 
-  get_apply_now(type) {
-    const url = pdpHost(marketingUI, this.platform) + '/apply.html?public_key=' + this.key + '&type=' + type;
+  get_apply_now(type, charges) {
+    const url = pdpHost(marketingUI, this.platform) + '/apply.html?public_key=' + this.key + '&type=' + type + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
     return frame(url);
   }
 
