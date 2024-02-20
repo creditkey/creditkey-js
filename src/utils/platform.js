@@ -22,7 +22,7 @@ export const applyUI = platform => {
 }
 
 export const marketingUI = platform => {
-  if (platform === DEV) return process.env.REACT_APP_MARKETING_UI ? process.env.REACT_APP_MARKETING_UI : 'http://marketing.creditkey.localhost';
+  if (platform === DEV) return process.env.REACT_APP_MARKETING_UI ? process.env.REACT_APP_MARKETING_UI : 'http://localhost:3002';
   if (platform === STAGE) return 'https://staging-marketing.creditkey.com';
   if (platform === PREVIEW) return 'https://marketing.preview.creditkey.com';
   if (platform === PROD) return 'https://marketing.creditkey.com';
