@@ -91,7 +91,7 @@ function registerPostMessageCallback(completionCallback) {
     } else if (event.action == 'complete' && event.type == 'modal') {
       if (completionCallback) {
         const params = new URL(event.options);
-        completionCallback(params.searchParams.get('id'));
+        completionCallback(params.searchParams.get('id'), remove);
       } else {
         redirect(event.options);
       }
