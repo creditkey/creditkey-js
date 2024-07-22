@@ -6,7 +6,7 @@ const PREVIEW = 'preview';
 const PROD = 'production';
 
 export const api = platform => {
-  if (platform === DEV) return process.env.REACT_APP_API ? process.env.REACT_APP_API : 'http://localhost:9100';
+  if (platform === DEV) return process.env.REACT_APP_API ? process.env.REACT_APP_API : 'http://ck-web.creditkey.localhost';
   if (platform === PREVIEW) return 'https://preview.creditkey.com';
   if (platform === STAGE) return 'https://staging.creditkey.com/app';
   if (platform === PROD) return 'https://www.creditkey.com/app';
@@ -22,7 +22,7 @@ export const applyUI = platform => {
 }
 
 export const marketingUI = platform => {
-  if (platform === DEV) return process.env.REACT_APP_MARKETING_UI ? process.env.REACT_APP_MARKETING_UI : 'http://localhost:3004';
+  if (platform === DEV) return process.env.REACT_APP_MARKETING_UI ? process.env.REACT_APP_MARKETING_UI : 'http://localhost:3002';
   if (platform === STAGE) return 'https://staging-marketing.creditkey.com';
   if (platform === PREVIEW) return 'https://marketing.preview.creditkey.com';
   if (platform === PROD) return 'https://marketing.creditkey.com';
@@ -31,8 +31,6 @@ export const marketingUI = platform => {
 
 export const pdpHost = (resource, platform) => {
   const host = window.location.hostname;
-
-  console.log('preview testing: ' + host.indexOf('preview'), host.indexOf('dev'));
 
   if(host.indexOf('staging') >= 0 || host.indexOf('dev') >= 0) {
     return resource(STAGE);

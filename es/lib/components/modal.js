@@ -1,7 +1,7 @@
 import styles from '../../styles/index.sass';
 import { api } from '../../utils/platform';
-var modal = function modal(source) {
-  registerPostMessageCallback();
+var modal = function modal(source, completionCallback) {
+  registerPostMessageCallback(completionCallback);
 
   // Check to see if we've already created the modal - but hidden it when the user clicked off.
   // If so, simply redisplay the modal.
@@ -53,7 +53,7 @@ function redirect(uri) {
     window.location.replace(uri);
   }
 }
-function registerPostMessageCallback() {
+function registerPostMessageCallback(completionCallback) {
   window.addEventListener('message', function (e) {
     if (!e) return false;
     if (e && !e.data) return false;
@@ -72,7 +72,12 @@ function registerPostMessageCallback() {
     if (event.action === 'cancel' && event.type === 'modal') {
       remove();
     } else if (event.action == 'complete' && event.type == 'modal') {
-      redirect(event.options);
+      if (completionCallback) {
+        var params = new URL(event.options);
+        completionCallback(params.searchParams.get('id'));
+      } else {
+        redirect(event.options);
+      }
     } else if (event.action == 'height' && event.type == 'modal') {
       var total_height = event.options + 14; // 14 allows padding underneath content (usually legal footer)
 
