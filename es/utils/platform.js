@@ -25,6 +25,13 @@ export var marketingUI = function marketingUI(platform) {
   if (platform === PROD) return 'https://marketing.creditkey.com';
   return platform; // custom URL - for testing
 };
+export var rechargeUI = function rechargeUI(platform) {
+  if (platform === DEV) return process.env.REACT_APP_RECHARGE_UI ? process.env.REACT_APP_RECHARGE_UI : 'http://recharge.localhost:3001';
+  if (platform === STAGE) return 'https://staging-recharge.creditkey.com';
+  if (platform === PREVIEW) return 'https://recharge.preview.creditkey.com';
+  if (platform === PROD) return 'https://recharge.creditkey.com';
+  return platform; // custom URL - for testing
+};
 export var pdpHost = function pdpHost(resource, platform) {
   var host = window.location.hostname;
   if (host.indexOf('staging') >= 0 || host.indexOf('dev') >= 0) {

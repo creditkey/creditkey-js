@@ -29,6 +29,14 @@ export const marketingUI = platform => {
   return platform; // custom URL - for testing
 }
 
+export const rechargeUI = platform => {
+  if (platform === DEV) return process.env.REACT_APP_RECHARGE_UI ? process.env.REACT_APP_RECHARGE_UI : 'http://recharge.localhost:3001';
+  if (platform === STAGE) return 'https://staging-recharge.creditkey.com';
+  if (platform === PREVIEW) return 'https://recharge.preview.creditkey.com';
+  if (platform === PROD) return 'https://recharge.creditkey.com';
+  return platform; // custom URL - for testing
+}
+
 export const pdpHost = (resource, platform) => {
   const host = window.location.hostname;
 

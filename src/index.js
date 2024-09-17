@@ -4,6 +4,7 @@ import Address from './lib/address';
 import Charges from './lib/charges';
 import checkout from './lib/checkout';
 import apply from './lib/apply';
+import recharge from './lib/recharge';
 
 export default { 
   Client,
@@ -11,5 +12,6 @@ export default {
   Address,
   Charges,
   apply,
-  checkout 
+  checkout,
+  recharge
 }

@@ -1,5 +1,5 @@
 /*!
- * @credit-key/creditkey-js v1.2.7 - https://www.creditkey.com
+ * @credit-key/creditkey-js v1.2.8 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -106,6 +106,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return api; });
 /* unused harmony export applyUI */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return marketingUI; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return rechargeUI; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return pdpHost; });
 
 
@@ -132,6 +133,13 @@ var marketingUI = function marketingUI(platform) {
   if (platform === STAGE) return 'https://staging-marketing.creditkey.com';
   if (platform === PREVIEW) return 'https://marketing.preview.creditkey.com';
   if (platform === PROD) return 'https://marketing.creditkey.com';
+  return platform; // custom URL - for testing
+};
+var rechargeUI = function rechargeUI(platform) {
+  if (platform === DEV) return process.env.REACT_APP_RECHARGE_UI ? process.env.REACT_APP_RECHARGE_UI : 'http://recharge.localhost:3001';
+  if (platform === STAGE) return 'https://staging-recharge.creditkey.com';
+  if (platform === PREVIEW) return 'https://recharge.preview.creditkey.com';
+  if (platform === PROD) return 'https://recharge.creditkey.com';
   return platform; // custom URL - for testing
 };
 var pdpHost = function pdpHost(resource, platform) {
@@ -672,7 +680,7 @@ module.exports = function (list, options) {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".creditkey{all:initial}.creditkey *{all:unset}.creditkey{z-index:50000;text-decoration:none !important;font-family:\"Proxima Nova\", \"Helvetica Neue\", Helvetica, Arial, sans-serif}.creditkey .modal-close{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-moz-appearance:none;-webkit-appearance:none;background-color:rgba(10,10,10,0.2);border:none;border-radius:9999px;cursor:pointer;pointer-events:auto;display:inline-block;flex-grow:0;flex-shrink:0;font-size:0;height:20px;max-height:20px;max-width:20px;min-height:20px;min-width:20px;outline:none;position:relative;vertical-align:top;width:20px}.creditkey .modal-close::before,.creditkey .modal-close::after{background-color:#fff;content:\"\";display:block;left:50%;position:absolute;top:50%;transform:translateX(-50%) translateY(-50%) rotate(45deg);transform-origin:center center}.creditkey .modal-close::before{height:2px;width:50%}.creditkey .modal-close::after{height:50%;width:2px}.creditkey .modal-close:hover,.creditkey .modal-close:focus{background-color:rgba(10,10,10,0.3)}.creditkey .modal-close:active{background-color:rgba(10,10,10,0.4)}.creditkey .is-small.modal-close{height:16px;max-height:16px;max-width:16px;min-height:16px;min-width:16px;width:16px}.creditkey .is-medium.modal-close{height:24px;max-height:24px;max-width:24px;min-height:24px;min-width:24px;width:24px}.creditkey .is-large.modal-close{height:32px;max-height:32px;max-width:32px;min-height:32px;min-width:32px;width:32px}.creditkey .modal,.creditkey .ck-modal,.creditkey .modal-background,.creditkey .ck-modal-background{bottom:0;left:0;position:absolute;right:0;top:0}.creditkey .modal,.creditkey .ck-modal{align-items:center;display:none;flex-direction:column;justify-content:center;overflow:hidden;position:fixed;z-index:50001}.creditkey .modal.is-active,.creditkey .is-active.ck-modal{display:flex}.creditkey .modal-background,.creditkey .ck-modal-background{background-color:rgba(10,10,10,0.86)}.creditkey .modal-content,.creditkey .ck-modal-content,.creditkey .ck-modal-card,.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{margin:0 20px;max-height:calc(100vh - 160px);overflow:auto;position:relative;width:100%}@media screen and (min-width: 769px){.creditkey .modal-content,.creditkey .ck-modal-content,.creditkey .ck-modal-card,.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{margin:0 auto;max-height:calc(100vh - 40px);width:650px}}.creditkey .modal-close{background:none;height:40px;position:fixed;right:20px;top:20px;width:40px}.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{display:flex;flex-direction:column;max-height:calc(100vh - 40px);overflow:hidden;-ms-overflow-y:visible}.creditkey .modal-card-head,.creditkey .modal-card-foot{align-items:center;background-color:#f5f5f5;display:flex;flex-shrink:0;justify-content:flex-start;padding:20px;position:relative}.creditkey .modal-card-head{border-bottom:1px solid #dbdbdb;border-top-left-radius:6px;border-top-right-radius:6px}.creditkey .modal-card-title{color:#363636;flex-grow:1;flex-shrink:0;font-size:1.5rem;line-height:1}.creditkey .modal-card-foot{border-bottom-left-radius:6px;border-bottom-right-radius:6px;border-top:1px solid #dbdbdb}.creditkey .modal-card-foot .button:not(:last-child){margin-right:.5em}.creditkey .modal-card-body{-webkit-overflow-scrolling:touch;background-color:#fff;flex-grow:1;flex-shrink:1;overflow:auto;padding:20px}.creditkeya{text-decoration:none !important}.creditkey .button{background-color:#3D9CE5 !important;min-height:40px !important;border-width:0 !important;vertical-align:middle !important;text-decoration:none !important}.creditkey .ck-modal{margin:0 !important;padding-top:50px;max-width:100% !important;width:100% !important;visibility:visible !important;background:transparent !important;position:absolute;justify-content:normal}@media screen and (max-device-width: 480px){.creditkey .ck-modal{padding-top:0px !important}}.creditkey .ck-modal-background{position:fixed}.creditkey .ck-modal-content,.creditkey .ck-modal-card{min-height:-webkit-min-content !important;min-height:min-content !important;max-height:none;height:auto !important}@media screen and (min-width: 769px), print{.creditkey .ck-modal-content,.creditkey .ck-modal-card{min-height:-webkit-min-content !important;min-height:min-content !important;max-height:none;height:auto !important}}.creditkey .ck-modal-card{min-height:-webkit-min-content !important;min-height:min-content !important;max-height:none !important}.creditkey .ck-modal-content{overflow:hidden;-webkit-overflow-scrolling:touch;border-radius:5px;background-color:#fff;background-image:url(\"https://www.creditkey.com/app/assets/header/ck-nav-logo-d79f74bc03213d02a5ab4cd1c484cfcfb533c2abf5f05ee35cd67c5239693a28.svg\");background-repeat:no-repeat;background-position:center;height:auto;min-height:-webkit-min-content;min-height:min-content;max-height:none}@media screen and (max-width: 1023px){.creditkey .ck-modal-content .ck-modal-content{height:100%;border-radius:0 !important}}.creditkey #creditkey-iframe{margin:auto;width:100%;border:none;height:inherit}.creditkey .payment-icon{display:inline-block !important;margin-right:5px !important;vertical-align:middle !important}.creditkey .terms{text-decoration:underline;color:#3D9CE5;cursor:pointer}.creditkey .terms:hover{text-decoration:none}.creditkey .pdp{padding:0 5px 0 0;font-size:16px !important;font-weight:bold}.creditkey .pdp-text{font-size:16px !important;font-weight:400}.creditkey .ck-offer{float:right;text-align:left}.creditkey .ck-logo-small{height:22px !important}.creditkey .ck-logo-medium{height:22px !important}.creditkey .ck-logo-large{height:22px !important}#creditkey-pdp-iframe{width:100% !important;max-height:70px !important}\n", ""]);
+exports.push([module.i, ".creditkey{all:initial}.creditkey *{all:unset}.creditkey{z-index:50000;text-decoration:none !important;font-family:\"Proxima Nova\", \"Helvetica Neue\", Helvetica, Arial, sans-serif}.creditkey .modal-close{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-moz-appearance:none;-webkit-appearance:none;background-color:rgba(10,10,10,0.2);border:none;border-radius:9999px;cursor:pointer;pointer-events:auto;display:inline-block;flex-grow:0;flex-shrink:0;font-size:0;height:20px;max-height:20px;max-width:20px;min-height:20px;min-width:20px;outline:none;position:relative;vertical-align:top;width:20px}.creditkey .modal-close::before,.creditkey .modal-close::after{background-color:#fff;content:\"\";display:block;left:50%;position:absolute;top:50%;transform:translateX(-50%) translateY(-50%) rotate(45deg);transform-origin:center center}.creditkey .modal-close::before{height:2px;width:50%}.creditkey .modal-close::after{height:50%;width:2px}.creditkey .modal-close:hover,.creditkey .modal-close:focus{background-color:rgba(10,10,10,0.3)}.creditkey .modal-close:active{background-color:rgba(10,10,10,0.4)}.creditkey .is-small.modal-close{height:16px;max-height:16px;max-width:16px;min-height:16px;min-width:16px;width:16px}.creditkey .is-medium.modal-close{height:24px;max-height:24px;max-width:24px;min-height:24px;min-width:24px;width:24px}.creditkey .is-large.modal-close{height:32px;max-height:32px;max-width:32px;min-height:32px;min-width:32px;width:32px}.creditkey .modal,.creditkey .ck-modal,.creditkey .modal-background,.creditkey .ck-modal-background{bottom:0;left:0;position:absolute;right:0;top:0}.creditkey .modal,.creditkey .ck-modal{align-items:center;display:none;flex-direction:column;justify-content:center;overflow:hidden;position:fixed;z-index:50001}.creditkey .modal.is-active,.creditkey .is-active.ck-modal{display:flex}.creditkey .modal-background,.creditkey .ck-modal-background{background-color:rgba(10,10,10,0.86)}.creditkey .modal-content,.creditkey .ck-modal-content,.creditkey .ck-modal-card,.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{margin:0 20px;max-height:calc(100vh - 160px);overflow:auto;position:relative;width:100%}@media screen and (min-width: 769px){.creditkey .modal-content,.creditkey .ck-modal-content,.creditkey .ck-modal-card,.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{margin:0 auto;max-height:calc(100vh - 40px);width:650px}}.creditkey .modal-close{background:none;height:40px;position:fixed;right:20px;top:20px;width:40px}.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{display:flex;flex-direction:column;max-height:calc(100vh - 40px);overflow:hidden;-ms-overflow-y:visible}.creditkey .modal-card-head,.creditkey .modal-card-foot{align-items:center;background-color:#f5f5f5;display:flex;flex-shrink:0;justify-content:flex-start;padding:20px;position:relative}.creditkey .modal-card-head{border-bottom:1px solid #dbdbdb;border-top-left-radius:6px;border-top-right-radius:6px}.creditkey .modal-card-title{color:#363636;flex-grow:1;flex-shrink:0;font-size:1.5rem;line-height:1}.creditkey .modal-card-foot{border-bottom-left-radius:6px;border-bottom-right-radius:6px;border-top:1px solid #dbdbdb}.creditkey .modal-card-foot .button:not(:last-child){margin-right:.5em}.creditkey .modal-card-body{-webkit-overflow-scrolling:touch;background-color:#fff;flex-grow:1;flex-shrink:1;overflow:auto;padding:20px}.creditkeya{text-decoration:none !important}.creditkey .button{background-color:#3D9CE5 !important;min-height:40px !important;border-width:0 !important;vertical-align:middle !important;text-decoration:none !important}.creditkey .ck-modal{margin:0 !important;padding-top:50px;max-width:100% !important;width:100% !important;visibility:visible !important;background:transparent !important;position:absolute;justify-content:normal}@media screen and (max-device-width: 480px){.creditkey .ck-modal{padding-top:0px !important}}.creditkey .ck-modal-background{position:fixed}.creditkey .ck-modal-content,.creditkey .ck-modal-card{min-height:min-content !important;max-height:none;height:auto !important}@media screen and (min-width: 769px), print{.creditkey .ck-modal-content,.creditkey .ck-modal-card{min-height:min-content !important;max-height:none;height:auto !important}}.creditkey .ck-modal-card{min-height:min-content !important;max-height:none !important}.creditkey .ck-modal-content{overflow:hidden;-webkit-overflow-scrolling:touch;border-radius:5px;background-color:#fff;background-image:url(\"https://www.creditkey.com/app/assets/header/ck-nav-logo-d79f74bc03213d02a5ab4cd1c484cfcfb533c2abf5f05ee35cd67c5239693a28.svg\");background-repeat:no-repeat;background-position:center;height:auto;min-height:min-content;max-height:none}@media screen and (max-width: 1023px){.creditkey .ck-modal-content .ck-modal-content{height:100%;border-radius:0 !important}}.creditkey #creditkey-iframe{margin:auto;width:100%;border:none;height:inherit}.creditkey .payment-icon{display:inline-block !important;margin-right:5px !important;vertical-align:middle !important}.creditkey .terms{text-decoration:underline;color:#3D9CE5;cursor:pointer}.creditkey .terms:hover{text-decoration:none}.creditkey .pdp{padding:0 5px 0 0;font-size:16px !important;font-weight:bold}.creditkey .pdp-text{font-size:16px !important;font-weight:400}.creditkey .ck-offer{float:right;text-align:left}.creditkey .ck-logo-small{height:22px !important}.creditkey .ck-logo-medium{height:22px !important}.creditkey .ck-logo-large{height:22px !important}#creditkey-pdp-iframe{width:100% !important;max-height:70px !important}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -1354,7 +1362,34 @@ var apply_apply = function apply(key, type, platform) {
   }
 };
 /* harmony default export */ var lib_apply = (apply_apply);
+// CONCATENATED MODULE: ./src/lib/recharge.js
+
+
+
+var recharge_recharge = function recharge(key, type, platform) {
+  if (type === void 0) {
+    type = 'modal';
+  }
+  if (platform === void 0) {
+    platform = 'production';
+  }
+  if (!key) {
+    throw new Error('API public key required.');
+  }
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth'
+  });
+  if (type.toLowerCase() === 'modal') {
+    return components_modal(Object(utils_platform["d" /* rechargeUI */])(platform) + '/' + key);
+  } else if (type.toLowerCase() === 'redirect') {
+    return lib_redirect(Object(utils_platform["d" /* rechargeUI */])(platform) + '/' + key);
+  }
+};
+/* harmony default export */ var lib_recharge = (recharge_recharge);
 // CONCATENATED MODULE: ./src/index.js
+
 
 
 
@@ -1367,7 +1402,8 @@ var apply_apply = function apply(key, type, platform) {
   Address: Address,
   Charges: Charges,
   apply: lib_apply,
-  checkout: lib_checkout
+  checkout: lib_checkout,
+  recharge: lib_recharge
 });
 
 /***/ })

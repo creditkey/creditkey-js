@@ -4,11 +4,13 @@ import Address from './lib/address';
 import Charges from './lib/charges';
 import checkout from './lib/checkout';
 import apply from './lib/apply';
+import recharge from './lib/recharge';
 export default {
   Client: Client,
   CartItem: CartItem,
   Address: Address,
   Charges: Charges,
   apply: apply,
-  checkout: checkout
+  checkout: checkout,
+  recharge: recharge
 };
