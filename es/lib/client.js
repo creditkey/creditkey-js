@@ -19,7 +19,7 @@ var Client = /*#__PURE__*/function () {
   _proto.begin_checkout = function begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl, orderCompleteUrl, mode, merchant_data) {
     var _this = this;
     return new Promise(function (resolve, reject) {
-      if (!cartItems || !billingAddress || !charges || !remoteId || !customerId || !returnUrl || !cancelUrl) {
+      if (!cartItems || !billingAddress || !charges || !customerId || !returnUrl || !cancelUrl) {
         return reject('missing required data');
       }
       if (!Array.isArray(cartItems)) {
