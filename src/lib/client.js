@@ -16,7 +16,7 @@ export default class Client {
 
   begin_checkout(cartItems, billingAddress, shippingAddress, charges, remoteId, customerId, returnUrl, cancelUrl, orderCompleteUrl, mode, merchant_data) {
     return new Promise((resolve, reject) => {
-      if (!cartItems || !billingAddress || !charges || !remoteId || !customerId || !returnUrl || !cancelUrl) {
+      if (!cartItems || !billingAddress || !charges || !customerId || !returnUrl || !cancelUrl) {
         return reject('missing required data');
       }
 
