@@ -672,7 +672,7 @@ module.exports = function (list, options) {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, ".creditkey{all:initial}.creditkey *{all:unset}.creditkey{z-index:50000;text-decoration:none !important;font-family:\"Proxima Nova\", \"Helvetica Neue\", Helvetica, Arial, sans-serif}.creditkey .modal-close{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-moz-appearance:none;-webkit-appearance:none;background-color:rgba(10,10,10,0.2);border:none;border-radius:9999px;cursor:pointer;pointer-events:auto;display:inline-block;flex-grow:0;flex-shrink:0;font-size:0;height:20px;max-height:20px;max-width:20px;min-height:20px;min-width:20px;outline:none;position:relative;vertical-align:top;width:20px}.creditkey .modal-close::before,.creditkey .modal-close::after{background-color:#fff;content:\"\";display:block;left:50%;position:absolute;top:50%;transform:translateX(-50%) translateY(-50%) rotate(45deg);transform-origin:center center}.creditkey .modal-close::before{height:2px;width:50%}.creditkey .modal-close::after{height:50%;width:2px}.creditkey .modal-close:hover,.creditkey .modal-close:focus{background-color:rgba(10,10,10,0.3)}.creditkey .modal-close:active{background-color:rgba(10,10,10,0.4)}.creditkey .is-small.modal-close{height:16px;max-height:16px;max-width:16px;min-height:16px;min-width:16px;width:16px}.creditkey .is-medium.modal-close{height:24px;max-height:24px;max-width:24px;min-height:24px;min-width:24px;width:24px}.creditkey .is-large.modal-close{height:32px;max-height:32px;max-width:32px;min-height:32px;min-width:32px;width:32px}.creditkey .modal,.creditkey .ck-modal,.creditkey .modal-background,.creditkey .ck-modal-background{bottom:0;left:0;position:absolute;right:0;top:0}.creditkey .modal,.creditkey .ck-modal{align-items:center;display:none;flex-direction:column;justify-content:center;overflow:hidden;position:fixed;z-index:50001}.creditkey .modal.is-active,.creditkey .is-active.ck-modal{display:flex}.creditkey .modal-background,.creditkey .ck-modal-background{background-color:rgba(10,10,10,0.86)}.creditkey .modal-content,.creditkey .ck-modal-content,.creditkey .ck-modal-card,.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{margin:0 20px;max-height:calc(100vh - 160px);overflow:auto;position:relative;width:100%}@media screen and (min-width: 769px){.creditkey .modal-content,.creditkey .ck-modal-content,.creditkey .ck-modal-card,.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{margin:0 auto;max-height:calc(100vh - 40px);width:650px}}.creditkey .modal-close{background:none;height:40px;position:fixed;right:20px;top:20px;width:40px}.creditkey .modal-card,.creditkey .ck-modal-content,.creditkey .ck-modal-card{display:flex;flex-direction:column;max-height:calc(100vh - 40px);overflow:hidden;-ms-overflow-y:visible}.creditkey .modal-card-head,.creditkey .modal-card-foot{align-items:center;background-color:#f5f5f5;display:flex;flex-shrink:0;justify-content:flex-start;padding:20px;position:relative}.creditkey .modal-card-head{border-bottom:1px solid #dbdbdb;border-top-left-radius:6px;border-top-right-radius:6px}.creditkey .modal-card-title{color:#363636;flex-grow:1;flex-shrink:0;font-size:1.5rem;line-height:1}.creditkey .modal-card-foot{border-bottom-left-radius:6px;border-bottom-right-radius:6px;border-top:1px solid #dbdbdb}.creditkey .modal-card-foot .button:not(:last-child){margin-right:.5em}.creditkey .modal-card-body{-webkit-overflow-scrolling:touch;background-color:#fff;flex-grow:1;flex-shrink:1;overflow:auto;padding:20px}.creditkeya{text-decoration:none !important}.creditkey .button{background-color:#3D9CE5 !important;min-height:40px !important;border-width:0 !important;vertical-align:middle !important;text-decoration:none !important}.creditkey .ck-modal{margin:0 !important;padding-top:50px;max-width:100% !important;width:100% !important;visibility:visible !important;background:transparent !important;position:absolute;justify-content:normal}@media screen and (max-device-width: 480px){.creditkey .ck-modal{padding-top:0px !important}}.creditkey .ck-modal-background{position:fixed}.creditkey .ck-modal-content,.creditkey .ck-modal-card{min-height:min-content !important;max-height:none;height:auto !important}@media screen and (min-width: 769px), print{.creditkey .ck-modal-content,.creditkey .ck-modal-card{min-height:min-content !important;max-height:none;height:auto !important}}.creditkey .ck-modal-card{min-height:min-content !important;max-height:none !important}.creditkey .ck-modal-content{overflow:hidden;-webkit-overflow-scrolling:touch;border-radius:5px;background-color:#fff;background-image:url(\"https://www.creditkey.com/app/assets/header/ck-nav-logo-d79f74bc03213d02a5ab4cd1c484cfcfb533c2abf5f05ee35cd67c5239693a28.svg\");background-repeat:no-repeat;background-position:center;height:auto;min-height:min-content;max-height:none}@media screen and (max-width: 1023px){.creditkey .ck-modal-content .ck-modal-content{height:100%;border-radius:0 !important}}.creditkey #creditkey-iframe{margin:auto;width:100%;border:none;height:inherit}.creditkey .payment-icon{display:inline-block !important;margin-right:5px !important;vertical-align:middle !important}.creditkey .terms{text-decoration:underline;color:#3D9CE5;cursor:pointer}.creditkey .terms:hover{text-decoration:none}.creditkey .pdp{padding:0 5px 0 0;font-size:16px !important;font-weight:bold}.creditkey .pdp-text{font-size:16px !important;font-weight:400}.creditkey .ck-offer{float:right;text-align:left}.creditkey .ck-logo-small{height:22px !important}.creditkey .ck-logo-medium{height:22px !important}.creditkey .ck-logo-large{height:22px !important}#creditkey-pdp-iframe{width:100% !important;max-height:70px !important}\n", ""]);
+exports.push([module.i, "/* CreditKey Styles - Converted from sass for compatibility */\n.creditkey {\n  all: initial;\n}\n\n.creditkey * {\n  all: unset;\n}\n\n.creditkey {\n  z-index: 50000;\n  text-decoration: none !important;\n  font-family: \"Proxima Nova\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n}\n\n.creditkey a {\n  text-decoration: none !important;\n}\n\n/* Modal styles based on bulma */\n.ck-modal {\n  margin: 0 !important;\n  padding-top: 50px;\n  max-width: 100% !important;\n  width: 100% !important;\n  visibility: visible !important;\n  background: transparent !important;\n  position: absolute;\n  justify-content: normal;\n  align-items: flex-start;\n  display: flex;\n  overflow: hidden;\n  position: fixed;\n  z-index: 50001;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 0;\n}\n\n@media screen and (max-device-width: 480px) {\n  .ck-modal {\n    padding-top: 0px !important;\n  }\n}\n\n.ck-modal-background {\n  position: fixed;\n  background-color: rgba(10, 10, 10, 0.86);\n  bottom: 0;\n  left: 0;\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n\n.ck-modal-content,\n.ck-modal-card {\n  min-height: -webkit-min-content !important;\n  min-height: min-content !important;\n  max-height: none;\n  height: auto !important;\n  margin: 0 20px;\n  max-height: calc(100vh - 160px);\n  overflow: auto;\n  position: relative;\n  width: 100%;\n}\n\n@media screen and (min-width: 769px) {\n  .ck-modal-content,\n  .ck-modal-card {\n    min-height: -webkit-min-content !important;\n    min-height: min-content !important;\n    max-height: none;\n    height: auto !important;\n    margin: 0 auto;\n    max-height: calc(100vh - 40px);\n    width: 650px;\n  }\n}\n\n.ck-modal-card {\n  min-height: -webkit-min-content !important;\n  min-height: min-content !important;\n  max-height: none !important;\n}\n\n.ck-modal-content {\n  overflow: hidden;\n  -webkit-overflow-scrolling: touch;\n  border-radius: 5px;\n  background-color: #fff;\n  background-image: url(\"https://www.creditkey.com/app/assets/header/ck-nav-logo-d79f74bc03213d02a5ab4cd1c484cfcfb533c2abf5f05ee35cd67c5239693a28.svg\");\n  background-repeat: no-repeat;\n  background-position: center;\n  height: auto;\n  min-height: -webkit-min-content;\n  min-height: min-content;\n  max-height: none;\n}\n\n@media screen and (max-width: 768px) {\n  .ck-modal-content {\n    height: 100%;\n    border-radius: 0 !important;\n  }\n}\n\n/* Button styles */\n.button {\n  background-color: #3D9CE5 !important;\n  min-height: 40px !important;\n  border-width: 0 !important;\n  vertical-align: middle !important;\n  text-decoration: none !important;\n}\n\n/* Custom classes */\n#creditkey-iframe {\n  margin: auto;\n  width: 100%;\n  border: none;\n  height: inherit;\n}\n\n.payment-icon {\n  display: inline-block !important;\n  margin-right: 5px !important;\n  vertical-align: middle !important;\n}\n\n.terms {\n  text-decoration: underline;\n  color: #3D9CE5;\n  cursor: pointer;\n}\n\n.terms:hover {\n  text-decoration: none;\n}\n\n.pdp {\n  padding: 0 5px 0 0;\n  font-size: 16px !important;\n  font-weight: bold;\n}\n\n.pdp-text {\n  font-size: 16px !important;\n  font-weight: 400;\n}\n\n.ck-offer {\n  float: right;\n  text-align: left;\n}\n\n.ck-logo-small {\n  height: 22px !important;\n}\n\n.ck-logo-medium {\n  height: 22px !important;\n}\n\n.ck-logo-large {\n  height: 22px !important;\n}\n\n#creditkey-pdp-iframe {\n  width: 100% !important;\n  max-height: 70px !important;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -919,13 +919,13 @@ var network_Network = function Network(platform, resource) {
   };
 };
 /* harmony default export */ var network = (network_Network);
-// EXTERNAL MODULE: ./src/styles/index.sass
+// EXTERNAL MODULE: ./src/styles/index.css
 var styles = __webpack_require__(3);
 
 // CONCATENATED MODULE: ./src/lib/components/modal.js
 
 
-var modal = function modal(source, completionCallback) {
+var _modal = function modal(source, completionCallback) {
   registerPostMessageCallback(completionCallback);
 
   // Check to see if we've already created the modal - but hidden it when the user clicked off.
@@ -938,7 +938,7 @@ var modal = function modal(source, completionCallback) {
     var url = iframe.src;
     if (url !== "" + sourceUrl.href) {
       existingModal.remove();
-      return modal(source);
+      return _modal(source);
     }
     existingModal.style.display = 'flex';
   } else {
@@ -1024,7 +1024,7 @@ function registerPostMessageCallback(completionCallback) {
     }
   }, false);
 }
-/* harmony default export */ var components_modal = (modal);
+/* harmony default export */ var modal = (_modal);
 // CONCATENATED MODULE: ./src/lib/charges.js
 var Charges = /*#__PURE__*/function () {
   function Charges(total, shipping, tax, discount_amount, grand_total) {
@@ -1082,7 +1082,7 @@ function iframes_registerPostMessageCallback() {
       var c = new client_Client(data.options.public_key, data.options.platform);
       c.enhanced_pdp_modal(charges);
     } else if (data.action === 'apply' && data.options.public_key) {
-      components_modal(data.options.url);
+      modal(data.options.url);
     }
   });
 }
@@ -1204,7 +1204,7 @@ var client_Client = /*#__PURE__*/function () {
     var allowedTypes = ['pdp', 'cart'];
     if (!allowedTypes.includes(type)) return reject('invalid type, allowed types are "pdp", "cart"');
     var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/pdp/' + this.key + '/' + type + '/' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
-    return components_modal(url);
+    return modal(url);
   };
   _proto.get_apply_now = function get_apply_now(type, charges) {
     var url = Object(utils_platform["c" /* pdpHost */])(utils_platform["b" /* marketingUI */], this.platform) + '/apply.html?public_key=' + this.key + '&type=' + type + '&charges=' + [charges.data.total, charges.data.shipping, charges.data.tax, charges.data.discount_amount, charges.data.grand_total].join(',');
@@ -1248,13 +1248,12 @@ var client_Client = /*#__PURE__*/function () {
       customer_id: customer_id
     });
   };
-  _createClass(Client, [{
+  return _createClass(Client, [{
     key: "key_param",
     get: function get() {
       return '?public_key=' + this.key;
     }
   }]);
-  return Client;
 }();
 
 // CONCATENATED MODULE: ./src/lib/cart-item.js
@@ -1322,7 +1321,7 @@ var checkout_checkout = function checkout(source, type, completionCallback) {
   }
   var width = window.screen.availWidth;
   if (type.toLowerCase() === 'modal' && width > 480) {
-    return components_modal(source, completionCallback);
+    return modal(source, completionCallback);
   } else {
     return lib_redirect(source);
   }
@@ -1348,7 +1347,7 @@ var apply_apply = function apply(key, type, platform) {
     behavior: 'smooth'
   });
   if (type.toLowerCase() === 'modal') {
-    return components_modal(Object(utils_platform["a" /* api */])(platform) + '/apply/modal/start/' + key);
+    return modal(Object(utils_platform["a" /* api */])(platform) + '/apply/modal/start/' + key);
   } else if (type.toLowerCase() === 'redirect') {
     return lib_redirect(Object(utils_platform["a" /* api */])(platform) + '/apply/start/' + key);
   }

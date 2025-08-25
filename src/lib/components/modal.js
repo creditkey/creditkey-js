@@ -1,4 +1,4 @@
-import styles from '../../styles/index.sass';
+import styles from '../../styles/index.css';
 import { api } from '../../utils/platform';
 
 const modal = (source, completionCallback) => {
