@@ -10,25 +10,25 @@
     "umd"
   ],
   "scripts": {
-    "build": "nwb build-web-module --copy-files",
+    "build": "NODE_OPTIONS=\"--openssl-legacy-provider\" nwb build-web-module --copy-files",
     "clean": "nwb clean-module",
-    "test": "nwb test",
-    "test:coverage": "nwb test --coverage",
-    "test:watch": "nwb test --server"
+    "test": "NODE_OPTIONS=\"--openssl-legacy-provider\" nwb test",
+    "test:coverage": "NODE_OPTIONS=\"--openssl-legacy-provider\" nwb test --coverage",
+    "test:watch": "NODE_OPTIONS=\"--openssl-legacy-provider\" nwb test --server"
   },
   "dependencies": {
     "bulma": "^1.0.2",
     "lodash.assign": "^4.2.0"
   },
   "devDependencies": {
-    "css-loader": "^7.1.2",
+    "css-loader": "^5.2.7",
     "fetch-mock": "^11.1.5",
     "nwb": "^0.25.2",
     "sass": "^1.82.0",
-    "sass-loader": "^16.0.4",
-    "style-loader": "^4.0.0",
+    "sass-loader": "^10.5.2",
+    "style-loader": "^2.0.0",
     "webpack-bundle-analyzer": "^4.10.2",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^4.10.0"
   },
   "author": "Eben Goodman",
   "homepage": "https://www.creditkey.com",
