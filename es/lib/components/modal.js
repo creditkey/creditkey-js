@@ -1,6 +1,6 @@
 import styles from '../../styles/index.sass';
 import { api } from '../../utils/platform';
-var modal = function modal(source, completionCallback) {
+var _modal = function modal(source, completionCallback) {
   registerPostMessageCallback(completionCallback);
 
   // Check to see if we've already created the modal - but hidden it when the user clicked off.
@@ -13,7 +13,7 @@ var modal = function modal(source, completionCallback) {
     var url = iframe.src;
     if (url !== "" + sourceUrl.href) {
       existingModal.remove();
-      return modal(source);
+      return _modal(source);
     }
     existingModal.style.display = 'flex';
   } else {
@@ -99,4 +99,4 @@ function registerPostMessageCallback(completionCallback) {
     }
   }, false);
 }
-export default modal;
+export default _modal;
