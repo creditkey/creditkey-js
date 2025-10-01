@@ -17,8 +17,16 @@
   text-decoration: none !important;
 }
 
-/* Modal styles based on bulma */
-.ck-modal {
+/* Modal styles based on bulma - properly namespaced under .creditkey */
+.creditkey .button {
+  background-color: #3D9CE5 !important;
+  min-height: 40px !important;
+  border-width: 0 !important;
+  vertical-align: middle !important;
+  text-decoration: none !important;
+}
+
+.creditkey .ck-modal {
   margin: 0 !important;
   padding-top: 50px;
   max-width: 100% !important;
@@ -30,7 +38,6 @@
   align-items: flex-start;
   display: flex;
   overflow: hidden;
-  position: fixed;
   z-index: 50001;
   bottom: 0;
   left: 0;
@@ -39,13 +46,12 @@
 }
 
 @media screen and (max-device-width: 480px) {
-  .ck-modal {
+  .creditkey .ck-modal {
     padding-top: 0px !important;
   }
 }
 
-.ck-modal-background {
-  position: fixed;
+.creditkey .ck-modal-background {
   background-color: rgba(10, 10, 10, 0.86);
   bottom: 0;
   left: 0;
@@ -54,8 +60,8 @@
   top: 0;
 }
 
-.ck-modal-content,
-.ck-modal-card {
+.creditkey .ck-modal-content,
+.creditkey .ck-modal-card {
   min-height: min-content !important;
   max-height: none;
   height: auto !important;
@@ -67,8 +73,8 @@
 }
 
 @media screen and (min-width: 769px) {
-  .ck-modal-content,
-  .ck-modal-card {
+  .creditkey .ck-modal-content,
+  .creditkey .ck-modal-card {
     min-height: min-content !important;
     max-height: none;
     height: auto !important;
@@ -78,12 +84,12 @@
   }
 }
 
-.ck-modal-card {
+.creditkey .ck-modal-card {
   min-height: min-content !important;
   max-height: none !important;
 }
 
-.ck-modal-content {
+.creditkey .ck-modal-content {
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
   border-radius: 5px;
@@ -97,73 +103,65 @@
 }
 
 @media screen and (max-width: 768px) {
-  .ck-modal-content {
+  .creditkey .ck-modal-content {
     height: 100%;
     border-radius: 0 !important;
   }
 }
 
-/* Button styles */
-.button {
-  background-color: #3D9CE5 !important;
-  min-height: 40px !important;
-  border-width: 0 !important;
-  vertical-align: middle !important;
-  text-decoration: none !important;
-}
-
-/* Custom classes */
-#creditkey-iframe {
+/* Custom classes - properly namespaced under .creditkey */
+.creditkey #creditkey-iframe {
   margin: auto;
   width: 100%;
   border: none;
   height: inherit;
 }
 
-.payment-icon {
+.creditkey .payment-icon {
   display: inline-block !important;
   margin-right: 5px !important;
   vertical-align: middle !important;
 }
 
-.terms {
+.creditkey .terms {
   text-decoration: underline;
   color: #3D9CE5;
   cursor: pointer;
 }
 
-.terms:hover {
+.creditkey .terms:hover {
   text-decoration: none;
 }
 
-.pdp {
+.creditkey .pdp {
   padding: 0 5px 0 0;
   font-size: 16px !important;
   font-weight: bold;
 }
 
-.pdp-text {
+.creditkey .pdp-text {
   font-size: 16px !important;
   font-weight: 400;
 }
 
-.ck-offer {
+.creditkey .ck-offer {
   float: right;
   text-align: left;
 }
 
-.ck-logo-small {
+.creditkey .ck-logo-small {
   height: 22px !important;
 }
 
-.ck-logo-medium {
+.creditkey .ck-logo-medium {
   height: 22px !important;
 }
 
-.ck-logo-large {
+.creditkey .ck-logo-large {
   height: 22px !important;
 }
 
+/* This selector remains at root level as it was in the original sass */
 #creditkey-pdp-iframe {
   width: 100% !important;
   max-height: 70px !important;
