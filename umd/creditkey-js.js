@@ -1,5 +1,5 @@
 /*!
- * @credit-key/creditkey-js v1.2.9 - https://www.creditkey.com
+ * @credit-key/creditkey-js v1.3.0 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
