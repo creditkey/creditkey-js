@@ -28,6 +28,9 @@
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^4.10.0"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "author": "Eben Goodman",
   "homepage": "https://www.creditkey.com",
   "license": "MIT",
