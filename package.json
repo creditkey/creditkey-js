@@ -1,6 +1,6 @@
 {
   "name": "@credit-key/creditkey-js",
-  "version": "1.2.9",
+  "version": "1.3.0",
   "description": "Credit Key Javascript SDK",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -10,25 +10,26 @@
     "umd"
   ],
   "scripts": {
-    "build": "nwb build-web-module --copy-files",
+    "build": "NODE_OPTIONS=\"--openssl-legacy-provider\" nwb build-web-module --copy-files",
     "clean": "nwb clean-module",
-    "test": "nwb test",
-    "test:coverage": "nwb test --coverage",
-    "test:watch": "nwb test --server"
+    "test": "NODE_OPTIONS=\"--openssl-legacy-provider\" nwb test",
+    "test:coverage": "NODE_OPTIONS=\"--openssl-legacy-provider\" nwb test --coverage",
+    "test:watch": "NODE_OPTIONS=\"--openssl-legacy-provider\" nwb test --server"
   },
   "dependencies": {
-    "bulma": "^0.9.1",
+    "bulma": "^1.0.2",
     "lodash.assign": "^4.2.0"
   },
   "devDependencies": {
-    "css-loader": "^5.0.1",
-    "fetch-mock": "^9.10.7",
+    "css-loader": "^5.2.7",
+    "fetch-mock": "^11.1.5",
     "nwb": "^0.25.2",
-    "nwb-sass": "^0.10.2",
-    "sass": "^1.62.1",
-    "sass-loader": "^7.1.0",
-    "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-cli": "^4.9.0"
+    "style-loader": "^2.0.0",
+    "webpack-bundle-analyzer": "^4.10.2",
+    "webpack-cli": "^4.10.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "author": "Eben Goodman",
   "homepage": "https://www.creditkey.com",

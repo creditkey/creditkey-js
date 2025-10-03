@@ -1,0 +1,168 @@
+/* CreditKey Styles - Converted from sass for compatibility */
+.creditkey {
+  all: initial;
+}
+
+.creditkey * {
+  all: unset;
+}
+
+.creditkey {
+  z-index: 50000;
+  text-decoration: none !important;
+  font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.creditkey a {
+  text-decoration: none !important;
+}
+
+/* Modal styles based on bulma - properly namespaced under .creditkey */
+.creditkey .button {
+  background-color: #3D9CE5 !important;
+  min-height: 40px !important;
+  border-width: 0 !important;
+  vertical-align: middle !important;
+  text-decoration: none !important;
+}
+
+.creditkey .ck-modal {
+  margin: 0 !important;
+  padding-top: 50px;
+  max-width: 100% !important;
+  width: 100% !important;
+  visibility: visible !important;
+  background: transparent !important;
+  position: absolute;
+  justify-content: normal;
+  align-items: flex-start;
+  display: flex;
+  overflow: hidden;
+  z-index: 50001;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+@media screen and (max-device-width: 480px) {
+  .creditkey .ck-modal {
+    padding-top: 0px !important;
+  }
+}
+
+.creditkey .ck-modal-background {
+  background-color: rgba(10, 10, 10, 0.86);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.creditkey .ck-modal-content,
+.creditkey .ck-modal-card {
+  min-height: min-content !important;
+  max-height: none;
+  height: auto !important;
+  margin: 0 20px;
+  max-height: calc(100vh - 160px);
+  overflow: auto;
+  position: relative;
+  width: 100%;
+}
+
+@media screen and (min-width: 769px) {
+  .creditkey .ck-modal-content,
+  .creditkey .ck-modal-card {
+    min-height: min-content !important;
+    max-height: none;
+    height: auto !important;
+    margin: 0 auto;
+    max-height: calc(100vh - 40px);
+    width: 650px;
+  }
+}
+
+.creditkey .ck-modal-card {
+  min-height: min-content !important;
+  max-height: none !important;
+}
+
+.creditkey .ck-modal-content {
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 5px;
+  background-color: #fff;
+  background-image: url("https://www.creditkey.com/app/assets/header/ck-nav-logo-d79f74bc03213d02a5ab4cd1c484cfcfb533c2abf5f05ee35cd67c5239693a28.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: auto;
+  min-height: min-content;
+  max-height: none;
+}
+
+@media screen and (max-width: 768px) {
+  .creditkey .ck-modal-content {
+    height: 100%;
+    border-radius: 0 !important;
+  }
+}
+
+/* Custom classes - properly namespaced under .creditkey */
+.creditkey #creditkey-iframe {
+  margin: auto;
+  width: 100%;
+  border: none;
+  height: inherit;
+}
+
+.creditkey .payment-icon {
+  display: inline-block !important;
+  margin-right: 5px !important;
+  vertical-align: middle !important;
+}
+
+.creditkey .terms {
+  text-decoration: underline;
+  color: #3D9CE5;
+  cursor: pointer;
+}
+
+.creditkey .terms:hover {
+  text-decoration: none;
+}
+
+.creditkey .pdp {
+  padding: 0 5px 0 0;
+  font-size: 16px !important;
+  font-weight: bold;
+}
+
+.creditkey .pdp-text {
+  font-size: 16px !important;
+  font-weight: 400;
+}
+
+.creditkey .ck-offer {
+  float: right;
+  text-align: left;
+}
+
+.creditkey .ck-logo-small {
+  height: 22px !important;
+}
+
+.creditkey .ck-logo-medium {
+  height: 22px !important;
+}
+
+.creditkey .ck-logo-large {
+  height: 22px !important;
+}
+
+/* This selector remains at root level as it was in the original sass */
+#creditkey-pdp-iframe {
+  width: 100% !important;
+  max-height: 70px !important;
+}
