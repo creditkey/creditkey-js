@@ -45,7 +45,7 @@ describe('Address', () => {
     });
 
     it('accepts a valid address', () => {
-      const address2 = new Address('Test', 'Tester', 'Test Co', 'test@test.com', 'Test Rd', null, 'Test Town', 'MA', '01230');
+      const address2 = new Address('Test', 'Tester', 'Test Co', 'test@test.com', 'Test Rd', null, 'Test Town', 'MA', '01230', '800 555-1234');
       expect(address2.is_valid_address()).toBe(true);
     });
   });

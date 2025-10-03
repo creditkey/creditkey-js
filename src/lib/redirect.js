@@ -3,8 +3,8 @@ const redirect = source => {
   const isModal = source.indexOf('modal');
   isModal >= 0 ? uri = source.replace('modal', 'redirect') : uri = source;
 
-  if(navigator.userAgent.match(/Android/i)) 
-    document.location = uri;      
+  if(navigator.userAgent.match(/Android/i))
+    document.location = uri;
   else
     window.location.href = uri;
 }
