@@ -1,6 +1,7 @@
 import expect from 'expect'
 
 import apply from '../../src/lib/apply';
+import { api } from '../../src/utils/platform';
 
 const key = 'testkey_123456789';
 
@@ -24,8 +25,9 @@ describe('Apply Now', () => {
 
     it('has an iframe with the expected source', () => {
       apply(key, 'modal', 'development');
+      const host = api('development');
 
-      expect(document.getElementById('creditkey-iframe').src).toBe('http://localhost:9100/apply/modal/start/' + key + '?modal=true');
+      expect(document.getElementById('creditkey-iframe').src).toBe(`${host}/apply/modal/start/${key}?modal=true`);
     });
   });
 
