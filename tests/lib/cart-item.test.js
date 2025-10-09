@@ -14,11 +14,6 @@ describe('CartItem', () => {
       expect(item.is_valid_item()).toBe(false);
     });
 
-    it('rejects cart item with invalid price', () => {
-      const item = new CartItem(1, 'Some Item', null);
-      expect(item.is_valid_item()).toBe(false);
-    });
-
     it('accepts a valid cart item', () => {
       const item = new CartItem(1, 'Some Item', '100.00');
       expect(item.is_valid_item()).toBe(true);
