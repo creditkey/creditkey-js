@@ -29,6 +29,21 @@ describe('Apply Now', () => {
 
       expect(document.getElementById('creditkey-iframe').src).toBe(`${host}/apply/modal/start/${key}?modal=true`);
     });
+
+    it('closes the modal when ESC key is pressed', () => {
+      apply(key, 'modal', 'development');
+
+      const modal = document.getElementById('creditkey-modal');
+      expect(modal).toExist();
+      expect(modal.style.display).toBe('');
+
+      // Simulate ESC key press
+      const escEvent = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27 });
+      document.dispatchEvent(escEvent);
+
+      // Modal should be hidden (display: none)
+      expect(modal.style.display).toBe('none');
+    });
   });
 
   describe('Redirect', () => {

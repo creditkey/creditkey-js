@@ -23,6 +23,72 @@ describe('Checkout', () => {
 
       expect(document.getElementById('creditkey-iframe').src).toBe(source + '/?modal=true');
     });
+
+    it('closes the modal when ESC key is pressed', () => {
+      // Create the modal
+      checkout(source);
+
+      const modal = document.getElementById('creditkey-modal');
+      expect(modal).toExist();
+      expect(modal.style.display).toBe('');
+
+      // Simulate ESC key press
+      const escEvent = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27 });
+      document.dispatchEvent(escEvent);
+
+      // Modal should be hidden (display: none)
+      expect(modal.style.display).toBe('none');
+    });
+
+    it('closes the modal when ESC key (legacy keyCode) is pressed', () => {
+      // Create the modal
+      checkout(source);
+
+      const modal = document.getElementById('creditkey-modal');
+      expect(modal).toExist();
+      expect(modal.style.display).toBe('');
+
+      // Simulate ESC key press using legacy keyCode
+      const escEvent = new KeyboardEvent('keydown', { keyCode: 27 });
+      document.dispatchEvent(escEvent);
+
+      // Modal should be hidden (display: none)
+      expect(modal.style.display).toBe('none');
+    });
+
+    it('does not close modal on non-ESC key press', () => {
+      // Create the modal
+      checkout(source);
+
+      const modal = document.getElementById('creditkey-modal');
+      expect(modal).toExist();
+      expect(modal.style.display).toBe('');
+
+      // Simulate non-ESC key press
+      const enterEvent = new KeyboardEvent('keydown', { key: 'Enter', keyCode: 13 });
+      document.dispatchEvent(enterEvent);
+
+      // Modal should still be visible
+      expect(modal.style.display).toBe('');
+    });
+
+    it('does not close modal when ESC is pressed but modal is already hidden', () => {
+      // Create the modal
+      checkout(source);
+
+      const modal = document.getElementById('creditkey-modal');
+      expect(modal).toExist();
+      
+      // Hide the modal first
+      modal.style.display = 'none';
+
+      // Simulate ESC key press
+      const escEvent = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27 });
+      document.dispatchEvent(escEvent);
+
+      // Modal should remain hidden 
+      expect(modal.style.display).toBe('none');
+    });
   });
 
   describe('Redirect', () => {

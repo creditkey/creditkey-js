@@ -1,6 +1,30 @@
 import styles from '../../styles/index.css';
 import { api } from '../../utils/platform';
-var _modal = function modal(source, completionCallback) {
+
+// Global keydown handler for ESC key
+var escKeyHandler = null;
+function registerEscKeyHandler() {
+  // Remove existing handler if any to avoid duplicates
+  removeEscKeyHandler();
+  escKeyHandler = function escKeyHandler(event) {
+    // Check if ESC key was pressed (key code 27 or key 'Escape')
+    if (event.key === 'Escape' || event.keyCode === 27) {
+      var _modal = document.getElementById('creditkey-modal');
+      // Only close if modal is visible
+      if (_modal && _modal.style.display !== 'none') {
+        remove();
+      }
+    }
+  };
+  document.addEventListener('keydown', escKeyHandler);
+}
+function removeEscKeyHandler() {
+  if (escKeyHandler) {
+    document.removeEventListener('keydown', escKeyHandler);
+    escKeyHandler = null;
+  }
+}
+var _modal2 = function modal(source, completionCallback) {
   registerPostMessageCallback(completionCallback);
 
   // Check to see if we've already created the modal - but hidden it when the user clicked off.
@@ -13,9 +37,11 @@ var _modal = function modal(source, completionCallback) {
     var url = iframe.src;
     if (url !== "" + sourceUrl.href) {
       existingModal.remove();
-      return _modal(source);
+      return _modal2(source);
     }
     existingModal.style.display = 'flex';
+    // Re-register ESC key handler when showing existing modal
+    registerEscKeyHandler();
   } else {
     // Otherwise, create the modal.
 
@@ -25,7 +51,9 @@ var _modal = function modal(source, completionCallback) {
     if (!validate_url(source)) {
       _iframe = "An invalid resource was requested";
     }
-    return body.insertAdjacentHTML('beforeend', "<div class=\"creditkey\" id=\"creditkey-modal\"><div class=\"ck-modal is-active\"><div class=\"ck-modal-background\"></div><div class=\"ck-modal-content\" id=\"ck-modal-card\">" + _iframe + "</div></div></div>");
+    body.insertAdjacentHTML('beforeend', "<div class=\"creditkey\" id=\"creditkey-modal\"><div class=\"ck-modal is-active\"><div class=\"ck-modal-background\"></div><div class=\"ck-modal-content\" id=\"ck-modal-card\">" + _iframe + "</div></div></div>");
+    // Register ESC key handler after creating modal
+    registerEscKeyHandler();
   }
 };
 function remove() {
@@ -35,6 +63,8 @@ function remove() {
   if (el !== null) {
     el.style.display = 'none';
   }
+  // Remove ESC key handler when hiding modal
+  removeEscKeyHandler();
 }
 
 // ensure that we're requesting a valid creditkey domain
@@ -99,4 +129,4 @@ function registerPostMessageCallback(completionCallback) {
     }
   }, false);
 }
-export default _modal;
+export default _modal2;
