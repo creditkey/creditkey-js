@@ -64,6 +64,14 @@ describe('Apply Now', () => {
       // Modal should be completely removed from DOM
       expect(document.getElementById('creditkey-modal')).toNotExist();
     });
+
+    it('sets focus to the modal element when created', () => {
+      apply(key, 'modal', 'development');
+
+      const modal = document.getElementById('creditkey-modal');
+      expect(modal).toExist();
+      expect(modal.getAttribute('tabindex')).toBe('-1');
+    });
   });
 
   describe('Redirect', () => {

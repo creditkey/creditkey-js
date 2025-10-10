@@ -74,6 +74,15 @@ const modal = (source, completionCallback) => {
       return modal(source);
     }
     existingModal.style.display = 'flex';
+    
+    // Ensure the existing modal can receive focus and set focus to it
+    if (existingModal) {
+      if (!existingModal.hasAttribute('tabindex')) {
+        existingModal.setAttribute('tabindex', '-1');
+      }
+      existingModal.focus();
+    }
+    
     // Re-register ESC key handler when showing existing modal
     registerEscKeyHandler();
     // Re-register background click handler when showing existing modal
@@ -89,7 +98,14 @@ const modal = (source, completionCallback) => {
       iframe = `An invalid resource was requested`;
     }
 
-    body.insertAdjacentHTML('beforeend', `<div class="creditkey" id="creditkey-modal"><div class="ck-modal is-active"><div class="ck-modal-background"></div><div class="ck-modal-content" id="ck-modal-card">${iframe}</div></div></div>`);
+    body.insertAdjacentHTML('beforeend', `<div class="creditkey" id="creditkey-modal" tabindex="-1"><div class="ck-modal is-active"><div class="ck-modal-background"></div><div class="ck-modal-content" id="ck-modal-card">${iframe}</div></div></div>`);
+    
+    // Set focus to the modal element for accessibility
+    const modalElement = document.getElementById('creditkey-modal');
+    if (modalElement) {
+      modalElement.focus();
+    }
+    
     // Register ESC key handler after creating modal
     registerEscKeyHandler();
     // Register background click handler after creating modal

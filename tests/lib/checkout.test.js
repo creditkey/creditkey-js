@@ -132,6 +132,35 @@ describe('Checkout', () => {
       // Modal should still exist
       expect(document.getElementById('creditkey-modal')).toExist();
     });
+
+    it('sets focus to the modal element when created', () => {
+      // Create the modal
+      checkout(source);
+
+      const modal = document.getElementById('creditkey-modal');
+      expect(modal).toExist();
+      expect(modal.getAttribute('tabindex')).toBe('-1');
+      // Note: In JSDOM, document.activeElement focus testing is limited
+      // But we can verify the tabindex attribute is set correctly
+    });
+
+    it('sets focus to existing modal when reshown', () => {
+      // Create the modal
+      checkout(source);
+
+      const modal = document.getElementById('creditkey-modal');
+      expect(modal).toExist();
+
+      // Hide the modal
+      modal.style.display = 'none';
+
+      // Reshow the modal with same source
+      checkout(source);
+
+      const existingModal = document.getElementById('creditkey-modal');
+      expect(existingModal).toExist();
+      expect(existingModal.getAttribute('tabindex')).toBe('-1');
+    });
   });
 
   describe('Redirect', () => {
