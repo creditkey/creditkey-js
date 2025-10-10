@@ -3,6 +3,33 @@ import { api } from '../../utils/platform';
 
 // Global keydown handler for ESC key
 let escKeyHandler = null;
+let backgroundClickHandler = null;
+
+function registerBackgroundClickHandler() {
+  // Remove existing handler if any to avoid duplicates
+  removeBackgroundClickHandler();
+  
+  backgroundClickHandler = function(event) {
+    // Only close if the clicked element is the background itself
+    if (event.target && event.target.classList.contains('ck-modal-background')) {
+      const modal = document.getElementById('creditkey-modal');
+      // Only close if modal exists and is visible
+      if (modal && modal.style.display !== 'none') {
+        remove(true); // Fully remove the modal on background click
+      }
+    }
+  };
+  
+  // Add click listener to the document to catch background clicks
+  document.addEventListener('click', backgroundClickHandler);
+}
+
+function removeBackgroundClickHandler() {
+  if (backgroundClickHandler) {
+    document.removeEventListener('click', backgroundClickHandler);
+    backgroundClickHandler = null;
+  }
+}
 
 function registerEscKeyHandler() {
   // Remove existing handler if any to avoid duplicates
@@ -49,6 +76,8 @@ const modal = (source, completionCallback) => {
     existingModal.style.display = 'flex';
     // Re-register ESC key handler when showing existing modal
     registerEscKeyHandler();
+    // Re-register background click handler when showing existing modal
+    registerBackgroundClickHandler();
   } else {
     // Otherwise, create the modal.
     
@@ -63,6 +92,8 @@ const modal = (source, completionCallback) => {
     body.insertAdjacentHTML('beforeend', `<div class="creditkey" id="creditkey-modal"><div class="ck-modal is-active"><div class="ck-modal-background"></div><div class="ck-modal-content" id="ck-modal-card">${iframe}</div></div></div>`);
     // Register ESC key handler after creating modal
     registerEscKeyHandler();
+    // Register background click handler after creating modal
+    registerBackgroundClickHandler();
   }
 }
 
@@ -80,6 +111,8 @@ function remove(fullRemove = false) {
   }
   // Remove ESC key handler when hiding/removing modal
   removeEscKeyHandler();
+  // Remove background click handler when hiding/removing modal
+  removeBackgroundClickHandler();
 }
 
 // ensure that we're requesting a valid creditkey domain

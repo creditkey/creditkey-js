@@ -90,6 +90,48 @@ describe('Checkout', () => {
       expect(document.getElementById('creditkey-modal')).toExist();
       expect(modal.style.display).toBe('none');
     });
+
+    it('closes the modal when background is clicked', () => {
+      // Create the modal
+      checkout(source);
+
+      const modal = document.getElementById('creditkey-modal');
+      const background = document.querySelector('.ck-modal-background');
+      expect(modal).toExist();
+      expect(background).toExist();
+
+      // Simulate background click
+      const clickEvent = new MouseEvent('click', { bubbles: true });
+      Object.defineProperty(clickEvent, 'target', { 
+        value: background, 
+        enumerable: true 
+      });
+      background.dispatchEvent(clickEvent);
+
+      // Modal should be completely removed from DOM
+      expect(document.getElementById('creditkey-modal')).toNotExist();
+    });
+
+    it('does not close modal when modal content is clicked', () => {
+      // Create the modal
+      checkout(source);
+
+      const modal = document.getElementById('creditkey-modal');
+      const content = document.getElementById('ck-modal-card');
+      expect(modal).toExist();
+      expect(content).toExist();
+
+      // Simulate content click
+      const clickEvent = new MouseEvent('click', { bubbles: true });
+      Object.defineProperty(clickEvent, 'target', { 
+        value: content, 
+        enumerable: true 
+      });
+      content.dispatchEvent(clickEvent);
+
+      // Modal should still exist
+      expect(document.getElementById('creditkey-modal')).toExist();
+    });
   });
 
   describe('Redirect', () => {

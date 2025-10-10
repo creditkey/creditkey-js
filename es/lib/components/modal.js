@@ -3,15 +3,39 @@ import { api } from '../../utils/platform';
 
 // Global keydown handler for ESC key
 var escKeyHandler = null;
+var backgroundClickHandler = null;
+function registerBackgroundClickHandler() {
+  // Remove existing handler if any to avoid duplicates
+  removeBackgroundClickHandler();
+  backgroundClickHandler = function backgroundClickHandler(event) {
+    // Only close if the clicked element is the background itself
+    if (event.target && event.target.classList.contains('ck-modal-background')) {
+      var _modal = document.getElementById('creditkey-modal');
+      // Only close if modal exists and is visible
+      if (_modal && _modal.style.display !== 'none') {
+        remove(true); // Fully remove the modal on background click
+      }
+    }
+  };
+
+  // Add click listener to the document to catch background clicks
+  document.addEventListener('click', backgroundClickHandler);
+}
+function removeBackgroundClickHandler() {
+  if (backgroundClickHandler) {
+    document.removeEventListener('click', backgroundClickHandler);
+    backgroundClickHandler = null;
+  }
+}
 function registerEscKeyHandler() {
   // Remove existing handler if any to avoid duplicates
   removeEscKeyHandler();
   escKeyHandler = function escKeyHandler(event) {
     // Check if ESC key was pressed (key code 27 or key 'Escape')
     if (event.key === 'Escape' || event.keyCode === 27) {
-      var _modal = document.getElementById('creditkey-modal');
+      var _modal2 = document.getElementById('creditkey-modal');
       // Only close if modal exists and is visible
-      if (_modal && _modal.style.display !== 'none') {
+      if (_modal2 && _modal2.style.display !== 'none') {
         remove(true); // Fully remove the modal on ESC key press
       }
     }
@@ -24,7 +48,7 @@ function removeEscKeyHandler() {
     escKeyHandler = null;
   }
 }
-var _modal2 = function modal(source, completionCallback) {
+var _modal3 = function modal(source, completionCallback) {
   registerPostMessageCallback(completionCallback);
 
   // Check to see if we've already created the modal - but hidden it when the user clicked off.
@@ -37,11 +61,13 @@ var _modal2 = function modal(source, completionCallback) {
     var url = iframe.src;
     if (url !== "" + sourceUrl.href) {
       existingModal.remove();
-      return _modal2(source);
+      return _modal3(source);
     }
     existingModal.style.display = 'flex';
     // Re-register ESC key handler when showing existing modal
     registerEscKeyHandler();
+    // Re-register background click handler when showing existing modal
+    registerBackgroundClickHandler();
   } else {
     // Otherwise, create the modal.
 
@@ -54,6 +80,8 @@ var _modal2 = function modal(source, completionCallback) {
     body.insertAdjacentHTML('beforeend', "<div class=\"creditkey\" id=\"creditkey-modal\"><div class=\"ck-modal is-active\"><div class=\"ck-modal-background\"></div><div class=\"ck-modal-content\" id=\"ck-modal-card\">" + _iframe + "</div></div></div>");
     // Register ESC key handler after creating modal
     registerEscKeyHandler();
+    // Register background click handler after creating modal
+    registerBackgroundClickHandler();
   }
 };
 function remove(fullRemove) {
@@ -73,6 +101,8 @@ function remove(fullRemove) {
   }
   // Remove ESC key handler when hiding/removing modal
   removeEscKeyHandler();
+  // Remove background click handler when hiding/removing modal
+  removeBackgroundClickHandler();
 }
 
 // ensure that we're requesting a valid creditkey domain
@@ -137,4 +167,4 @@ function registerPostMessageCallback(completionCallback) {
     }
   }, false);
 }
-export default _modal2;
+export default _modal3;

@@ -44,6 +44,26 @@ describe('Apply Now', () => {
       // Modal should be completely removed from DOM
       expect(document.getElementById('creditkey-modal')).toNotExist();
     });
+
+    it('closes the modal when background is clicked', () => {
+      apply(key, 'modal', 'development');
+
+      const modal = document.getElementById('creditkey-modal');
+      const background = document.querySelector('.ck-modal-background');
+      expect(modal).toExist();
+      expect(background).toExist();
+
+      // Simulate background click
+      const clickEvent = new MouseEvent('click', { bubbles: true });
+      Object.defineProperty(clickEvent, 'target', { 
+        value: background, 
+        enumerable: true 
+      });
+      background.dispatchEvent(clickEvent);
+
+      // Modal should be completely removed from DOM
+      expect(document.getElementById('creditkey-modal')).toNotExist();
+    });
   });
 
   describe('Redirect', () => {
