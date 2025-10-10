@@ -36,8 +36,8 @@ describe('Checkout', () => {
       const escEvent = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27 });
       document.dispatchEvent(escEvent);
 
-      // Modal should be hidden (display: none)
-      expect(modal.style.display).toBe('none');
+      // Modal should be completely removed from DOM
+      expect(document.getElementById('creditkey-modal')).toNotExist();
     });
 
     it('closes the modal when ESC key (legacy keyCode) is pressed', () => {
@@ -52,8 +52,8 @@ describe('Checkout', () => {
       const escEvent = new KeyboardEvent('keydown', { keyCode: 27 });
       document.dispatchEvent(escEvent);
 
-      // Modal should be hidden (display: none)
-      expect(modal.style.display).toBe('none');
+      // Modal should be completely removed from DOM
+      expect(document.getElementById('creditkey-modal')).toNotExist();
     });
 
     it('does not close modal on non-ESC key press', () => {
@@ -86,7 +86,8 @@ describe('Checkout', () => {
       const escEvent = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27 });
       document.dispatchEvent(escEvent);
 
-      // Modal should remain hidden 
+      // Modal should still exist but remain hidden (ESC shouldn't affect hidden modals)
+      expect(document.getElementById('creditkey-modal')).toExist();
       expect(modal.style.display).toBe('none');
     });
   });

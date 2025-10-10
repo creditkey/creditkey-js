@@ -12,9 +12,9 @@ function registerEscKeyHandler() {
     // Check if ESC key was pressed (key code 27 or key 'Escape')
     if (event.key === 'Escape' || event.keyCode === 27) {
       const modal = document.getElementById('creditkey-modal');
-      // Only close if modal is visible
+      // Only close if modal exists and is visible
       if (modal && modal.style.display !== 'none') {
-        remove();
+        remove(true); // Fully remove the modal on ESC key press
       }
     }
   };
@@ -66,14 +66,19 @@ const modal = (source, completionCallback) => {
   }
 }
 
-function remove() {
-  // Hide the modal so we can potentially redisplay it, leaving the user at the same place in the
-  // checkout flow, if they accidentially click off.
+function remove(fullRemove = false) {
   const el = document.getElementById('creditkey-modal');
   if (el !== null) {
-    el.style.display = 'none';
+    if (fullRemove) {
+      // Completely remove the modal from DOM when explicitly requested (e.g., ESC key)
+      el.remove();
+    } else {
+      // Hide the modal so we can potentially redisplay it, leaving the user at the same place in the
+      // checkout flow, if they accidentally click off.
+      el.style.display = 'none';
+    }
   }
-  // Remove ESC key handler when hiding modal
+  // Remove ESC key handler when hiding/removing modal
   removeEscKeyHandler();
 }
 
