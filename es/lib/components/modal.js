@@ -13,7 +13,7 @@ function registerBackgroundClickHandler() {
       var _modal = document.getElementById('creditkey-modal');
       // Only close if modal exists and is visible
       if (_modal && _modal.style.display !== 'none') {
-        remove(true); // Fully remove the modal on background click
+        remove(); // Hide the modal on background click
       }
     }
   };
@@ -36,7 +36,7 @@ function registerEscKeyHandler() {
       var _modal2 = document.getElementById('creditkey-modal');
       // Only close if modal exists and is visible
       if (_modal2 && _modal2.style.display !== 'none') {
-        remove(true); // Fully remove the modal on ESC key press
+        remove(); // Hide the modal on ESC key press
       }
     }
   };

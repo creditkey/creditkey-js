@@ -41,8 +41,8 @@ describe('Apply Now', () => {
       const escEvent = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27 });
       document.dispatchEvent(escEvent);
 
-      // Modal should be completely removed from DOM
-      expect(document.getElementById('creditkey-modal')).toNotExist();
+      // Modal should be hidden (display: none)
+      expect(modal.style.display).toBe('none');
     });
 
     it('closes the modal when background is clicked', () => {
@@ -61,8 +61,8 @@ describe('Apply Now', () => {
       });
       background.dispatchEvent(clickEvent);
 
-      // Modal should be completely removed from DOM
-      expect(document.getElementById('creditkey-modal')).toNotExist();
+      // Modal should be hidden (display: none)
+      expect(modal.style.display).toBe('none');
     });
 
     it('sets focus to the modal element when created', () => {
