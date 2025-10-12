@@ -247,6 +247,45 @@ describe('Checkout', () => {
       document.dispatchEvent(escEvent);
       expect(sameModal.style.display).toBe('none'); // Should hide again via ESC
     });
+
+    it('scrolls to top when modal is displayed', () => {
+      // Mock window.scrollTo to track calls
+      let scrollToCalls = [];
+      const originalScrollTo = window.scrollTo;
+      window.scrollTo = function(options) {
+        scrollToCalls.push(options);
+      };
+
+      try {
+        // Create the modal
+        checkout(source);
+
+        // Should have called scrollTo with top: 0
+        expect(scrollToCalls.length).toBe(1);
+        expect(scrollToCalls[0].top).toBe(0);
+        expect(scrollToCalls[0].left).toBe(0);
+        expect(scrollToCalls[0].behavior).toBe('smooth');
+
+        // Reset calls array
+        scrollToCalls = [];
+
+        const modal = document.getElementById('creditkey-modal');
+        // Hide the modal
+        modal.style.display = 'none';
+
+        // Reshow the modal
+        checkout(source);
+
+        // Should have called scrollTo again when reshowing
+        expect(scrollToCalls.length).toBe(1);
+        expect(scrollToCalls[0].top).toBe(0);
+        expect(scrollToCalls[0].left).toBe(0);
+        expect(scrollToCalls[0].behavior).toBe('smooth');
+      } finally {
+        // Restore original scrollTo
+        window.scrollTo = originalScrollTo;
+      }
+    });
   });
 
   describe('Redirect', () => {

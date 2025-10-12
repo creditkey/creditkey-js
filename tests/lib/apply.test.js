@@ -72,6 +72,33 @@ describe('Apply Now', () => {
       expect(modal).toExist();
       expect(modal.getAttribute('tabindex')).toBe('-1');
     });
+
+    it('scrolls to top when modal is displayed', () => {
+      // Mock window.scrollTo to track calls
+      let scrollToCalls = [];
+      const originalScrollTo = window.scrollTo;
+      window.scrollTo = function(options) {
+        scrollToCalls.push(options);
+      };
+
+      try {
+        // Create the modal
+        apply(key, 'modal', 'development');
+
+        // Should have called scrollTo twice - once in apply() and once in modal()
+        expect(scrollToCalls.length).toBe(2);
+        // Both calls should scroll to top
+        expect(scrollToCalls[0].top).toBe(0);
+        expect(scrollToCalls[0].left).toBe(0);
+        expect(scrollToCalls[0].behavior).toBe('smooth');
+        expect(scrollToCalls[1].top).toBe(0);
+        expect(scrollToCalls[1].left).toBe(0);
+        expect(scrollToCalls[1].behavior).toBe('smooth');
+      } finally {
+        // Restore original scrollTo
+        window.scrollTo = originalScrollTo;
+      }
+    });
   });
 
   describe('Redirect', () => {

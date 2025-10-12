@@ -75,6 +75,13 @@ const modal = (source, completionCallback) => {
     }
     existingModal.style.display = 'flex';
     
+    // Scroll to top when showing existing modal
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+    
     // Ensure the existing modal can receive focus and set focus to it
     if (existingModal) {
       if (!existingModal.hasAttribute('tabindex')) {
@@ -99,6 +106,13 @@ const modal = (source, completionCallback) => {
     }
 
     body.insertAdjacentHTML('beforeend', `<div class="creditkey" id="creditkey-modal" tabindex="-1"><div class="ck-modal is-active"><div class="ck-modal-background"></div><div class="ck-modal-content" id="ck-modal-card">${iframe}</div></div></div>`);
+    
+    // Scroll to top when creating new modal
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
     
     // Set focus to the modal element for accessibility
     const modalElement = document.getElementById('creditkey-modal');
