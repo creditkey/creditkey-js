@@ -161,6 +161,92 @@ describe('Checkout', () => {
       expect(existingModal).toExist();
       expect(existingModal.getAttribute('tabindex')).toBe('-1');
     });
+
+    it('preserves modal content when hidden via ESC and reshown', () => {
+      // Create the modal
+      checkout(source);
+
+      const modal = document.getElementById('creditkey-modal');
+      const iframe = document.getElementById('creditkey-iframe');
+      const originalSrc = iframe.src;
+      expect(modal).toExist();
+      expect(iframe).toExist();
+
+      // Hide modal via ESC key
+      const escEvent = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27 });
+      document.dispatchEvent(escEvent);
+      expect(modal.style.display).toBe('none');
+
+      // Reshow modal with same source - should preserve content
+      checkout(source);
+      
+      const sameModal = document.getElementById('creditkey-modal');
+      const sameIframe = document.getElementById('creditkey-iframe');
+      expect(sameModal).toBe(modal); // Should be the same DOM element
+      expect(sameIframe).toBe(iframe); // Should be the same iframe element
+      expect(sameIframe.src).toBe(originalSrc); // Should have same source
+      expect(sameModal.style.display).toBe('flex'); // Should be visible again
+    });
+
+    it('preserves modal content when hidden via background click and reshown', () => {
+      // Create the modal
+      checkout(source);
+
+      const modal = document.getElementById('creditkey-modal');
+      const iframe = document.getElementById('creditkey-iframe');
+      const background = document.querySelector('.ck-modal-background');
+      const originalSrc = iframe.src;
+      
+      // Hide modal via background click
+      const clickEvent = new MouseEvent('click', { bubbles: true });
+      Object.defineProperty(clickEvent, 'target', { 
+        value: background, 
+        enumerable: true 
+      });
+      background.dispatchEvent(clickEvent);
+      expect(modal.style.display).toBe('none');
+
+      // Reshow modal with same source - should preserve content
+      checkout(source);
+      
+      const sameModal = document.getElementById('creditkey-modal');
+      const sameIframe = document.getElementById('creditkey-iframe');
+      expect(sameModal).toBe(modal); // Should be the same DOM element
+      expect(sameIframe).toBe(iframe); // Should be the same iframe element
+      expect(sameIframe.src).toBe(originalSrc); // Should have same source
+      expect(sameModal.style.display).toBe('flex'); // Should be visible again
+    });
+
+    it('preserves modal content and ESC functionality when hidden via iframe cancel and reshown', () => {
+      // Create the modal
+      checkout(source);
+
+      const modal = document.getElementById('creditkey-modal');
+      const iframe = document.getElementById('creditkey-iframe');
+      const originalSrc = iframe.src;
+      
+      // Simulate iframe 'cancel' event (like user canceling from within iframe)
+      const cancelEvent = {
+        data: JSON.stringify({ action: 'cancel', type: 'modal' })
+      };
+      window.dispatchEvent(new MessageEvent('message', cancelEvent));
+      expect(modal.style.display).toBe('none');
+
+      // Reshow modal with same source - should preserve content AND functionality
+      checkout(source);
+      
+      const sameModal = document.getElementById('creditkey-modal');
+      const sameIframe = document.getElementById('creditkey-iframe');
+      expect(sameModal).toBe(modal); // Should be the same DOM element
+      expect(sameIframe).toBe(iframe); // Should be the same iframe element
+      expect(sameIframe.src).toBe(originalSrc); // Should have same source
+      expect(sameModal.style.display).toBe('flex'); // Should be visible again
+      
+      // ESC functionality should still work after reshow
+      const escEvent = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27 });
+      document.dispatchEvent(escEvent);
+      expect(sameModal.style.display).toBe('none'); // Should hide again via ESC
+    });
   });
 
   describe('Redirect', () => {

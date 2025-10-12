@@ -117,18 +117,18 @@ function remove(fullRemove = false) {
   const el = document.getElementById('creditkey-modal');
   if (el !== null) {
     if (fullRemove) {
-      // Completely remove the modal from DOM when explicitly requested (e.g., ESC key)
+      // Completely remove the modal from DOM when explicitly requested
       el.remove();
+      // Only remove event handlers when completely removing modal from DOM
+      removeEscKeyHandler();
+      removeBackgroundClickHandler();
     } else {
       // Hide the modal so we can potentially redisplay it, leaving the user at the same place in the
       // checkout flow, if they accidentally click off.
       el.style.display = 'none';
+      // Keep event handlers intact so they work when modal is reshown
     }
   }
-  // Remove ESC key handler when hiding/removing modal
-  removeEscKeyHandler();
-  // Remove background click handler when hiding/removing modal
-  removeBackgroundClickHandler();
 }
 
 // ensure that we're requesting a valid creditkey domain
