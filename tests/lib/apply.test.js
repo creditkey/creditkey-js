@@ -39,7 +39,7 @@ describe('Apply Now', () => {
 
       // Simulate ESC key press
       const escEvent = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27 });
-      document.dispatchEvent(escEvent);
+      window.dispatchEvent(escEvent);
 
       // Modal should be hidden (display: none)
       expect(modal.style.display).toBe('none');

@@ -961,15 +961,18 @@ function registerEscKeyHandler() {
       var _modal2 = document.getElementById('creditkey-modal');
       // Only close if modal exists and is visible
       if (_modal2 && _modal2.style.display !== 'none') {
+        // Prevent default behavior and stop propagation to ensure ESC always works
+        event.preventDefault();
+        event.stopPropagation();
         remove(); // Hide the modal on ESC key press
       }
     }
   };
-  document.addEventListener('keydown', escKeyHandler);
+  window.addEventListener('keydown', escKeyHandler, true);
 }
 function removeEscKeyHandler() {
   if (escKeyHandler) {
-    document.removeEventListener('keydown', escKeyHandler);
+    window.removeEventListener('keydown', escKeyHandler, true);
     escKeyHandler = null;
   }
 }

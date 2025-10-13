@@ -41,17 +41,20 @@ function registerEscKeyHandler() {
       const modal = document.getElementById('creditkey-modal');
       // Only close if modal exists and is visible
       if (modal && modal.style.display !== 'none') {
+        // Prevent default behavior and stop propagation to ensure ESC always works
+        event.preventDefault();
+        event.stopPropagation();
         remove(); // Hide the modal on ESC key press
       }
     }
   };
   
-  document.addEventListener('keydown', escKeyHandler);
+  window.addEventListener('keydown', escKeyHandler, true);
 }
 
 function removeEscKeyHandler() {
   if (escKeyHandler) {
-    document.removeEventListener('keydown', escKeyHandler);
+    window.removeEventListener('keydown', escKeyHandler, true);
     escKeyHandler = null;
   }
 }

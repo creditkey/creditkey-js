@@ -34,7 +34,7 @@ describe('Checkout', () => {
 
       // Simulate ESC key press
       const escEvent = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27 });
-      document.dispatchEvent(escEvent);
+      window.dispatchEvent(escEvent);
 
       // Modal should be hidden (display: none)
       expect(modal.style.display).toBe('none');
@@ -50,7 +50,7 @@ describe('Checkout', () => {
 
       // Simulate ESC key press using legacy keyCode
       const escEvent = new KeyboardEvent('keydown', { keyCode: 27 });
-      document.dispatchEvent(escEvent);
+      window.dispatchEvent(escEvent);
 
       // Modal should be hidden (display: none)
       expect(modal.style.display).toBe('none');
@@ -66,7 +66,7 @@ describe('Checkout', () => {
 
       // Simulate non-ESC key press
       const enterEvent = new KeyboardEvent('keydown', { key: 'Enter', keyCode: 13 });
-      document.dispatchEvent(enterEvent);
+      window.dispatchEvent(enterEvent);
 
       // Modal should still be visible
       expect(modal.style.display).toBe('');
@@ -84,7 +84,7 @@ describe('Checkout', () => {
 
       // Simulate ESC key press
       const escEvent = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27 });
-      document.dispatchEvent(escEvent);
+      window.dispatchEvent(escEvent);
 
       // Modal should still exist but remain hidden (ESC shouldn't affect hidden modals)
       expect(document.getElementById('creditkey-modal')).toExist();
@@ -174,7 +174,7 @@ describe('Checkout', () => {
 
       // Hide modal via ESC key
       const escEvent = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27 });
-      document.dispatchEvent(escEvent);
+      window.dispatchEvent(escEvent);
       expect(modal.style.display).toBe('none');
 
       // Reshow modal with same source - should preserve content
@@ -244,7 +244,7 @@ describe('Checkout', () => {
       
       // ESC functionality should still work after reshow
       const escEvent = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27 });
-      document.dispatchEvent(escEvent);
+      window.dispatchEvent(escEvent);
       expect(sameModal.style.display).toBe('none'); // Should hide again via ESC
     });
 
@@ -285,6 +285,34 @@ describe('Checkout', () => {
         // Restore original scrollTo
         window.scrollTo = originalScrollTo;
       }
+    });
+
+    it('closes modal with ESC key regardless of focus', () => {
+      // Create the modal
+      checkout(source);
+
+      const modal = document.getElementById('creditkey-modal');
+      expect(modal).toExist();
+      expect(modal.style.display).toBe('');
+
+      // Create a focused element to simulate focus being elsewhere
+      const testInput = document.createElement('input');
+      testInput.id = 'test-input';
+      document.body.appendChild(testInput);
+      testInput.focus();
+
+      // Ensure the test input has focus
+      expect(document.activeElement).toBe(testInput);
+
+      // ESC key should still close the modal even when another element has focus
+      const escEvent = new KeyboardEvent('keydown', { key: 'Escape', keyCode: 27 });
+      window.dispatchEvent(escEvent);
+
+      // Modal should be hidden regardless of focus
+      expect(modal.style.display).toBe('none');
+
+      // Clean up test element
+      document.body.removeChild(testInput);
     });
   });
 
