@@ -137,7 +137,7 @@ Since the SDK is a client-side library, validation requires testing the built ar
 ```
 ├── src/                    # Source code
 │   ├── lib/               # Core library modules
-│   ├── styles/           # SASS stylesheets  
+│   ├── styles/           # CSS stylesheets  
 │   └── utils/            # Utility functions
 ├── tests/lib/            # Test files (*.test.js pattern)
 ├── es/                   # ES modules build output
