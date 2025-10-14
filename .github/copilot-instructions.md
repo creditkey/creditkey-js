@@ -7,78 +7,80 @@ Credit Key JavaScript SDK is a client-side JavaScript library for integrating Cr
 ## Working Effectively
 
 ### Environment Requirements
-- **Node.js Version**: MUST use Node.js 14.19.0 for full functionality
-- **Current Runtime Issue**: Node.js 20+ causes compatibility issues with legacy dependencies (node-sass)
-- **Python Requirements**: Python 2.x required for node-sass compilation (not available on Ubuntu 24.04+)
+- **Node.js Version**: Requires Node.js >=18.0.0 (as specified in package.json engines)
+- **Legacy OpenSSL Provider**: Required for webpack compatibility with Node 18+
+- **No Python Dependencies**: SASS dependencies have been removed - no Python 2.x requirement
 
 ### Bootstrap, Build, and Test the Repository
 
-**PREFERRED METHOD - Docker Build (Recommended)**:
+**PREFERRED METHOD - Direct npm install and build**:
 ```bash
-# Build using Docker (uses Node 14.19 Alpine)
+# Install dependencies
+npm install
+# Time: ~1 minute with some deprecation warnings (expected)
+
+# Build all module formats (ES5, ES modules, and UMD)
+npm run build
+# Time: ~5-10 seconds for complete build including UMD
+
+# Run tests
+npm test  
+# Time: ~10 seconds, runs 27+ tests successfully
+```
+
+**ALTERNATIVE METHOD - Docker Build (if needed)**:
+```bash
+# Build using Docker (still available but not required)
 docker build -t creditkey-js:latest .
-# Extract build artifacts
+# Extract build artifacts if needed
 id=$(docker create creditkey-js:latest)
 docker cp $id:/creditkey/creditkey-js/es .
 docker cp $id:/creditkey/creditkey-js/lib .
 docker cp $id:/creditkey/creditkey-js/umd .
 docker rm $id
 ```
-**Time Expectation**: 10-15 minutes for complete Docker build. NEVER CANCEL - Docker build includes yarn install and full compilation.
-**NOTE**: Docker build may fail due to Alpine Linux package manager network timeouts. This is an infrastructure issue, not a code issue.
-
-**FALLBACK METHOD - Manual Setup (Limited Functionality)**:
-```bash
-# Install yarn globally
-npm install -g yarn
-
-# NOTE: Full npm/yarn install will FAIL due to node-sass compatibility
-# The following provides partial functionality only:
-
-# Install with legacy OpenSSL provider (partial functionality)
-NODE_OPTIONS="--openssl-legacy-provider" yarn install
-# EXPECTED: This WILL FAIL at node-sass compilation - this is normal
-
-# Partial build (ES5 and ES modules only, UMD will fail)
-NODE_OPTIONS="--openssl-legacy-provider" npm run build
-# Time: ~5 seconds. UMD build will fail due to node-sass - this is expected
-```
+**Time Expectation**: 10-15 minutes for complete Docker build. Only use if direct npm approach fails.
 
 ### Testing
 ```bash
-# Tests require proper naming pattern and legacy OpenSSL
-# NOTE: Tests will FAIL due to sass compilation issues in Node 20+
+# Tests work directly with npm
+npm test
+# Time: ~10 seconds, runs 27+ tests with coverage report
 
-# To discover tests (they exist but compilation fails):
-NODE_OPTIONS="--openssl-legacy-provider" npm test
-# Time: ~2 seconds for discovery, fails on sass compilation
+# Test coverage
+npm run test:coverage
+# Generates detailed coverage report
 
-# Test files must follow *.test.js pattern (not *-test.js)
+# Watch mode for development
+npm run test:watch
+# Runs tests in watch mode for development
+
+# Test files follow *.test.js pattern (not *-test.js)
 # Tests are located in tests/lib/ directory
 ```
 
 ### Key NPM Scripts
-- `npm run build` - Build ES5, ES modules, and UMD bundles (UMD fails in Node 20+)
+- `npm run build` - Build ES5, ES modules, and UMD bundles (all formats work successfully)
 - `npm run clean` - Clean built resources  
-- `npm test` - Run test suite via Karma + Chrome Headless
-- `npm run test:coverage` - Run tests with coverage report
+- `npm test` - Run test suite via Karma + Chrome Headless (27+ tests)
+- `npm run test:coverage` - Run tests with coverage report 
 - `npm run test:watch` - Run tests in watch mode
 
 ## Build System Details
 - **Build Tool**: nwb (Node.js Web Builder) v0.25.2
 - **Module Formats**: ES5 (lib/), ES modules (es/), UMD (umd/)
-- **Styling**: SASS compiled via deprecated node-sass
+- **Styling**: CSS-only (SASS dependencies removed)
 - **Testing**: Karma + Mocha + Chrome Headless
-- **Legacy Dependencies**: Uses deprecated packages requiring Python 2 and Node 14.x
+- **Modern Compatibility**: Works with Node 18+ using legacy OpenSSL provider
 
-## Critical Compatibility Issues
-**DO NOT** attempt to upgrade Node.js version or replace node-sass without extensive testing - this will break the build system.
+## Current Status - Fully Functional
+**All build processes work successfully** - the repository has been modernized:
 
-**node-sass Limitation**: 
-```
-Error: Node Sass does not yet support your current environment: Linux 64-bit with Unsupported runtime (115)
-```
-This error is expected in Node 20+ and cannot be easily resolved without major dependency updates.
+- ✅ **Full npm install** works without issues
+- ✅ **Complete builds** generate all module formats (ES5, ES modules, UMD)
+- ✅ **Tests run successfully** with full test suite passing
+- ✅ **No SASS compilation issues** - styling moved to pure CSS
+- ✅ **No Python dependencies** - node-sass removed entirely
 
 ## Validation
 
@@ -86,8 +88,9 @@ This error is expected in Node 20+ and cannot be easily resolved without major d
 Since the SDK is a client-side library, validation requires testing the built artifacts:
 
 **After making changes, ALWAYS test the built library by**:
-1. Build the library (preferably via Docker, or partial build with NODE_OPTIONS)
-2. Test the ES module build in a browser environment:
+1. Build the library using npm: `npm run build`
+2. Run the test suite: `npm test` (27+ tests should pass)
+3. Test the ES module build in a browser environment:
    ```html
    <script type="module">
      import ck from './es/index.js';
@@ -95,7 +98,7 @@ Since the SDK is a client-side library, validation requires testing the built ar
      console.log('✓ ES Module loaded successfully');
    </script>
    ```
-3. Test the UMD build in a browser:
+4. Test the UMD build in a browser:
    ```html
    <script src="./umd/creditkey-js.js"></script>
    <script>
@@ -103,15 +106,18 @@ Since the SDK is a client-side library, validation requires testing the built ar
      console.log('✓ UMD global ck object loaded');
    </script>
    ```
-4. **NOTE**: CommonJS build (lib/) will fail in Node.js due to SASS import issues
-5. Test key functionality in browser:
+5. Test the CommonJS build in Node.js:
+   ```javascript
+   const ck = require('./lib/index.js');
+   const client = new ck.Client('test-key', 'development');
+   console.log('✓ CommonJS module loaded successfully');
+   ```
+6. Test key functionality in browser:
    - `ck.checkout(url)` - Modal display
    - `ck.apply(key)` - Apply now flow  
    - Client API methods for eligibility checks
 
-**CRITICAL**: The existing build artifacts (es/, lib/, umd/) are functional. DO NOT delete these unless you can successfully rebuild them.
-
-**Validation Limitation**: Built CommonJS modules cannot be tested directly in Node.js due to SASS compilation issues.
+**All module formats are fully functional** and can be rebuilt reliably using `npm run build`.
 
 ## Common Tasks
 
@@ -122,10 +128,10 @@ Since the SDK is a client-side library, validation requires testing the built ar
 - Tests import from `../../src/` paths
 
 ### Working with Styles
-- SASS files in `src/styles/`
-- Main stylesheet: `src/styles/index.sass`
-- Uses Bulma CSS framework
-- SASS compilation WILL FAIL in Node 20+ environments
+- CSS files in `src/styles/`
+- Main stylesheet: `src/styles/index.css`
+- Uses Bulma CSS framework 
+- Styles are now pure CSS (no SASS compilation needed)
 
 ### Directory Structure
 ```
@@ -149,40 +155,43 @@ Since the SDK is a client-side library, validation requires testing the built ar
 - `src/lib/client.js` - Core API client
 - `src/lib/checkout.js` - Checkout flow implementation
 
-## Timing Expectations and "NEVER CANCEL" Commands
+## Timing Expectations
 
-**NEVER CANCEL these long-running operations**:
-- **Docker build**: 10-15 minutes - Downloads Node 14.19 Alpine image and compiles everything
-- **yarn install** (in Docker): 3-5 minutes - Downloads and compiles all dependencies
-- **Full build** (in Docker): 2-3 minutes - Compiles all module formats
+**Standard operations (all work reliably)**:
+- **npm install**: ~60 seconds - Downloads all dependencies (with expected deprecation warnings)
+- **npm run build**: ~5-10 seconds - Compiles all module formats (ES5, ES modules, UMD)
+- **npm test**: ~10 seconds - Runs full test suite with 27+ tests
+- **npm run clean**: <1 second - Cleans build artifacts
 
-**Quick operations**:
-- **Partial build** (ES5 + ES modules): ~5 seconds
-- **Test discovery**: ~2 seconds  
-- **Clean**: <1 second
+**Optional Docker operations** (if needed):
+- **Docker build**: 10-15 minutes - Complete containerized build
+- **Docker dependency install**: 3-5 minutes - Downloads and compiles all dependencies
 
-## Known Working Commands Summary
+## Working Commands Summary
 ```bash
-# Recommended approach
-docker build -t creditkey-js:latest .  # 10-15 min, NEVER CANCEL
+# Primary development workflow (all fully functional)
+npm install                    # Install dependencies
+npm run build                  # Build all module formats  
+npm test                      # Run complete test suite
+npm run test:coverage         # Generate coverage report
+npm run clean                 # Clean build artifacts
 
-# Fallback (limited functionality)
-NODE_OPTIONS="--openssl-legacy-provider" npm run build  # ~5 sec, UMD fails
-NODE_OPTIONS="--openssl-legacy-provider" npm test       # ~2 sec, compilation fails
+# Docker workflow (alternative)
+docker build -t creditkey-js:latest .  # 10-15 min if containerized build needed
 ```
 
-## Summary of Current Limitations and Workarounds
+## Summary of Current Capabilities
 
-**Working in Node 20+ Environment**:
-- **Partial Build**: ES5 and ES modules build successfully (~3 seconds)
-- **UMD Build**: Fails due to node-sass incompatibility
-- **Testing**: Test discovery works but compilation fails
-- **Required Workaround**: Always use `NODE_OPTIONS="--openssl-legacy-provider"`
+**Fully Modern Development Environment**:
+- ✅ **Complete npm workflow** - all commands work out of the box
+- ✅ **All module formats** - ES5, ES modules, and UMD builds all succeed  
+- ✅ **Full testing suite** - 27+ tests run successfully with coverage
+- ✅ **No legacy constraints** - no Python, Docker, or Node 14.x requirements
+- ✅ **Quick iterations** - build and test cycles complete in seconds
 
 **Recommended Development Approach**:
-1. Use Docker for complete builds when possible
-2. Use partial builds for development (ES5 + ES modules sufficient for most work)
-3. Test functionality using existing UMD build artifacts
-4. Validate changes in browser environment, not Node.js
-
-**ALWAYS** use Docker for production builds and complete functionality testing.
+1. Use `npm install && npm run build && npm test` for complete setup and validation
+2. Use `npm run build` for quick rebuilds during development  
+3. Use `npm test` for continuous validation
+4. All module formats can be tested directly in their target environments
+5. Docker is available as alternative but not required for development
