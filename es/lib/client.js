@@ -159,11 +159,12 @@ var Client = /*#__PURE__*/function () {
       customer_id: customer_id
     });
   };
-  return _createClass(Client, [{
+  _createClass(Client, [{
     key: "key_param",
     get: function get() {
       return '?public_key=' + this.key;
     }
   }]);
+  return Client;
 }();
 export { Client as default };
