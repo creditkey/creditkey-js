@@ -43,6 +43,10 @@
   left: 0;
   right: 0;
   top: 0;
+  /* Cross-browser fallbacks */
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
 }
 
 @media screen and (max-device-width: 480px) {
@@ -58,6 +62,16 @@
   position: absolute;
   right: 0;
   top: 0;
+  /* Cross-browser height fallbacks for older browsers */
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  /* IE 8/9 specific fallbacks using CSS hacks */
+  min-height: 100vh\9;
+  /* Firefox fallback */
+  min-height: -moz-calc(100vh);
+  /* WebKit fallback */
+  min-height: -webkit-calc(100vh);
 }
 
 .creditkey .ck-modal-content,
