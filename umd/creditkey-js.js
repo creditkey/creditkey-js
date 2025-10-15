@@ -1,5 +1,5 @@
 /*!
- * @credit-key/creditkey-js v1.3.0 - https://www.creditkey.com
+ * @credit-key/creditkey-js v1.3.1 - https://www.creditkey.com
  * MIT Licensed
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -120,6 +120,7 @@ var api = function api(platform) {
   if (platform === PROD) return 'https://www.creditkey.com/app';
   return platform; // custom URL - for testing
 };
+
 var applyUI = function applyUI(platform) {
   if (platform === DEV) return process.env.REACT_APP_APPLY_UI ? process.env.REACT_APP_APPLY_UI : 'http://localhost:3001';
   if (platform === PREVIEW) return 'https://apply.preview.creditkey.com';
@@ -127,6 +128,7 @@ var applyUI = function applyUI(platform) {
   if (platform === PROD) return 'https://apply.creditkey.com';
   return platform; // custom URL - for testing
 };
+
 var marketingUI = function marketingUI(platform) {
   if (platform === DEV) return process.env.REACT_APP_MARKETING_UI ? process.env.REACT_APP_MARKETING_UI : 'http://localhost:3002';
   if (platform === STAGE) return 'https://staging-marketing.creditkey.com';
@@ -134,6 +136,7 @@ var marketingUI = function marketingUI(platform) {
   if (platform === PROD) return 'https://marketing.creditkey.com';
   return platform; // custom URL - for testing
 };
+
 var pdpHost = function pdpHost(resource, platform) {
   var host = window.location.hostname;
   if (host.indexOf('staging') >= 0 || host.indexOf('dev') >= 0) {
@@ -672,7 +675,7 @@ module.exports = function (list, options) {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "/* CreditKey Styles - Converted from sass for compatibility */\n.creditkey {\n  all: initial;\n}\n\n.creditkey * {\n  all: unset;\n}\n\n.creditkey {\n  z-index: 50000;\n  text-decoration: none !important;\n  font-family: \"Proxima Nova\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n}\n\n.creditkey a {\n  text-decoration: none !important;\n}\n\n/* Modal styles based on bulma - properly namespaced under .creditkey */\n.creditkey .button {\n  background-color: #3D9CE5 !important;\n  min-height: 40px !important;\n  border-width: 0 !important;\n  vertical-align: middle !important;\n  text-decoration: none !important;\n}\n\n.creditkey .ck-modal {\n  margin: 0 !important;\n  padding-top: 50px;\n  max-width: 100% !important;\n  width: 100% !important;\n  visibility: visible !important;\n  background: transparent !important;\n  position: absolute;\n  justify-content: normal;\n  align-items: flex-start;\n  display: flex;\n  overflow: hidden;\n  z-index: 50001;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 0;\n}\n\n@media screen and (max-device-width: 480px) {\n  .creditkey .ck-modal {\n    padding-top: 0px !important;\n  }\n}\n\n.creditkey .ck-modal-background {\n  background-color: rgba(10, 10, 10, 0.86);\n  bottom: 0;\n  left: 0;\n  position: absolute;\n  right: 0;\n  top: 0;\n}\n\n.creditkey .ck-modal-content,\n.creditkey .ck-modal-card {\n  min-height: -webkit-min-content !important;\n  min-height: min-content !important;\n  max-height: none;\n  height: auto !important;\n  margin: 0 20px;\n  max-height: calc(100vh - 160px);\n  overflow: auto;\n  position: relative;\n  width: 100%;\n}\n\n@media screen and (min-width: 769px) {\n  .creditkey .ck-modal-content,\n  .creditkey .ck-modal-card {\n    min-height: -webkit-min-content !important;\n    min-height: min-content !important;\n    max-height: none;\n    height: auto !important;\n    margin: 0 auto;\n    max-height: calc(100vh - 40px);\n    width: 650px;\n  }\n}\n\n.creditkey .ck-modal-card {\n  min-height: -webkit-min-content !important;\n  min-height: min-content !important;\n  max-height: none !important;\n}\n\n.creditkey .ck-modal-content {\n  overflow: hidden;\n  -webkit-overflow-scrolling: touch;\n  border-radius: 5px;\n  background-color: #fff;\n  background-image: url(\"https://www.creditkey.com/app/assets/header/ck-nav-logo-d79f74bc03213d02a5ab4cd1c484cfcfb533c2abf5f05ee35cd67c5239693a28.svg\");\n  background-repeat: no-repeat;\n  background-position: center;\n  height: auto;\n  min-height: -webkit-min-content;\n  min-height: min-content;\n  max-height: none;\n}\n\n@media screen and (max-width: 768px) {\n  .creditkey .ck-modal-content {\n    height: 100%;\n    border-radius: 0 !important;\n  }\n}\n\n/* Custom classes - properly namespaced under .creditkey */\n.creditkey #creditkey-iframe {\n  margin: auto;\n  width: 100%;\n  border: none;\n  height: inherit;\n}\n\n.creditkey .payment-icon {\n  display: inline-block !important;\n  margin-right: 5px !important;\n  vertical-align: middle !important;\n}\n\n.creditkey .terms {\n  text-decoration: underline;\n  color: #3D9CE5;\n  cursor: pointer;\n}\n\n.creditkey .terms:hover {\n  text-decoration: none;\n}\n\n.creditkey .pdp {\n  padding: 0 5px 0 0;\n  font-size: 16px !important;\n  font-weight: bold;\n}\n\n.creditkey .pdp-text {\n  font-size: 16px !important;\n  font-weight: 400;\n}\n\n.creditkey .ck-offer {\n  float: right;\n  text-align: left;\n}\n\n.creditkey .ck-logo-small {\n  height: 22px !important;\n}\n\n.creditkey .ck-logo-medium {\n  height: 22px !important;\n}\n\n.creditkey .ck-logo-large {\n  height: 22px !important;\n}\n\n/* This selector remains at root level as it was in the original sass */\n#creditkey-pdp-iframe {\n  width: 100% !important;\n  max-height: 70px !important;\n}\n", ""]);
+exports.push([module.i, "/* CreditKey Styles - Converted from sass for compatibility */\n.creditkey {\n  all: initial;\n}\n\n.creditkey * {\n  all: unset;\n}\n\n.creditkey {\n  z-index: 50000;\n  text-decoration: none !important;\n  font-family: \"Proxima Nova\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n}\n\n.creditkey a {\n  text-decoration: none !important;\n}\n\n/* Modal styles based on bulma - properly namespaced under .creditkey */\n.creditkey .button {\n  background-color: #3D9CE5 !important;\n  min-height: 40px !important;\n  border-width: 0 !important;\n  vertical-align: middle !important;\n  text-decoration: none !important;\n}\n\n.creditkey .ck-modal {\n  margin: 0 !important;\n  padding-top: 50px;\n  max-width: 100% !important;\n  width: 100% !important;\n  visibility: visible !important;\n  background: transparent !important;\n  position: absolute;\n  justify-content: normal;\n  align-items: flex-start;\n  display: flex;\n  overflow: hidden;\n  z-index: 50001;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 0;\n}\n\n@media screen and (max-device-width: 480px) {\n  .creditkey .ck-modal {\n    padding-top: 0px !important;\n  }\n}\n\n.creditkey .ck-modal-background {\n  background-color: rgba(10, 10, 10, 0.86);\n  bottom: 0;\n  left: 0;\n  position: fixed;\n  right: 0;\n  top: 0;\n}\n\n.creditkey .ck-modal-content,\n.creditkey .ck-modal-card {\n  min-height: -webkit-min-content !important;\n  min-height: min-content !important;\n  max-height: none;\n  height: auto !important;\n  margin: 0 20px;\n  max-height: calc(100vh - 160px);\n  overflow: auto;\n  position: relative;\n  width: 100%;\n}\n\n@media screen and (min-width: 769px) {\n  .creditkey .ck-modal-content,\n  .creditkey .ck-modal-card {\n    min-height: -webkit-min-content !important;\n    min-height: min-content !important;\n    max-height: none;\n    height: auto !important;\n    margin: 0 auto;\n    max-height: calc(100vh - 40px);\n    width: 650px;\n  }\n}\n\n.creditkey .ck-modal-card {\n  min-height: -webkit-min-content !important;\n  min-height: min-content !important;\n  max-height: none !important;\n}\n\n.creditkey .ck-modal-content {\n  overflow: hidden;\n  -webkit-overflow-scrolling: touch;\n  border-radius: 5px;\n  background-color: #fff;\n  background-image: url(\"https://www.creditkey.com/app/assets/header/ck-nav-logo-d79f74bc03213d02a5ab4cd1c484cfcfb533c2abf5f05ee35cd67c5239693a28.svg\");\n  background-repeat: no-repeat;\n  background-position: center;\n  height: auto;\n  min-height: -webkit-min-content;\n  min-height: min-content;\n  max-height: none;\n}\n\n@media screen and (max-width: 768px) {\n  .creditkey .ck-modal-content {\n    height: 100%;\n    border-radius: 0 !important;\n  }\n}\n\n/* Custom classes - properly namespaced under .creditkey */\n.creditkey #creditkey-iframe {\n  margin: auto;\n  width: 100%;\n  border: none;\n  height: inherit;\n}\n\n.creditkey .payment-icon {\n  display: inline-block !important;\n  margin-right: 5px !important;\n  vertical-align: middle !important;\n}\n\n.creditkey .terms {\n  text-decoration: underline;\n  color: #3D9CE5;\n  cursor: pointer;\n}\n\n.creditkey .terms:hover {\n  text-decoration: none;\n}\n\n.creditkey .pdp {\n  padding: 0 5px 0 0;\n  font-size: 16px !important;\n  font-weight: bold;\n}\n\n.creditkey .pdp-text {\n  font-size: 16px !important;\n  font-weight: 400;\n}\n\n.creditkey .ck-offer {\n  float: right;\n  text-align: left;\n}\n\n.creditkey .ck-logo-small {\n  height: 22px !important;\n}\n\n.creditkey .ck-logo-medium {\n  height: 22px !important;\n}\n\n.creditkey .ck-logo-large {\n  height: 22px !important;\n}\n\n/* This selector remains at root level as it was in the original sass */\n#creditkey-pdp-iframe {\n  width: 100% !important;\n  max-height: 70px !important;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -819,7 +822,7 @@ function request(url, options) {
 var utils_platform = __webpack_require__(0);
 
 // CONCATENATED MODULE: ./src/utils/network.js
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 
 
@@ -941,6 +944,9 @@ var _modal = function modal(source, completionCallback) {
       return _modal(source);
     }
     existingModal.style.display = 'flex';
+    // Remove old event listeners before re-adding when showing existing modal
+    removeModalEventListeners();
+    addModalEventListeners();
   } else {
     // Otherwise, create the modal.
 
@@ -950,7 +956,10 @@ var _modal = function modal(source, completionCallback) {
     if (!validate_url(source)) {
       _iframe = "An invalid resource was requested";
     }
-    return body.insertAdjacentHTML('beforeend', "<div class=\"creditkey\" id=\"creditkey-modal\"><div class=\"ck-modal is-active\"><div class=\"ck-modal-background\"></div><div class=\"ck-modal-content\" id=\"ck-modal-card\">" + _iframe + "</div></div></div>");
+    body.insertAdjacentHTML('beforeend', "<div class=\"creditkey\" id=\"creditkey-modal\"><div class=\"ck-modal is-active\"><div class=\"ck-modal-background\"></div><div class=\"ck-modal-content\" id=\"ck-modal-card\">" + _iframe + "</div></div></div>");
+
+    // Add event listeners for ESC key and background click
+    addModalEventListeners();
   }
 };
 function remove() {
@@ -959,6 +968,8 @@ function remove() {
   var el = document.getElementById('creditkey-modal');
   if (el !== null) {
     el.style.display = 'none';
+    // Remove event listeners when hiding modal
+    removeModalEventListeners();
   }
 }
 
@@ -1024,6 +1035,46 @@ function registerPostMessageCallback(completionCallback) {
     }
   }, false);
 }
+
+// Event handlers for ESC key and background click
+var escKeyHandler;
+var backgroundClickHandler;
+function addModalEventListeners() {
+  // ESC key handler
+  escKeyHandler = function escKeyHandler(e) {
+    if (e.key === 'Escape' || e.keyCode === 27) {
+      var modal = document.getElementById('creditkey-modal');
+      if (modal && modal.style.display !== 'none') {
+        remove();
+      }
+    }
+  };
+
+  // Background click handler
+  backgroundClickHandler = function backgroundClickHandler(e) {
+    var modal = document.getElementById('creditkey-modal');
+    if (modal && modal.style.display !== 'none') {
+      // Check if click target is the modal background (not the content)
+      if (e.target.classList.contains('ck-modal-background')) {
+        remove();
+      }
+    }
+  };
+
+  // Add event listeners
+  document.addEventListener('keydown', escKeyHandler);
+  document.addEventListener('click', backgroundClickHandler);
+}
+function removeModalEventListeners() {
+  if (escKeyHandler) {
+    document.removeEventListener('keydown', escKeyHandler);
+    escKeyHandler = null;
+  }
+  if (backgroundClickHandler) {
+    document.removeEventListener('click', backgroundClickHandler);
+    backgroundClickHandler = null;
+  }
+}
 /* harmony default export */ var modal = (_modal);
 // CONCATENATED MODULE: ./src/lib/charges.js
 var Charges = /*#__PURE__*/function () {
@@ -1087,10 +1138,10 @@ function iframes_registerPostMessageCallback() {
   });
 }
 // CONCATENATED MODULE: ./src/lib/client.js
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != typeof i) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 
 
 
@@ -1248,12 +1299,13 @@ var client_Client = /*#__PURE__*/function () {
       customer_id: customer_id
     });
   };
-  return _createClass(Client, [{
+  _createClass(Client, [{
     key: "key_param",
     get: function get() {
       return '?public_key=' + this.key;
     }
   }]);
+  return Client;
 }();
 
 // CONCATENATED MODULE: ./src/lib/cart-item.js

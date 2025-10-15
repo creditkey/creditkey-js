@@ -19,6 +19,9 @@ const modal = (source, completionCallback) => {
       return modal(source);
     }
     existingModal.style.display = 'flex';
+    // Remove old event listeners before re-adding when showing existing modal
+    removeModalEventListeners();
+    addModalEventListeners();
   } else {
     // Otherwise, create the modal.
     
@@ -30,7 +33,10 @@ const modal = (source, completionCallback) => {
       iframe = `An invalid resource was requested`;
     }
 
-    return body.insertAdjacentHTML('beforeend', `<div class="creditkey" id="creditkey-modal"><div class="ck-modal is-active"><div class="ck-modal-background"></div><div class="ck-modal-content" id="ck-modal-card">${iframe}</div></div></div>`);
+    body.insertAdjacentHTML('beforeend', `<div class="creditkey" id="creditkey-modal"><div class="ck-modal is-active"><div class="ck-modal-background"></div><div class="ck-modal-content" id="ck-modal-card">${iframe}</div></div></div>`);
+    
+    // Add event listeners for ESC key and background click
+    addModalEventListeners();
   }
 }
 
@@ -40,6 +46,8 @@ function remove() {
   const el = document.getElementById('creditkey-modal');
   if (el !== null) {
     el.style.display = 'none';
+    // Remove event listeners when hiding modal
+    removeModalEventListeners();
   }
 }
 
@@ -115,6 +123,48 @@ function registerPostMessageCallback(completionCallback) {
       });
     }
   }, false);
+}
+
+// Event handlers for ESC key and background click
+let escKeyHandler;
+let backgroundClickHandler;
+
+function addModalEventListeners() {
+  // ESC key handler
+  escKeyHandler = function(e) {
+    if (e.key === 'Escape' || e.keyCode === 27) {
+      const modal = document.getElementById('creditkey-modal');
+      if (modal && modal.style.display !== 'none') {
+        remove();
+      }
+    }
+  };
+
+  // Background click handler
+  backgroundClickHandler = function(e) {
+    const modal = document.getElementById('creditkey-modal');
+    if (modal && modal.style.display !== 'none') {
+      // Check if click target is the modal background (not the content)
+      if (e.target.classList.contains('ck-modal-background')) {
+        remove();
+      }
+    }
+  };
+
+  // Add event listeners
+  document.addEventListener('keydown', escKeyHandler);
+  document.addEventListener('click', backgroundClickHandler);
+}
+
+function removeModalEventListeners() {
+  if (escKeyHandler) {
+    document.removeEventListener('keydown', escKeyHandler);
+    escKeyHandler = null;
+  }
+  if (backgroundClickHandler) {
+    document.removeEventListener('click', backgroundClickHandler);
+    backgroundClickHandler = null;
+  }
 }
 
 export default modal;
