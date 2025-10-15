@@ -16,9 +16,8 @@ var _modal = function modal(source, completionCallback) {
       return _modal(source);
     }
     existingModal.style.display = 'flex';
-    // Remove prior event listeners before re-adding to avoid duplicates
+    // Remove old event listeners before re-adding when showing existing modal
     removeModalEventListeners();
-    // Re-add event listeners when showing existing modal
     addModalEventListeners();
   } else {
     // Otherwise, create the modal.
