@@ -120,7 +120,6 @@ var api = function api(platform) {
   if (platform === PROD) return 'https://www.creditkey.com/app';
   return platform; // custom URL - for testing
 };
-
 var applyUI = function applyUI(platform) {
   if (platform === DEV) return process.env.REACT_APP_APPLY_UI ? process.env.REACT_APP_APPLY_UI : 'http://localhost:3001';
   if (platform === PREVIEW) return 'https://apply.preview.creditkey.com';
@@ -128,7 +127,6 @@ var applyUI = function applyUI(platform) {
   if (platform === PROD) return 'https://apply.creditkey.com';
   return platform; // custom URL - for testing
 };
-
 var marketingUI = function marketingUI(platform) {
   if (platform === DEV) return process.env.REACT_APP_MARKETING_UI ? process.env.REACT_APP_MARKETING_UI : 'http://localhost:3002';
   if (platform === STAGE) return 'https://staging-marketing.creditkey.com';
@@ -136,7 +134,6 @@ var marketingUI = function marketingUI(platform) {
   if (platform === PROD) return 'https://marketing.creditkey.com';
   return platform; // custom URL - for testing
 };
-
 var pdpHost = function pdpHost(resource, platform) {
   var host = window.location.hostname;
   if (host.indexOf('staging') >= 0 || host.indexOf('dev') >= 0) {
@@ -822,7 +819,7 @@ function request(url, options) {
 var utils_platform = __webpack_require__(0);
 
 // CONCATENATED MODULE: ./src/utils/network.js
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 
 
 
@@ -1138,10 +1135,10 @@ function iframes_registerPostMessageCallback() {
   });
 }
 // CONCATENATED MODULE: ./src/lib/client.js
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return typeof key === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (typeof input !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (typeof res !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == typeof i ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != typeof i) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 
 
 
@@ -1299,13 +1296,12 @@ var client_Client = /*#__PURE__*/function () {
       customer_id: customer_id
     });
   };
-  _createClass(Client, [{
+  return _createClass(Client, [{
     key: "key_param",
     get: function get() {
       return '?public_key=' + this.key;
     }
   }]);
-  return Client;
 }();
 
 // CONCATENATED MODULE: ./src/lib/cart-item.js
