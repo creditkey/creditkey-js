@@ -166,5 +166,5 @@
   width: 100% !important;
   min-height: 50px !important;
   height: auto !important;
-  transition: height 0.3s ease-in-out;
+  transition: height 0.3s ease-in-out !important;
 }
