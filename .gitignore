@@ -46,3 +46,6 @@ root.iml
 .env.production.local
 
 tags
+
+# Manual test files
+tests/manual-test-*.html

@@ -164,5 +164,7 @@
 /* This selector remains at root level as it was in the original sass */
 #creditkey-pdp-iframe {
   width: 100% !important;
-  max-height: 70px !important;
+  min-height: 50px !important;
+  height: auto !important;
+  transition: height 0.3s ease-in-out;
 }

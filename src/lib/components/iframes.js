@@ -29,6 +29,15 @@ function registerPostMessageCallback() {
       c.enhanced_pdp_modal(charges);
     } else if (data.action === 'apply' && data.options.public_key) {
       modal(data.options.url);
+    } else if (data.action === 'height' && data.type === 'pdp') {
+      // Handle dynamic height updates for PDP iframe
+      const pdpIframe = document.getElementById('creditkey-pdp-iframe');
+      if (pdpIframe && data.options) {
+        const height = parseInt(data.options, 10);
+        if (!isNaN(height) && height > 0) {
+          pdpIframe.style.height = height + 'px';
+        }
+      }
     }
   });
 }
