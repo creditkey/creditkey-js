@@ -29,6 +29,20 @@ function registerPostMessageCallback() {
       c.enhanced_pdp_modal(charges);
     } else if (data.action === 'apply' && data.options.public_key) {
       modal(data.options.url);
+    } else if (data.action === 'height' && data.type === 'pdp') {
+      // Handle dynamic height updates for PDP iframe
+      // Only updates if:
+      // 1. The iframe element exists in the DOM
+      // 2. Height value is provided in data.options
+      // 3. Height is a positive number (validates against invalid/negative values)
+      // Modal iframe height updates are handled separately in modal.js
+      const pdpIframe = document.getElementById('creditkey-pdp-iframe');
+      if (pdpIframe && data.options) {
+        const height = parseInt(data.options, 10);
+        if (!isNaN(height) && height > 0) {
+          pdpIframe.style.height = height + 'px';
+        }
+      }
     }
   });
 }
