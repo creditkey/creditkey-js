@@ -16,11 +16,17 @@ The iframe listens for `postMessage` events from the iframe content to dynamical
 
 ### From Iframe Content
 
-To update the parent iframe's height, send a postMessage from within the iframe:
+To update the parent iframe's height based on the body element, send a postMessage from within the iframe:
 
 ```javascript
 // Inside the iframe content
-const height = document.body.scrollHeight; // Or any calculated height
+// Calculate height from body element
+const height = Math.max(
+  document.body.scrollHeight,
+  document.body.offsetHeight,
+  document.documentElement.scrollHeight,
+  document.documentElement.offsetHeight
+);
 
 const message = {
   action: 'height',
@@ -30,6 +36,8 @@ const message = {
 
 window.parent.postMessage(JSON.stringify(message), '*');
 ```
+
+**Note**: The height should be calculated from the body element's `scrollHeight` to ensure the entire content is visible, including any overflow.
 
 ### Message Format
 
@@ -82,13 +90,44 @@ max-height: 70px !important;  /* Old - removed */
 
 ## Example Integration
 
+### Option 1: Automatic Height Adjustment (Recommended)
+
+For iframe content hosted on CreditKey servers, include the helper script to automatically adjust height based on the body element:
+
+```html
+<!-- In the iframe content (e.g., pdp.html) -->
+<!-- Use the ES5 version for broad browser compatibility -->
+<script src="path/to/creditkey-js/lib/utils/iframe-height-adjuster.js"></script>
+
+<!-- Or use the ES module version -->
+<script type="module" src="path/to/creditkey-js/es/utils/iframe-height-adjuster.js"></script>
+```
+
+This script automatically:
+- Calculates height based on the body element's `scrollHeight`
+- Sends initial height on page load
+- Monitors DOM changes and updates height automatically
+- Handles window resize events
+- Only sends updates when height changes
+
+The helper is available in the built SDK at:
+- ES5: `lib/utils/iframe-height-adjuster.js`
+- ES modules: `es/utils/iframe-height-adjuster.js`
+- Source: `src/utils/iframe-height-adjuster.js`
+
+### Option 2: Manual Height Updates
+
+For custom implementations, manually send height updates:
+
 ```javascript
 // In the iframe content (e.g., pdp.html)
 window.addEventListener('load', function() {
-  // Calculate the required height
+  // Calculate the required height from body element
   const contentHeight = Math.max(
     document.body.scrollHeight,
-    document.documentElement.scrollHeight
+    document.body.offsetHeight,
+    document.documentElement.scrollHeight,
+    document.documentElement.offsetHeight
   );
   
   // Send height update to parent
