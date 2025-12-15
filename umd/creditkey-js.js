@@ -675,7 +675,7 @@ module.exports = function (list, options) {
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(6);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "/* CreditKey Styles - Converted from sass for compatibility */\n.creditkey {\n  all: initial;\n}\n\n.creditkey * {\n  all: unset;\n}\n\n.creditkey {\n  z-index: 50000;\n  text-decoration: none !important;\n  font-family: \"Proxima Nova\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n}\n\n.creditkey a {\n  text-decoration: none !important;\n}\n\n/* Modal styles based on bulma - properly namespaced under .creditkey */\n.creditkey .button {\n  background-color: #3D9CE5 !important;\n  min-height: 40px !important;\n  border-width: 0 !important;\n  vertical-align: middle !important;\n  text-decoration: none !important;\n}\n\n.creditkey .ck-modal {\n  margin: 0 !important;\n  padding-top: 50px;\n  max-width: 100% !important;\n  width: 100% !important;\n  visibility: visible !important;\n  background: transparent !important;\n  position: absolute;\n  justify-content: normal;\n  align-items: flex-start;\n  display: flex;\n  overflow: hidden;\n  z-index: 50001;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 0;\n}\n\n@media screen and (max-device-width: 480px) {\n  .creditkey .ck-modal {\n    padding-top: 0px !important;\n  }\n}\n\n.creditkey .ck-modal-background {\n  background-color: rgba(10, 10, 10, 0.86);\n  bottom: 0;\n  left: 0;\n  position: fixed;\n  right: 0;\n  top: 0;\n}\n\n.creditkey .ck-modal-content,\n.creditkey .ck-modal-card {\n  min-height: -webkit-min-content !important;\n  min-height: min-content !important;\n  max-height: none;\n  height: auto !important;\n  margin: 0 20px;\n  max-height: calc(100vh - 160px);\n  overflow: auto;\n  position: relative;\n  width: 100%;\n}\n\n@media screen and (min-width: 769px) {\n  .creditkey .ck-modal-content,\n  .creditkey .ck-modal-card {\n    min-height: -webkit-min-content !important;\n    min-height: min-content !important;\n    max-height: none;\n    height: auto !important;\n    margin: 0 auto;\n    max-height: calc(100vh - 40px);\n    width: 650px;\n  }\n}\n\n.creditkey .ck-modal-card {\n  min-height: -webkit-min-content !important;\n  min-height: min-content !important;\n  max-height: none !important;\n}\n\n.creditkey .ck-modal-content {\n  overflow: hidden;\n  -webkit-overflow-scrolling: touch;\n  border-radius: 5px;\n  background-color: #fff;\n  background-image: url(\"https://www.creditkey.com/app/assets/header/ck-nav-logo-d79f74bc03213d02a5ab4cd1c484cfcfb533c2abf5f05ee35cd67c5239693a28.svg\");\n  background-repeat: no-repeat;\n  background-position: center;\n  height: auto;\n  min-height: -webkit-min-content;\n  min-height: min-content;\n  max-height: none;\n}\n\n@media screen and (max-width: 768px) {\n  .creditkey .ck-modal-content {\n    height: 100%;\n    border-radius: 0 !important;\n  }\n}\n\n/* Custom classes - properly namespaced under .creditkey */\n.creditkey #creditkey-iframe {\n  margin: auto;\n  width: 100%;\n  border: none;\n  height: inherit;\n}\n\n.creditkey .payment-icon {\n  display: inline-block !important;\n  margin-right: 5px !important;\n  vertical-align: middle !important;\n}\n\n.creditkey .terms {\n  text-decoration: underline;\n  color: #3D9CE5;\n  cursor: pointer;\n}\n\n.creditkey .terms:hover {\n  text-decoration: none;\n}\n\n.creditkey .pdp {\n  padding: 0 5px 0 0;\n  font-size: 16px !important;\n  font-weight: bold;\n}\n\n.creditkey .pdp-text {\n  font-size: 16px !important;\n  font-weight: 400;\n}\n\n.creditkey .ck-offer {\n  float: right;\n  text-align: left;\n}\n\n.creditkey .ck-logo-small {\n  height: 22px !important;\n}\n\n.creditkey .ck-logo-medium {\n  height: 22px !important;\n}\n\n.creditkey .ck-logo-large {\n  height: 22px !important;\n}\n\n/* This selector remains at root level as it was in the original sass */\n#creditkey-pdp-iframe {\n  width: 100% !important;\n  max-height: 70px !important;\n}\n", ""]);
+exports.push([module.i, "/* CreditKey Styles - Converted from sass for compatibility */\n.creditkey {\n  all: initial;\n}\n\n.creditkey * {\n  all: unset;\n}\n\n.creditkey {\n  z-index: 50000;\n  text-decoration: none !important;\n  font-family: \"Proxima Nova\", \"Helvetica Neue\", Helvetica, Arial, sans-serif;\n}\n\n.creditkey a {\n  text-decoration: none !important;\n}\n\n/* Modal styles based on bulma - properly namespaced under .creditkey */\n.creditkey .button {\n  background-color: #3D9CE5 !important;\n  min-height: 40px !important;\n  border-width: 0 !important;\n  vertical-align: middle !important;\n  text-decoration: none !important;\n}\n\n.creditkey .ck-modal {\n  margin: 0 !important;\n  padding-top: 2vh;\n  padding-bottom: 2vh;\n  visibility: visible !important;\n  background: transparent !important;\n  position: absolute;\n  justify-content: normal;\n  align-items: flex-start;\n  display: flex;\n  overflow: hidden;\n  z-index: 50001;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 0;\n  height: 96vh;\n}\n\n.creditkey .ck-modal-background {\n  background-color: rgba(10, 10, 10, 0.86);\n  bottom: 0;\n  left: 0;\n  position: fixed;\n  right: 0;\n  top: 0;\n}\n\n.creditkey .ck-modal-content,\n.creditkey .ck-modal-card {\n  position: fixed;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 560px;\n}\n\n.creditkey .ck-modal-card {\n  min-height: -webkit-min-content !important;\n  min-height: min-content !important;\n  max-height: none !important;\n}\n\n.creditkey .ck-modal-content {\n  overflow: hidden;\n  -webkit-overflow-scrolling: touch;\n  border-radius: 5px;\n  background-color: #fff;\n  background-image: url(\"https://www.creditkey.com/app/assets/header/ck-nav-logo-d79f74bc03213d02a5ab4cd1c484cfcfb533c2abf5f05ee35cd67c5239693a28.svg\");\n  background-repeat: no-repeat;\n  background-position: center;\n  height: auto;\n  min-height: -webkit-min-content;\n  min-height: min-content;\n  max-height: none;\n}\n\n/* Custom classes - properly namespaced under .creditkey */\n.creditkey #creditkey-iframe {\n  margin: auto;\n  width: 100%;\n  border: none;\n  height: 96vh;\n}\n\n.creditkey .payment-icon {\n  display: inline-block !important;\n  margin-right: 5px !important;\n  vertical-align: middle !important;\n}\n\n.creditkey .terms {\n  text-decoration: underline;\n  color: #3D9CE5;\n  cursor: pointer;\n}\n\n.creditkey .terms:hover {\n  text-decoration: none;\n}\n\n.creditkey .pdp {\n  padding: 0 5px 0 0;\n  font-size: 16px !important;\n  font-weight: bold;\n}\n\n.creditkey .pdp-text {\n  font-size: 16px !important;\n  font-weight: 400;\n}\n\n.creditkey .ck-offer {\n  float: right;\n  text-align: left;\n}\n\n.creditkey .ck-logo-small {\n  height: 22px !important;\n}\n\n.creditkey .ck-logo-medium {\n  height: 22px !important;\n}\n\n.creditkey .ck-logo-large {\n  height: 22px !important;\n}\n\n@media screen and (max-width: 639px) {\n  .creditkey .ck-modal-content {\n    width: 100vw;\n    height: 100vh;\n    border-radius: 0 !important;\n  }\n}\n\n@media screen and (min-width: 769px) {\n  .creditkey .ck-modal-content,\n  .creditkey .ck-modal-card {\n    position: fixed;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n  }\n}\n\n@media screen and (max-device-width: 480px) {\n  .creditkey .ck-modal {\n    padding-top: 0px !important;\n  }\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -952,7 +952,7 @@ var _modal = function modal(source, completionCallback) {
 
     var body = document.body;
     // default height set for UX during load, will be changed via updateParent() from inside iframe content later
-    var _iframe = "<iframe scrolling=\"no\" id=\"creditkey-iframe\" src=\"" + sourceUrl.href + "\" style=\"height: 100vh;\"></iframe>";
+    var _iframe = "<iframe scrolling=\"yes\" id=\"creditkey-iframe\" src=\"" + sourceUrl.href + "\"></iframe>";
     if (!validate_url(source)) {
       _iframe = "An invalid resource was requested";
     }
@@ -1014,24 +1014,6 @@ function registerPostMessageCallback(completionCallback) {
       } else {
         redirect(event.options);
       }
-    } else if (event.action == 'height' && event.type == 'modal') {
-      var total_height = event.options + 14; // 14 allows padding underneath content (usually legal footer)
-
-      // set the iframe, the parent div, and that div's parent height to something that adjusts to content height
-      iframe_element.style.height = total_height.toString() + 'px';
-
-      // Pad parent div height because issues where Chrome's calc'd <body> height is different than other browsers
-      //  which cuts of the bottom rounded corners
-      if (total_height + 60 > window.innerHeight) {
-        modal_element.parentNode.style.height = (total_height + 60).toString() + 'px';
-      }
-
-      // force scroll to top because modal starts at top of page.
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      });
     }
   }, false);
 }
@@ -1116,7 +1098,7 @@ var iframes_frame = function frame(url, pointer) {
   iframes_registerPostMessageCallback();
   var style = '';
   if (!pointer) style = 'pointer-events: none;';
-  var iframe = "<div className=\"iframe-container\"><iframe allowtransparency=\"true\" scrolling=\"no\" id=\"creditkey-pdp-iframe\" frameBorder=\"0\" style=\"" + style + "\" src=\"" + url + "\"></iframe></div>";
+  var iframe = "<div className=\"iframe-container\"><iframe allowtransparency=\"true\" scrolling=\"yes\" id=\"creditkey-pdp-iframe\" frameBorder=\"0\" style=\"" + style + "\" src=\"" + url + "\"></iframe></div>";
   return iframe;
 };
 function iframes_registerPostMessageCallback() {

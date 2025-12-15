@@ -27,7 +27,7 @@ const modal = (source, completionCallback) => {
     
     const body = document.body;
     // default height set for UX during load, will be changed via updateParent() from inside iframe content later
-    let iframe = `<iframe scrolling="no" id="creditkey-iframe" src="${sourceUrl.href}" style="height: 100vh;"></iframe>`;
+    let iframe = `<iframe scrolling="yes" id="creditkey-iframe" src="${sourceUrl.href}"></iframe>`;
 
     if (!validate_url(source)) {
       iframe = `An invalid resource was requested`;
@@ -103,24 +103,6 @@ function registerPostMessageCallback(completionCallback) {
       } else {
         redirect(event.options);
       }
-    } else if (event.action == 'height' && event.type == 'modal') {
-      const total_height = event.options + 14; // 14 allows padding underneath content (usually legal footer)
-
-      // set the iframe, the parent div, and that div's parent height to something that adjusts to content height
-      iframe_element.style.height = total_height.toString() + 'px';
-
-      // Pad parent div height because issues where Chrome's calc'd <body> height is different than other browsers
-      //  which cuts of the bottom rounded corners
-      if ((total_height + 60) > window.innerHeight) {
-        modal_element.parentNode.style.height = (total_height + 60).toString() + 'px';
-      }
-
-      // force scroll to top because modal starts at top of page.
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth'
-      });
     }
   }, false);
 }

@@ -7,7 +7,7 @@ export const frame = (url, pointer = true) => {
 
   let style = '';
   if (!pointer) style = 'pointer-events: none;';
-  let iframe = `<div className="iframe-container"><iframe allowtransparency=\"true\" scrolling=\"no\" id="creditkey-pdp-iframe" frameBorder=\"0\" style=\"${style}\" src="${url}"></iframe></div>`;
+  let iframe = `<div className="iframe-container"><iframe allowtransparency=\"true\" scrolling=\"yes\" id="creditkey-pdp-iframe" frameBorder=\"0\" style=\"${style}\" src="${url}"></iframe></div>`;
   return iframe;
 }
 
