@@ -28,9 +28,8 @@
 
 .creditkey .ck-modal {
   margin: 0 !important;
-  padding-top: 50px;
-  max-width: 100% !important;
-  width: 100% !important;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
   visibility: visible !important;
   background: transparent !important;
   position: absolute;
@@ -43,12 +42,7 @@
   left: 0;
   right: 0;
   top: 0;
-}
-
-@media screen and (max-device-width: 480px) {
-  .creditkey .ck-modal {
-    padding-top: 0px !important;
-  }
+  height: 96vh;
 }
 
 .creditkey .ck-modal-background {
@@ -62,26 +56,11 @@
 
 .creditkey .ck-modal-content,
 .creditkey .ck-modal-card {
-  min-height: min-content !important;
-  max-height: none;
-  height: auto !important;
-  margin: 0 20px;
-  max-height: calc(100vh - 160px);
-  overflow: auto;
-  position: relative;
-  width: 100%;
-}
-
-@media screen and (min-width: 769px) {
-  .creditkey .ck-modal-content,
-  .creditkey .ck-modal-card {
-    min-height: min-content !important;
-    max-height: none;
-    height: auto !important;
-    margin: 0 auto;
-    max-height: calc(100vh - 40px);
-    width: 650px;
-  }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 560px;
 }
 
 .creditkey .ck-modal-card {
@@ -102,19 +81,12 @@
   max-height: none;
 }
 
-@media screen and (max-width: 768px) {
-  .creditkey .ck-modal-content {
-    height: 100%;
-    border-radius: 0 !important;
-  }
-}
-
 /* Custom classes - properly namespaced under .creditkey */
 .creditkey #creditkey-iframe {
   margin: auto;
   width: 100%;
   border: none;
-  height: inherit;
+  height: 96vh;
 }
 
 .creditkey .payment-icon {
@@ -161,8 +133,26 @@
   height: 22px !important;
 }
 
-/* This selector remains at root level as it was in the original sass */
-#creditkey-pdp-iframe {
-  width: 100% !important;
-  max-height: 70px !important;
+@media screen and (max-width: 639px) {
+  .creditkey .ck-modal-content {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0 !important;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .creditkey .ck-modal-content,
+  .creditkey .ck-modal-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media screen and (max-device-width: 480px) {
+  .creditkey .ck-modal {
+    padding-top: 0px !important;
+  }
 }

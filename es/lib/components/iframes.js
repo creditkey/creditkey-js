@@ -8,7 +8,7 @@ export var frame = function frame(url, pointer) {
   registerPostMessageCallback();
   var style = '';
   if (!pointer) style = 'pointer-events: none;';
-  var iframe = "<div className=\"iframe-container\"><iframe allowtransparency=\"true\" scrolling=\"no\" id=\"creditkey-pdp-iframe\" frameBorder=\"0\" style=\"" + style + "\" src=\"" + url + "\"></iframe></div>";
+  var iframe = "<div className=\"iframe-container\"><iframe allowtransparency=\"true\" scrolling=\"yes\" id=\"creditkey-pdp-iframe\" frameBorder=\"0\" style=\"" + style + "\" src=\"" + url + "\"></iframe></div>";
   return iframe;
 };
 function registerPostMessageCallback() {
