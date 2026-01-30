@@ -1,4 +1,4 @@
-import expect from 'expect'
+// Vitest provides expect globally
 import fetchMock from 'fetch-mock';
 import { api } from '../../src/utils/platform';
 

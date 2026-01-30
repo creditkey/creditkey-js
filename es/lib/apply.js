@@ -1,13 +1,13 @@
-import modal from './components/modal';
-import redirect from './redirect';
-import { api } from '../utils/platform';
-var apply = function apply(key, type, platform) {
-  if (type === void 0) {
-    type = 'modal';
-  }
-  if (platform === void 0) {
-    platform = 'production';
-  }
+/*!
+ * @credit-key/creditkey-js v1.3.1
+ * (c) 2026 Eben Goodman
+ * Released under the MIT License
+ */
+import modal from './components/modal.js';
+import redirect from './redirect.js';
+import { api } from '../utils/platform.js';
+
+const apply = (key, type = 'modal', platform = 'production') => {
   if (!key) {
     throw new Error('API public key required.');
   }
@@ -22,4 +22,6 @@ var apply = function apply(key, type, platform) {
     return redirect(api(platform) + '/apply/start/' + key);
   }
 };
-export default apply;
+
+export { apply as default };
+//# sourceMappingURL=apply.js.map

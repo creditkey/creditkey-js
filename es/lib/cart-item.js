@@ -1,5 +1,10 @@
-var CartItem = /*#__PURE__*/function () {
-  function CartItem(merchantProductId, name, price, sku, quantity, size, color) {
+/*!
+ * @credit-key/creditkey-js v1.3.1
+ * (c) 2026 Eben Goodman
+ * Released under the MIT License
+ */
+class CartItem {
+  constructor(merchantProductId, name, price, sku, quantity, size, color) {
     this.data = {
       merchant_id: merchantProductId,
       name: name,
@@ -10,10 +15,10 @@ var CartItem = /*#__PURE__*/function () {
       color: color
     };
   }
-  var _proto = CartItem.prototype;
-  _proto.is_valid_item = function is_valid_item() {
+  is_valid_item() {
     return !!(this.data.merchant_id && this.data.name);
-  };
-  return CartItem;
-}();
+  }
+}
+
 export { CartItem as default };
+//# sourceMappingURL=cart-item.js.map

@@ -1,4 +1,4 @@
-import expect from 'expect'
+// Vitest provides expect globally
 
 import CartItem from '../../src/lib/cart-item';
 

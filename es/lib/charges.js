@@ -1,5 +1,10 @@
-var Charges = /*#__PURE__*/function () {
-  function Charges(total, shipping, tax, discount_amount, grand_total) {
+/*!
+ * @credit-key/creditkey-js v1.3.1
+ * (c) 2026 Eben Goodman
+ * Released under the MIT License
+ */
+class Charges {
+  constructor(total, shipping, tax, discount_amount, grand_total) {
     this.data = {
       total: total,
       shipping: shipping,
@@ -8,8 +13,7 @@ var Charges = /*#__PURE__*/function () {
       grand_total: grand_total
     };
   }
-  var _proto = Charges.prototype;
-  _proto.validate_charges = function validate_charges() {
+  validate_charges() {
     if (this.data.shipping && !this.is_valid_money_value(this.data.shipping)) return false;
     if (this.data.tax && !this.is_valid_money_value(this.data.tax)) return false;
     if (this.data.discount_amount && !this.is_valid_money_value(this.data.discount_amount)) return false;
@@ -17,12 +21,13 @@ var Charges = /*#__PURE__*/function () {
       return false;
     }
     return true;
-  };
-  _proto.is_valid_money_value = function is_valid_money_value(value) {
-    var num = +value;
+  }
+  is_valid_money_value(value) {
+    const num = +value;
     if (isNaN(num)) return false;
     return true;
-  };
-  return Charges;
-}();
+  }
+}
+
 export { Charges as default };
+//# sourceMappingURL=charges.js.map

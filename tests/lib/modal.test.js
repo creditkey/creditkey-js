@@ -1,4 +1,4 @@
-import expect from 'expect'
+// Vitest provides expect globally
 
 import modal from '../../src/lib/components/modal';
 import { api } from '../../src/utils/platform';
@@ -22,9 +22,9 @@ describe('Modal', () => {
     it('creates a modal with background and content elements', () => {
       modal(testUrl);
       
-      expect(document.getElementById('creditkey-modal')).toExist();
-      expect(document.querySelector('.ck-modal-background')).toExist();
-      expect(document.getElementById('ck-modal-card')).toExist();
+      expect(document.getElementById('creditkey-modal')).toBeTruthy();
+      expect(document.querySelector('.ck-modal-background')).toBeTruthy();
+      expect(document.getElementById('ck-modal-card')).toBeTruthy();
     });
   });
 
@@ -33,7 +33,7 @@ describe('Modal', () => {
       modal(testUrl);
       
       const modalElement = document.getElementById('creditkey-modal');
-      expect(modalElement).toExist();
+      expect(modalElement).toBeTruthy();
       expect(modalElement.style.display).toBe('');
 
       // Simulate ESC key press
@@ -51,7 +51,7 @@ describe('Modal', () => {
       modal(testUrl);
       
       const modalElement = document.getElementById('creditkey-modal');
-      expect(modalElement).toExist();
+      expect(modalElement).toBeTruthy();
       expect(modalElement.style.display).toBe('');
 
       // Simulate ESC key press with legacy keyCode
@@ -68,7 +68,7 @@ describe('Modal', () => {
       modal(testUrl);
       
       const modalElement = document.getElementById('creditkey-modal');
-      expect(modalElement).toExist();
+      expect(modalElement).toBeTruthy();
       expect(modalElement.style.display).toBe('');
 
       // Simulate other key press
@@ -108,8 +108,8 @@ describe('Modal', () => {
       const modalElement = document.getElementById('creditkey-modal');
       const backgroundElement = document.querySelector('.ck-modal-background');
       
-      expect(modalElement).toExist();
-      expect(backgroundElement).toExist();
+      expect(modalElement).toBeTruthy();
+      expect(backgroundElement).toBeTruthy();
       expect(modalElement.style.display).toBe('');
 
       // Simulate background click
@@ -131,8 +131,8 @@ describe('Modal', () => {
       const modalElement = document.getElementById('creditkey-modal');
       const contentElement = document.getElementById('ck-modal-card');
       
-      expect(modalElement).toExist();
-      expect(contentElement).toExist();
+      expect(modalElement).toBeTruthy();
+      expect(contentElement).toBeTruthy();
       expect(modalElement.style.display).toBe('');
 
       // Simulate content area click
@@ -175,7 +175,7 @@ describe('Modal', () => {
       modal(testUrl);
       
       const modalElement = document.getElementById('creditkey-modal');
-      expect(modalElement).toExist();
+      expect(modalElement).toBeTruthy();
 
       // Hide the modal programmatically (simulates internal remove() call)
       modalElement.style.display = 'none';

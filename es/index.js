@@ -1,14 +1,23 @@
-import Client from './lib/client';
-import CartItem from './lib/cart-item';
-import Address from './lib/address';
-import Charges from './lib/charges';
-import checkout from './lib/checkout';
-import apply from './lib/apply';
-export default {
-  Client: Client,
-  CartItem: CartItem,
-  Address: Address,
-  Charges: Charges,
-  apply: apply,
-  checkout: checkout
+/*!
+ * @credit-key/creditkey-js v1.3.1
+ * (c) 2026 Eben Goodman
+ * Released under the MIT License
+ */
+import Client from './lib/client.js';
+import CartItem from './lib/cart-item.js';
+import Address from './lib/address.js';
+import Charges from './lib/charges.js';
+import checkout from './lib/checkout.js';
+import apply from './lib/apply.js';
+
+var index = {
+  Client,
+  CartItem,
+  Address,
+  Charges,
+  apply,
+  checkout
 };
+
+export { index as default };
+//# sourceMappingURL=index.js.map

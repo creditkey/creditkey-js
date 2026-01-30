@@ -10,23 +10,29 @@
     "umd"
   ],
   "scripts": {
-    "build": "NODE_OPTIONS=\"--openssl-legacy-provider\" nwb build-web-module --copy-files",
-    "clean": "nwb clean-module",
-    "test": "NODE_OPTIONS=\"--openssl-legacy-provider\" nwb test",
-    "test:coverage": "NODE_OPTIONS=\"--openssl-legacy-provider\" nwb test --coverage",
-    "test:watch": "NODE_OPTIONS=\"--openssl-legacy-provider\" nwb test --server"
+    "build": "rollup -c",
+    "clean": "rm -rf es lib umd",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "bulma": "^1.0.2",
     "lodash.assign": "^4.2.0"
   },
   "devDependencies": {
-    "css-loader": "^5.2.7",
+    "@babel/core": "^7.28.6",
+    "@babel/preset-env": "^7.28.6",
+    "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@vitest/ui": "^4.0.18",
     "fetch-mock": "^11.1.5",
-    "nwb": "^0.25.2",
-    "style-loader": "^2.0.0",
-    "webpack-bundle-analyzer": "^4.10.2",
-    "webpack-cli": "^4.10.0"
+    "happy-dom": "^20.4.0",
+    "rollup": "^4.57.1",
+    "rollup-plugin-postcss": "^4.0.2",
+    "vitest": "^4.0.18"
   },
   "engines": {
     "node": ">=18.0.0"

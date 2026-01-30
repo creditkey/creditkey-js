@@ -1,6 +1,10 @@
-function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-import request from './request';
-import { api } from './platform';
+/*!
+ * @credit-key/creditkey-js v1.3.1
+ * (c) 2026 Eben Goodman
+ * Released under the MIT License
+ */
+import request from './request.js';
+import { api } from './platform.js';
 
 /**
  * @function Network
@@ -8,17 +12,16 @@ import { api } from './platform';
  * requests to a specific resource on the server.
  * @param {string} resource The resource used for config
  */
-var Network = function Network(platform, resource) {
+const Network = (platform, resource) => {
   if (!platform) return false;
-  var buildURL = function buildURL(id, resource) {
-    var parameters = [api(platform)];
-    if (resource) parameters = parameters.concat([resource]);
+  let buildURL = (id, resource) => {
+    let parameters = [api(platform)];
     if (id) parameters = parameters.concat([id]);
     return parameters.join('/');
   };
 
   // Default options used for every request
-  var defaultOptions = {
+  const defaultOptions = {
     mode: 'cors',
     headers: {
       'Accept': 'application/json',
@@ -34,14 +37,13 @@ var Network = function Network(platform, resource) {
      * @param {object} options
      * @returns {promise}
      */
-    post: function post(path, body, options) {
-      if (options === void 0) {
-        options = {};
-      }
-      return request(buildURL(path), _extends({}, options, defaultOptions, {
+    post: (path, body, options = {}) => {
+      return request(buildURL(path), {
+        ...options,
+        ...defaultOptions,
         method: 'POST',
         body: JSON.stringify(body)
-      }));
+      });
     },
     /**
      * @function post
@@ -50,13 +52,12 @@ var Network = function Network(platform, resource) {
      * @param {object} options
      * @returns {promise}
      */
-    get: function get(path, options) {
-      if (options === void 0) {
-        options = {};
-      }
-      return request(buildURL(path), _extends({}, options, defaultOptions, {
+    get: (path, options = {}) => {
+      return request(buildURL(path), {
+        ...options,
+        ...defaultOptions,
         method: 'GET'
-      }));
+      });
     },
     /**
      * @function edit
@@ -66,14 +67,13 @@ var Network = function Network(platform, resource) {
      * @param {object} options
      * @returns {promise}
      */
-    edit: function edit(path, body, options) {
-      if (options === void 0) {
-        options = {};
-      }
-      return request(buildURL(path), _extends({}, options, defaultOptions, {
+    edit: (path, body, options = {}) => {
+      return request(buildURL(path), {
+        ...options,
+        ...defaultOptions,
         method: 'PUT',
         body: JSON.stringify(body)
-      }));
+      });
     },
     /**
      * @function delete
@@ -82,19 +82,18 @@ var Network = function Network(platform, resource) {
      * @param {object} options
      * @returns {promise}
      */
-    "delete": function _delete(path, options) {
-      if (options === void 0) {
-        options = {};
-      }
-      return request(buildURL(path), _extends({}, options, defaultOptions, {
+    delete: (path, options = {}) => {
+      return request(buildURL(path), {
+        ...options,
+        ...defaultOptions,
         method: 'DELETE'
-      }));
-    },
-    ping: function ping() {
-      return request(buildURL(), {
-        method: 'GET'
       });
-    }
+    },
+    ping: () => request(buildURL(), {
+      method: 'GET'
+    })
   };
 };
-export default Network;
+
+export { Network as default };
+//# sourceMappingURL=network.js.map

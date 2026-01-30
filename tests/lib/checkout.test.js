@@ -1,4 +1,4 @@
-import expect from 'expect'
+// Vitest provides expect globally
 
 import checkout from '../../src/lib/checkout';
 
@@ -11,11 +11,11 @@ describe('Checkout', () => {
 
   describe('Modal', () => {
     it('adds a modal overlay to the DOM', () => {
-      expect(document.getElementById('creditkey-modal')).toNotExist();
+      expect(document.getElementById('creditkey-modal')).toBeFalsy();
 
       checkout(source);
 
-      expect(document.getElementById('creditkey-modal')).toExist();
+      expect(document.getElementById('creditkey-modal')).toBeTruthy();
     });
 
     it('has an iframe with the expected source', () => {
@@ -26,7 +26,7 @@ describe('Checkout', () => {
   });
 
   describe('Redirect', () => {
-    xit('redirects to the specified source', () => {
+    it.skip('redirects to the specified source', () => {
       checkout(source, 'redirect');
 
       expect(global.window.location.href).toBe(source);

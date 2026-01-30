@@ -22,7 +22,7 @@ You should have been put in contact with an Implementation Support Engineer at C
 ## Requirements
 ---------------
 
-The Credit Key Javascript SDK requires Node 8.x or higher and NPM 5.x or higher. Depending on your setup the following dependencies may also need to be present: babel-loader @babel/core @babel/preset-env node-sass 
+The Credit Key Javascript SDK requires Node 18.x or higher and NPM 7.x or higher for development. The SDK is built using Rollup and tested with Vitest. 
 
 ## Install
 ----------
@@ -34,7 +34,7 @@ npm install creditkey-js
 The Credit Key Javascript SDK can also be installed via a script tag using the UNPKG CDN.  It is then available as a global variable `ck` or as a UMD module.
 
 ```javascript
-<script crossorigin src="https://unpkg.com/@credit-key/creditkey-js@latest/umd/creditkey-js.js"></script>
+<script crossorigin src="https://unpkg.com/@credit-key/creditkey-js@latest/umd/creditkey-js.min.js"></script>
 ```
 
 ## Overview

@@ -1,4 +1,4 @@
-import expect from 'expect'
+// Vitest provides expect globally
 
 import apply from '../../src/lib/apply';
 import { api } from '../../src/utils/platform';
@@ -16,11 +16,11 @@ describe('Apply Now', () => {
     });
 
     it('adds a modal overlay to the DOM', () => {
-      expect(document.getElementById('creditkey-modal')).toNotExist();
+      expect(document.getElementById('creditkey-modal')).toBeFalsy();
 
       apply(key, 'modal', 'development');
 
-      expect(document.getElementById('creditkey-modal')).toExist();
+      expect(document.getElementById('creditkey-modal')).toBeTruthy();
     });
 
     it('has an iframe with the expected source', () => {
@@ -32,7 +32,7 @@ describe('Apply Now', () => {
   });
 
   describe('Redirect', () => {
-    xit('redirects to the specified source', () => {
+    it.skip('redirects to the specified source', () => {
       apply(key, 'redirect');
 
       expect(global.window.location.href).toBe(source);
