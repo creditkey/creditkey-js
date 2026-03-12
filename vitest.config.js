@@ -10,6 +10,9 @@ export default defineConfig({
       exclude: [
         'node_modules/',
         'tests/',
+        'es/',
+        'lib/',
+        'umd/',
         '*.config.js'
       ]
     },
