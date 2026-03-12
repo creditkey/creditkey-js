@@ -13,14 +13,15 @@ const banner = `/*!
  * Released under the ${pkg.license} License
  */`;
 
-const baseConfig = {
+const createBaseConfig = (extractCSS = true) => ({
   input: 'src/index.js',
   external: ['bulma'],
   plugins: [
     resolve(),
     commonjs(),
     postcss({
-      extract: true,
+      extract: extractCSS,
+      inject: !extractCSS,
       minimize: true,
       sourceMap: false
     }),
@@ -37,12 +38,12 @@ const baseConfig = {
       ]
     })
   ]
-};
+});
 
 export default [
   // ES module build
   {
-    ...baseConfig,
+    ...createBaseConfig(true),
     output: {
       dir: 'es',
       format: 'es',
@@ -54,7 +55,7 @@ export default [
   },
   // CommonJS build
   {
-    ...baseConfig,
+    ...createBaseConfig(true),
     output: {
       dir: 'lib',
       format: 'cjs',
@@ -65,9 +66,9 @@ export default [
       exports: 'auto'
     }
   },
-  // UMD build (minified)
+  // UMD build (minified) - injects CSS for easier CDN usage
   {
-    ...baseConfig,
+    ...createBaseConfig(false),
     output: {
       file: 'umd/creditkey-js.min.js',
       format: 'umd',
@@ -77,7 +78,7 @@ export default [
       exports: 'default'
     },
     plugins: [
-      ...baseConfig.plugins,
+      ...createBaseConfig(false).plugins,
       terser({
         format: {
           comments: /^!/
@@ -86,3 +87,4 @@ export default [
     ]
   }
 ];
+
