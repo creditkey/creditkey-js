@@ -83,6 +83,18 @@ export default [
       exports: 'auto'
     }
   },
+  // UMD build (non-minified)
+  {
+    ...baseConfig,
+    output: {
+      file: 'umd/creditkey-js.js',
+      format: 'umd',
+      name: 'ck',
+      banner,
+      sourcemap: true,
+      exports: 'default'
+    }
+  },
   // UMD build (minified)
   {
     ...baseConfig,
