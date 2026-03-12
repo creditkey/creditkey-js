@@ -13,6 +13,23 @@ const banner = `/*!
  * Released under the ${pkg.license} License
  */`;
 
+// Custom CSS injection function that doesn't require external dependencies
+const cssInjection = (cssVariableName) => `
+(function() {
+  if (typeof document === 'undefined') return;
+  var css = ${cssVariableName};
+  var style = document.createElement('style');
+  style.type = 'text/css';
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+  var head = document.head || document.getElementsByTagName('head')[0];
+  head.appendChild(style);
+})();
+`;
+
 const baseConfig = {
   input: 'src/index.js',
   external: ['bulma'],
@@ -21,7 +38,7 @@ const baseConfig = {
     commonjs(),
     postcss({
       extract: false,
-      inject: true,
+      inject: cssInjection,
       minimize: true,
       sourceMap: false
     }),
