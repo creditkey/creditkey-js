@@ -1,6 +1,6 @@
 /*!
  * @credit-key/creditkey-js v1.3.1
- * (c) 2026 Eben Goodman
+ * (c) 2026 Credit Key Engineering
  * Released under the MIT License
  */
 import Network from '../utils/network.js';
