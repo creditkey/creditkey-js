@@ -37,7 +37,7 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "author": "Eben Goodman",
+  "author": "Credit Key Engineering",
   "homepage": "https://www.creditkey.com",
   "license": "MIT",
   "repository": "https://github.com/creditkey/creditkey-js"
