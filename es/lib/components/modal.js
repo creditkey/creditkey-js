@@ -3,6 +3,7 @@
  * (c) 2026 Eben Goodman
  * Released under the MIT License
  */
+import '../../styles/index.css.js';
 import { api } from '../../utils/platform.js';
 
 const modal = (source, completionCallback) => {
