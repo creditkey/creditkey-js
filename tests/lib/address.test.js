@@ -1,4 +1,4 @@
-import expect from 'expect'
+// Vitest provides expect globally
 
 import Address from '../../src/lib/address';
 

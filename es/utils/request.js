@@ -1,3 +1,8 @@
+/*!
+ * @credit-key/creditkey-js v1.3.1
+ * (c) 2026 Credit Key Engineering
+ * Released under the MIT License
+ */
 /**
  * @private
  * @function request
@@ -12,18 +17,15 @@ function handleErrors(response) {
   }
   return response;
 }
-export default function request(url, options) {
-  return new Promise(function (resolve, reject) {
+function request(url, options) {
+  return new Promise((resolve, reject) => {
     if (!url) reject(new Error('URL parameter required'));
     if (!options) reject(new Error('Options parameter required'));
-    fetch(url, options).then(function (response) {
-      return handleErrors(response);
-    }).then(function (response) {
-      return response.json();
-    }).then(function (response) {
+    fetch(url, options).then(response => handleErrors(response)).then(response => response.json()).then(response => {
       if (response.errors) reject(response.errors);else resolve(response);
-    })["catch"](function (err) {
-      return reject(err);
-    });
+    }).catch(err => reject(err));
   });
 }
+
+export { request as default };
+//# sourceMappingURL=request.js.map

@@ -1,6 +1,6 @@
 ## Prerequisites
 
-[Node.js](http://nodejs.org/) >= v4 must be installed.
+[Node.js](http://nodejs.org/) >= v18 must be installed.
 
 ## Installation
 
@@ -16,6 +16,9 @@
 
 ## Building
 
-- `npm run build` will build the module for publishing to npm.
+- `npm run build` will build the module for publishing to npm using Rollup. This creates three output formats:
+  - ES modules in `es/`
+  - CommonJS in `lib/`
+  - UMD (minified) in `umd/`
 
 - `npm run clean` will delete built resources.

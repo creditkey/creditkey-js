@@ -1,14 +1,19 @@
-import modal from './components/modal';
-import redirect from './redirect';
-var checkout = function checkout(source, type, completionCallback) {
-  if (type === void 0) {
-    type = 'modal';
-  }
-  var width = window.screen.availWidth;
+/*!
+ * @credit-key/creditkey-js v1.3.1
+ * (c) 2026 Credit Key Engineering
+ * Released under the MIT License
+ */
+import modal from './components/modal.js';
+import redirect from './redirect.js';
+
+const checkout = (source, type = 'modal', completionCallback) => {
+  let width = window.screen.availWidth;
   if (type.toLowerCase() === 'modal' && width > 480) {
     return modal(source, completionCallback);
   } else {
     return redirect(source);
   }
 };
-export default checkout;
+
+export { checkout as default };
+//# sourceMappingURL=checkout.js.map
