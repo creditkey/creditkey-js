@@ -1,0 +1,10 @@
+# Release-sensitive files and repository controls require engineering review.
+/.github/ @creditkey/engineers
+/package.json @creditkey/engineers
+/package-lock.json @creditkey/engineers
+/rollup.config.js @creditkey/engineers
+/build.sh @creditkey/engineers
+/Dockerfile @creditkey/engineers
+/.node-version @creditkey/engineers
+/.nvmrc @creditkey/engineers
+/.tool-versions @creditkey/engineers
