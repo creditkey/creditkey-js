@@ -10,7 +10,7 @@
     "umd"
   ],
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c rollup.config.mjs",
     "clean": "rm -rf es lib umd",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
