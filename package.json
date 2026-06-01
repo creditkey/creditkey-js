@@ -9,8 +9,9 @@
     "lib",
     "umd"
   ],
+  "type": "module",
   "scripts": {
-    "build": "rollup -c rollup.config.mjs",
+    "build": "rollup -c",
     "clean": "rm -rf es lib umd",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
