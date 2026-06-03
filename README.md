@@ -22,7 +22,7 @@ You should have been put in contact with an Implementation Support Engineer at C
 ## Requirements
 ---------------
 
-The Credit Key Javascript SDK requires Node 18.x or higher and NPM 7.x or higher for development. The SDK is built using Rollup and tested with Vitest. 
+The Credit Key Javascript SDK requires Node 22.20.0 or higher and NPM 7.x or higher for development. The SDK is built using Rollup and tested with Vitest. 
 
 ## Install
 ----------
