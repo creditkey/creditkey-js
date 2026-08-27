@@ -15,6 +15,7 @@ There is currently no `ARCHITECTURE.md` or ADR collection in this repository.
 - Use Node `>=22.20.0` and install dependencies with `npm install`.
 - Run tests once with `npm test`; run coverage with `npm run test:coverage`.
 - Build bundle outputs with `npm run build`; remove them with `npm run clean`.
+- No lint or migration command is configured in this package.
 - The Dockerfile is an optional legacy image-build path: it uses Node 14 and
   Yarn, so it is not the canonical local workflow.
 
